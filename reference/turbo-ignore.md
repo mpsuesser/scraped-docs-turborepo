@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/turbo-ignore
 title: "turbo-ignore"
 description: "Reference for the `turbo-ignore` package that determines whether to skip CI tasks based on package changes."
-access_date: 2026-08-03T18:13:51.263Z
-current_date: 2026-08-03T18:13:51.263Z
+access_date: 2026-08-03T18:24:07.617Z
+current_date: 2026-08-03T18:24:07.617Z
 ---
 
 Learn how to use turbo-ignore to skip tasks in CI.

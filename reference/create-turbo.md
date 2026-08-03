@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/create-turbo
 title: "create-turbo"
 description: "Reference for the `create-turbo` CLI that scaffolds a new Turborepo monorepo."
-access_date: 2026-08-03T18:13:51.263Z
-current_date: 2026-08-03T18:13:51.263Z
+access_date: 2026-08-03T18:24:07.617Z
+current_date: 2026-08-03T18:24:07.617Z
 ---
 
 Quickly set up a new Turborepo repository from scratch.

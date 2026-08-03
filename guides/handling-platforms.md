@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/handling-platforms
 title: "Handling platforms"
 description: "Learn how to handle caching around operating systems, architectures, and other arbitrary conditions for Turborepo tasks."
-access_date: 2026-08-03T18:13:51.263Z
-current_date: 2026-08-03T18:13:51.263Z
+access_date: 2026-08-03T18:24:07.617Z
+current_date: 2026-08-03T18:24:07.617Z
 ---
 
 # Handling platforms

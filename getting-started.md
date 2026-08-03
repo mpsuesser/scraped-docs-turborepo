@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/getting-started
 title: "Getting started"
 description: "Choose a learning path to start using Turborepo in a new or existing repository."
-access_date: 2026-08-03T18:13:51.263Z
-current_date: 2026-08-03T18:13:51.263Z
+access_date: 2026-08-03T18:24:07.617Z
+current_date: 2026-08-03T18:24:07.617Z
 ---
 
 If you're new to Turborepo, you can follow these steps to get started.

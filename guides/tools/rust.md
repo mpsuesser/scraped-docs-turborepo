@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/rust
 title: "Rust (Experimental)"
 description: "Discover Cargo workspace crates as Turborepo packages and run native Cargo tasks."
-access_date: 2026-08-03T18:13:51.263Z
-current_date: 2026-08-03T18:13:51.263Z
+access_date: 2026-08-03T18:24:07.617Z
+current_date: 2026-08-03T18:24:07.617Z
 ---
 
 Use experimental native Cargo workspace support with Turborepo.

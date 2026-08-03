@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/publishing-libraries
 title: "Publishing libraries"
 description: "Bundle, version, and publish packages from your monorepo to npm using tsup and Changesets."
-access_date: 2026-08-03T18:13:51.263Z
-current_date: 2026-08-03T18:13:51.263Z
+access_date: 2026-08-03T18:24:07.617Z
+current_date: 2026-08-03T18:24:07.617Z
 ---
 
 Learn how to publish libraries to the npm registry from a monorepo.

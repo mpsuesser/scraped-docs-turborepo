@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/core-concepts/package-and-task-graph
 title: "Package and Task Graphs"
 description: "Learn how Turborepo uses directed acyclic graphs to model package dependencies and task relationships."
-access_date: 2026-08-03T18:13:51.263Z
-current_date: 2026-08-03T18:13:51.263Z
+access_date: 2026-08-03T18:24:07.617Z
+current_date: 2026-08-03T18:24:07.617Z
 ---
 
 Turborepo builds a Task Graph based on your configuration and repository structure.

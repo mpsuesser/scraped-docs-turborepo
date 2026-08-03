@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/travis-ci
 title: "Travis CI"
 description: "Configure Travis CI to run Turborepo tasks with Remote Caching."
-access_date: 2026-08-03T18:13:51.263Z
-current_date: 2026-08-03T18:13:51.263Z
+access_date: 2026-08-03T18:24:07.617Z
+current_date: 2026-08-03T18:24:07.617Z
 ---
 
 The following example shows how to use Turborepo with [Travis CI](https://www.travis-ci.com/).

@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/eslint
 title: "ESLint"
 description: "Configure ESLint for consistent linting across your monorepo packages with a shared config."
-access_date: 2026-08-03T18:13:51.263Z
-current_date: 2026-08-03T18:13:51.263Z
+access_date: 2026-08-03T18:24:07.617Z
+current_date: 2026-08-03T18:24:07.617Z
 ---
 
 Learn how to use ESLint in a monorepo.

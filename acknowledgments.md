@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/acknowledgments
 title: "Acknowledgements"
 description: "Thank you to all these developers, build systems, and monorepo tools for their support and assistance."
-access_date: 2026-08-03T18:13:51.263Z
-current_date: 2026-08-03T18:13:51.263Z
+access_date: 2026-08-03T18:24:07.617Z
+current_date: 2026-08-03T18:24:07.617Z
 ---
 
 # Acknowledgements
