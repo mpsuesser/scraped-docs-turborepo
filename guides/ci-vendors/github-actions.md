@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/github-actions
 title: "GitHub Actions"
 description: "Configure GitHub Actions workflows to run Turborepo tasks with Remote Caching."
-access_date: 2026-08-03T19:10:40.966Z
-current_date: 2026-08-03T19:10:40.966Z
+access_date: 2026-08-03T19:40:59.569Z
+current_date: 2026-08-03T19:40:59.569Z
 ---
 
 Learn how to use GitHub Actions with Turborepo.

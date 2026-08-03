@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/getting-started/examples
 title: "Start with an example"
 description: "Browse core-maintained and community examples to bootstrap a Turborepo with your favorite tools."
-access_date: 2026-08-03T19:10:40.966Z
-current_date: 2026-08-03T19:10:40.966Z
+access_date: 2026-08-03T19:40:59.569Z
+current_date: 2026-08-03T19:40:59.569Z
 ---
 
 Use `create-turbo` to bootstrap an example with your favorite tooling.

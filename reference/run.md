@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/run
 title: "run"
 description: "All flags and options for the `turbo run` command used to execute tasks."
-access_date: 2026-08-03T19:10:40.966Z
-current_date: 2026-08-03T19:10:40.966Z
+access_date: 2026-08-03T19:40:59.569Z
+current_date: 2026-08-03T19:40:59.569Z
 ---
 
 Run tasks specified in `turbo.json`.

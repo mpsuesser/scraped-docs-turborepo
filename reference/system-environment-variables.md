@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/system-environment-variables
 title: "System environment variables"
 description: "Learn about system variables used by Turborepo."
-access_date: 2026-08-03T19:10:40.966Z
-current_date: 2026-08-03T19:10:40.966Z
+access_date: 2026-08-03T19:40:59.569Z
+current_date: 2026-08-03T19:40:59.569Z
 ---
 
 # System environment variables

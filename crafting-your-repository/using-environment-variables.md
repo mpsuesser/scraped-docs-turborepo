@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/using-environment-variables
 title: "Using environment variables"
 description: "Account for environment variables in task hashing, configure environment modes, and handle .env files."
-access_date: 2026-08-03T19:10:40.966Z
-current_date: 2026-08-03T19:10:40.966Z
+access_date: 2026-08-03T19:40:59.569Z
+current_date: 2026-08-03T19:40:59.569Z
 ---
 
 Learn how to handle environments for your applications.

@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/core-concepts
 title: "Core concepts"
 description: "Learn about the core concepts behind Turborepo."
-access_date: 2026-08-03T19:10:40.966Z
-current_date: 2026-08-03T19:10:40.966Z
+access_date: 2026-08-03T19:40:59.569Z
+current_date: 2026-08-03T19:40:59.569Z
 ---
 
 # Core concepts

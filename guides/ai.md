@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/ai
 title: "Using AI with Turborepo"
 description: "Get the most out of AI coding assistants in your Turborepo."
-access_date: 2026-08-03T19:10:40.966Z
-current_date: 2026-08-03T19:10:40.966Z
+access_date: 2026-08-03T19:40:59.569Z
+current_date: 2026-08-03T19:40:59.569Z
 ---
 
 # Using AI with Turborepo

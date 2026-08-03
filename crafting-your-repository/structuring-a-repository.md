@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/structuring-a-repository
 title: "Structuring a repository"
 description: "Set up a multi-package workspace with the directory structure, package.json files, and lockfile that Turborepo expects."
-access_date: 2026-08-03T19:10:40.966Z
-current_date: 2026-08-03T19:10:40.966Z
+access_date: 2026-08-03T19:40:59.569Z
+current_date: 2026-08-03T19:40:59.569Z
 ---
 
 Start by creating a repository using the conventions of the ecosystem.

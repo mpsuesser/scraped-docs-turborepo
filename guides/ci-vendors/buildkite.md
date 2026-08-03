@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/buildkite
 title: "Buildkite"
 description: "Configure Buildkite pipelines to run Turborepo tasks with Remote Caching."
-access_date: 2026-08-03T19:10:40.966Z
-current_date: 2026-08-03T19:10:40.966Z
+access_date: 2026-08-03T19:40:59.569Z
+current_date: 2026-08-03T19:40:59.569Z
 ---
 
 Learn how to use Buildkite with Turborepo.
@@ -133,7 +133,7 @@ To use Remote Caching, retrieve the team and token for the Remote Cache for your
 To use Vercel Remote Caching, you can get the value of these variables in a few steps:
 
 1. Create a Scoped Access Token to your account in the [Vercel Dashboard](https://vercel.com/account/tokens). Copy the value to a safe place. You'll need it in a moment.
-	![Vercel Access Tokens](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fvercel-create-token.2km5ecr58yqs2.png&w=3840&q=75&dpl=dpl_GvvaU1dSxMmdhnstDgQWwX3gUQJv)
+	![Vercel Access Tokens](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fvercel-create-token.2km5ecr58yqs2.png&w=3840&q=75&dpl=dpl_3bQdUaRyC74tvRTuv7agd2L81jpc)
 2. Obtain [your Team URL](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fsettings&title=Find+Team+URL) and copy its value as well. Both values will be used in the next step.
 3. In the Buildkite dashboard, create two new [Buildkite secrets](https://buildkite.com/docs/pipelines/security/secrets/buildkite-secrets), one for each value. Name them `TURBO_TOKEN` and `TURBO_TEAM`.
 4. Update `pipeline.yml` to fetch and apply `TURBO_TOKEN` and `TURBO_TEAM` as environment variables with the [Buildkite Secrets](https://github.com/buildkite-plugins/secrets-buildkite-plugin) plugin as shown. (For additional secret-management options, read [Managing pipeline secrets](https://buildkite.com/docs/pipelines/security/secrets/managing) in the Buildkite documentation.)

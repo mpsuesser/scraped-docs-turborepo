@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/frameworks/rsbuild
 title: "Rsbuild"
 description: "Add and configure Rsbuild applications in your Turborepo monorepo."
-access_date: 2026-08-03T19:10:40.966Z
-current_date: 2026-08-03T19:10:40.966Z
+access_date: 2026-08-03T19:40:59.569Z
+current_date: 2026-08-03T19:40:59.569Z
 ---
 
 Learn more about using Rsbuild in your monorepo.

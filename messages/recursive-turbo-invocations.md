@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/messages/recursive-turbo-invocations
 title: "Recursive `turbo` invocations"
 description: "Learn more about errors with recursive scripts and tasks in Turborepo."
-access_date: 2026-08-03T19:10:40.966Z
-current_date: 2026-08-03T19:10:40.966Z
+access_date: 2026-08-03T19:40:59.569Z
+current_date: 2026-08-03T19:40:59.569Z
 ---
 
 # Recursive `turbo` invocations
