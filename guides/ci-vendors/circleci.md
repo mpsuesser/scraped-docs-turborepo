@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/circleci
 title: "CircleCI"
 description: "Configure CircleCI workflows to run Turborepo tasks with Remote Caching."
-access_date: 2026-08-03T21:45:14.046Z
-current_date: 2026-08-03T21:45:14.046Z
+access_date: 2026-08-03T22:13:48.040Z
+current_date: 2026-08-03T22:13:48.040Z
 ---
 
 Learn how to use CircleCI with Turborepo.
@@ -175,13 +175,13 @@ To use Vercel Remote Caching, you can get the value of these variables in a few 
 
 1. Create a Scoped Access Token to your account in the [Vercel Dashboard](https://vercel.com/account/tokens)
 
-![Vercel Access Tokens](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fvercel-create-token.2km5ecr58yqs2.png&w=3840&q=75&dpl=dpl_Np2RHkNG8vgrhan6tknPK2NjEkNL)
+![Vercel Access Tokens](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fvercel-create-token.2km5ecr58yqs2.png&w=3840&q=75&dpl=dpl_3e7bCGLx2BB2kjUwnY6yf9rBou2K)
 
 Copy the value to a safe place. You'll need it in a moment.
 
 2. Go to your CircleCI project settings and click on the **Environment Variables** tab. Create a new secret called `TURBO_TOKEN` and enter the value of your Scoped Access Token.
 
-![CircleCI Environment Variables](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcircleci-environment-variables.11w852w8lkcdp.png&w=3840&q=75&dpl=dpl_Np2RHkNG8vgrhan6tknPK2NjEkNL) ![CircleCI Create Environment Variables](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcircleci-create-environment-variables.2302me35e56yx.png&w=3840&q=75&dpl=dpl_Np2RHkNG8vgrhan6tknPK2NjEkNL)
+![CircleCI Environment Variables](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcircleci-environment-variables.11w852w8lkcdp.png&w=3840&q=75&dpl=dpl_3e7bCGLx2BB2kjUwnY6yf9rBou2K) ![CircleCI Create Environment Variables](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcircleci-create-environment-variables.2302me35e56yx.png&w=3840&q=75&dpl=dpl_3e7bCGLx2BB2kjUwnY6yf9rBou2K)
 
 3. Make a second secret called `TURBO_TEAM` and set it to your team slug - the part after `vercel.com/` in [your Team URL](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fsettings&title=Find+Team+URL). For example, the slug for `vercel.com/acme` is `acme`.
 4. CircleCI automatically loads environment variables stored in project settings into the CI environment. No modifications are necessary for the CI file.
