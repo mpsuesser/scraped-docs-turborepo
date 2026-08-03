@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/guides/coordinating-runtime-dependencies
 title: "Coordinating development runtime dependencies"
-description: "Combine a readiness probe with with and dependsOn to coordinate runtime dependencies between development services."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+description: "Combine a readiness probe with `with` and `dependsOn` to coordinate runtime dependencies between development services."
+access_date: 2026-08-03T21:45:14.046Z
+current_date: 2026-08-03T21:45:14.046Z
 ---
 
 Learn how to coordinate development services that depend on each other at runtime.

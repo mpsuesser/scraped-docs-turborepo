@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/configuring-tasks
 title: "Configuring tasks"
 description: "Define task dependencies, outputs, and inputs in turbo.json to orchestrate your repository's workflows."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-08-03T21:45:14.046Z
+current_date: 2026-08-03T21:45:14.046Z
 ---
 
 Learn how to describe the workflows in your repository to get them done as fast as possible.
@@ -14,11 +14,11 @@ Turborepo will always parallelize any work that it can to ensure everything runs
 
 For example, `yarn workspaces run lint && yarn workspaces run build && yarn workspaces run test` would look like this:
 
-![A graphical representation of tasks running sequentially, with lots of empty space where scripts are not being ran.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fslow-tasks-light.3buooozk27cm2.png&w=3840&q=75&dpl=dpl_3JeffpntqLSsYQY4aa5rodJ9bB7v)
+![A graphical representation of tasks running sequentially, with lots of empty space where scripts are not being ran.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fslow-tasks-light.3buooozk27cm2.png&w=3840&q=75&dpl=dpl_Np2RHkNG8vgrhan6tknPK2NjEkNL)
 
 But, to get the same work done **faster** with Turborepo, you can use `turbo run lint build test`:
 
-![A graphical representation of turbo run lint test build. It shows all tasks running in parallel, with much less empty space where scripts are not being ran.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fturborepo-tasks-fast-light.0gccg_-he037-.png&w=3840&q=75&dpl=dpl_3JeffpntqLSsYQY4aa5rodJ9bB7v)
+![A graphical representation of turbo run lint test build. It shows all tasks running in parallel, with much less empty space where scripts are not being ran.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fturborepo-tasks-fast-light.0gccg_-he037-.png&w=3840&q=75&dpl=dpl_Np2RHkNG8vgrhan6tknPK2NjEkNL)
 
 ## Getting started
 

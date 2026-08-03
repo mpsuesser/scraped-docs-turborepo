@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs
 title: "Introduction"
 description: "Learn what Turborepo is, how it solves monorepo scaling problems, and how to navigate the documentation."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-08-03T21:45:14.046Z
+current_date: 2026-08-03T21:45:14.046Z
 ---
 
 ## What is Turborepo?
@@ -16,13 +16,13 @@ From individual developers to the largest enterprise engineering organizations i
 
 Monorepos have many advantages - but **they struggle to scale**. Each workspace has its own test suite, its own linting, and its own build process. A single monorepo might have **thousands of tasks to execute**.
 
-![A representation of a typical monorepo. The first application took 110 seconds to complete its tasks. The second application took 140 seconds to complete its tasks. The shared package between them took 90 seconds to complete its tasks.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwhy-turborepo-problem.0vqhrgu9522sy.png&w=3840&q=75&dpl=dpl_3JeffpntqLSsYQY4aa5rodJ9bB7v)
+![A representation of a typical monorepo. The first application took 110 seconds to complete its tasks. The second application took 140 seconds to complete its tasks. The shared package between them took 90 seconds to complete its tasks.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwhy-turborepo-problem.0vqhrgu9522sy.png&w=3840&q=75&dpl=dpl_Np2RHkNG8vgrhan6tknPK2NjEkNL)
 
 These slowdowns can dramatically affect the way your teams build software, especially at scale. Feedback loops need to be fast so developers can deliver high-quality code quickly.
 
 ## The monorepo solution
 
-![The monorepo from before using Turborepo, showing how it can hit cache to complete tasks for all three packages in 80 milliseconds.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwhy-turborepo-solution.2xt1tkfstms2z.png&w=3840&q=75&dpl=dpl_3JeffpntqLSsYQY4aa5rodJ9bB7v)
+![The monorepo from before using Turborepo, showing how it can hit cache to complete tasks for all three packages in 80 milliseconds.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwhy-turborepo-solution.2xt1tkfstms2z.png&w=3840&q=75&dpl=dpl_Np2RHkNG8vgrhan6tknPK2NjEkNL)
 
 **Turborepo solves your monorepo's scaling problem**. [Remote Cache](core-concepts/remote-caching.md) stores the result of all your tasks, meaning that **your CI never needs to do the same work twice**.
 
