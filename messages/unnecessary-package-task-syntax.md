@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/messages/unnecessary-package-task-syntax
 title: "Unnecessary package task syntax error"
-description: "How to fix errors from using `package#task` syntax in a package-level turbo.json where it is unnecessary."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "Learn more about errors with unnecessary package task syntax in Turborepo."
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # Unnecessary package task syntax error
@@ -13,7 +13,7 @@ current_date: 2026-08-03T17:27:52.096Z
 ## Why this error occurred
 
 Turborepo supports adding additional `turbo.json` files in a package directory
-to override the `turbo.json` file declared at the repository root, a feature called [Workspace Configurations](/docs/crafting-your-repository/structuring-a-repository#specifying-packages-in-a-monorepo).
+to override the `turbo.json` file declared at the repository root, a feature called [Workspace Configurations](../crafting-your-repository/structuring-a-repository.md#specifying-packages-in-a-monorepo).
 In those additional `turbo.json` files, you can only configure tasks for that specific
 package. Therefore, only the task name should be included in the task,
 not the package and task name (`package#task`).
@@ -49,8 +49,8 @@ Remove the package prefix from the task name:
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

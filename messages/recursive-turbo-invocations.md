@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/messages/recursive-turbo-invocations
 title: "Recursive `turbo` invocations"
-description: "How to fix infinite loops caused by package.json scripts that recursively invoke `turbo`."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "Learn more about errors with recursive scripts and tasks in Turborepo."
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # Recursive `turbo` invocations
@@ -12,7 +12,7 @@ current_date: 2026-08-03T17:27:52.096Z
 
 ## Why this error occurred
 
-When a cycle of `turbo` invocations is detected in a [single-package workspace](https://turborepo.dev/docs/guides/single-package-workspaces), Turborepo will error to prevent the recursive calls to itself. Typically, this situation occurs for one of two reasons:
+When a cycle of `turbo` invocations is detected in a [single-package workspace](../guides/single-package-workspaces.md), Turborepo will error to prevent the recursive calls to itself. Typically, this situation occurs for one of two reasons:
 
 ### Recursion in scripts and tasks
 
@@ -42,15 +42,15 @@ To resolve this, ensure that the name of the script in `package.json` is not the
 
 A misconfigured workspace can make it appear that a [multi-package workspace](https://vercel.com/docs/vercel-platform/glossary#multi-package-workspace) is a single-package workspace. This causes Turborepo to infer that the repository is of the wrong type, causing it to see the script in `package.json` to be recursive.
 
-Your repo can end up in this state in a few ways, with the most common being that the [packages are not defined according to your package manager](https://turborepo.dev/docs/crafting-your-repository/structuring-a-repository#specifying-packages-in-a-monorepo). An npm workspace that is missing the `workspaces` field in `package.json` or a pnpm workspace that is missing a `pnpm-workspace.yaml` file can result in this error message.
+Your repo can end up in this state in a few ways, with the most common being that the [packages are not defined according to your package manager](../crafting-your-repository/structuring-a-repository.md#specifying-packages-in-a-monorepo). An npm workspace that is missing the `workspaces` field in `package.json` or a pnpm workspace that is missing a `pnpm-workspace.yaml` file can result in this error message.
 
 Check that your repository is complying with standards for multi-package workspaces and correct any issues.
 
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

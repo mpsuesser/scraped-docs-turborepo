@@ -2,13 +2,9 @@
 url: https://turborepo.dev/docs/reference/eslint-plugin-turbo
 title: "eslint-plugin-turbo"
 description: "Reference for the `eslint-plugin-turbo` package that detects undeclared environment variables in your code."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
-
-# eslint-plugin-turbo
-
-
 
 [The `eslint-plugin-turbo` package](https://www.npmjs.com/package/eslint-plugin-turbo) helps you find environment variables that are used in your code that are not a part of Turborepo's hashing. Environment variables used in your source code that are not accounted for in `turbo.json` will be highlighted in your editor and errors will show as ESLint output.
 
@@ -16,37 +12,35 @@ current_date: 2026-08-03T17:27:52.096Z
 
 Install `eslint-plugin-turbo` into the location where your ESLint configuration is held:
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm add eslint-plugin-turbo --filter=@repo/eslint-config
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```bash title="Terminal"
-    yarn workspace @acme/eslint-config add eslint-plugin-turbo --dev
-    ```
-  </Tab>
+```
+pnpm add eslint-plugin-turbo --filter=@repo/eslint-config
+```
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npm i --save-dev eslint-plugin-turbo -w @acme/eslint-config
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    cd packages/eslint-config && bun install eslint-plugin-turbo --dev
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+yarn workspace @acme/eslint-config add eslint-plugin-turbo --dev
+```
 
-## Usage (Flat Config `eslint.config.js`)
+#### npm
+
+```
+npm i --save-dev eslint-plugin-turbo -w @acme/eslint-config
+```
+
+#### bun
+
+```
+cd packages/eslint-config && bun install eslint-plugin-turbo --dev
+```
+
+## Usage (Flat Config eslint.config.js)
 
 ESLint v9 uses the Flat Config format seen below:
 
-```js title="./packages/eslint-config/base.js"
+```
 import turbo from "eslint-plugin-turbo";
 
 export default [turbo.configs["flat/recommended"]];
@@ -54,7 +48,7 @@ export default [turbo.configs["flat/recommended"]];
 
 Otherwise, you may configure the rules you want to use under the rules section.
 
-```js title="./packages/eslint-config/base.js"
+```
 import turbo from "eslint-plugin-turbo";
 
 export default [
@@ -69,9 +63,9 @@ export default [
 ];
 ```
 
-## Example (Flat Config `eslint.config.js`)
+## Example (Flat Config eslint.config.js)
 
-```js title="./packages/eslint-config/base.js"
+```
 import turbo from "eslint-plugin-turbo";
 
 export default [
@@ -91,11 +85,11 @@ export default [
 ];
 ```
 
-## Usage (Legacy `eslintrc*`)
+## Usage (Legacy eslintrc\*)
 
 Add `turbo` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
 
-```json title="./packages/eslint-config/base.json"
+```
 {
   "plugins": ["turbo"]
 }
@@ -103,7 +97,7 @@ Add `turbo` to the plugins section of your `.eslintrc` configuration file. You c
 
 Then configure the rules you want to use under the rules section.
 
-```json title="./packages/eslint-config/base.json"
+```
 {
   "rules": {
     "turbo/no-undeclared-env-vars": "error"
@@ -111,9 +105,9 @@ Then configure the rules you want to use under the rules section.
 }
 ```
 
-## Example (Legacy `eslintrc*`)
+## Example (Legacy eslintrc\*)
 
-```json title="./packages/eslint-config/base.json"
+```
 {
   "plugins": ["turbo"],
   "rules": {
@@ -126,12 +120,3 @@ Then configure the rules you want to use under the rules section.
   }
 }
 ```
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)

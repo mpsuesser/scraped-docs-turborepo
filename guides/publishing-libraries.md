@@ -2,33 +2,23 @@
 url: https://turborepo.dev/docs/guides/publishing-libraries
 title: "Publishing libraries"
 description: "Bundle, version, and publish packages from your monorepo to npm using tsup and Changesets."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# Publishing libraries
-
-
+Learn how to publish libraries to the npm registry from a monorepo.
 
 Publishing a package to the npm registry from a monorepo can be a smooth experience, with the right tools.
 
 While this guide cannot solve for every possible compiling, bundling, and publishing configuration needed for robust packages, it will explain some of the basics.
 
-<Callout type="info">
-  You should follow this setup if you want to publish some of your monorepo's
-  packages to npm. If you don't need to publish to npm, you should use an
-  [Internal
-  Package](/docs/crafting-your-repository/creating-an-internal-package) instead.
-  They're much easier to set up and use.
-</Callout>
-
 ## Bundling
 
-Unlike [Internal Packages](/docs/crafting-your-repository/creating-an-internal-package), external packages can be deployed to [npm](https://www.npmjs.com) *and* used locally. In this guide, we'll bundle a package to both [ECMAScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) (`esm`) and [CommonJS modules](https://en.wikipedia.org/wiki/CommonJS) (`cjs`), the most commonly used formats on npm.
+Unlike [Internal Packages](../crafting-your-repository/creating-an-internal-package.md), external packages can be deployed to [npm](https://www.npmjs.com/) *and* used locally. In this guide, we'll bundle a package to both [ECMAScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) (`esm`) and [CommonJS modules](https://en.wikipedia.org/wiki/CommonJS) (`cjs`), the most commonly used formats on npm.
 
 ## Setting up a build script
 
-Let's start with a package created using the [Internal Packages](/docs/crafting-your-repository/creating-an-internal-package) tutorial.
+Let's start with a package created using the [Internal Packages](../crafting-your-repository/creating-an-internal-package.md) tutorial.
 
 There, we created a `@repo/math` package which contained a few helper functions for adding and subtracting numbers. We've decided that this package is good enough for npm, so we're going to bundle it.
 
@@ -36,7 +26,7 @@ We're going to add a `build` script to `@repo/math`, using a bundler. If you're 
 
 Install `tsup` inside the `./packages/math` package using your package manager and then create a build script for it:
 
-```json title="./packages/math/package.json"
+```
 {
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts"
@@ -49,7 +39,7 @@ Install `tsup` inside the `./packages/math` package using your package manager a
 1. Add `dist` to your `.gitignore` files to make sure they aren't committed to source control.
 2. Add `dist` to the outputs of `build` in your `turbo.json`.
 
-```json title="./turbo.json"
+```
 {
   "tasks": {
     "build": {
@@ -59,11 +49,11 @@ Install `tsup` inside the `./packages/math` package using your package manager a
 }
 ```
 
-That way, when `tsup` is run the outputs can be [cached](/docs/crafting-your-repository/caching) by Turborepo.
+That way, when `tsup` is run the outputs can be [cached](../crafting-your-repository/caching.md) by Turborepo.
 
 Finally, we should update our package entrypoints. Inside `package.json`, change `main` to point at `./dist/index.js` for clients using CommonJS modules (`cjs`), `module` to point at `./dist/index.mjs` for clients using ECMAScript modules (`esm`), and `types` to the type definition file - `./dist/index.d.ts`:
 
-```json title="./packages/math/package.json"
+```
 {
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -71,21 +61,13 @@ Finally, we should update our package entrypoints. Inside `package.json`, change
 }
 ```
 
-<Callout type="info">
-  It is not required to bundle to both `cjs` and `esm`. However, it is recommended, as it allows your package to be used in a wider variety of environments.
-
-  If you run into errors by using `main`, `module` and `types`, take a look at the [tsup docs](https://tsup.egoist.dev/#bundle-formats).
-
-  Bundling is a complicated topic, and we don't have space here to cover everything!
-</Callout>
-
 ### Building our package before our app
 
-Before we can run `turbo run build`, there's one thing we need to consider. We've just added a [task dependency](/docs/crafting-your-repository/running-tasks) into our monorepo. The `build` of `packages/math` needs to run **before** the `build` of `apps/web`.
+Before we can run `turbo run build`, there's one thing we need to consider. We've just added a [task dependency](../crafting-your-repository/running-tasks.md) into our monorepo. The `build` of `packages/math` needs to run **before** the `build` of `apps/web`.
 
-Fortunately, we can use [`dependsOn`](/docs/reference/configuration#dependson) to easily configure this.
+Fortunately, we can use [`dependsOn`](../reference/configuration.md#dependson) to easily configure this.
 
-```json title="./turbo.json"
+```
 {
   "tasks": {
     "build": {
@@ -103,8 +85,7 @@ There's a small issue with our setup. We are building our package just fine, but
 
 That's because we don't have a `dev` script to rebuild our packages while we're working. We can add one easily:
 
-```json title="./packages/math/package.json"
-// [!code word:--watch]
+```
 {
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
@@ -115,7 +96,7 @@ That's because we don't have a `dev` script to rebuild our packages while we're 
 
 This passes the `--watch` flag to `tsup`, meaning it will watch for file changes.
 
-If we've already set up [dev scripts](/docs/crafting-your-repository/developing-applications#configuring-development-tasks) in our `turbo.json`, running `turbo run dev` will run our `packages/math` dev task in parallel with our `apps/web` dev task.
+If we've already set up [dev scripts](../crafting-your-repository/developing-applications.md#configuring-development-tasks) in our `turbo.json`, running `turbo run dev` will run our `packages/math` dev task in parallel with our `apps/web` dev task.
 
 Our package is now in a spot where we can consider deploying to npm. In our [versioning and publishing](#versioning-and-publishing) section, we'll do just that.
 
@@ -127,8 +108,8 @@ We recommend Changesets because it's intuitive to use, and - just like Turborepo
 
 Some alternatives are:
 
-* [intuit/auto](https://github.com/intuit/auto) - Generate releases based on semantic version labels on pull requests
-* [microsoft/beachball](https://github.com/microsoft/beachball) - The Sunniest Semantic Version Bumper
+- [intuit/auto](https://github.com/intuit/auto) - Generate releases based on semantic version labels on pull requests
+- [microsoft/beachball](https://github.com/microsoft/beachball) - The Sunniest Semantic Version Bumper
 
 ## Publishing
 
@@ -145,7 +126,7 @@ We recommend taking a look at the Changesets docs. Here's our recommended readin
 
 Once you've started using Changesets, you'll gain access to three useful commands:
 
-```bash title="Terminal"
+```
 # Add a new changeset
 changeset
 
@@ -158,9 +139,9 @@ changeset publish
 
 Linking your publishing flow into Turborepo can make organizing your deploy a lot simpler and faster.
 
-Our recommendation is to configure Changesets to automatically commit `changeset version`'s changes
+Our recommendation is to configure Changesets to automatically commit `changeset version` 's changes
 
-```json title="./.changeset/config.json"
+```
 {
   // …
   "commit": true
@@ -170,7 +151,7 @@ Our recommendation is to configure Changesets to automatically commit `changeset
 
 and add a `publish-packages` script into your root `package.json`:
 
-```json title="./package.json"
+```
 {
   "scripts": {
     // Include build, lint, test - all the things you need to run
@@ -182,7 +163,7 @@ and add a `publish-packages` script into your root `package.json`:
 
 If your packages are public, set Changeset's `access` to `public`:
 
-```json title="./.changeset/config.json"
+```
 {
   // …
   "access": "public"
@@ -190,18 +171,4 @@ If your packages are public, set Changeset's `access` to `public`:
 }
 ```
 
-<Callout type="info">
-  We recommend `publish-packages` so that it doesn't conflict with npm's
-  built-in `publish` script.
-</Callout>
-
 This means that when you run `publish-packages`, your monorepo gets built, linted, tested and published - and you benefit from all of Turborepo's speedups.
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)

@@ -1,16 +1,16 @@
 ---
 url: https://turborepo.dev/docs/guides/ci-vendors
 title: "Continuous Integration"
-description: "Browse CI provider recipes for using Turborepo with Remote Caching in your pipelines."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "Recipes for using Turborepo with Vercel, GitHub Actions, and other continuous integration providers."
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # Continuous Integration
 
 
 
-Turborepo not only speeds up builds, but also the rest of your Continuous Integration pipeline by using [Remote Caching](/docs/core-concepts/remote-caching). Below are a few platform recipes to use Turborepo with your CI providers.
+Turborepo not only speeds up builds, but also the rest of your Continuous Integration pipeline by using [Remote Caching](../core-concepts/remote-caching.md). Below are a few platform recipes to use Turborepo with your CI providers.
 
 <Cards>
   <Card title="Vercel (Zero configuration)" href="/docs/guides/ci-vendors/vercel" />
@@ -42,8 +42,8 @@ To enable Remote Caching for your CI:
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

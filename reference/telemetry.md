@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/reference/telemetry
 title: "telemetry"
-description: "Reference for the `turbo telemetry` command that manages anonymous usage data collection."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "API reference for the `turbo telemetry` command"
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # telemetry
@@ -49,8 +49,8 @@ turbo telemetry disable
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

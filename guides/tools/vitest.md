@@ -2,61 +2,36 @@
 url: https://turborepo.dev/docs/guides/tools/vitest
 title: "Vitest"
 description: "Configure Vitest for cached, parallelized testing across monorepo packages with optional merged coverage."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# Vitest
-
-
+Learn how to use Vitest in a monorepo.
 
 [Vitest](https://vitest.dev/) is a test runner from the Vite ecosystem. Integrating it with Turborepo will lead to enormous speed-ups.
 
-[The Vitest documentation](https://vitest.dev/guide/workspace) shows how to create a "Vitest Projects" configuration that runs all tests in the monorepo from one root command, enabling behavior like merged coverage reports out-of-the-box. This feature doesn't follow modern best practices for monorepos, since its designed for compatibility with Jest (whose Workspace feature was built before [package manager Workspaces](/docs/crafting-your-repository/structuring-a-repository)).
-
-<Callout type="warn">
-  Vitest has deprecated workspaces in favor of projects. When using projects,
-  individual project vitest configs can't extend the root config anymore since
-  they would inherit the projects configuration. Instead, a separate shared file
-  like `vitest.shared.ts` is needed.
-</Callout>
+[The Vitest documentation](https://vitest.dev/guide/workspace) shows how to create a "Vitest Projects" configuration that runs all tests in the monorepo from one root command, enabling behavior like merged coverage reports out-of-the-box. This feature doesn't follow modern best practices for monorepos, since its designed for compatibility with Jest (whose Workspace feature was built before [package manager Workspaces](../../crafting-your-repository/structuring-a-repository.md)).
 
 Because of this you have two options, each with their own tradeoffs:
 
-* [Leveraging Turborepo for caching](#leveraging-turborepo-for-caching)
-* [Using Vitest's Projects feature](#using-vitests-projects-feature)
+- [Leveraging Turborepo for caching](#leveraging-turborepo-for-caching)
+- [Using Vitest's Projects feature](#using-vitests-projects-feature)
 
 ### Leveraging Turborepo for caching
 
 To improve on cache hit rates and only run tests with changes, you can choose to configure tasks per-package, splitting up the Vitest command into separate, cacheable scripts in each package. This speed comes with the tradeoff that you'll need to create merged coverage reports yourself.
 
-<Callout type="info">
-  For a complete example, run `npx create-turbo@latest --example with-vitest` or
-  [visit the example's source
-  code](https://github.com/vercel/turborepo/tree/main/examples/with-vitest).
-</Callout>
-
 #### Setting up
 
-Let's say we have a simple [package manager Workspace](/docs/crafting-your-repository/structuring-a-repository) that looks like this:
+Let's say we have a simple [package manager Workspace](../../crafting-your-repository/structuring-a-repository.md) that looks like this:
 
-<Files>
-  <Folder name="apps" defaultOpen>
-    <Folder name="web" defaultOpen>
-      <File name="package.json" />
-    </Folder>
-  </Folder>
+package.json
 
-  <Folder name="packages" defaultOpen>
-    <Folder name="ui" defaultOpen>
-      <File name="package.json" />
-    </Folder>
-  </Folder>
-</Files>
+package.json
 
-Both `apps/web` and `packages/ui` have their own test suites, with `vitest` [installed into the packages that use them](/docs/crafting-your-repository/managing-dependencies#install-dependencies-where-theyre-used). Their `package.json` files include a `test` script that runs Vitest:
+Both `apps/web` and `packages/ui` have their own test suites, with `vitest` [installed into the packages that use them](../../crafting-your-repository/managing-dependencies.md#install-dependencies-where-theyre-used). Their `package.json` files include a `test` script that runs Vitest:
 
-```json title="./apps/web/package.json"
+```
 {
   "scripts": {
     "test": "vitest run"
@@ -69,7 +44,7 @@ Both `apps/web` and `packages/ui` have their own test suites, with `vitest` [ins
 
 Inside the root `turbo.json`, create a `test` task:
 
-```json title="./turbo.json"
+```
 {
   "tasks": {
     "test": {
@@ -86,19 +61,13 @@ Now, `turbo run test` can parallelize and cache all of the test suites from each
 
 #### Running tests in watch mode
 
-When you run your test suite in CI, it logs results and eventually exits upon completion. This means you can [cache it with Turborepo](/docs/crafting-your-repository/caching). But when you run your tests using Vitest's watch mode during development, the process never exits. This makes a watch task more like a [long-running, development task](/docs/crafting-your-repository/developing-applications).
+When you run your test suite in CI, it logs results and eventually exits upon completion. This means you can [cache it with Turborepo](../../crafting-your-repository/caching.md). But when you run your tests using Vitest's watch mode during development, the process never exits. This makes a watch task more like a [long-running, development task](../../crafting-your-repository/developing-applications.md).
 
 Because of this difference, we recommend specifying **two separate Turborepo tasks**: one for running your tests, and one for running them in watch mode.
 
-<Callout type="info">
-  This strategy below creates two tasks, one for local development and one for
-  CI. You could choose to make the `test` task for local development and create
-  some `test:ci` task instead.
-</Callout>
-
 For example, inside the `package.json` file for each workspace:
 
-```json title="./apps/web/package.json"
+```
 {
   "scripts": {
     "test": "vitest run",
@@ -109,7 +78,7 @@ For example, inside the `package.json` file for each workspace:
 
 And, inside the root `turbo.json`:
 
-```json title="./turbo.json"
+```
 {
   "tasks": {
     "test": {
@@ -123,39 +92,30 @@ And, inside the root `turbo.json`:
 }
 ```
 
-You can now run your tasks using [global `turbo`](/docs/getting-started/installation#global-installation) as `turbo run test:watch` or from a script in your root `package.json`:
+You can now run your tasks using [global `turbo`](../../getting-started/installation.md#global-installation) as `turbo run test:watch` or from a script in your root `package.json`:
 
-<Tabs items={["Global turbo", "./package.json"]}>
-  <Tab value="Global turbo">
-    ```bash title="Terminal"
-    turbo run test
+#### Global turbo
 
-    turbo run test:watch
-    ```
-  </Tab>
+```
+turbo run test
 
-  <Tab value="./package.json">
-    ```json title="./package.json"
-    {
-      "scripts": {
-        "test": "turbo run test",
-        "test:watch": "turbo run test:watch"
-      }
-    }
-    ```
-  </Tab>
-</Tabs>
+turbo run test:watch
+```
+
+#### ./package.json
+
+```
+{
+  "scripts": {
+    "test": "turbo run test",
+    "test:watch": "turbo run test:watch"
+  }
+}
+```
 
 #### Creating merged coverage reports
 
 [Vitest's Projects feature](#using-vitests-projects-feature) creates an out-of-the-box coverage report that merges all of your packages' tests coverage reports. Following the Turborepo strategy, though, you'll have to merge the coverage reports yourself.
-
-<Callout type="info">
-  The [`with-vitest`
-  example](https://github.com/vercel/turborepo/tree/main/examples/with-vitest)
-  shows a complete example that you may adapt for your needs. You can get
-  started with it quickly using `npx create-turbo@latest --example with-vitest`.
-</Callout>
 
 To do this with Vitest's native reporter merging, you'll follow a few general steps:
 
@@ -166,7 +126,7 @@ To do this with Vitest's native reporter merging, you'll follow a few general st
 
 Start by enabling the `blob` reporter in your shared Vitest configuration:
 
-```ts title="./packages/vitest-config/src/index.ts"
+```
 export const sharedConfig = {
   test: {
     reporters: ["default", "blob"],
@@ -185,7 +145,7 @@ Because the blob output path is package-relative, each package's `test` task own
 
 Then configure Turborepo's task outputs:
 
-```json title="./turbo.json"
+```
 {
   "tasks": {
     "test": {
@@ -201,7 +161,7 @@ Then configure Turborepo's task outputs:
 
 Vitest's `--merge-reports` command expects all blob files to be direct children of the directory passed to the flag. If your blobs are package-local for caching, add a small script that copies them into a flat staging directory before invoking Vitest:
 
-```json title="./packages/vitest-config/package.json"
+```
 {
   "scripts": {
     "merge-blob-reports": "node dist/scripts/merge-blob-reports.js",
@@ -212,7 +172,7 @@ Vitest's `--merge-reports` command expects all blob files to be direct children 
 
 The report package can then cache the staging step separately from the final coverage report:
 
-```json title="./packages/vitest-config/turbo.json"
+```
 {
   "extends": ["//"],
   "tasks": {
@@ -238,16 +198,9 @@ The report package can then cache the staging step separately from the final cov
 }
 ```
 
-<Callout type="info">
-  Turborepo uses `inputs` to hash a task, but `inputs` do not restore another
-  task's outputs. Run the package `test` tasks before `report` so Turborepo can
-  restore each package's `coverage/blob/**` output before the report task hashes
-  and merges those files.
-</Callout>
-
 With this in place, use a root script that runs tests before the report task:
 
-```json title="./package.json"
+```
 {
   "scripts": {
     "report": "turbo run test && turbo run report"
@@ -257,13 +210,13 @@ With this in place, use a root script that runs tests before the report task:
 
 ### Using Vitest's Projects feature
 
-The Vitest Projects feature doesn't follow the same model as a [package manager Workspace](/docs/crafting-your-repository/structuring-a-repository). Instead, it uses a root configuration that discovers and runs tests across multiple projects from a single command.
+The Vitest Projects feature doesn't follow the same model as a [package manager Workspace](../../crafting-your-repository/structuring-a-repository.md). Instead, it uses a root configuration that discovers and runs tests across multiple projects from a single command.
 
 #### Root configuration behavior
 
 When using projects, the root `vitest.config.ts` serves as the entry point that defines which projects to include via the `projects` array. Each project can have its own configuration that extends or overrides the root settings:
 
-```ts title="./vitest.config.ts"
+```
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
@@ -297,15 +250,11 @@ export default defineConfig({
 1. Creating a shared configuration file that projects import
 2. Using TypeScript to export a config object that projects spread into their settings
 
-<Callout type="info">
-  This separation ensures each project can be configured independently while sharing common settings through imports.
-</Callout>
-
 In this model, there aren't package boundaries, from a modern JavaScript ecosystem perspective. This means you can't rely on Turborepo's caching, since Turborepo leans on those package boundaries.
 
-Because of this, you'll need to use [Root Tasks](/docs/crafting-your-repository/configuring-tasks#registering-root-tasks) if you want to run the tests using Turborepo. Once you've configured [a Vitest Projects setup](https://vitest.dev/guide/workspace), create the Root Tasks for Turborepo:
+Because of this, you'll need to use [Root Tasks](../../crafting-your-repository/configuring-tasks.md#registering-root-tasks) if you want to run the tests using Turborepo. Once you've configured [a Vitest Projects setup](https://vitest.dev/guide/workspace), create the Root Tasks for Turborepo:
 
-```json title="./turbo.json"
+```
 {
   "tasks": {
     "//#test": {
@@ -325,7 +274,7 @@ Because of this, you'll need to use [Root Tasks](/docs/crafting-your-repository/
 
 When using Vitest's projects feature, you can run tests for specific projects using the `--project` (or `-p`) CLI flag:
 
-```bash title="Terminal"
+```
 # Run tests for a specific project
 vitest run --project=web
 
@@ -344,7 +293,7 @@ You can combine the benefits of both approaches by implementing a hybrid solutio
 
 First, create a shared configuration package since individual projects can't extend the root config when using projects. Create a new package for your shared Vitest configuration:
 
-```json title="./packages/vitest-config/package.json"
+```
 {
   "name": "@repo/vitest-config",
   "version": "0.0.0",
@@ -364,7 +313,7 @@ First, create a shared configuration package since individual projects can't ext
 }
 ```
 
-```json title="./packages/vitest-config/tsconfig.json"
+```
 {
   "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
@@ -376,7 +325,7 @@ First, create a shared configuration package since individual projects can't ext
 }
 ```
 
-```ts title="./packages/vitest-config/src/index.ts"
+```
 export const sharedConfig = {
   test: {
     globals: true,
@@ -389,7 +338,7 @@ export const sharedConfig = {
 
 Then, create your root Vitest configuration using projects:
 
-```ts title="./vitest.config.ts"
+```
 import { defineConfig } from "vitest/config";
 import { sharedConfig } from "@repo/vitest-config";
 
@@ -410,7 +359,7 @@ export default defineConfig({
 
 In this setup, your packages maintain their individual Vitest configurations that import the shared config. First, install the shared config package:
 
-```json title="./packages/ui/package.json"
+```
 {
   "scripts": {
     "test": "vitest run",
@@ -425,7 +374,7 @@ In this setup, your packages maintain their individual Vitest configurations tha
 
 Then create the Vitest configuration:
 
-```ts title="./packages/ui/vitest.config.ts"
+```
 import { defineConfig } from "vitest/config";
 import { sharedConfig } from "@repo/vitest-config";
 
@@ -440,7 +389,7 @@ export default defineConfig({
 
 Make sure to update your `turbo.json` to include the new configuration package in the dependency graph:
 
-```json title="./turbo.json"
+```
 {
   "tasks": {
     "build": {
@@ -460,7 +409,7 @@ Make sure to update your `turbo.json` to include the new configuration package i
 
 While your root `package.json` includes scripts for running tests globally:
 
-```json title="./package.json"
+```
 {
   "scripts": {
     "test:projects": "vitest run",
@@ -470,12 +419,3 @@ While your root `package.json` includes scripts for running tests globally:
 ```
 
 This configuration allows developers to run `pnpm test:projects` or `pnpm test:projects:watch` at the root for a seamless local development experience using Vitest projects, while CI continues to use `turbo run test` to leverage package-level caching. **You'll still need to handle merged coverage reports manually as described in the previous section**.
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)

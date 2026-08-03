@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/guides/tools/storybook
 title: "Storybook"
 description: "Set up Storybook for developing and documenting UI components in your monorepo."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# Storybook
-
-
+Learn how to use Storybook in a Turborepo.
 
 [Storybook](https://storybook.js.org/) is a popular way to build UI components in an isolated environment. By putting Storybook into your Turborepo, you can easily develop your design system right alongside your applications.
 
@@ -16,230 +14,199 @@ current_date: 2026-08-03T17:27:52.096Z
 
 If you'd rather use a template, this guide is walking through how to build [this Storybook/Turborepo template](https://vercel.com/templates/react/turborepo-design-system) on Vercel.
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm dlx create-turbo@latest -e design-system
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```bash title="Terminal"
-    yarn dlx create-turbo@latest -e design-system
-    ```
-  </Tab>
+```
+pnpm dlx create-turbo@latest -e design-system
+```
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npx create-turbo@latest -e design-system
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    bunx create-turbo@latest -e design-system
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+yarn dlx create-turbo@latest -e design-system
+```
+
+#### npm
+
+```
+npx create-turbo@latest -e design-system
+```
+
+#### bun
+
+```
+bunx create-turbo@latest -e design-system
+```
 
 ## Guide
 
-<Steps>
-  <Step>
-    ### Create a monorepo
+### Create a monorepo
 
-    If you don't have an existing project, use [create-turbo](/docs/getting-started/installation) to create a new monorepo:
+If you don't have an existing project, use [create-turbo](../../getting-started/installation.md) to create a new monorepo:
 
-    <PackageManagerTabs>
-      <Tab value="pnpm">
-        ```bash title="Terminal"
-        pnpm dlx create-turbo@latest
-        ```
-      </Tab>
+#### pnpm
 
-      <Tab value="yarn">
-        ```bash title="Terminal"
-        yarn dlx create-turbo@latest
-        ```
-      </Tab>
+```
+pnpm dlx create-turbo@latest
+```
 
-      <Tab value="npm">
-        ```bash title="Terminal"
-        npx create-turbo@latest
-        ```
-      </Tab>
+#### yarn
 
-      <Tab value="bun">
-        ```bash title="Terminal"
-        bunx create-turbo@latest
-        ```
-      </Tab>
-    </PackageManagerTabs>
-  </Step>
+```
+yarn dlx create-turbo@latest
+```
 
-  <Step>
-    ### Create a directory for the app
+#### npm
 
-    You'll need a directory for the Storybook application:
+```
+npx create-turbo@latest
+```
 
-    ```bash title="Terminal"
-    mkdir apps/storybook
-    cd apps/storybook
-    ```
-  </Step>
+#### bun
 
-  <Step>
-    ### Add the Storybook application
+```
+bunx create-turbo@latest
+```
 
-    In the `apps/storybook` directory, initialize a new Storybook application:
+### Create a directory for the app
 
-    <PackageManagerTabs>
-      <Tab value="pnpm">
-        ```bash title="Terminal"
-        pnpm create storybook@latest
-        ```
-      </Tab>
+You'll need a directory for the Storybook application:
 
-      <Tab value="yarn">
-        ```bash title="Terminal"
-        yarn create storybook@latest
-        ```
-      </Tab>
+```
+mkdir apps/storybook
+cd apps/storybook
+```
 
-      <Tab value="npm">
-        ```bash title="Terminal"
-        npm create storybook@latest
-        ```
-      </Tab>
+### Add the Storybook application
 
-      <Tab value="bun">
-        ```bash title="Terminal"
-        bun create storybook@latest
-        ```
-      </Tab>
-    </PackageManagerTabs>
+In the `apps/storybook` directory, initialize a new Storybook application:
 
-    Follow the prompts to create an application. For the rest of this guide, we'll assume React and TypeScript.
+#### pnpm
 
-    <Callout type="info">
-      After going through Storybook's onboarding, you can [uninstall the onboarding
-      addon](https://github.com/storybookjs/addon-onboarding/blob/main/README.md).
-    </Callout>
-  </Step>
+```
+pnpm create storybook@latest
+```
 
-  <Step>
-    ### Add your UI kit to Storybook
+#### yarn
 
-    Now, install your UI package into Storybook.
+```
+yarn create storybook@latest
+```
 
-    <PackageManagerTabs>
-      <Tab value="pnpm">
-        ```bash title="Terminal"
-        pnpm add @repo/ui --filter=storybook
-        ```
-      </Tab>
+#### npm
 
-      <Tab value="yarn">
-        ```bash title="Terminal"
-        yarn workspace storybook add @repo/ui
-        ```
-      </Tab>
+```
+npm create storybook@latest
+```
 
-      <Tab value="npm">
-        ```bash title="Terminal"
-        npm install @repo/ui --workspace=storybook
-        ```
-      </Tab>
+#### bun
 
-      <Tab value="bun">
-        ```bash title="Terminal"
-        cd apps/storybook && bun install @repo/ui
-        ```
-      </Tab>
-    </PackageManagerTabs>
-  </Step>
+```
+bun create storybook@latest
+```
 
-  <Step>
-    ### Set up a story for your Button component
+Follow the prompts to create an application. For the rest of this guide, we'll assume React and TypeScript.
 
-    Delete the stories and components found in `src/stories` that were created by the Storybook scaffolding tool. You will be making your own.
+### Add your UI kit to Storybook
 
-    As an example, here is a story for the `Button` component from `@repo/ui/button`.
+Now, install your UI package into Storybook.
 
-    ```tsx title="./apps/storybook/src/stories/Button.stories.tsx"
-    import type { Meta, StoryObj } from "@storybook/react";
-    import { Button } from "@repo/ui/button";
+#### pnpm
 
-    const meta = {
-      title: "Example/Button",
-      component: Button,
-      tags: ["autodocs"],
-    } satisfies Meta<typeof Button>;
+```
+pnpm add @repo/ui --filter=storybook
+```
 
-    export default meta;
-    type Story = StoryObj<typeof meta>;
+#### yarn
 
-    export const Primary: Story = {
-      args: {
-        appName: "Button",
-        children: "I am a primary button.",
-      },
-    };
-    ```
-  </Step>
+```
+yarn workspace storybook add @repo/ui
+```
 
-  <Step>
-    ### Align scripts to your tasks
+#### npm
 
-    Last, integrate the new Storybook application into your Turborepo:
+```
+npm install @repo/ui --workspace=storybook
+```
 
-    ```json title="apps/storybook/package.json"
-    {
-      "scripts": {
-        "dev": "storybook dev -p 6006", // [!code highlight]
-        "build": "storybook build" // [!code highlight]
-      }
+#### bun
+
+```
+cd apps/storybook && bun install @repo/ui
+```
+
+### Set up a story for your Button component
+
+Delete the stories and components found in `src/stories` that were created by the Storybook scaffolding tool. You will be making your own.
+
+As an example, here is a story for the `Button` component from `@repo/ui/button`.
+
+```
+import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "@repo/ui/button";
+
+const meta = {
+  title: "Example/Button",
+  component: Button,
+  tags: ["autodocs"],
+} satisfies Meta<typeof Button>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Primary: Story = {
+  args: {
+    appName: "Button",
+    children: "I am a primary button.",
+  },
+};
+```
+
+### Align scripts to your tasks
+
+Last, integrate the new Storybook application into your Turborepo:
+
+```
+{
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build": "storybook build"
+  }
+}
+```
+
+These scripts will now run with the `turbo dev` and `turbo build` tasks in your `turbo.json`.
+
+To ensure file outputs are cached when you run `build`, add `storybook-static` to the outputs of your `turbo.json` build task:
+
+```
+{
+  "tasks": {
+    "build": {
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "!.next/dev/**",
++       "storybook-static/**"
+      ]
     }
-    ```
+  }
+}
+```
 
-    These scripts will now run with the `turbo dev` and `turbo build` tasks in your `turbo.json`.
+### Add Storybook build outputs to.gitignore
 
-    To ensure file outputs are cached when you run `build`, add `storybook-static` to the outputs of your `turbo.json` build task:
+Ensure that the build outputs for Storybook are not committed to source control
 
-    ```diff title="turbo.json"
-    {
-      "tasks": {
-        "build": {
-          "outputs": [
-            ".next/**",
-            "!.next/cache/**",
-            "!.next/dev/**",
-    +       "storybook-static/**"
-          ]
-        }
-      }
-    }
-    ```
+```
++ storybook-static
+```
 
-    <Step>
-      ### Add Storybook build outputs to `.gitignore`
+### Verify your configuration
 
-      Ensure that the build outputs for Storybook are not committed to source control
+Run `turbo build` to build the Storybook application alongside the rest of your applications.
 
-      ```diff title=".gitignore"
-      + storybook-static
-      ```
-    </Step>
-
-    <Step>
-      ### Verify your configuration
-
-      Run `turbo build` to build the Storybook application alongside the rest of your applications.
-
-      You can also run `turbo build` again to see cache hits for your builds.
-    </Step>
-  </Step>
-</Steps>
+You can also run `turbo build` again to see cache hits for your builds.
 
 ## More tips
 
@@ -247,149 +214,113 @@ If you'd rather use a template, this guide is walking through how to build [this
 
 If you'd prefer to co-locate your stories to their source code (rather than having them in the Storybook application), you'll need some extra configuration.
 
-<Steps>
-  <Step>
-    #### Re-configure Storybook sources
+#### Re-configure Storybook sources
 
-    In `.storybook/main.ts`, change the `stories` paths in `config` to the directories you'd like to capture. For instance, if you'd like to write stories in the UI package:
+In `.storybook/main.ts`, change the `stories` paths in `config` to the directories you'd like to capture. For instance, if you'd like to write stories in the UI package:
 
-    ```diff title="./apps/storybook/.storybook/main.ts"
+```
+const config = {
+  stories: [
+-   "../src/**/*.mdx",
+-   "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
++   "../../../packages/ui/src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+};
+```
 
-    const config = {
-      stories: [
-    -   "../src/**/*.mdx",
-    -   "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
-    +   "../../../packages/ui/src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
-    };
-    ```
-  </Step>
+#### Move story files to the UI package
 
-  <Step>
-    #### Move story files to the UI package
+Following along with [the guide above](#set-up-a-story-for-your-button-component), move the `./apps/storybook/src/stories/Button.stories.tsx` file to `./packages/ui/src/Button.stories.tsx`.
 
-    Following along with [the guide above](#set-up-a-story-for-your-button-component), move the `./apps/storybook/src/stories/Button.stories.tsx` file to `./packages/ui/src/Button.stories.tsx`.
+Update components imports so that they reference the now co-located modules. For instance, in the story's imports:
 
-    Update components imports so that they reference the now co-located modules. For instance, in the story's imports:
+```
+- import { Button } from "@repo/ui/button";
++ import { Button } from "./button";
+```
 
-    ```diff title="./packages/ui/src/Button.stories.tsx"
-    - import { Button } from "@repo/ui/button";
-    + import { Button } from "./button";
-    ```
+You'll also need to install any Storybook packages required for writing stories. For example, moving the story from above would require that you install `@storybook/react` into your `@repo/ui` package.
 
-    <Callout type="info">
-      You may also need to update [absolute
-      imports](/docs/guides/tools/typescript#use-nodejs-subpath-imports-instead-of-typescript-compiler-paths)
-      according to your changes and usage.
-    </Callout>
+#### pnpm
 
-    You'll also need to install any Storybook packages required for writing stories. For example, moving the story from above would require that you install `@storybook/react` into your `@repo/ui` package.
+```
+pnpm add @storybook/react --filter=@repo/ui --save-dev
+```
 
-    <PackageManagerTabs>
-      <Tab value="pnpm">
-        ```bash title="Terminal"
-        pnpm add @storybook/react --filter=@repo/ui --save-dev
-        ```
-      </Tab>
+#### yarn
 
-      <Tab value="yarn">
-        ```bash title="Terminal"
-        yarn workspace @repo/ui add @storybook/react --dev
-        ```
-      </Tab>
+```
+yarn workspace @repo/ui add @storybook/react --dev
+```
 
-      <Tab value="npm">
-        ```bash title="Terminal"
-        npm install @storybook/react --workspace=@repo/ui --save-dev
-        ```
-      </Tab>
+#### npm
 
-      <Tab value="bun">
-        ```bash title="Terminal"
-        cd packages/ui && bun install @storybook/react --dev
-        ```
-      </Tab>
-    </PackageManagerTabs>
-  </Step>
+```
+npm install @storybook/react --workspace=@repo/ui --save-dev
+```
 
-  <Step>
-    #### Configure caching
+#### bun
 
-    Because stories are now in the UI package, changes to those stories can cause cache misses for any builds that depend on your UI package. However, changing a story doesn't mean your production applications should miss cache.
+```
+cd packages/ui && bun install @storybook/react --dev
+```
 
-    To prevent this, exclude stories from the inputs to your `build` task in your root `turbo.json`. You'll also need to create a `build:storybook` task, which you'll need in a moment:
+#### Configure caching
 
-    ```json title="./turbo.json"
-    {
-      "tasks": {
-        "build": {
-          "dependsOn": ["^build"],
-          "inputs": ["$TURBO_DEFAULT$", "!**/*.stories.{tsx,jsx,mdx}"], // [!code highlight]
-          "outputs": [".next/**", "!.next/cache/**", "!.next/dev/**"]
-        },
-        "build:storybook": {} // [!code highlight]
-      }
+Because stories are now in the UI package, changes to those stories can cause cache misses for any builds that depend on your UI package. However, changing a story doesn't mean your production applications should miss cache.
+
+To prevent this, exclude stories from the inputs to your `build` task in your root `turbo.json`. You'll also need to create a `build:storybook` task, which you'll need in a moment:
+
+```
+{
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "!**/*.stories.{tsx,jsx,mdx}"],
+      "outputs": [".next/**", "!.next/cache/**", "!.next/dev/**"]
+    },
+    "build:storybook": {}
+  }
+}
+```
+
+Additionally, create a [Package Configuration](../../reference/package-configurations.md) in the `storybook` application so stories are **accounted for in building the Storybook application, specifically**:
+
+```
+{
+  "extends": ["//"],
+  "tasks": {
+    "build:storybook": {
+      "dependsOn": ["^build:storybook"],
+      "outputs": ["storybook-static/**"]
     }
-    ```
+  }
+}
+```
 
-    Additionally, create a [Package Configuration](/docs/reference/package-configurations) in the `storybook` application so stories are **accounted for in building the Storybook application, specifically**:
+#### Rename the build script
 
-    ```json title="./apps/storybook/turbo.json"
-    {
-      "extends": ["//"],
-      "tasks": {
-        "build:storybook": {
-          "dependsOn": ["^build:storybook"],
-          "outputs": ["storybook-static/**"]
-        }
-      }
-    }
-    ```
+Last, make sure your script to build Storybook uses the configuration we just wrote by renaming it to the name of the task:
 
-    <Callout type="info">
-      If you are using the [Compiled Package
-      pattern](/docs/core-concepts/internal-packages#compiled-packages), you may
-      also need to add `^build` to your `dependsOn`.
-    </Callout>
-  </Step>
+```
+{
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build:storybook": "storybook build"
+  }
+}
+```
 
-  <Step>
-    #### Rename the build script
+The script that was once `"build"` is now `"build:storybook"` to ensure the stories are included in hashes for caching.
 
-    Last, make sure your script to build Storybook uses the configuration we just wrote by renaming it to the name of the task:
+#### Verify your configuration
 
-    ```json title="apps/storybook/package.json"
-    {
-      "scripts": {
-        "dev": "storybook dev -p 6006",
-        "build:storybook": "storybook build" // [!code highlight]
-      }
-    }
-    ```
+To ensure your setup is correct:
 
-    The script that was once `"build"` is now `"build:storybook"` to ensure the stories are included in hashes for caching.
-  </Step>
-
-  <Step>
-    #### Verify your configuration
-
-    To ensure your setup is correct:
-
-    1. Run `turbo build:storybook build`. You should see cache misses.
-    2. Run `turbo build:storybook build` again. You should see all cache hits.
-    3. Make a code change **to a story** in your `@repo/ui` package.
-    4. Run `turbo build:storybook build` again. You should **only** see a cache miss for the Storybook application. All others should hit cache.
-  </Step>
-</Steps>
+1. Run `turbo build:storybook build`. You should see cache misses.
+2. Run `turbo build:storybook build` again. You should see all cache hits.
+3. Make a code change **to a story** in your `@repo/ui` package.
+4. Run `turbo build:storybook build` again. You should **only** see a cache miss for the Storybook application. All others should hit cache.
 
 ### Adding CSS
 
 If your UI package exports its own CSS, you'll need to add it to the renders in the Storybook app, similar to how you would add it to your applications. [The Storybook documentation](https://storybook.js.org/docs/configure/styling-and-css#css) recommends you add it to the `.storybook/preview.ts` file.
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)

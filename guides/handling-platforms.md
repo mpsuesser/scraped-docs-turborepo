@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/guides/handling-platforms
 title: "Handling platforms"
-description: "Account for OS, architecture, and Node.js version differences in your Turborepo cache hash."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "Learn how to handle caching around operating systems, architectures, and other arbitrary conditions for Turborepo tasks."
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # Handling platforms
@@ -46,7 +46,7 @@ You won't want to commit this file to source control since it's dependent on env
 
 Now, make sure that `turbo` is aware of the file by adding it to task inputs. You can do this two ways:
 
-* **For specific tasks**: Include the file in [the `inputs` array](/docs/reference/configuration#inputs) of the task(s):
+* **For specific tasks**: Include the file in [the `inputs` array](../reference/configuration.md#inputs) of the task(s):
 
 ```json title="./turbo.json"
 {
@@ -59,7 +59,7 @@ Now, make sure that `turbo` is aware of the file by adding it to task inputs. Yo
 }
 ```
 
-* **For all tasks**: Add the file to [`globalDependencies`](/docs/reference/configuration#globaldependencies)
+* **For all tasks**: Add the file to [`globalDependencies`](../reference/configuration.md#globaldependencies)
 
 ```json title="./turbo.json"
 {
@@ -87,8 +87,8 @@ Last, you'll want to ensure that you run the script before running `turbo`. For 
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

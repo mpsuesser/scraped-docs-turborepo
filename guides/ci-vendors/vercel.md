@@ -2,17 +2,13 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/vercel
 title: "Vercel"
 description: "Deploy your Turborepo on Vercel with zero-config Remote Caching."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# Vercel
+Learn how to use Turborepo on Vercel.
 
-
-
-
-
-<img alt="" src={__img0} placeholder="blur" />
+![](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fturborepo-x-vercel.3ei-d2654h24u.png&w=3840&q=75&dpl=dpl_GvvaU1dSxMmdhnstDgQWwX3gUQJv)
 
 Vercel's zero-config integration with Turborepo automatically understands your monorepo.
 
@@ -22,53 +18,36 @@ For more information about deploying your Turborepo to Vercel, [visit the Vercel
 
 ## Filtered installs
 
-You can speed up installs by only installing the dependencies for the application being deployed and its Workspace dependencies. Set a custom Install Command in the application's `vercel.json` or [in your project's Build and Deployment settings](https://vercel.com/d?to=%2F%5Bteam%5D%2F%5Bproject%5D%2Fsettings%2Fbuild-and-deployment%23framework-settings\&title=Build+and+Deployment+settings):
+You can speed up installs by only installing the dependencies for the application being deployed and its Workspace dependencies. Set a custom Install Command in the application's `vercel.json` or [in your project's Build and Deployment settings](https://vercel.com/d?to=%2F%5Bteam%5D%2F%5Bproject%5D%2Fsettings%2Fbuild-and-deployment%23framework-settings&title=Build+and+Deployment+settings):
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```json title="apps/web/vercel.json"
-    {
-      "installCommand": "pnpm install --filter web..."
-    }
-    ```
+#### pnpm
 
-    <Callout type="warn">
-      Requires pnpm 9.5 or newer. On pnpm 8.x through 9.4, `--filter` installed
-      dependencies for the entire workspace
-      ([pnpm#6300](https://github.com/pnpm/pnpm/issues/6300)).
-    </Callout>
-  </Tab>
+```
+{
+  "installCommand": "pnpm install --filter web..."
+}
+```
 
-  <Tab value="yarn">
-    ```json title="apps/web/vercel.json"
-    {
-      "installCommand": "yarn workspaces focus web"
-    }
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="npm">
-    ```json title="apps/web/vercel.json"
-    {
-      "installCommand": "npm install --workspace=web"
-    }
-    ```
-  </Tab>
+```
+{
+  "installCommand": "yarn workspaces focus web"
+}
+```
 
-  <Tab value="bun">
-    ```json title="apps/web/vercel.json"
-    {
-      "installCommand": "bun install --filter web"
-    }
-    ```
-  </Tab>
-</PackageManagerTabs>
+#### npm
 
+```
+{
+  "installCommand": "npm install --workspace=web"
+}
+```
 
----
+#### bun
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+```
+{
+  "installCommand": "bun install --filter web"
+}
+```

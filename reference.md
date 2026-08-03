@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/reference
 title: "Turborepo API reference"
-description: "Entry point for all Turborepo API reference documentation including configuration, CLI commands, and packages."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "Learn about Turborepo's APIs using the reference."
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # Turborepo API reference
@@ -95,13 +95,13 @@ Suppresses color in terminal output, even in interactive terminals.
 
 Disables the update notification. This notification will be automatically disabled when running in CI environments, but can also be disabled manually via this flag.
 
-Alternatively, you can disable the notification using [the `TURBO_NO_UPDATE_NOTIFIER` environment variable](/docs/reference/system-environment-variables).
+Alternatively, you can disable the notification using [the `TURBO_NO_UPDATE_NOTIFIER` environment variable](reference/system-environment-variables.md).
 
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

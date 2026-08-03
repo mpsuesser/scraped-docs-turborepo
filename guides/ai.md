@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/guides/ai
 title: "Using AI with Turborepo"
-description: "Optimize your AI coding assistant workflows with Turborepo features like agent skills, task descriptions, and machine-readable docs."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "Get the most out of AI coding assistants in your Turborepo."
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # Using AI with Turborepo
@@ -48,7 +48,7 @@ git branch feature-branch && git worktree add ../agent-2-worktree feature-branch
 cd ../agent-2-worktree && turbo run build
 ```
 
-Combined with [Remote Caching](/docs/core-concepts/remote-caching), this enables fast feedback loops across multiple agents working simultaneously.
+Combined with [Remote Caching](../core-concepts/remote-caching.md), this enables fast feedback loops across multiple agents working simultaneously.
 
 ## Task descriptions
 
@@ -100,7 +100,7 @@ Turborepo's documentation site is optimized for AI consumption in several ways:
 When fetching documentation with appropriate headers, the site returns Markdown instead of HTML, preserving your AI's context window:
 
 ```bash title="Terminal"
-curl -sL -H "Accept: text/markdown" https://turborepo.dev/docs
+curl -sL -H "Accept: text/markdown" ../index.md
 ```
 
 ### Direct Markdown routes
@@ -123,8 +123,8 @@ This is useful when your AI needs to reference documentation matching your exact
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

@@ -2,21 +2,13 @@
 url: https://turborepo.dev/docs
 title: "Introduction"
 description: "Learn what Turborepo is, how it solves monorepo scaling problems, and how to navigate the documentation."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
-
-# Introduction
-
-
-
-
-
-
 
 ## What is Turborepo?
 
-Turborepo is a high-performance build system for JavaScript and TypeScript codebases. It is designed for scaling monorepos and also makes workflows in [single-package workspaces](/docs/guides/single-package-workspaces) faster, too.
+Turborepo is a high-performance build system for JavaScript and TypeScript codebases. It is designed for scaling monorepos and also makes workflows in [single-package workspaces](guides/single-package-workspaces.md) faster, too.
 
 From individual developers to the largest enterprise engineering organizations in the world, Turborepo is saving years of engineering time and millions of dollars in compute costs through a lightweight approach to optimizing the tasks you need to run in your repository.
 
@@ -24,15 +16,15 @@ From individual developers to the largest enterprise engineering organizations i
 
 Monorepos have many advantages - but **they struggle to scale**. Each workspace has its own test suite, its own linting, and its own build process. A single monorepo might have **thousands of tasks to execute**.
 
-<img alt="A representation of a typical monorepo. The first application took 110 seconds to complete its tasks. The second application took 140 seconds to complete its tasks. The shared package between them took 90 seconds to complete its tasks." src={__img0} placeholder="blur" />
+![A representation of a typical monorepo. The first application took 110 seconds to complete its tasks. The second application took 140 seconds to complete its tasks. The shared package between them took 90 seconds to complete its tasks.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwhy-turborepo-problem.0vqhrgu9522sy.png&w=3840&q=75&dpl=dpl_GvvaU1dSxMmdhnstDgQWwX3gUQJv)
 
 These slowdowns can dramatically affect the way your teams build software, especially at scale. Feedback loops need to be fast so developers can deliver high-quality code quickly.
 
 ## The monorepo solution
 
-<img alt="The monorepo from before using Turborepo, showing how it can hit cache to complete tasks for all three packages in 80 milliseconds." src={__img1} placeholder="blur" />
+![The monorepo from before using Turborepo, showing how it can hit cache to complete tasks for all three packages in 80 milliseconds.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwhy-turborepo-solution.2xt1tkfstms2z.png&w=3840&q=75&dpl=dpl_GvvaU1dSxMmdhnstDgQWwX3gUQJv)
 
-**Turborepo solves your monorepo's scaling problem**. [Remote Cache](/docs/core-concepts/remote-caching) stores the result of all your tasks, meaning that **your CI never needs to do the same work twice**.
+**Turborepo solves your monorepo's scaling problem**. [Remote Cache](core-concepts/remote-caching.md) stores the result of all your tasks, meaning that **your CI never needs to do the same work twice**.
 
 Additionally, task scheduling can be difficult in a monorepo. You may need to build, *then* test, *then* lint...
 
@@ -47,12 +39,3 @@ We will do our best to keep jargon to a minimum - but there are some need-to-kno
 ## Join the community
 
 If you have questions about anything related to Turborepo, you're always welcome to ask the community on [GitHub Discussions](https://github.com/vercel/turborepo/discussions), [Vercel Community](https://community.vercel.com/tag/turborepo), and [Twitter](https://twitter.com/turborepo).
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)

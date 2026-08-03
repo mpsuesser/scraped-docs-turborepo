@@ -2,56 +2,47 @@
 url: https://turborepo.dev/docs/guides/single-package-workspaces
 title: "Single-package workspaces"
 description: "Use Turborepo's caching and task parallelization in a standalone application without a monorepo."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# Single-package workspaces
-
-
+Learn how to use Turborepo in a single-package workspace.
 
 While Turborepo is highly effective in [multi-package workspaces](https://vercel.com/docs/vercel-platform/glossary#multi-package-workspace) (commonly referred to as monorepos), it can also be used to make [single-package workspaces](https://vercel.com/docs/vercel-platform/glossary#single-package-workspace) faster.
 
-Turborepo's most important features work in single-package workspaces including local and [Remote Caching](/docs/core-concepts/remote-caching) and task parallelization. Features that don't work are ones that don't make sense in the context of a single package, like package tasks (`app#build`).
-
-<Callout type="info">
-  Examples of single-package workspaces are the output of `npx create-next-app`
-  or `npm create vite`.
-</Callout>
+Turborepo's most important features work in single-package workspaces including local and [Remote Caching](../core-concepts/remote-caching.md) and task parallelization. Features that don't work are ones that don't make sense in the context of a single package, like package tasks (`app#build`).
 
 ## Installation
 
 Install `turbo` into your application:
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm add turbo --save-dev
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```bash title="Terminal"
-    yarn add turbo --dev
-    ```
-  </Tab>
+```
+pnpm add turbo --save-dev
+```
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npm install turbo --save-dev
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    bun install turbo --dev
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+yarn add turbo --dev
+```
 
-### Running a `package.json` script using global `turbo` (optional)
+#### npm
 
-For even faster developer workflows, you can [install `turbo` globally](/docs/getting-started/installation#global-installation), too, and run commands directly from the command line.
+```
+npm install turbo --save-dev
+```
+
+#### bun
+
+```
+bun install turbo --dev
+```
+
+### Running a package.json script using global turbo (optional)
+
+For even faster developer workflows, you can [install `turbo` globally](../getting-started/installation.md#global-installation), too, and run commands directly from the command line.
 
 Once installed, you can run `turbo build` and Turborepo will run your `build` script from `package.json`. Running `turbo build` again will hit the cache.
 
@@ -70,7 +61,7 @@ For example, let's say you have a project where we always have to set up a devel
 
 You can schedule these tasks into one command using Turborepo. First, create scripts in your `package.json`:
 
-```json title="package.json"
+```
 {
   "name": "@acme/my-app",
   "version": "0.0.0",
@@ -89,7 +80,7 @@ You can schedule these tasks into one command using Turborepo. First, create scr
 
 Then, create tasks in `turbo.json` to run these scripts in order:
 
-```json title="./turbo.json"
+```
 {
   "$schema": "https://turborepo.dev/schema.json",
   "tasks": {
@@ -119,7 +110,7 @@ The `dependsOn` arrays in the tasks above create a sequential order for the task
 
 Using `turbo` to parallelize tasks results in speeding up tasks by running all at once, when they can be. For instance, you can run your ESLint, TypeScript, and Prettier checks at the same time. Given scripts like:
 
-```json title="./package.json"
+```
 {
   "scripts": {
     "lint": "eslint .",
@@ -131,7 +122,7 @@ Using `turbo` to parallelize tasks results in speeding up tasks by running all a
 
 You can create a configuration like this one:
 
-```json title="turbo.json"
+```
 {
   "$schema": "https://turborepo.dev/schema.json",
   "tasks": {
@@ -144,7 +135,7 @@ You can create a configuration like this one:
 
 Then, to run all tasks at the same time:
 
-```bash title="Terminal"
+```
 turbo check-types lint format
 ```
 
@@ -154,7 +145,7 @@ Because Turborepo will treat a single-package workspace as one package, it can h
 
 For instance, a script for checking types using `tsc --noEmit` can be configured with inputs that only include TypeScript files:
 
-```json title="./turbo.json"
+```
 {
   "$schema": "https://turborepo.dev/schema.json",
   "tasks": {
@@ -164,12 +155,3 @@ For instance, a script for checking types using `tsc --noEmit` can be configured
   }
 }
 ```
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)

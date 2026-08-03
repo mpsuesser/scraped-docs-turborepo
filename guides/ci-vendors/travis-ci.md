@@ -2,23 +2,15 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/travis-ci
 title: "Travis CI"
 description: "Configure Travis CI to run Turborepo tasks with Remote Caching."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
-
-# Travis CI
-
-
-
-
-
-
 
 The following example shows how to use Turborepo with [Travis CI](https://www.travis-ci.com/).
 
 For a given root `package.json`:
 
-```json title="./package.json"
+```
 {
   "name": "my-turborepo",
   "scripts": {
@@ -33,7 +25,7 @@ For a given root `package.json`:
 
 And a `turbo.json`:
 
-```json title="./turbo.json"
+```
 {
   "$schema": "https://turborepo.dev/schema.json",
   "tasks": {
@@ -50,109 +42,97 @@ And a `turbo.json`:
 
 Create a file called `.travis.yml` in your repository with the following contents:
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```yaml title=".travis.yml"
-    language: node_js
-    node_js:
-      - lts/*
-    cache:
-      npm: false
-      directories:
-        - "~/.pnpm-store"
-    before_install:
-      - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6.32.2
-      - pnpm config set store-dir ~/.pnpm-store
-    install:
-      - pnpm install
-    script:
-      - pnpm build
-    script:
-      - pnpm test
-    ```
+#### pnpm
 
-    > For more information visit the pnpm documentation section on Travis CI integration, view it [here](https://pnpm.io/continuous-integration#travis)
-  </Tab>
+```
+language: node_js
+node_js:
+  - lts/*
+cache:
+  npm: false
+  directories:
+    - "~/.pnpm-store"
+before_install:
+  - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6.32.2
+  - pnpm config set store-dir ~/.pnpm-store
+install:
+  - pnpm install
+script:
+  - pnpm build
+script:
+  - pnpm test
+```
 
-  <Tab value="yarn">
-    Travis CI detects the use of Yarn by the presence of `yarn.lock`. It will automatically ensure it is installed.
+> For more information visit the pnpm documentation section on Travis CI integration, view it [here](https://pnpm.io/continuous-integration#travis)
 
-    ```yaml title=".travis.yml"
-    language: node_js
-    node_js:
-      - lts/*
-    install:
-      - yarn
-    script:
-      - yarn build
-    script:
-      - yarn test
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="npm">
-    ```yaml title=".travis.yml"
-    language: node_js
-    node_js:
-      - lts/*
-    install:
-      - npm install
-    script:
-      - npm run build
-    script:
-      - npm run test
-    ```
-  </Tab>
+Travis CI detects the use of Yarn by the presence of `yarn.lock`. It will automatically ensure it is installed.
 
-  <Tab value="bun">
-    ```yaml title=".travis.yml"
-    language: node_js
-    node_js:
-      - lts/*
-    cache:
-      npm: false
-      directories:
-        - "~/.pnpm-store"
-    before_install:
-      - curl -fsSL https://bun.sh/install | bash
-    install:
-      - bun install
-    script:
-      - bun run build
-    script:
-      - bun run test
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+language: node_js
+node_js:
+  - lts/*
+install:
+  - yarn
+script:
+  - yarn build
+script:
+  - yarn test
+```
+
+#### npm
+
+```
+language: node_js
+node_js:
+  - lts/*
+install:
+  - npm install
+script:
+  - npm run build
+script:
+  - npm run test
+```
+
+#### bun
+
+```
+language: node_js
+node_js:
+  - lts/*
+cache:
+  npm: false
+  directories:
+    - "~/.pnpm-store"
+before_install:
+  - curl -fsSL https://bun.sh/install | bash
+install:
+  - bun install
+script:
+  - bun run build
+script:
+  - bun run test
+```
 
 ## Remote Caching
 
 To use Remote Caching, retrieve the team and token for the Remote Cache for your provider. In this example, we'll use [Vercel Remote Cache](https://vercel.com/docs/monorepos/remote-caching):
 
-* `TURBO_TOKEN` - The Bearer token to access the Remote Cache
-* `TURBO_TEAM` - The slug of the Vercel team to share the artifacts with
+- `TURBO_TOKEN` - The Bearer token to access the Remote Cache
+- `TURBO_TEAM` - The slug of the Vercel team to share the artifacts with
 
 To use Vercel Remote Caching, you can get the value of these variables in a few steps:
 
 1. Create a Scoped Access Token to your account in the [Vercel Dashboard](https://vercel.com/account/tokens)
 
-<img alt="Vercel Access Tokens" src={__img0} placeholder="blur" />
+![Vercel Access Tokens](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fvercel-create-token.2km5ecr58yqs2.png&w=3840&q=75&dpl=dpl_GvvaU1dSxMmdhnstDgQWwX3gUQJv)
 
 Copy the value to a safe place. You'll need it in a moment.
 
 2. Go to your Travis repository settings and scroll down to the *Environment Variables* section. Create a new variable called `TURBO_TOKEN` and enter the value of your Scoped Access Token.
 
-<img alt="Travis CI Variables" src={__img1} placeholder="blur" />
+![Travis CI Variables](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftravis-ci-environment-variables.2o2xvjvi9lk2y.png&w=3840&q=75&dpl=dpl_GvvaU1dSxMmdhnstDgQWwX3gUQJv)
 
-3. Make a second secret called `TURBO_TEAM` and set it to your team slug - the part after `vercel.com/` in [your Team URL](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fsettings\&title=Find+Team+URL). For example, the slug for `vercel.com/acme` is `acme`.
-
+3. Make a second secret called `TURBO_TEAM` and set it to your team slug - the part after `vercel.com/` in [your Team URL](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fsettings&title=Find+Team+URL). For example, the slug for `vercel.com/acme` is `acme`.
 4. Travis CI automatically loads environment variables stored in project settings into the CI environment. No modifications are necessary for the CI file.
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)

@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/guides/frameworks/rsbuild
 title: "Rsbuild"
 description: "Add and configure Rsbuild applications in your Turborepo monorepo."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# Rsbuild
-
-
+Learn more about using Rsbuild in your monorepo.
 
 [Rsbuild](https://rsbuild.rs/) is an Rspack-based build tool that provides out-of-the-box setup for modern web applications.
 
@@ -16,123 +14,117 @@ current_date: 2026-08-03T17:27:52.096Z
 
 To get started with Rsbuild in a Turborepo quickly, use [the `with-rsbuild` example](https://github.com/vercel/turborepo/tree/main/examples/with-rsbuild):
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm dlx create-turbo@latest -e with-rsbuild
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```bash title="Terminal"
-    yarn dlx create-turbo@latest -e with-rsbuild
-    ```
-  </Tab>
+```
+pnpm dlx create-turbo@latest -e with-rsbuild
+```
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npx create-turbo@latest -e with-rsbuild
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    bunx create-turbo@latest -e with-rsbuild
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+yarn dlx create-turbo@latest -e with-rsbuild
+```
+
+#### npm
+
+```
+npx create-turbo@latest -e with-rsbuild
+```
+
+#### bun
+
+```
+bunx create-turbo@latest -e with-rsbuild
+```
 
 ## Adding an Rsbuild application to an existing repository
 
 Use [`create-rsbuild`](https://rsbuild.rs/guide/start/quick-start) to set up a new Rsbuild application in a package. From the root of your repository, run:
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm dlx create-rsbuild@latest apps/my-app --template react
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```bash title="Terminal"
-    yarn dlx create-rsbuild@latest apps/my-app --template react
-    ```
-  </Tab>
+```
+pnpm dlx create-rsbuild@latest apps/my-app --template react
+```
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npx -y create-rsbuild@latest apps/my-app --template react
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    bunx create-rsbuild@latest apps/my-app --template react
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+yarn dlx create-rsbuild@latest apps/my-app --template react
+```
+
+#### npm
+
+```
+npx -y create-rsbuild@latest apps/my-app --template react
+```
+
+#### bun
+
+```
+bunx create-rsbuild@latest apps/my-app --template react
+```
 
 ## Integrating with your repository
 
-To add [Internal Packages](/docs/core-concepts/internal-packages) to your new application, install them into the app with your package manager:
+To add [Internal Packages](../../core-concepts/internal-packages.md) to your new application, install them into the app with your package manager:
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```diff title="./apps/my-app/package.json"
-    {
-      "name": "my-app",
-      "dependencies": {
-    +   "@repo/ui": "workspace:*"
-      }
-    }
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```diff title="./apps/my-app/package.json"
-    {
-      "name": "my-app",
-      "dependencies": {
-    +   "@repo/ui": "*"
-      }
-    }
-    ```
-  </Tab>
+```
+{
+  "name": "my-app",
+  "dependencies": {
++   "@repo/ui": "workspace:*"
+  }
+}
+```
 
-  <Tab value="npm">
-    ```diff title="./apps/my-app/package.json"
-    {
-     "name": "my-app",
-      "dependencies": {
-    +   "@repo/ui": "*"
-      }
-    }
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```diff title="./apps/my-app/package.json"
-    {
-     "name": "my-app",
-      "dependencies": {
-    +   "@repo/ui": "workspace:*"
-      }
-    }
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+{
+  "name": "my-app",
+  "dependencies": {
++   "@repo/ui": "*"
+  }
+}
+```
+
+#### npm
+
+```
+{
+ "name": "my-app",
+  "dependencies": {
++   "@repo/ui": "*"
+  }
+}
+```
+
+#### bun
+
+```
+{
+ "name": "my-app",
+  "dependencies": {
++   "@repo/ui": "workspace:*"
+  }
+}
+```
 
 Make sure to run your package manager's install command. You also may need to update `scripts` in `package.json` to fit your use case in your repository.
 
 ### Customizing tasks
 
-By default, the new application will use the tasks defined in the root `turbo.json`. If you'd like to configure tasks differently for the new application, use [Package Configurations](/docs/reference/package-configurations).
+By default, the new application will use the tasks defined in the root `turbo.json`. If you'd like to configure tasks differently for the new application, use [Package Configurations](../../reference/package-configurations.md).
 
 ### Microfrontends
 
-When using Rsbuild with [Turborepo's microfrontends](/docs/guides/microfrontends), set `server.base` for child applications. Rsbuild uses `server.base` as the default asset prefix for both development and production assets.
+When using Rsbuild with [Turborepo's microfrontends](../microfrontends.md), set `server.base` for child applications. Rsbuild uses `server.base` as the default asset prefix for both development and production assets.
 
-```ts title="./apps/my-app/rsbuild.config.ts"
+```
 import { defineConfig } from "@rsbuild/core";
 
 export default defineConfig({
@@ -146,37 +138,35 @@ export default defineConfig({
 
 For runtime composition with Rsbuild, use [the `with-rsbuild-module-federation` example](https://github.com/vercel/turborepo/tree/main/examples/with-rsbuild-module-federation).
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm dlx create-turbo@latest -e with-rsbuild-module-federation
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```bash title="Terminal"
-    yarn dlx create-turbo@latest -e with-rsbuild-module-federation
-    ```
-  </Tab>
+```
+pnpm dlx create-turbo@latest -e with-rsbuild-module-federation
+```
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npx create-turbo@latest -e with-rsbuild-module-federation
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    bunx create-turbo@latest -e with-rsbuild-module-federation
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+yarn dlx create-turbo@latest -e with-rsbuild-module-federation
+```
+
+#### npm
+
+```
+npx create-turbo@latest -e with-rsbuild-module-federation
+```
+
+#### bun
+
+```
+bunx create-turbo@latest -e with-rsbuild-module-federation
+```
 
 The example includes a `react-host` Rsbuild app, a `react-remote` Rsbuild app, and an `@mf-rsbuild-example/shared-ui` package. The host consumes the remote's exposed `./remote-app` module through `mf-manifest.json`, and both apps share React dependencies through [Module Federation](https://module-federation.io/).
 
 During development, run `turbo dev` from the example root. The host uses Rsbuild's default port `3000` and the remote runs on `localhost:3001`.
 
-```json title="./turbo.json"
+```
 {
   "tasks": {
     "dev": {
@@ -193,12 +183,3 @@ During development, run `turbo dev` from the example root. The host uses Rsbuild
 ```
 
 Keep `dev` uncached and persistent for Rsbuild servers. Use `dependsOn: ["^build"]` so shared packages are built before the host and remote start.
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)

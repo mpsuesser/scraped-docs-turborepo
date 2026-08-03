@@ -2,13 +2,9 @@
 url: https://turborepo.dev/docs/crafting-your-repository
 title: "Crafting your repository"
 description: "Step-by-step guides for designing, building, and optimizing a monorepo with Turborepo."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
-
-# Crafting your repository
-
-
 
 Architecting a monorepo is a careful process. Through these guides, you'll learn how to design and build a monorepo that will make every team faster - no matter the size.
 
@@ -16,47 +12,52 @@ The guides in this section will take you through building a multi-package worksp
 
 By the time you've read through all of this section, you should have a good understanding of how to design and build a monorepo with Turborepo.
 
-<Callout type="info">
-  Turborepo can also be used to speed up single-package workspaces. Visit the
-  [single-package workspace](/docs/guides/single-package-workspaces) section for
-  more information.
-</Callout>
+## From zero to turbo
 
-## From zero to `turbo`
+### [1\. Structuring a repository](crafting-your-repository/structuring-a-repository.md)
 
-<Cards>
-  <Card href="/docs/crafting-your-repository/structuring-a-repository" title="1. Structuring a repository" description="Design the directory structure of your monorepo." />
+Design the directory structure of your monorepo.
 
-  <Card href="/docs/crafting-your-repository/managing-dependencies" title="2. Managing dependencies" description="Using dependencies for sharing code" />
+### [2\. Managing dependencies](crafting-your-repository/managing-dependencies.md)
 
-  <Card href="/docs/crafting-your-repository/creating-an-internal-package" title="3. Creating an internal package" description="Make a package in your repository" />
+Using dependencies for sharing code
 
-  <Card href="/docs/crafting-your-repository/configuring-tasks" title="4. Configuring tasks" description="Design your task patterns" />
+### [3\. Creating an internal package](crafting-your-repository/creating-an-internal-package.md)
 
-  <Card href="/docs/crafting-your-repository/running-tasks" title="5. Running tasks" description="Run tasks as fast as possible" />
+Make a package in your repository
 
-  <Card href="/docs/crafting-your-repository/caching" title="6. Caching" description="Never do the same work twice" />
+### [4\. Configuring tasks](crafting-your-repository/configuring-tasks.md)
 
-  <Card href="/docs/crafting-your-repository/developing-applications" title="7. Developing apps" description="Run many apps in parallel" />
+Design your task patterns
 
-  <Card href="/docs/crafting-your-repository/using-environment-variables" title="8. Using environment variables" description="Account for variables in your environment" />
+### [5\. Running tasks](crafting-your-repository/running-tasks.md)
 
-  <Card href="/docs/crafting-your-repository/constructing-ci" title="9. Constructing CI" description="Ship your applications" />
+Run tasks as fast as possible
 
-  <Card href="/docs/crafting-your-repository/upgrading" title="10. Upgrading" description="Upgrading your Turborepo version" />
+### [6\. Caching](crafting-your-repository/caching.md)
 
-  <Card href="/docs/crafting-your-repository/understanding-your-repository" title="11. Understanding your repository" description="Understanding your codebase with Turborepo" />
-</Cards>
+Never do the same work twice
+
+### [7\. Developing apps](crafting-your-repository/developing-applications.md)
+
+Run many apps in parallel
+
+### [8\. Using environment variables](crafting-your-repository/using-environment-variables.md)
+
+Account for variables in your environment
+
+### [9\. Constructing CI](crafting-your-repository/constructing-ci.md)
+
+Ship your applications
+
+### [10\. Upgrading](crafting-your-repository/upgrading.md)
+
+Upgrading your Turborepo version
+
+### [11\. Understanding your repository](crafting-your-repository/understanding-your-repository.md)
+
+Understanding your codebase with Turborepo
 
 ## More guides
 
-We also have more guides centered around [specific tools, use cases, and other topics](/docs/guides).
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+We also have more guides centered around [specific tools, use cases, and other topics](guides.md).

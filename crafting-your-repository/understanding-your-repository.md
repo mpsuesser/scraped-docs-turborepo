@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/crafting-your-repository/understanding-your-repository
 title: "Understanding your repository"
-description: "Use turbo devtools, ls, run, and query to visualize and inspect your monorepo's package and task graphs."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "Learn how to understand your repository structure using Turborepo."
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # Understanding your repository
@@ -20,7 +20,7 @@ Turborepo includes tools for understanding your repository structure, that can h
 turbo devtools
 ```
 
-For more information, see the [reference documentation](/docs/reference/devtools).
+For more information, see the [reference documentation](../reference/devtools.md).
 
 ## `turbo ls`
 
@@ -36,7 +36,7 @@ To list your packages, you can run `turbo ls`. This will show the packages in yo
   web apps/web
 ```
 
-You can [apply filters](/docs/crafting-your-repository/running-tasks#using-filters) to `ls`, just like `run`:
+You can [apply filters](running-tasks.md#using-filters) to `ls`, just like `run`:
 
 ```bash title="Terminal"
 > turbo ls --filter ...ui
@@ -160,8 +160,8 @@ With `turbo query`, you can find all the packages and the reason why they were i
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

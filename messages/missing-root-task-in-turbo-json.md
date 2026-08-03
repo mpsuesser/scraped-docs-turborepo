@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/messages/missing-root-task-in-turbo-json
 title: "Missing root task in turbo.json"
-description: "How to resolve errors caused by root package.json scripts that are not registered in turbo.json."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "Learn more about errors for missing root tasks in turbo.json in Turborepo."
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # Missing root task in turbo.json
@@ -22,7 +22,7 @@ Root tasks are the scripts defined in the monorepo's root `package.json`. These 
 }
 ```
 
-This creates a problem when we declare [topological dependencies](/docs/reference/configuration#dependson). Topological
+This creates a problem when we declare [topological dependencies](../reference/configuration.md#dependson). Topological
 dependencies specify that your package's dependencies should execute their tasks before your package executes its own task.
 
 ```json title="./turbo.json"
@@ -59,8 +59,8 @@ For instance, if `//#build` depends on `app#lint` and `docs#lint`, then you can 
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

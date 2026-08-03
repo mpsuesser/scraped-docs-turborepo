@@ -2,69 +2,53 @@
 url: https://turborepo.dev/docs/guides/generating-code
 title: "Generating code"
 description: "Use Turborepo's built-in generators and custom Plop configurations to scaffold new packages and code."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# Generating code
+Learn how to generate code using Turborepo.
 
-
-
-Splitting your monorepo into packages is a great way to organize your code, speed up tasks, and improve the local development
-experience. With Turborepo's code generation, it's easy to generate new source code for packages, modules,
-and even individual UI components in a structured way that integrates with the rest of your repository.
+Splitting your monorepo into packages is a great way to organize your code, speed up tasks, and improve the local development experience. With Turborepo's code generation, it's easy to generate new source code for packages, modules, and even individual UI components in a structured way that integrates with the rest of your repository.
 
 ## Add an empty package
 
 Add a new, empty app or package to your monorepo.
 
-```sh title="Terminal"
+```
 turbo gen workspace
 ```
 
-View all available [options](/docs/reference/generate#workspace) for `gen workspace`.
+View all available [options](../reference/generate.md#workspace) for `gen workspace`.
 
 ## Copy an existing package
 
-You can use an existing workspace as a template for your new app or package. This works for both workspaces within your existing monorepo,
-and remote workspaces from other repositories (specified via GitHub URL).
+You can use an existing workspace as a template for your new app or package. This works for both workspaces within your existing monorepo, and remote workspaces from other repositories (specified via GitHub URL).
 
 ### Examples
 
 Create a new package in your monorepo by copying from an existing package in your repo.
 
-```sh title="Terminal"
+```
 turbo gen workspace --copy
 ```
 
 Create a new workspace in your monorepo by copying from a remote package.
 
-```sh title="Terminal"
+```
 turbo gen workspace --copy https://github.com/vercel/turborepo/tree/main/examples/with-tailwind/packages/tailwind-config
 ```
 
-<Callout type="info">
-  **Note**: When adding from a remote source, Turborepo is unable to verify that your repo has all of the required dependencies, and is using the correct package manager. In this case, some manual modifications may be required to get the new workspace working as expected within your repository.
-</Callout>
-
-View all available [options](/docs/reference/generate#workspace) for `gen workspace --copy`.
+View all available [options](../reference/generate.md#workspace) for `gen workspace --copy`.
 
 ## Custom generators
 
-If a built-in generator does not fit your needs, you can create your own custom generator using [Plop](https://plopjs.com/) configurations.
-Turborepo will automatically detect any generator configurations within your repo, and make them available to run from the command line.
+If a built-in generator does not fit your needs, you can create your own custom generator using [Plop](https://plopjs.com/) configurations. Turborepo will automatically detect any generator configurations within your repo, and make them available to run from the command line.
 
-<Callout type="info">
-  While Turborepo Generators are built on top of Plop, they don't require `plop`
-  to be installed as a dependency in your repo.
-</Callout>
-
-While Turborepo understands all Plop configuration options and features, it provides a few additional features to improve the experience of writing
-generators within a repo configured with Turborepo.
+While Turborepo understands all Plop configuration options and features, it provides a few additional features to improve the experience of writing generators within a repo configured with Turborepo.
 
 1. Generators are automatically discovered, loaded, and organized per workspace (no need to manually `load` them within a single configuration file)
 2. Generators are automatically run from the root of the workspace where they are defined
-3. Generators can be invoked from anywhere within your repo (or outside it via the [`--root`](/docs/reference/generate#--root-path) flag)
+3. Generators can be invoked from anywhere within your repo (or outside it via the [`--root`](../reference/generate.md#--root-path) flag)
 4. TypeScript generators are supported with zero configuration
 5. `plop` is not required to be installed as a dependency of your repo
 
@@ -72,224 +56,63 @@ generators within a repo configured with Turborepo.
 
 To build and run a custom generator, run the following command from anywhere within your monorepo using Turborepo.
 
-```sh title="Terminal"
+```
 turbo gen
 ```
 
-You'll be prompted to select an existing generator or to create one if you don't have any yet. You can also create your configuration
-manually at `turbo/generators/config.ts` (or `config.js`) at the root of your repo - or within *any* workspace.
-
-<Callout type="info">
-  If you are using TypeScript, you will need to install [the `@turbo/gen`
-  package](https://github.com/vercel/turborepo/tree/main/packages/turbo-gen) as
-  a `devDependency` to access the required TS types.
-</Callout>
+You'll be prompted to select an existing generator or to create one if you don't have any yet. You can also create your configuration manually at `turbo/generators/config.ts` (or `config.js`) at the root of your repo - or within *any* workspace.
 
 For example, the following illustrates a monorepo with three locations for generators:
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    <Files>
-      <Folder name="apps" defaultOpen>
-        <Folder name="docs">
-          <File name="package.json" />
-        </Folder>
+#### pnpm
 
-        <Folder name="web" defaultOpen>
-          <File name="package.json" />
+package.json
 
-          <Folder name="turbo" green defaultOpen>
-            <Folder name="generators">
-              <File name="config.ts" />
+package.json
 
-              <File name="templates" />
-            </Folder>
-          </Folder>
-        </Folder>
-      </Folder>
+package.json
 
-      <Folder name="packages" defaultOpen>
-        <Folder name="ui" defaultOpen>
-          <File name="package.json" />
+package-lock.yaml
 
-          <Folder name="turbo" green defaultOpen>
-            <Folder name="generators">
-              <File name="config.ts" />
+pnpm-workspace.yaml
 
-              <File name="templates" />
-            </Folder>
-          </Folder>
-        </Folder>
-      </Folder>
+turbo.json
 
-      <Folder name="turbo" green defaultOpen>
-        <Folder name="generators">
-          <File name="config.ts" />
+#### yarn
 
-          <File name="templates" />
-        </Folder>
-      </Folder>
+package.json
 
-      <File name="package.json" />
+package.json
 
-      <File name="package-lock.yaml" />
+package.json
 
-      <File name="pnpm-workspace.yaml" />
+yarn.lock
 
-      <File name="turbo.json" />
-    </Files>
-  </Tab>
+turbo.json
 
-  <Tab value="yarn">
-    <Files>
-      <Folder name="apps" defaultOpen>
-        <Folder name="docs">
-          <File name="package.json" />
-        </Folder>
+#### npm
 
-        <Folder name="web" defaultOpen>
-          <File name="package.json" />
+package.json
 
-          <Folder name="turbo" green defaultOpen>
-            <Folder name="generators">
-              <File name="config.ts" />
+package.json
 
-              <File name="templates" />
-            </Folder>
-          </Folder>
-        </Folder>
-      </Folder>
+package.json
 
-      <Folder name="packages" defaultOpen>
-        <Folder name="ui" defaultOpen>
-          <File name="package.json" />
+package-lock.json
 
-          <Folder name="turbo" green defaultOpen>
-            <Folder name="generators">
-              <File name="config.ts" />
+turbo.json
 
-              <File name="templates" />
-            </Folder>
-          </Folder>
-        </Folder>
-      </Folder>
+#### bun
 
-      <Folder name="turbo" green defaultOpen>
-        <Folder name="generators">
-          <File name="config.ts" />
+package.json
 
-          <File name="templates" />
-        </Folder>
-      </Folder>
+package.json
 
-      <File name="package.json" />
+package.json
 
-      <File name="yarn.lock" />
+bun.lock
 
-      <File name="turbo.json" />
-    </Files>
-  </Tab>
-
-  <Tab value="npm">
-    <Files>
-      <Folder name="apps" defaultOpen>
-        <Folder name="docs">
-          <File name="package.json" />
-        </Folder>
-
-        <Folder name="web" defaultOpen>
-          <File name="package.json" />
-
-          <Folder name="turbo" green defaultOpen>
-            <Folder name="generators">
-              <File name="config.ts" />
-
-              <File name="templates" />
-            </Folder>
-          </Folder>
-        </Folder>
-      </Folder>
-
-      <Folder name="packages" defaultOpen>
-        <Folder name="ui" defaultOpen>
-          <File name="package.json" />
-
-          <Folder name="turbo" green defaultOpen>
-            <Folder name="generators">
-              <File name="config.ts" />
-
-              <File name="templates" />
-            </Folder>
-          </Folder>
-        </Folder>
-      </Folder>
-
-      <Folder name="turbo" green defaultOpen>
-        <Folder name="generators">
-          <File name="config.ts" />
-
-          <File name="templates" />
-        </Folder>
-      </Folder>
-
-      <File name="package.json" />
-
-      <File name="package-lock.json" />
-
-      <File name="turbo.json" />
-    </Files>
-  </Tab>
-
-  <Tab value="bun">
-    <Files>
-      <Folder name="apps" defaultOpen>
-        <Folder name="docs">
-          <File name="package.json" />
-        </Folder>
-
-        <Folder name="web" defaultOpen>
-          <File name="package.json" />
-
-          <Folder name="turbo" green defaultOpen>
-            <Folder name="generators">
-              <File name="config.ts" />
-
-              <File name="templates" />
-            </Folder>
-          </Folder>
-        </Folder>
-      </Folder>
-
-      <Folder name="packages" defaultOpen>
-        <Folder name="ui" defaultOpen>
-          <File name="package.json" />
-
-          <Folder name="turbo" green defaultOpen>
-            <Folder name="generators">
-              <File name="config.ts" />
-
-              <File name="templates" />
-            </Folder>
-          </Folder>
-        </Folder>
-      </Folder>
-
-      <Folder name="turbo" green defaultOpen>
-        <Folder name="generators">
-          <File name="config.ts" />
-
-          <File name="templates" />
-        </Folder>
-      </Folder>
-
-      <File name="package.json" />
-
-      <File name="bun.lock" />
-
-      <File name="turbo.json" />
-    </Files>
-  </Tab>
-</PackageManagerTabs>
+turbo.json
 
 Generators created within workspaces are automatically run from the workspace root, **not** the repo root, nor the location of the generator configuration.
 
@@ -299,12 +122,11 @@ Learn more about [creating custom generators using Plop](https://plopjs.com/docu
 
 ### Writing generators
 
-A generator configuration file is a function that returns a [Plop](https://plopjs.com/) configuration object. The configuration object is
-used to define the generator's prompts, and actions.
+A generator configuration file is a function that returns a [Plop](https://plopjs.com/) configuration object. The configuration object is used to define the generator's prompts, and actions.
 
 In its simplest form, a generator configuration file looks like:
 
-```ts title="turbo/generators/config.ts"
+```
 import type { PlopTypes } from "@turbo/gen";
 
 export default function generator(plop: PlopTypes.NodePlopAPI): void {
@@ -331,7 +153,7 @@ Prompts are written using [Plop prompts](https://plopjs.com/documentation/#using
 
 Actions can use [built-in Plop actions](https://plopjs.com/documentation/#built-in-actions), or [custom action functions](https://plopjs.com/documentation/#functionsignature-custom-action) that you define yourself:
 
-```ts title="turbo/generators/config.ts"
+```
 import type { PlopTypes } from "@turbo/gen";
 
 const customAction: PlopTypes.CustomActionFunction = async (answers) => {
@@ -352,7 +174,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
     ],
     actions: [
       customAction
-      {/* actions now have access to `answers.results` */}
+      {/* actions now have access to \`answers.results\` */}
       ...
     ],
   });
@@ -367,7 +189,7 @@ When running actions, Turborepo automatically injects a `turbo` object into the 
 
 In [Handlebars templates](https://plopjs.com/documentation/#built-in-actions), access the variables using double curly braces:
 
-```hbs title="turbo/generators/templates/component.hbs"
+```
 // Generated at {{ turbo.paths.root }}/src/components
 ```
 
@@ -375,7 +197,7 @@ In [Handlebars templates](https://plopjs.com/documentation/#built-in-actions), a
 
 In [custom action functions](https://plopjs.com/documentation/#functionsignature-custom-action), the `turbo` object is available on the `answers` parameter:
 
-```ts title="turbo/generators/config.ts"
+```
 import type { PlopTypes } from "@turbo/gen";
 
 export default function generator(plop: PlopTypes.NodePlopAPI): void {
@@ -385,7 +207,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
     actions: [
       async (answers) => {
         const { turbo } = answers;
-        console.log(`Monorepo root: ${turbo.paths.root}`);
+        console.log(\`Monorepo root: ${turbo.paths.root}\`);
         return "Done!";
       },
     ],
@@ -393,31 +215,22 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
 }
 ```
 
-The available variables are documented in the [`@turbo/gen` reference](/docs/reference/turbo-gen#turborepo-variables).
+The available variables are documented in the [`@turbo/gen` reference](../reference/turbo-gen.md#turborepo-variables).
 
 ### Running generators
 
 Once you have created your generator configuration file, you can skip the selection prompt and directly run a specified generator with:
 
-```sh title="Terminal"
+```
 turbo gen [generator-name]
 ```
 
 Arguments can also be passed directly to the generator prompts using `--args`
 
-```sh title="Terminal"
+```
 turbo gen [generator-name] --args answer1 answer2 ...
 ```
 
 See [bypassing prompts](https://plopjs.com/documentation/#bypassing-prompts) in the Plop documentation for more information.
 
-View all available [options](/docs/reference/generate#run-generator-name) for `gen`.
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+View all available [options](../reference/generate.md#run-generator-name) for `gen`.

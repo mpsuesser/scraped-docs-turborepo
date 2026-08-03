@@ -2,63 +2,43 @@
 url: https://turborepo.dev/docs/support-policy
 title: "Support policy"
 description: "Supported package managers, platforms, Node.js versions, and LTS policy for Turborepo."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
-
-# Support policy
-
-
 
 ## Package managers
 
-Core `turbo` functionality depends on the package managers in the JavaScript ecosystem and their implementations of Workspaces and
-lockfile formats.
+Core `turbo` functionality depends on the package managers in the JavaScript ecosystem and their implementations of Workspaces and lockfile formats.
 
-| Package manager | Support                            |
-| --------------- | ---------------------------------- |
-| pnpm 8+         | Stable                             |
-| npm 8+          | Stable                             |
-| yarn 1+         | Stable (Includes Yarn Plug'n'Play) |
-| bun 1.2+        | Stable                             |
-
-<Callout type="info">
-  Package managers have their own release schedules, bugs, and features. While
-  we intend to keep up with new major versions, we likely will not be able to
-  release support immediately.
-</Callout>
+| Package manager | Support |
+| --- | --- |
+| pnpm 8+ | Stable |
+| npm 8+ | Stable |
+| yarn 1+ | Stable (Includes Yarn Plug'n'Play) |
+| bun 1.2+ | Stable |
 
 ## Platforms
 
-`turbo` is generally supported on Debian-based Linux distributions, macOS, and
-Windows on both x86\_64 and ARM 64 architectures. Specifically, we build and ship
-the following binaries via npm:
+`turbo` is generally supported on Debian-based Linux distributions, macOS, and Windows on both x86\_64 and ARM 64 architectures. Specifically, we build and ship the following binaries via npm:
 
-* `turbo-darwin-64` (macOS with Intel chips)
-* `turbo-darwin-arm64` (macOS with Apple Silicon)
-* `turbo-linux-64`
-* `turbo-linux-arm64`
-* `turbo-windows-64`\*
-* `turbo-windows-arm64`\*
+- `turbo-darwin-64` (macOS with Intel chips)
+- `turbo-darwin-arm64` (macOS with Apple Silicon)
+- `turbo-linux-64`
+- `turbo-linux-arm64`
+- `turbo-windows-64` \*
+- `turbo-windows-arm64` \*
 
-<small>
-  \*: Requires [Windows C Runtime
-  Libraries](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist)
-</small>
+\*: Requires [Windows C Runtime Libraries](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist)
 
 ## Node.js
 
-Core `turbo` functionality does not depend on the
-active Node.js version on your system, but [some packages in the Turborepo ecosystem](/docs/reference#packages)
-such as [`create-turbo`](/docs/reference/create-turbo), [`turbo-ignore`](/docs/reference/turbo-ignore), and [`eslint-config-turbo`](/docs/reference/eslint-config-turbo) do. For these features,
-we intend to support the [Active and Maintenance LTS versions of Node.js](https://nodejs.org/en/about/previous-releases).
+Core `turbo` functionality does not depend on the active Node.js version on your system, but [some packages in the Turborepo ecosystem](reference.md#packages) such as [`create-turbo`](reference/create-turbo.md), [`turbo-ignore`](reference/turbo-ignore.md), and [`eslint-config-turbo`](reference/eslint-config-turbo.md) do. For these features, we intend to support the [Active and Maintenance LTS versions of Node.js](https://nodejs.org/en/about/previous-releases).
 
-Turborepo's [examples](/docs/getting-started/examples) are also expected to work with these Node.js versions.
+Turborepo's [examples](getting-started/examples.md) are also expected to work with these Node.js versions.
 
 ## Version control
 
-We support repositories that are version controlled with Git and repositories that don't have
-version control at all. Any other version control system will be ignored.
+We support repositories that are version controlled with Git and repositories that don't have version control at all. Any other version control system will be ignored.
 
 Note that we use Git to hash files, so repositories without git may perform and behave differently.
 
@@ -71,9 +51,9 @@ Changes required for critical security fixes in older versions will be backporte
 We highly encourage you to use the most current version of Turborepo whenever possible.
 
 | Major version | Release date | End-of-life date |
-| ------------- | ------------ | ---------------- |
-| 2.x           | Jun. 4, 2024 | -                |
-| 1.x           | Dec. 9, 2021 | Jun. 4, 2026     |
+| --- | --- | --- |
+| 2.x | Jun. 4, 2024 | \- |
+| 1.x | Dec. 9, 2021 | Jun. 4, 2026 |
 
 ## Release phases
 
@@ -89,8 +69,8 @@ The Turborepo core team would like to thank any users who do use features early 
 
 When an API reaches stability, it is considered ready for use in production. APIs marked as stable will only change in a backward-compatible way in a major release.
 
-* If a stable API is going to **have breaking changes** in an upcoming major release, warnings and documentation will be provided to help with migrations and next steps.
-* If a stable API is going to be **removed** in an upcoming major release, it will be marked as [Deprecated](#deprecated) to provide early notice of future removal.
+- If a stable API is going to **have breaking changes** in an upcoming major release, warnings and documentation will be provided to help with migrations and next steps.
+- If a stable API is going to be **removed** in an upcoming major release, it will be marked as [Deprecated](#deprecated) to provide early notice of future removal.
 
 ### Beta
 
@@ -100,7 +80,7 @@ We encourage early adopters to use Beta APIs to help us gain certainty around th
 
 **APIs currently in the Beta phase:**
 
-* None
+- None
 
 ### Experimental
 
@@ -110,9 +90,9 @@ We encourage you to help us test experimental APIs in side projects, proof-of-co
 
 **APIs currently in the Experimental phase:**
 
-* [`turbo boundaries`](/docs/reference/boundaries) and [Tags](/docs/reference/boundaries#tags)
-* [`--experimental-write-cache` for `turbo watch`](/docs/reference/watch#caching)
-* [`--output=json` for `turbo ls --affected` flag](/docs/reference/ls)
+- [`turbo boundaries`](reference/boundaries.md) and [Tags](reference/boundaries.md#tags)
+- [`--experimental-write-cache` for `turbo watch`](reference/watch.md#caching)
+- [`--output=json` for `turbo ls --affected` flag](reference/ls.md)
 
 ### Deprecated
 
@@ -120,22 +100,13 @@ Deprecated APIs are in the process of being removed. Any feature we intend to re
 
 **APIs that are currently deprecated:**
 
-* [`turbo-ignore`](/docs/reference/turbo-ignore): Use [`turbo query affected`](/docs/reference/query#affected) instead.
-* [`turbo scan`](/docs/reference/scan): This command has been removed and will be fully deleted in a future major version.
-* `--parallel`: Use [`persistent`](/docs/reference/configuration#persistent) and [`with`](/docs/reference/configuration#with) in `turbo.json` instead.
-* `--no-cache`: Use [`--cache=local:r,remote:r`](/docs/reference/run#--cache-options) instead.
-* `TURBO_REMOTE_ONLY` and `--remote-only`: Use [`TURBO_CACHE`](/docs/reference/system-environment-variables) or [`--cache=remote:rw`](/docs/reference/run#--cache-options) instead.
-* `--remote-cache-read-only`: Use [`--cache=local:rw,remote:r`](/docs/reference/run#--cache-options) instead.
-* `--daemon` / `--no-daemon` / `daemon` key in `turbo.json`: The daemon is no longer used and these options will be removed in a future major version.
-* `--graph` with `.png`, `.jpg`, `.pdf`, or `.json` output: These formats require an external Graphviz installation and will be removed in version 3.0. Use `.svg`, `.html`, `.mermaid`, or `.dot` instead. For programmatic access to the task graph, use [`turbo query`](/docs/reference/query).
-* `--scope` for [`turbo prune`](/docs/reference/prune): Use positional arguments instead (e.g. `turbo prune web`).
-* `globalDependencies`, `globalEnv`, and `globalPassThroughEnv` at the root level: Use the [`globalConfiguration` Future Flag](/docs/reference/configuration#globalconfiguration) to migrate to the new [`global` key](/docs/reference/configuration#global).
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+- [`turbo-ignore`](reference/turbo-ignore.md): Use [`turbo query affected`](reference/query.md#affected) instead.
+- [`turbo scan`](reference/scan.md): This command has been removed and will be fully deleted in a future major version.
+- `--parallel`: Use [`persistent`](reference/configuration.md#persistent) and [`with`](reference/configuration.md#with) in `turbo.json` instead.
+- `--no-cache`: Use [`--cache=local:r,remote:r`](reference/run.md#--cache-options) instead.
+- `TURBO_REMOTE_ONLY` and `--remote-only`: Use [`TURBO_CACHE`](reference/system-environment-variables.md) or [`--cache=remote:rw`](reference/run.md#--cache-options) instead.
+- `--remote-cache-read-only`: Use [`--cache=local:rw,remote:r`](reference/run.md#--cache-options) instead.
+- `--daemon` / `--no-daemon` / `daemon` key in `turbo.json`: The daemon is no longer used and these options will be removed in a future major version.
+- `--graph` with `.png`, `.jpg`, `.pdf`, or `.json` output: These formats require an external Graphviz installation and will be removed in version 3.0. Use `.svg`, `.html`, `.mermaid`, or `.dot` instead. For programmatic access to the task graph, use [`turbo query`](reference/query.md).
+- `--scope` for [`turbo prune`](reference/prune.md): Use positional arguments instead (e.g. `turbo prune web`).
+- `globalDependencies`, `globalEnv`, and `globalPassThroughEnv` at the root level: Use the [`globalConfiguration` Future Flag](reference/configuration.md#globalconfiguration) to migrate to the new [`global` key](reference/configuration.md#global).

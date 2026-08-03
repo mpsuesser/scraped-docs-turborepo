@@ -2,19 +2,17 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/github-actions
 title: "GitHub Actions"
 description: "Configure GitHub Actions workflows to run Turborepo tasks with Remote Caching."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# GitHub Actions
-
-
+Learn how to use GitHub Actions with Turborepo.
 
 The following example shows how to use Turborepo with [GitHub Actions](https://github.com/features/actions).
 
 For a given root `package.json`:
 
-```json title="./package.json"
+```
 {
   "name": "my-turborepo",
   "scripts": {
@@ -29,7 +27,7 @@ For a given root `package.json`:
 
 And a `turbo.json`:
 
-```json title="./turbo.json"
+```
 {
   "$schema": "https://turborepo.dev/schema.json",
   "tasks": {
@@ -46,175 +44,173 @@ And a `turbo.json`:
 
 Create a file called `.github/workflows/ci.yml` in your repository with the following contents:
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```yaml title=".github/workflows/ci.yml"
-    name: CI
+#### pnpm
 
-    on:
-      push:
-        branches: ["main"]
-      pull_request:
-        types: [opened, synchronize]
+```
+name: CI
 
-    jobs:
-      build:
-        name: Build and Test
-        timeout-minutes: 15
-        runs-on: ubuntu-latest
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    types: [opened, synchronize]
 
-        steps:
-          - name: Check out code
-            uses: actions/checkout@v4
-            with:
-              fetch-depth: 2
+jobs:
+  build:
+    name: Build and Test
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
 
-          - uses: pnpm/action-setup@v3
-            with:
-              version: 8
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-          - name: Setup Node.js environment
-            uses: actions/setup-node@v4
-            with:
-              node-version: 20
-              cache: 'pnpm'
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
 
-          - name: Install dependencies
-            run: pnpm install
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
 
-          - name: Build
-            run: pnpm build
+      - name: Install dependencies
+        run: pnpm install
 
-          - name: Test
-            run: pnpm test
-    ```
-  </Tab>
+      - name: Build
+        run: pnpm build
 
-  <Tab value="yarn">
-    ```yaml title=".github/workflows/ci.yml"
-    name: CI
+      - name: Test
+        run: pnpm test
+```
 
-    on:
-      push:
-        branches: ["main"]
-      pull_request:
-        types: [opened, synchronize]
+#### yarn
 
-    jobs:
-      build:
-        name: Build and Test
-        timeout-minutes: 15
-        runs-on: ubuntu-latest
+```
+name: CI
 
-        steps:
-          - name: Check out code
-            uses: actions/checkout@v4
-            with:
-              fetch-depth: 2
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    types: [opened, synchronize]
 
-          - name: Setup Node.js environment
-            uses: actions/setup-node@v4
-            with:
-              node-version: 20
-              cache: 'yarn'
+jobs:
+  build:
+    name: Build and Test
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
 
-          - name: Install dependencies
-            run: yarn
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-          - name: Build
-            run: yarn build
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'yarn'
 
-          - name: Test
-            run: yarn test
-    ```
-  </Tab>
+      - name: Install dependencies
+        run: yarn
 
-  <Tab value="npm">
-    ```yaml title=".github/workflows/ci.yml"
-    name: CI
+      - name: Build
+        run: yarn build
 
-    on:
-      push:
-        branches: ["main"]
-      pull_request:
-        types: [opened, synchronize]
+      - name: Test
+        run: yarn test
+```
 
-    jobs:
-      build:
-        name: Build and Test
-        timeout-minutes: 15
-        runs-on: ubuntu-latest
+#### npm
 
-        steps:
-          - name: Check out code
-            uses: actions/checkout@v4
-            with:
-              fetch-depth: 2
+```
+name: CI
 
-          - name: Setup Node.js environment
-            uses: actions/setup-node@v4
-            with:
-              node-version: 20
-              cache: 'npm'
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    types: [opened, synchronize]
 
-          - name: Install dependencies
-            run: npm install
+jobs:
+  build:
+    name: Build and Test
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
 
-          - name: Build
-            run: npm run build
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-          - name: Test
-            run: npm run test
-    ```
-  </Tab>
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
 
-  <Tab value="bun">
-    ```yaml title=".github/workflows/ci.yml"
-    name: CI
+      - name: Install dependencies
+        run: npm install
 
-    on:
-      push:
-        branches: ["main"]
-      pull_request:
-        types: [opened, synchronize]
+      - name: Build
+        run: npm run build
 
-    jobs:
-      build:
-        name: Build and Test
-        timeout-minutes: 15
-        runs-on: ubuntu-latest
+      - name: Test
+        run: npm run test
+```
 
-        steps:
-          - name: Check out code
-            uses: actions/checkout@v4
-            with:
-              fetch-depth: 2
+#### bun
 
-          - uses: oven-sh/setup-bun@v2
+```
+name: CI
 
-          - name: Setup Node.js environment
-            uses: actions/setup-node@v4
-            with:
-              node-version: 20
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    types: [opened, synchronize]
 
-          - name: Install dependencies
-            run: bun install
+jobs:
+  build:
+    name: Build and Test
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
 
-          - name: Build
-            run: bun run build
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-          - name: Test
-            run: bun run test
-    ```
-  </Tab>
-</PackageManagerTabs>
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build
+        run: bun run build
+
+      - name: Test
+        run: bun run test
+```
 
 ## Remote Caching with Vercel Remote Cache
 
 There are two ways to authenticate to [Vercel Remote Cache](https://vercel.com/docs/monorepos/remote-caching) from GitHub Actions:
 
-* **OpenID Connect (OIDC)**: configure a policy that allows exchanging the CI/CD provider's OIDC tokens for short-lived Turborepo access tokens that grant access to Remote Cache (recommended).
-* **Personal Access Token (PAT)**: configure a long-lived, team-scoped PAT as a secret in your CI/CD provider (use when OIDC is not an option).
+- **OpenID Connect (OIDC)**: configure a policy that allows exchanging the CI/CD provider's OIDC tokens for short-lived Turborepo access tokens that grant access to Remote Cache (recommended).
+- **Personal Access Token (PAT)**: configure a long-lived, team-scoped PAT as a secret in your CI/CD provider (use when OIDC is not an option).
 
 For the full setup, see [Use Remote Caching from external CI/CD](https://vercel.com/docs/monorepos/remote-caching/external-ci-cd). The GitHub Actions workflow configuration is shown below.
 
@@ -222,20 +218,20 @@ For the full setup, see [Use Remote Caching from external CI/CD](https://vercel.
 
 Follow [these instructions](https://vercel.com/docs/monorepos/remote-caching/external-ci-cd#openid-connect-oidc) to create an OIDC policy on your Vercel team and configure your `TURBO_TEAM` variable. Then add [`vercel/setup-turborepo-remote-cache-action`](https://github.com/vercel/setup-turborepo-remote-cache-action) before any step that runs `turbo`. It requests a GitHub OIDC token, exchanges it for a short-lived Turborepo access token, and sets `TURBO_TOKEN` and `TURBO_TEAM` environment variables for later steps that run `turbo`:
 
-```yaml title=".github/workflows/ci.yml"
+```
 # ...
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions: # [!code highlight]
-      contents: read # [!code highlight]
-      id-token: write # [!code highlight]
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Turborepo Remote Cache # [!code highlight]
-        uses: vercel/setup-turborepo-remote-cache-action@v1.0.0 # [!code highlight]
-        with: # [!code highlight]
-          team: ${{ vars.TURBO_TEAM }} # [!code highlight]
+      - name: Set up Turborepo Remote Cache
+        uses: vercel/setup-turborepo-remote-cache-action@v1.0.0
+        with:
+          team: ${{ vars.TURBO_TEAM }}
     # ...
 ```
 
@@ -243,14 +239,14 @@ jobs:
 
 Follow [these instructions](https://vercel.com/docs/monorepos/remote-caching/external-ci-cd#personal-access-token-pat) to create a Personal Access Token, configure your `TURBO_TOKEN` secret, and configure your `TURBO_TEAM` variable. Then provide them to jobs that run `turbo`:
 
-```yaml title=".github/workflows/ci.yml"
+```
 # ...
 jobs:
   build:
     runs-on: ubuntu-latest
-    env: # [!code highlight]
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }} # [!code highlight]
-      TURBO_TEAM: ${{ vars.TURBO_TEAM }} # [!code highlight]
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     steps:
       - uses: actions/checkout@v4
     # ...
@@ -264,70 +260,55 @@ For information on passing secrets to reusable workflows, see [GitHub's document
 
 The following steps show how you could use [actions/cache](https://github.com/actions/cache) to cache your monorepo artifacts on GitHub.
 
-<Steps>
-  <Step>
-    Supply a package.json script that will run tasks using Turborepo.
+Supply a package.json script that will run tasks using Turborepo.
 
-    Example `package.json` with a `build` script:
+Example `package.json` with a `build` script:
 
-    ```json title="./package.json"
-    {
-      "name": "my-turborepo",
-      "scripts": {
-        "build": "turbo run build"
-      },
-      "devDependencies": {
-        "turbo": "1.2.5"
-      }
-    }
-    ```
-  </Step>
+```
+{
+  "name": "my-turborepo",
+  "scripts": {
+    "build": "turbo run build"
+  },
+  "devDependencies": {
+    "turbo": "1.2.5"
+  }
+}
+```
 
-  <Step>
-    Configure your GitHub pipeline with a step which uses the `actions/cache@v4` action before the build steps of your CI file.
+Configure your GitHub pipeline with a step which uses the `actions/cache@v4` action before the build steps of your CI file.
 
-    * Make sure that the `path` attribute set within the `actions/cache` action matches the output location above. In the example below, `path` was set to `.turbo`.
-    * State the cache key for the current run under the `key` attribute. In the example below, we used a combination of the runner OS and GitHub SHA as the cache key.
-    * State the desired cache prefix pattern under the `restore-keys` attribute. Make sure this pattern will remain valid for future CI runs. In the example below, we used the `${{ runner.os }}-turbo-` as the cache key prefix pattern to search against. This allows us to hit the cache on any subsequent CI runs despite `github.sha` changing.
+- Make sure that the `path` attribute set within the `actions/cache` action matches the output location above. In the example below, `path` was set to `.turbo`.
+- State the cache key for the current run under the `key` attribute. In the example below, we used a combination of the runner OS and GitHub SHA as the cache key.
+- State the desired cache prefix pattern under the `restore-keys` attribute. Make sure this pattern will remain valid for future CI runs. In the example below, we used the `${{ runner.os }}-turbo-` as the cache key prefix pattern to search against. This allows us to hit the cache on any subsequent CI runs despite `github.sha` changing.
 
-    Example `ci` yaml with `.turbo` as chosen cache folder:
+Example `ci` yaml with `.turbo` as chosen cache folder:
 
-    ```yaml title=".github/workflows/ci.yml"
-    jobs:
-      build:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Check out code
-            uses: actions/checkout@v4
+```
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
 
-          - name: Cache turbo build setup # [!code highlight]
-            uses: actions/cache@v4 # [!code highlight]
-            with: # [!code highlight]
-              path: .turbo # [!code highlight]
-              key: ${{ runner.os }}-turbo-${{ github.sha }} # [!code highlight]
-              restore-keys: | # [!code highlight]
-                ${{ runner.os }}-turbo-
+      - name: Cache turbo build setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
 
-          - name: Setup Node.js environment
-            uses: actions/setup-node@v4
-            with:
-              node-version: 20
-              cache: "npm"
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
 
-          - name: Install dependencies
-            run: npm install
+      - name: Install dependencies
+        run: npm install
 
-          - name: Build
-            run: npm run build
-    ```
-  </Step>
-</Steps>
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+      - name: Build
+        run: npm run build
+```

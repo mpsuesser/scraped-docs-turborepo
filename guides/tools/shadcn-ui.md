@@ -2,83 +2,68 @@
 url: https://turborepo.dev/docs/guides/tools/shadcn-ui
 title: "shadcn/ui"
 description: "Initialize and use shadcn/ui components in your Turborepo monorepo."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# shadcn/ui
-
-
+Learn how to use shadcn/ui in a Turborepo.
 
 [shadcn/ui](https://ui.shadcn.com/docs/monorepo) is an open-source set of beautifully designed components made with Tailwind CSS that you can copy and paste into your apps.
 
 To get started with shadcn/ui in a new monorepo, run:
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm dlx shadcn@canary init
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```bash title="Terminal"
-    npx shadcn@canary init
-    ```
-  </Tab>
+```
+pnpm dlx shadcn@canary init
+```
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npx shadcn@canary init
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    bunx shadcn@canary init
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+npx shadcn@canary init
+```
+
+#### npm
+
+```
+npx shadcn@canary init
+```
+
+#### bun
+
+```
+bunx shadcn@canary init
+```
 
 When prompted, select the option for monorepos.
 
 To add a component, run:
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm dlx shadcn@canary add [COMPONENT]
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```bash title="Terminal"
-    npx shadcn@canary add [COMPONENT]
-    ```
-  </Tab>
+```
+pnpm dlx shadcn@canary add [COMPONENT]
+```
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npx shadcn@canary add [COMPONENT]
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    bunx shadcn@canary add [COMPONENT]
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+npx shadcn@canary add [COMPONENT]
+```
+
+#### npm
+
+```
+npx shadcn@canary add [COMPONENT]
+```
+
+#### bun
+
+```
+bunx shadcn@canary add [COMPONENT]
+```
 
 ## More information
 
 To learn more about using shadcn/ui in Turborepo, [visit the docs for shadcn/ui](https://ui.shadcn.com/docs/monorepo).
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)

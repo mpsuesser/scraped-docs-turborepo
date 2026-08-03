@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/guides/frameworks/sveltekit
 title: "SvelteKit"
 description: "Add and configure SvelteKit applications in your Turborepo monorepo."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# SvelteKit
-
-
+Learn more about using SvelteKit in your monorepo.
 
 [SvelteKit](https://kit.svelte.dev/) is a framework for rapidly developing robust, performant web applications using Svelte.
 
@@ -16,123 +14,117 @@ current_date: 2026-08-03T17:27:52.096Z
 
 To get started with SvelteKit in a Turborepo quickly, use [the `with-svelte` example](https://github.com/vercel/turborepo/tree/main/examples/with-svelte):
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm dlx create-turbo@latest -e with-svelte
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```bash title="Terminal"
-    yarn dlx create-turbo@latest -e with-svelte
-    ```
-  </Tab>
+```
+pnpm dlx create-turbo@latest -e with-svelte
+```
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npx create-turbo@latest -e with-svelte
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    bunx create-turbo@latest -e with-svelte
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+yarn dlx create-turbo@latest -e with-svelte
+```
+
+#### npm
+
+```
+npx create-turbo@latest -e with-svelte
+```
+
+#### bun
+
+```
+bunx create-turbo@latest -e with-svelte
+```
 
 ## Adding a SvelteKit application to an existing repository
 
 Use [`npm create svelte`](https://kit.svelte.dev/docs/creating-a-project) to set up a new SvelteKit application in a package. From the root of your repository, run:
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm dlx sv create
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```bash title="Terminal"
-    yarn dlx sv create
-    ```
-  </Tab>
+```
+pnpm dlx sv create
+```
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npx sv create
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    bunx sv create
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+yarn dlx sv create
+```
+
+#### npm
+
+```
+npx sv create
+```
+
+#### bun
+
+```
+bunx sv create
+```
 
 ## Integrating with your repository
 
-To add [Internal Packages](/docs/core-concepts/internal-packages) to your new application, install them into the app with your package manager:
+To add [Internal Packages](../../core-concepts/internal-packages.md) to your new application, install them into the app with your package manager:
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```diff title="./apps/my-app/package.json"
-    {
-      "name": "my-app",
-      "dependencies": {
-    +   "@repo/ui": "workspace:*"
-      }
-    }
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```diff title="./apps/my-app/package.json"
-    {
-      "name": "my-app",
-      "dependencies": {
-    +   "@repo/ui": "*"
-      }
-    }
-    ```
-  </Tab>
+```
+{
+  "name": "my-app",
+  "dependencies": {
++   "@repo/ui": "workspace:*"
+  }
+}
+```
 
-  <Tab value="npm">
-    ```diff title="./apps/my-app/package.json"
-    {
-     "name": "my-app",
-      "dependencies": {
-    +   "@repo/ui": "*"
-      }
-    }
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```diff title="./apps/my-app/package.json"
-    {
-     "name": "my-app",
-      "dependencies": {
-    +   "@repo/ui": "workspace:*"
-      }
-    }
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+{
+  "name": "my-app",
+  "dependencies": {
++   "@repo/ui": "*"
+  }
+}
+```
+
+#### npm
+
+```
+{
+ "name": "my-app",
+  "dependencies": {
++   "@repo/ui": "*"
+  }
+}
+```
+
+#### bun
+
+```
+{
+ "name": "my-app",
+  "dependencies": {
++   "@repo/ui": "workspace:*"
+  }
+}
+```
 
 Make sure to run your package manager's install command. You also may need to update `scripts` in `package.json` to fit your use case in your repository.
 
 ### Customizing tasks
 
-By default, the new application will use the tasks defined in the root `turbo.json`. If you'd like to configure tasks differently for the new application, use [Package Configurations](/docs/reference/package-configurations).
+By default, the new application will use the tasks defined in the root `turbo.json`. If you'd like to configure tasks differently for the new application, use [Package Configurations](../../reference/package-configurations.md).
 
 ### Microfrontends
 
-When using Svelte with [Turborepo's microfrontends](/docs/guides/microfrontends), make sure to set the `base` property for child applications. This ensures the assets like images and CSS will be routed to the correct application.
+When using Svelte with [Turborepo's microfrontends](../microfrontends.md), make sure to set the `base` property for child applications. This ensures the assets like images and CSS will be routed to the correct application.
 
-```ts title="./apps/my-app/vite.config.ts"
+```
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -140,11 +132,4 @@ export default defineConfig({
 });
 ```
 
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+[PreviousNext.js](nextjs.md) [NextVite](vite.md)

@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/reference/system-environment-variables
 title: "System environment variables"
-description: "All environment variables that control Turborepo behavior including Remote Cache, logging, and CI settings."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "Learn about system variables used by Turborepo."
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # System environment variables
@@ -76,7 +76,7 @@ System environment variables are always overridden by flag values provided direc
 
       <td>
         Control reading and writing for cache sources. Uses the same syntax as
-        <code>[--cache](/docs/reference/run#--cache-options)</code>.
+        <code>[--cache](run.md#--cache-options)</code>.
       </td>
     </tr>
 
@@ -95,7 +95,7 @@ System environment variables are always overridden by flag values provided direc
         {" "}
 
         <code>
-          [--cache-dir](/docs/reference/run#--cache-dir-path)
+          [--cache-dir](run.md#--cache-dir-path)
         </code>
 
         <span>
@@ -144,7 +144,7 @@ System environment variables are always overridden by flag values provided direc
       <td>
         <span>Set a prefix for environment variables that you want</span>
         <strong> excluded</strong> <span>from</span> [Framework
-        Inference](/docs/crafting-your-repository/using-environment-variables#framework-inference).{" "}
+        Inference](../crafting-your-repository/using-environment-variables.md#framework-inference).{" "}
 
         <div />
 
@@ -166,7 +166,7 @@ System environment variables are always overridden by flag values provided direc
         <div />
 
         You may run into [errors and unexpected caching
-        behavior](/docs/reference/run#--dangerously-disable-package-manager-check)
+        behavior](run.md#--dangerously-disable-package-manager-check)
         when disabling this check. Use <code>true</code>
         or <code>1</code> to disable.
       </td>
@@ -291,7 +291,7 @@ System environment variables are always overridden by flag values provided direc
 
       <td>
         Set the URL used to log in to [Remote
-        Cache](/docs/core-concepts/remote-caching).
+        Cache](../core-concepts/remote-caching.md).
 
         <div />
 
@@ -401,7 +401,7 @@ System environment variables are always overridden by flag values provided direc
       </td>
 
       <td>
-        Sign artifacts with a secret key. Must be at least 32 bytes when [`futureFlags.longerSignatureKey`](/docs/reference/configuration#longersignaturekey) is enabled. For more information, visit [the Artifact Integrity section](/docs/core-concepts/remote-caching#artifact-integrity-and-authenticity-verification).
+        Sign artifacts with a secret key. Must be at least 32 bytes when [`futureFlags.longerSignatureKey`](configuration.md#longersignaturekey) is enabled. For more information, visit [the Artifact Integrity section](../core-concepts/remote-caching.md#artifact-integrity-and-authenticity-verification).
       </td>
     </tr>
 
@@ -555,7 +555,7 @@ System environment variables are always overridden by flag values provided direc
       </td>
 
       <td>
-        Controls [concurrency](/repo/docs/reference/run#--concurrency-number--percentage) settings in run or watch mode.
+        Controls [concurrency](https://turborepo.dev/repo/docs/reference/run#--concurrency-number--percentage) settings in run or watch mode.
       </td>
     </tr>
 
@@ -581,14 +581,14 @@ Turborepo will make the following environment variables available within your ta
 | Variable       | Description                                                                                                                                          |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `TURBO_HASH`   | The hash of the currently running task.                                                                                                              |
-| `TURBO_IS_TUI` | When using the [TUI](/docs/reference/configuration#ui), this variable is set to `true`.                                                              |
-| `TURBO_IS_MFE` | When using the [microfrontends](/docs/guides/microfrontends), this variable is set to the port defined in `microfrontends.json` for the application. |
+| `TURBO_IS_TUI` | When using the [TUI](configuration.md#ui), this variable is set to `true`.                                                              |
+| `TURBO_IS_MFE` | When using the [microfrontends](../guides/microfrontends.md), this variable is set to the port defined in `microfrontends.json` for the application. |
 
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/reference/options-overview
 title: "Options overview"
-description: "Quick-reference table mapping CLI flags, environment variables, and turbo.json configuration options."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "Flags, configurations, and System Environment Variables for Turborepo"
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # Options overview
@@ -12,9 +12,9 @@ current_date: 2026-08-03T17:27:52.096Z
 
 There are three ways to manage the behavior of a `turbo` invocation:
 
-* [Configuration in `turbo.json`](/docs/reference/configuration)
-* [System Environment Variables](/docs/reference/system-environment-variables)
-* [Flags passed to the CLI invocation](/docs/reference/run)
+* [Configuration in `turbo.json`](configuration.md)
+* [System Environment Variables](system-environment-variables.md)
+* [Flags passed to the CLI invocation](run.md)
 
 The three strategies listed above are in order of precedence. Where a flag value is provided, for the same System Environment Variable or `turbo.json` configuration, the value for the flag will be used. Because of this, we recommend using:
 
@@ -29,16 +29,16 @@ The three strategies listed above are in order of precedence. Where a flag value
 <div className="options-cheat-sheet-table">
   | Behavior                    | Flags                                                             | Environment Variables                                                                                                 | turbo.json                                                                 |
   | --------------------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-  | Force tasks to run          | [`--force`](/docs/reference/run#--force)                          | [`TURBO_FORCE`](/docs/reference/system-environment-variables#turbo_force)                                             | [`cache`](/docs/reference/configuration#cache)                             |
-  | Remote Cache timeout        | [`--remote-cache-timeout`](/docs/reference/configuration#timeout) | [`TURBO_REMOTE_CACHE_TIMEOUT`](/docs/reference/system-environment-variables#turbo_remote_cache_timeout)               | [`remoteCache.timeout`](/docs/reference/configuration#timeout)             |
-  | Remote Cache upload timeout | -                                                                 | [`TURBO_REMOTE_CACHE_UPLOAD_TIMEOUT`](/docs/reference/system-environment-variables#turbo_remote_cache_upload_timeout) | [`remoteCache.uploadTimeout`](/docs/reference/configuration#uploadtimeout) |
-  | Cache signature key         | -                                                                 | [`TURBO_REMOTE_CACHE_SIGNATURE_KEY`](/docs/reference/system-environment-variables#turbo_remote_cache_signature_key)   | [`signature`](/docs/reference/configuration#signature)                     |
-  | Preflight request           | [`--preflight`](/docs/reference/run#--preflight)                  | [`TURBO_PREFLIGHT`](/docs/reference/system-environment-variables#turbo_preflight)                                     | [`remoteCache.preflight`](/docs/reference/configuration#preflight)         |
-  | Remote Cache base URL       | -                                                                 | [`TURBO_API`](/docs/reference/system-environment-variables#turbo_api)                                                 | [`remoteCache.apiUrl`](/docs/reference/configuration#remote-caching)       |
-  | Cache sources               | [`--cache`](/docs/reference/run#--cache-options)                  | [`TURBO_CACHE`](/docs/reference/system-environment-variables#turbo_cache)                                             | -                                                                          |
-  | Local cache directory       | [`--cache-dir`](/docs/reference/run#--cache-dir-path)             | [`TURBO_CACHE_DIR`](/docs/reference/system-environment-variables#turbo_cache_dir)                                     | [`cacheDir`](/docs/reference/configuration#cachedir)                       |
-  | Local cache max age         | -                                                                 | [`TURBO_CACHE_MAX_AGE`](/docs/reference/system-environment-variables#turbo_cache_max_age)                             | [`cacheMaxAge`](/docs/reference/configuration#cachemaxage)                 |
-  | Local cache max size        | -                                                                 | [`TURBO_CACHE_MAX_SIZE`](/docs/reference/system-environment-variables#turbo_cache_max_size)                           | [`cacheMaxSize`](/docs/reference/configuration#cachemaxsize)               |
+  | Force tasks to run          | [`--force`](run.md#--force)                          | [`TURBO_FORCE`](system-environment-variables.md#turbo_force)                                             | [`cache`](configuration.md#cache)                             |
+  | Remote Cache timeout        | [`--remote-cache-timeout`](configuration.md#timeout) | [`TURBO_REMOTE_CACHE_TIMEOUT`](system-environment-variables.md#turbo_remote_cache_timeout)               | [`remoteCache.timeout`](configuration.md#timeout)             |
+  | Remote Cache upload timeout | -                                                                 | [`TURBO_REMOTE_CACHE_UPLOAD_TIMEOUT`](system-environment-variables.md#turbo_remote_cache_upload_timeout) | [`remoteCache.uploadTimeout`](configuration.md#uploadtimeout) |
+  | Cache signature key         | -                                                                 | [`TURBO_REMOTE_CACHE_SIGNATURE_KEY`](system-environment-variables.md#turbo_remote_cache_signature_key)   | [`signature`](configuration.md#signature)                     |
+  | Preflight request           | [`--preflight`](run.md#--preflight)                  | [`TURBO_PREFLIGHT`](system-environment-variables.md#turbo_preflight)                                     | [`remoteCache.preflight`](configuration.md#preflight)         |
+  | Remote Cache base URL       | -                                                                 | [`TURBO_API`](system-environment-variables.md#turbo_api)                                                 | [`remoteCache.apiUrl`](configuration.md#remote-caching)       |
+  | Cache sources               | [`--cache`](run.md#--cache-options)                  | [`TURBO_CACHE`](system-environment-variables.md#turbo_cache)                                             | -                                                                          |
+  | Local cache directory       | [`--cache-dir`](run.md#--cache-dir-path)             | [`TURBO_CACHE_DIR`](system-environment-variables.md#turbo_cache_dir)                                     | [`cacheDir`](configuration.md#cachedir)                       |
+  | Local cache max age         | -                                                                 | [`TURBO_CACHE_MAX_AGE`](system-environment-variables.md#turbo_cache_max_age)                             | [`cacheMaxAge`](configuration.md#cachemaxage)                 |
+  | Local cache max size        | -                                                                 | [`TURBO_CACHE_MAX_SIZE`](system-environment-variables.md#turbo_cache_max_size)                           | [`cacheMaxSize`](configuration.md#cachemaxsize)               |
 </div>
 
 ### Messages
@@ -46,10 +46,10 @@ The three strategies listed above are in order of precedence. Where a flag value
 <div className="options-cheat-sheet-table">
   | Behavior                       | Flags | Environment Variables                                                                                               | turbo.json                                                                                |
   | ------------------------------ | ----- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-  | Disable version print          | -     | [`TURBO_PRINT_VERSION_DISABLED`](/docs/reference/system-environment-variables#turbo_print_version_disabled)         | -                                                                                         |
-  | Disable telemetry message      | -     | [`TURBO_TELEMETRY_MESSAGE_DISABLED`](/docs/reference/system-environment-variables#turbo_telemetry_message_disabled) | -                                                                                         |
-  | Disable global `turbo` warning | -     | [`TURBO_GLOBAL_WARNING_DISABLED`](/docs/reference/system-environment-variables#turbo_global_warning_disabled)       | -                                                                                         |
-  | No update notifier             | -     | [`TURBO_NO_UPDATE_NOTIFIER`](/docs/reference/system-environment-variables#turbo_no_update_notifier)                 | [`noUpdateNotifier`](https://turborepo.dev/docs/reference/configuration#noupdatenotifier) |
+  | Disable version print          | -     | [`TURBO_PRINT_VERSION_DISABLED`](system-environment-variables.md#turbo_print_version_disabled)         | -                                                                                         |
+  | Disable telemetry message      | -     | [`TURBO_TELEMETRY_MESSAGE_DISABLED`](system-environment-variables.md#turbo_telemetry_message_disabled) | -                                                                                         |
+  | Disable global `turbo` warning | -     | [`TURBO_GLOBAL_WARNING_DISABLED`](system-environment-variables.md#turbo_global_warning_disabled)       | -                                                                                         |
+  | No update notifier             | -     | [`TURBO_NO_UPDATE_NOTIFIER`](system-environment-variables.md#turbo_no_update_notifier)                 | [`noUpdateNotifier`](configuration.md#noupdatenotifier) |
 </div>
 
 ### Task running and logs
@@ -57,19 +57,19 @@ The three strategies listed above are in order of precedence. Where a flag value
 <div className="options-cheat-sheet-table">
   | Behavior                          | Flags                                                                                                            | Environment Variables                                                                                                                             | turbo.json                                                                                                     |
   | --------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-  | Terminal UI                       | [`--ui`](/docs/reference/run#--ui)                                                                               | [`TURBO_UI`](/docs/reference/system-environment-variables#turbo_ui)                                                                               | [`ui`](/docs/reference/configuration#ui)                                                                       |
-  | Run affected tasks                | [`--affected`](/docs/reference/run#--affected)                                                                   | -                                                                                                                                                 | -                                                                                                              |
-  | Disable package manager check     | [`--dangerously-disable-package-manager-check`](/docs/reference/run#--dangerously-disable-package-manager-check) | [`TURBO_DANGEROUSLY_DISABLE_PACKAGE_MANAGER_CHECK`](/docs/reference/system-environment-variables#turbo_dangerously_disable_package_manager_check) | [`dangerouslyDisablePackageManagerCheck`](/docs/reference/configuration#dangerouslydisablepackagemanagercheck) |
-  | Affected base ref                 | -                                                                                                                | [`TURBO_SCM_BASE`](/docs/reference/system-environment-variables#turbo_scm_base)                                                                   | -                                                                                                              |
-  | Affected head ref                 | -                                                                                                                | [`TURBO_SCM_HEAD`](/docs/reference/system-environment-variables#turbo_scm_head)                                                                   | -                                                                                                              |
-  | Only run directly specified tasks | [`--only`](/docs/reference/run#--only)                                                                           | -                                                                                                                                                 | -                                                                                                              |
-  | Task concurrency                  | [`--concurrency`](/docs/reference/run#--concurrency-number--percentage)                                          | [`TURBO_CONCURRENCY`](/docs/reference/system-environment-variables#turbo_concurrency)                                                             | -                                                                                                              |
-  | Task log order                    | [`--log-order`](/docs/reference/run#--log-order-option)                                                          | [`TURBO_LOG_ORDER`](/docs/reference/system-environment-variables#turbo_log_order)                                                                 | -                                                                                                              |
-  | Current working directory         | [`--cwd`](/docs/reference/run#--cwd-path)                                                                        | -                                                                                                                                                 | -                                                                                                              |
-  | Streamed logs prefix              | [`--log-prefix`](/docs/reference/run#--log-prefix-option)                                                        | -                                                                                                                                                 | -                                                                                                              |
-  | Task logs output level            | [`--output-logs-option`](/docs/reference/run#--output-logs-option)                                               | -                                                                                                                                                 | [`outputLogs`](/docs/reference/configuration#outputlogs)                                                       |
-  | Global inputs                     | [`--global-deps`](/docs/reference/run#--global-deps-file-glob)                                                   | -                                                                                                                                                 | [`globalDependencies`](/docs/reference/configuration#globaldependencies)                                       |
-  | Terminal colors                   | [`--color`](/docs/reference#--color)                                                                             | [FORCE\_COLOR](/docs/reference/system-environment-variables#force_color)                                                                          | -                                                                                                              |
+  | Terminal UI                       | [`--ui`](run.md#--ui)                                                                               | [`TURBO_UI`](system-environment-variables.md#turbo_ui)                                                                               | [`ui`](configuration.md#ui)                                                                       |
+  | Run affected tasks                | [`--affected`](run.md#--affected)                                                                   | -                                                                                                                                                 | -                                                                                                              |
+  | Disable package manager check     | [`--dangerously-disable-package-manager-check`](run.md#--dangerously-disable-package-manager-check) | [`TURBO_DANGEROUSLY_DISABLE_PACKAGE_MANAGER_CHECK`](system-environment-variables.md#turbo_dangerously_disable_package_manager_check) | [`dangerouslyDisablePackageManagerCheck`](configuration.md#dangerouslydisablepackagemanagercheck) |
+  | Affected base ref                 | -                                                                                                                | [`TURBO_SCM_BASE`](system-environment-variables.md#turbo_scm_base)                                                                   | -                                                                                                              |
+  | Affected head ref                 | -                                                                                                                | [`TURBO_SCM_HEAD`](system-environment-variables.md#turbo_scm_head)                                                                   | -                                                                                                              |
+  | Only run directly specified tasks | [`--only`](run.md#--only)                                                                           | -                                                                                                                                                 | -                                                                                                              |
+  | Task concurrency                  | [`--concurrency`](run.md#--concurrency-number--percentage)                                          | [`TURBO_CONCURRENCY`](system-environment-variables.md#turbo_concurrency)                                                             | -                                                                                                              |
+  | Task log order                    | [`--log-order`](run.md#--log-order-option)                                                          | [`TURBO_LOG_ORDER`](system-environment-variables.md#turbo_log_order)                                                                 | -                                                                                                              |
+  | Current working directory         | [`--cwd`](run.md#--cwd-path)                                                                        | -                                                                                                                                                 | -                                                                                                              |
+  | Streamed logs prefix              | [`--log-prefix`](run.md#--log-prefix-option)                                                        | -                                                                                                                                                 | -                                                                                                              |
+  | Task logs output level            | [`--output-logs-option`](run.md#--output-logs-option)                                               | -                                                                                                                                                 | [`outputLogs`](configuration.md#outputlogs)                                                       |
+  | Global inputs                     | [`--global-deps`](run.md#--global-deps-file-glob)                                                   | -                                                                                                                                                 | [`globalDependencies`](configuration.md#globaldependencies)                                       |
+  | Terminal colors                   | [`--color`](../reference.md#--color)                                                                             | [FORCE\_COLOR](system-environment-variables.md#force_color)                                                                          | -                                                                                                              |
 </div>
 
 ### Environment variables
@@ -77,9 +77,9 @@ The three strategies listed above are in order of precedence. Where a flag value
 <div className="options-cheat-sheet-table">
   | Behavior                      | Flags                                                                | Environment Variables                                                                             | turbo.json                                         |
   | ----------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-  | Environment variable mode     | [`--env-mode`](/docs/reference/run#--env-mode-option)                | -                                                                                                 | [`envMode`](/docs/reference/configuration#envmode) |
-  | Vendor environment variables  | -                                                                    | [`TURBO_CI_VENDOR_ENV_KEY`](/docs/reference/system-environment-variables#turbo_ci_vendor_env_key) | -                                                  |
-  | Framework variable exceptions | [`--framework-inference`](/docs/reference/run#--framework-inference) | -                                                                                                 | -                                                  |
+  | Environment variable mode     | [`--env-mode`](run.md#--env-mode-option)                | -                                                                                                 | [`envMode`](configuration.md#envmode) |
+  | Vendor environment variables  | -                                                                    | [`TURBO_CI_VENDOR_ENV_KEY`](system-environment-variables.md#turbo_ci_vendor_env_key) | -                                                  |
+  | Framework variable exceptions | [`--framework-inference`](run.md#--framework-inference) | -                                                                                                 | -                                                  |
 </div>
 
 ### Debugging outputs
@@ -87,9 +87,9 @@ The three strategies listed above are in order of precedence. Where a flag value
 <div className="options-cheat-sheet-table">
   | Behavior            | Flags                                              | Environment Variables                                                                 | turbo.json |
   | ------------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------- |
-  | Run Summaries       | [`--summarize`](/docs/reference/run#--summarize)   | [`TURBO_RUN_SUMMARY`](/docs/reference/system-environment-variables#turbo_run_summary) | -          |
-  | Graph visualization | [`--graph`](/docs/reference/run#--graph-file-name) | -                                                                                     | -          |
-  | Dry run             | [`--dry`](/docs/reference/run#--dry----dry-run)    | -                                                                                     | -          |
+  | Run Summaries       | [`--summarize`](run.md#--summarize)   | [`TURBO_RUN_SUMMARY`](system-environment-variables.md#turbo_run_summary) | -          |
+  | Graph visualization | [`--graph`](run.md#--graph-file-name) | -                                                                                     | -          |
+  | Dry run             | [`--dry`](run.md#--dry----dry-run)    | -                                                                                     | -          |
 </div>
 
 ### Authentication
@@ -97,10 +97,10 @@ The three strategies listed above are in order of precedence. Where a flag value
 <div className="options-cheat-sheet-table">
   | Behavior                                | Flags                                    | Environment Variables                                                       | turbo.json                                                       |
   | --------------------------------------- | ---------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-  | Login URL                               | -                                        | [`TURBO_LOGIN`](/docs/reference/system-environment-variables#turbo_login)   | [`remoteCache.loginUrl`](/docs/reference/configuration#loginurl) |
-  | Team name (for multi-team Remote Cache) | [`--team`](/docs/reference/run#--team)   | [`TURBO_TEAM`](/docs/reference/system-environment-variables#turbo_team)     | -                                                                |
-  | Team ID (for multi-team Remote Cache)   | -                                        | [`TURBO_TEAMID`](/docs/reference/system-environment-variables#turbo_teamid) | -                                                                |
-  | Authentication token                    | [`--token`](/docs/reference/run#--token) | [`TURBO_TOKEN`](/docs/reference/system-environment-variables#turbo_token)   | -                                                                |
+  | Login URL                               | -                                        | [`TURBO_LOGIN`](system-environment-variables.md#turbo_login)   | [`remoteCache.loginUrl`](configuration.md#loginurl) |
+  | Team name (for multi-team Remote Cache) | [`--team`](run.md#--team)   | [`TURBO_TEAM`](system-environment-variables.md#turbo_team)     | -                                                                |
+  | Team ID (for multi-team Remote Cache)   | -                                        | [`TURBO_TEAMID`](system-environment-variables.md#turbo_teamid) | -                                                                |
+  | Authentication token                    | [`--token`](run.md#--token) | [`TURBO_TOKEN`](system-environment-variables.md#turbo_token)   | -                                                                |
 </div>
 
 ### Other
@@ -108,16 +108,16 @@ The three strategies listed above are in order of precedence. Where a flag value
 <div className="options-cheat-sheet-table">
   | Behavior               | Flags                                                                      | Environment Variables                                                                                       | turbo.json                                       |
   | ---------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
-  | Binary path            | -                                                                          | [`TURBO_BINARY_PATH`](/docs/reference/system-environment-variables#turbo_binary_path)                       | -                                                |
-  | Download local `turbo` | -                                                                          | [`TURBO_DOWNLOAD_LOCAL_ENABLED`](/docs/reference/system-environment-variables#turbo_download_local_enabled) | -                                                |
-  | Daemon (deprecated)    | [`--daemon` / `--no-daemon`](/docs/reference/run#--daemon-and---no-daemon) | -                                                                                                           | [`daemon`](/docs/reference/configuration#daemon) |
+  | Binary path            | -                                                                          | [`TURBO_BINARY_PATH`](system-environment-variables.md#turbo_binary_path)                       | -                                                |
+  | Download local `turbo` | -                                                                          | [`TURBO_DOWNLOAD_LOCAL_ENABLED`](system-environment-variables.md#turbo_download_local_enabled) | -                                                |
+  | Daemon (deprecated)    | [`--daemon` / `--no-daemon`](run.md#--daemon-and---no-daemon) | -                                                                                                           | [`daemon`](configuration.md#daemon) |
 </div>
 
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

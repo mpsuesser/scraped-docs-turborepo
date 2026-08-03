@@ -2,19 +2,13 @@
 url: https://turborepo.dev/docs/guides/tools/docker
 title: "Docker"
 description: "Use turbo prune to create optimized Docker images from your monorepo with minimal dependencies."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# Docker
-
-
-
-import { CreateTurboCallout } from "./create-turbo-callout.tsx";
+Learn how to use Docker in a monorepo.
 
 Building a [Docker](https://www.docker.com/) image is a common way to deploy all sorts of applications. However, doing so from a monorepo has several challenges.
-
-<CreateTurboCallout />
 
 ## The problem
 
@@ -22,27 +16,19 @@ Building a [Docker](https://www.docker.com/) image is a common way to deploy all
 
 Let's imagine you have a monorepo that looks like this:
 
-<Files>
-  <Folder name="apps" defaultOpen>
-    <Folder name="api" defaultOpen>
-      <File name="server.js" />
+server.js
 
-      <File name="package.json" />
-    </Folder>
+package.json
 
-    <Folder name="web" defaultOpen>
-      <File name="package.json" />
-    </Folder>
-  </Folder>
+package.json
 
-  <File name="package.json" />
+package.json
 
-  <File name="package-lock.json" />
-</Files>
+package-lock.json
 
 You want to deploy `apps/api` using Docker, so you create a Dockerfile:
 
-```docker title="./apps/api/Dockerfile"
+```
 FROM node:16
 
 WORKDIR /usr/src/app
@@ -68,7 +54,7 @@ This will copy the root `package.json` and the root lockfile to the Docker image
 
 You should also create a `.dockerignore` file to prevent node\_modules from being copied in with the app's source.
 
-```txt title=".dockerignore"
+```
 node_modules
 npm-debug.log
 ```
@@ -89,55 +75,35 @@ In a large monorepo, this can result in a huge amount of lost time, as any chang
 
 The solution is to prune the inputs to the Dockerfile to only what is strictly necessary. Turborepo provides a simple solution - `turbo prune`.
 
-```bash title="Terminal"
+```
 turbo prune api --docker
 ```
 
 Running this command creates a **pruned version of your monorepo** inside an `./out` directory. It only includes workspaces which `api` depends on. It also **prunes the lockfile** so that only the relevant `node_modules` will be downloaded.
 
-### The `--docker` flag
+### The --docker flag
 
 By default, `turbo prune` puts all relevant files inside `./out`. But to optimize caching with Docker, we ideally want to copy the files over in two stages.
 
 First, we want to copy over only what we need to install the packages. When running `--docker`, you'll find this inside `./out/json`.
 
-<Files>
-  <Folder name="out" defaultOpen>
-    <Folder name="json" defaultOpen>
-      <Folder name="apps" defaultOpen>
-        <Folder name="api" defaultOpen>
-          <File name="package.json" />
-        </Folder>
-      </Folder>
+package.json
 
-      <File name="package.json" />
-    </Folder>
+package.json
 
-    <Folder name="full" defaultOpen>
-      <Folder name="apps" defaultOpen>
-        <Folder name="api" defaultOpen>
-          <File name="server.js" />
+server.js
 
-          <File name="package.json" />
-        </Folder>
-      </Folder>
+package.json
 
-      <File name="package.json" />
+package.json
 
-      <File name="turbo.json" />
-    </Folder>
+turbo.json
 
-    <File name="package-lock.json" />
-  </Folder>
-</Files>
+package-lock.json
 
 Afterwards, you can copy the files in `./out/full` to add the source files.
 
 Splitting up **dependencies** and **source files** in this way lets us **only run `npm install` when dependencies change** - giving us a much larger speedup.
-
-<Callout type="info">
-  Without `--docker`, all pruned files are placed inside `./out`.
-</Callout>
 
 ### Example
 
@@ -145,17 +111,11 @@ Our detailed [`with-docker` example](https://github.com/vercel/turborepo/tree/ma
 
 Build the Dockerfile from the root of your monorepo:
 
-```bash title="Terminal"
+```
 docker build -f apps/web/Dockerfile .
 ```
 
-<Callout type="info">
-  This Dockerfile is written for a [Next.js](https://nextjs.org/) app that is
-  using the `standalone` [output
-  mode](https://nextjs.org/docs/pages/api-reference/next-config-js/output).
-</Callout>
-
-```docker title="./apps/web/Dockerfile"
+```
 FROM node:18-alpine AS base
 RUN apk update
 RUN apk add --no-cache libc6-compat
@@ -208,13 +168,13 @@ CMD node apps/web/server.js
 
 ## Remote Caching
 
-To take advantage of remote caches during Docker builds, you will need to make sure your build container has credentials to access your [Remote Cache](/docs/core-concepts/remote-caching).
+To take advantage of remote caches during Docker builds, you will need to make sure your build container has credentials to access your [Remote Cache](../../core-concepts/remote-caching.md).
 
 There are many ways to take care of secrets in a Docker image. We will use a simple strategy here with multi-stage builds using secrets as build arguments that will get hidden for the final image.
 
 Assuming you are using a Dockerfile similar to the one above, we will bring in some environment variables from build arguments right before `turbo build`:
 
-```docker title="./apps/api/Dockerfile"
+```
 ARG TURBO_TEAM
 ENV TURBO_TEAM=$TURBO_TEAM
 
@@ -226,15 +186,6 @@ RUN yarn turbo run build
 
 `turbo` will now be able to hit your Remote Cache. To see a Turborepo cache hit for a non-cached Docker build image, run a command like this one from your project root:
 
-```bash title="Terminal"
+```
 docker build -f apps/web/Dockerfile . --build-arg TURBO_TEAM="your-team-name" --build-arg TURBO_TOKEN="your-token" --no-cache
 ```
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)

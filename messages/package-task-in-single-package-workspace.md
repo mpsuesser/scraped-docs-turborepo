@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/messages/package-task-in-single-package-workspace
 title: "Package task in single-package workspace error"
-description: "How to fix errors from using package-scoped task syntax in a single-package workspace."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "Learn more about errors with package tasks in single-package workspaces."
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # Package task in single-package workspace error
@@ -39,13 +39,13 @@ Remove the package name from the task declaration.
 }
 ```
 
-Alternatively, if you would like to have multiple packages, you can [specify the workspaces in your repository](/docs/getting-started/add-to-existing-repository).
+Alternatively, if you would like to have multiple packages, you can [specify the workspaces in your repository](../getting-started/add-to-existing-repository.md).
 
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

@@ -2,62 +2,58 @@
 url: https://turborepo.dev/docs/crafting-your-repository/managing-dependencies
 title: "Managing dependencies"
 description: "Install, organize, and maintain external and internal dependencies across packages in your workspace."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# Managing dependencies
+Learn how to manage dependencies in your monorepo's workspace.
 
+- **External dependencies** come from [the npm registry](https://www.npmjs.com/), allowing you to leverage valuable code from the ecosystem to build your applications and libraries faster.
+- **Internal dependencies** let you share functionality within your repository, dramatically improving discoverability and usability of shared code. We will discuss how to build an Internal Package in [the next guide](creating-an-internal-package.md).
 
+#### pnpm
 
-* **External dependencies** come from [the npm registry](https://www.npmjs.com/), allowing you to leverage valuable code from the ecosystem to build your applications and libraries faster.
-* **Internal dependencies** let you share functionality within your repository, dramatically improving discoverability and usability of shared code. We will discuss how to build an Internal Package in [the next guide](/docs/crafting-your-repository/creating-an-internal-package).
+```
+{
+  "dependencies": {
+    "next": "latest", // External dependency
+    "@repo/ui": "workspace:*" // Internal dependency
+  }
+}
+```
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```json title="./apps/web/package.json"
-    {
-      "dependencies": {
-        "next": "latest", // External dependency
-        "@repo/ui": "workspace:*" // Internal dependency
-      }
-    }
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="yarn">
-    ```json title="./apps/web/package.json"
-    {
-      "dependencies": {
-        "next": "latest", // External dependency
-        "@repo/ui": "*" // Internal dependency
-      }
-    }
-    ```
-  </Tab>
+```
+{
+  "dependencies": {
+    "next": "latest", // External dependency
+    "@repo/ui": "*" // Internal dependency
+  }
+}
+```
 
-  <Tab value="npm">
-    ```json title="./apps/web/package.json"
-    {
-      "dependencies": {
-        "next": "latest", // External dependency
-        "@repo/ui": "*" // Internal dependency
-      }
-    }
-    ```
-  </Tab>
+#### npm
 
-  <Tab value="bun">
-    ```json title="./apps/web/package.json"
-    {
-      "dependencies": {
-        "next": "latest", // External dependency
-        "@repo/ui": "workspace:*" // Internal dependency
-      }
-    }
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+{
+  "dependencies": {
+    "next": "latest", // External dependency
+    "@repo/ui": "*" // Internal dependency
+  }
+}
+```
+
+#### bun
+
+```
+{
+  "dependencies": {
+    "next": "latest", // External dependency
+    "@repo/ui": "workspace:*" // Internal dependency
+  }
+}
+```
 
 ## Best practices for dependency installation
 
@@ -65,65 +61,58 @@ current_date: 2026-08-03T17:27:52.096Z
 
 When you install a dependency in your repository, you should install it directly in the package that uses it. The package's `package.json` will have every dependency that the package needs. This is true for both external and internal dependencies.
 
-<Callout type="info">
-  Note that your package manager may choose to [use a different node\_modules
-  location than the package](#node_modules-locations).
-</Callout>
-
 To quickly install dependencies in multiple packages, you can use your package manager:
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm add jest --save-dev --recursive --filter=web --filter=@repo/ui --filter=docs
-    ```
+#### pnpm
 
-    <LinkToDocumentation href="https://pnpm.io/cli/recursive" text="pnpm documentation" />
-  </Tab>
+```
+pnpm add jest --save-dev --recursive --filter=web --filter=@repo/ui --filter=docs
+```
 
-  <Tab value="yarn">
-    Yarn 1:
+[→ pnpm documentation](https://pnpm.io/cli/recursive)
 
-    ```bash title="Terminal"
-    yarn workspace web add jest --dev
-    yarn workspace @repo/ui add jest --dev
-    ```
+#### yarn
 
-    <LinkToDocumentation href="https://classic.yarnpkg.com/en/docs/cli/add" text="Yarn 1 documentation" />
+Yarn 1:
 
-    Yarn 2+:
+```
+yarn workspace web add jest --dev
+yarn workspace @repo/ui add jest --dev
+```
 
-    ```bash title="Terminal"
-    yarn workspaces foreach -R --from '{web,@repo/ui}' add jest --dev
-    ```
+[→ Yarn 1 documentation](https://classic.yarnpkg.com/en/docs/cli/add)
 
-    <LinkToDocumentation href="https://yarnpkg.com/cli/workspaces/foreach#usage" text="Yarn 2+ documentation" />
-  </Tab>
+Yarn 2+:
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npm install jest --workspace=web --workspace=@repo/ui --save-dev
-    ```
+```
+yarn workspaces foreach -R --from '{web,@repo/ui}' add jest --dev
+```
 
-    <LinkToDocumentation href="https://docs.npmjs.com/cli/v7/using-npm/config#workspace" text="npm documentation" />
-  </Tab>
+[→ Yarn 2+ documentation](https://yarnpkg.com/cli/workspaces/foreach#usage)
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    cd apps/web && bun install jest --dev
-    cd packages/ui && bun install jest --dev
-    ```
+#### npm
 
-    <LinkToDocumentation href="https://bun.sh/docs/install/workspaces" text="bun documentation" />
-  </Tab>
-</PackageManagerTabs>
+```
+npm install jest --workspace=web --workspace=@repo/ui --save-dev
+```
+
+[→ npm documentation](https://docs.npmjs.com/cli/v7/using-npm/config#workspace)
+
+#### bun
+
+```
+cd apps/web && bun install jest --dev
+cd packages/ui && bun install jest --dev
+```
+
+[→ bun documentation](https://bun.sh/docs/install/workspaces)
 
 This practice has several benefits:
 
-* **Improved clarity**: It's easier to understand what a package depends on when its dependencies are listed in its `package.json`. Developers working in the repository can see at a glance what dependencies are used within the package.
-* **Enhanced flexibility**: In a monorepo at scale, it can be unrealistic to expect each package to use the same version of an external dependency. When there are many teams working in the same codebase, there will be differing priorities, timelines, and needs due to the realities of [operating at scale](https://vercel.com/blog/how-to-scale-a-large-codebase). By installing dependencies in the package that uses them, you can enable your `ui` team to bump to the latest version of TypeScript, while your `web` team can prioritize shipping new features and bumping TypeScript later. Additionally, if you still want to keep dependency versions in sync, [you can do that, too](#keeping-dependencies-on-the-same-version).
-* **Better caching ability**: If you install too many dependencies in the root of your repository, you'll be changing the workspace root whenever you add, update, or delete a dependency, leading to unnecessary cache misses.
-* **Pruning unused dependencies**: For Docker users, [Turborepo's pruning feature](/docs/reference/prune) can remove unused dependencies from Docker images to create lighter images. When dependencies are installed in the packages that they are meant for, Turborepo can read your lockfile and remove dependencies that aren't used in the packages you need.
+- **Improved clarity**: It's easier to understand what a package depends on when its dependencies are listed in its `package.json`. Developers working in the repository can see at a glance what dependencies are used within the package.
+- **Enhanced flexibility**: In a monorepo at scale, it can be unrealistic to expect each package to use the same version of an external dependency. When there are many teams working in the same codebase, there will be differing priorities, timelines, and needs due to the realities of [operating at scale](https://vercel.com/blog/how-to-scale-a-large-codebase). By installing dependencies in the package that uses them, you can enable your `ui` team to bump to the latest version of TypeScript, while your `web` team can prioritize shipping new features and bumping TypeScript later. Additionally, if you still want to keep dependency versions in sync, [you can do that, too](#keeping-dependencies-on-the-same-version).
+- **Better caching ability**: If you install too many dependencies in the root of your repository, you'll be changing the workspace root whenever you add, update, or delete a dependency, leading to unnecessary cache misses.
+- **Pruning unused dependencies**: For Docker users, [Turborepo's pruning feature](../reference/prune.md) can remove unused dependencies from Docker images to create lighter images. When dependencies are installed in the packages that they are meant for, Turborepo can read your lockfile and remove dependencies that aren't used in the packages you need.
 
 ### Few dependencies in the root
 
@@ -153,11 +142,7 @@ Depending on your choice of package manager, version, settings, and where your d
 
 As long as your scripts and tasks are able to find the dependencies they need, your package manager is working correctly.
 
-<Callout type="info" title="Referencing `node_modules` in your code">
-  The specific locations for `node_modules` within the Workspace are not a part of the public API of package managers. This means that referencing `node_modules` directly (like `node ./node_modules/a-package/dist/index.js`) can be brittle, since the location of the dependency on disk can change with other dependency changes around the Workspace.
-
-  Instead, rely on conventions of the Node.js ecosystem for accessing dependency modules whenever possible.
-</Callout>
+Referencing \`node\_modules\` in your code
 
 ### Keeping dependencies on the same version
 
@@ -171,59 +156,47 @@ Tools like [`syncpack`](https://www.npmjs.com/package/syncpack), [`manypkg`](htt
 
 You can use your package manager to update dependency versions in one command.
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm up --recursive typescript@latest
-    ```
+#### pnpm
 
-    <small>
-      [-> pnpm documentation](https://pnpm.io/cli/update#--recursive--r)
-    </small>
-  </Tab>
+```
+pnpm up --recursive typescript@latest
+```
 
-  <Tab value="yarn">
-    Yarn 1:
+[\-> pnpm documentation](https://pnpm.io/cli/update#--recursive--r)
 
-    ```bash title="Terminal"
-    yarn upgrade-interactive --latest
-    ```
+#### yarn
 
-    <small>
-      [-> Yarn 1 documentation](https://classic.yarnpkg.com/en/docs/cli/upgrade-interactive)
-    </small>
+Yarn 1:
 
-    Yarn 2+:
+```
+yarn upgrade-interactive --latest
+```
 
-    ```bash title="Terminal"
-    yarn upgrade typescript@latest --upgrade
-    ```
+[\-> Yarn 1 documentation](https://classic.yarnpkg.com/en/docs/cli/upgrade-interactive)
 
-    <small>
-      [-> Yarn 2+ documentation](https://yarnpkg.com/cli/up)
-    </small>
-  </Tab>
+Yarn 2+:
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npm install typescript@latest --workspaces
-    ```
+```
+yarn upgrade typescript@latest --upgrade
+```
 
-    <small>
-      [-> npm documentation](https://docs.npmjs.com/cli/v7/using-npm/config#workspaces)
-    </small>
-  </Tab>
+[\-> Yarn 2+ documentation](https://yarnpkg.com/cli/up)
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    bun update typescript --latest
-    ```
+#### npm
 
-    <small>
-      [-> Bun documentation](https://bun.sh/docs/cli/update)
-    </small>
-  </Tab>
-</PackageManagerTabs>
+```
+npm install typescript@latest --workspaces
+```
+
+[\-> npm documentation](https://docs.npmjs.com/cli/v7/using-npm/config#workspaces)
+
+#### bun
+
+```
+bun update typescript --latest
+```
+
+[\-> Bun documentation](https://bun.sh/docs/cli/update)
 
 #### pnpm catalogs
 
@@ -237,13 +210,4 @@ Your IDE's refactoring tooling can find and replace the version of a dependency 
 
 ## Next steps
 
-Now that you know how to manage dependencies effectively in a workspace, let's [create an Internal Package](/docs/crafting-your-repository/creating-an-internal-package) to be used as a dependency in your monorepo.
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+Now that you know how to manage dependencies effectively in a workspace, let's [create an Internal Package](creating-an-internal-package.md) to be used as a dependency in your monorepo.

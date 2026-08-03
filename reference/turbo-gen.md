@@ -2,15 +2,15 @@
 url: https://turborepo.dev/docs/reference/turbo-gen
 title: "@turbo/gen"
 description: "Reference for the `@turbo/gen` package that provides type definitions for Turborepo code generators."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # @turbo/gen
 
 
 
-Use this package for type definitions in your [Turborepo code generators](/docs/reference/generate).
+Use this package for type definitions in your [Turborepo code generators](generate.md).
 
 ```ts title="./turbo/generators/my-generator.ts"
 import type { PlopTypes } from "@turbo/gen"; // [!code highlight]
@@ -57,13 +57,13 @@ Each `TurboConfig` object has the following shape:
 | `workspacePath`   | `string`  | The absolute path to the workspace directory containing the configuration. |
 | `isRootConfig`    | `boolean` | Whether the configuration is from the root of the monorepo.                |
 
-For more information, [visit the Generating code guide](/docs/guides/generating-code).
+For more information, [visit the Generating code guide](../guides/generating-code.md).
 
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

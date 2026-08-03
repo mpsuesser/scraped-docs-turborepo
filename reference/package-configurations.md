@@ -2,28 +2,21 @@
 url: https://turborepo.dev/docs/reference/package-configurations
 title: "Package Configurations"
 description: "Reference for creating per-package turbo.json overrides to customize task behavior."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# Package Configurations
+Learn how to use Package Configurations to bring greater task flexibility to your monorepo's package.
 
-
-
-import { ExperimentalBadge } from "@/components/geistdocs/experimental-badge";
-
-Many monorepos can declare a `turbo.json` in the root directory with a
-[task description](/docs/reference/configuration#tasks) that applies to all packages. But, sometimes, a monorepo can contain packages that need to configure their tasks differently.
+Many monorepos can declare a `turbo.json` in the root directory with a [task description](configuration.md#tasks) that applies to all packages. But, sometimes, a monorepo can contain packages that need to configure their tasks differently.
 
 To accommodate this, Turborepo enables you to extend the root configuration with a `turbo.json` in any package. This flexibility enables a more diverse set of apps and packages to co-exist in a Workspace, and allows package owners to maintain specialized tasks and configuration without affecting other apps and packages of the monorepo.
 
 ## How it works
 
-To override the configuration for any task defined in the root `turbo.json`, add
-a `turbo.json` file in any package of your monorepo with a top-level `extends`
-key:
+To override the configuration for any task defined in the root `turbo.json`, add a `turbo.json` file in any package of your monorepo with a top-level `extends` key:
 
-```jsonc title="./apps/my-app/turbo.json"
+```
 {
   "extends": ["//"],
   "tasks": {
@@ -34,12 +27,6 @@ key:
   },
 }
 ```
-
-<Callout type="info">
-  The `extends` array must start with `["//"]`. `//` is a special name used to
-  identify the root directory of the monorepo. You can also extend from other
-  packages by adding them after `//` (e.g., `["//", "shared-config"]`).
-</Callout>
 
 ## Inheritance behavior
 
@@ -55,7 +42,7 @@ For example, if your root `turbo.json` sets `"outputLogs": "hash-only"` for a ta
 
 Array fields like `outputs`, `env`, `inputs`, `dependsOn`, and `passThroughEnv` **completely replace** the root configuration's values by default.
 
-```jsonc title="./turbo.json"
+```
 {
   "tasks": {
     "build": {
@@ -66,7 +53,7 @@ Array fields like `outputs`, `env`, `inputs`, `dependsOn`, and `passThroughEnv` 
 }
 ```
 
-```jsonc title="./apps/my-app/turbo.json"
+```
 {
   "extends": ["//"],
   "tasks": {
@@ -78,11 +65,11 @@ Array fields like `outputs`, `env`, `inputs`, `dependsOn`, and `passThroughEnv` 
 }
 ```
 
-### Extending arrays with `$TURBO_EXTENDS$`
+### Extending arrays with $TURBO\_EXTENDS$
 
-To **add** to inherited array values instead of replacing them, use the [`$TURBO_EXTENDS$` microsyntax](/docs/reference/configuration#turbo_extends):
+To **add** to inherited array values instead of replacing them, use the [`$TURBO_EXTENDS$` microsyntax](configuration.md#turbo_extends):
 
-```jsonc title="./apps/my-app/turbo.json"
+```
 {
   "extends": ["//"],
   "tasks": {
@@ -102,7 +89,7 @@ Package Configurations can extend from other packages' `turbo.json` files, not j
 
 Extend from any package by using its `name` from `package.json` in your `extends` array. For example, if you have a Next.js app at `./apps/web` with `"name": "web"` in its `package.json`:
 
-```jsonc title="./apps/web/turbo.json"
+```
 {
   "extends": ["//"],
   "tasks": {
@@ -119,7 +106,7 @@ Extend from any package by using its `name` from `package.json` in your `extends
 
 Another Next.js app can extend from it to share the same configuration:
 
-```jsonc title="./apps/docs/turbo.json"
+```
 {
   "extends": ["//", "web"],
   "tasks": {
@@ -130,11 +117,6 @@ Another Next.js app can extend from it to share the same configuration:
   },
 }
 ```
-
-<Callout type="warn">
-  When extending from multiple configurations, the root (`"//"`) must always be
-  listed **first** in the `extends` array.
-</Callout>
 
 #### Inheritance order
 
@@ -152,46 +134,44 @@ Later configurations override earlier ones for scalar fields. For array fields, 
 
 **Create a dedicated configuration package**: For larger monorepos, you may want to create packages specifically for sharing configuration. This keeps configuration separate from application code and makes it clear that other packages depend on these settings. These packages typically only contain a `package.json` and `turbo.json`.
 
-<Tabs items={["shared-config/package.json", "shared-config/turbo.json", "apps/web/turbo.json"]}>
-  <Tab value="shared-config/package.json">
-    ```json title="./packages/shared-config/package.json"
-    {
-      "name": "shared-config",
-      "private": true
-    }
-    ```
-  </Tab>
+#### shared-config/package.json
 
-  <Tab value="shared-config/turbo.json">
-    ```jsonc title="./packages/shared-config/turbo.json"
-    {
-      "extends": ["//"],
-      "tasks": {
-        "build": {
-          "outputs": ["dist/**"]
-        },
-        "dev": {
-          "cache": false,
-          "persistent": true
-        }
-      }
-    }
-    ```
-  </Tab>
+```
+{
+  "name": "shared-config",
+  "private": true
+}
+```
 
-  <Tab value="apps/web/turbo.json">
-    ```jsonc title="./apps/web/turbo.json"
-    {
-      "extends": ["//", "shared-config"],
-      "tasks": {
-        "build": {
-          "env": ["MY_API_URL"]
-        }
-      }
+#### shared-config/turbo.json
+
+```
+{
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "outputs": ["dist/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
     }
-    ```
-  </Tab>
-</Tabs>
+  }
+}
+```
+
+#### apps/web/turbo.json
+
+```
+{
+  "extends": ["//", "shared-config"],
+  "tasks": {
+    "build": {
+      "env": ["MY_API_URL"]
+    }
+  }
+}
+```
 
 ### Excluding tasks from inheritance
 
@@ -201,7 +181,7 @@ When extending from the root or other packages, your package inherits all their 
 
 To completely exclude an inherited task from your package, set `extends: false` with no other configuration:
 
-```jsonc title="./turbo.json"
+```
 {
   "tasks": {
     "build": {},
@@ -211,7 +191,7 @@ To completely exclude an inherited task from your package, set `extends: false` 
 }
 ```
 
-```jsonc title="./packages/ui/turbo.json"
+```
 {
   "extends": ["//"],
   "tasks": {
@@ -228,7 +208,7 @@ When you run `turbo run lint`, the `ui` package will be skipped entirely for the
 
 To create a new task definition that doesn't inherit any configuration from the extends chain, use `extends: false` along with other task configuration:
 
-```jsonc title="./packages/special-app/turbo.json"
+```
 {
   "extends": ["//"],
   "tasks": {
@@ -247,7 +227,7 @@ This is useful when you need completely different task configuration that should
 
 When a package excludes a task, that exclusion propagates to packages that extend from it:
 
-```jsonc title="./packages/base-config/turbo.json"
+```
 {
   "extends": ["//"],
   "tasks": {
@@ -258,7 +238,7 @@ When a package excludes a task, that exclusion propagates to packages that exten
 }
 ```
 
-```jsonc title="./apps/web/turbo.json"
+```
 {
   "extends": ["//", "base-config"],
   "tasks": {
@@ -267,22 +247,13 @@ When a package excludes a task, that exclusion propagates to packages that exten
 }
 ```
 
-<Callout type="info">
-  Task-level `extends` is only available in Package Configurations. Using
-  `extends` on a task in the root `turbo.json` will result in a validation
-  error.
-</Callout>
-
 ## Examples
 
 ### Different frameworks in one Workspace
 
-Let's say your monorepo has multiple [Next.js](https://nextjs.org) apps, and one [SvelteKit](https://kit.svelte.dev)
-app. Both frameworks create their build output with a `build` script in their
-respective `package.json`. You *could* configure Turborepo to run these tasks
-with a single `turbo.json` at the root like this:
+Let's say your monorepo has multiple [Next.js](https://nextjs.org/) apps, and one [SvelteKit](https://kit.svelte.dev/) app. Both frameworks create their build output with a `build` script in their respective `package.json`. You *could* configure Turborepo to run these tasks with a single `turbo.json` at the root like this:
 
-```jsonc title="./turbo.json"
+```
 {
   "tasks": {
     "build": {
@@ -292,14 +263,11 @@ with a single `turbo.json` at the root like this:
 }
 ```
 
-Notice that both `.next/**` and `.svelte-kit/**` need to be specified as
-[`outputs`](/docs/reference/configuration#outputs), even though Next.js apps do not generate a `.svelte-kit` directory, and
-vice versa.
+Notice that both `.next/**` and `.svelte-kit/**` need to be specified as [`outputs`](configuration.md#outputs), even though Next.js apps do not generate a `.svelte-kit` directory, and vice versa.
 
-With Package Configurations, you can instead add custom
-configuration in the SvelteKit package in `apps/my-svelte-kit-app/turbo.json`:
+With Package Configurations, you can instead add custom configuration in the SvelteKit package in `apps/my-svelte-kit-app/turbo.json`:
 
-```jsonc title="./apps/my-svelte-kit-app/turbo.json"
+```
 {
   "extends": ["//"],
   "tasks": {
@@ -310,9 +278,9 @@ configuration in the SvelteKit package in `apps/my-svelte-kit-app/turbo.json`:
 }
 ```
 
-and remove the SvelteKit-specific [`outputs`](/docs/reference/configuration#outputs) from the root configuration:
+and remove the SvelteKit-specific [`outputs`](configuration.md#outputs) from the root configuration:
 
-```diff title="./turbo.json"
+```
 {
   "tasks": {
     "build": {
@@ -323,17 +291,13 @@ and remove the SvelteKit-specific [`outputs`](/docs/reference/configuration#outp
 }
 ```
 
-This not only makes each configuration easier to read, it puts the configuration
-closer to where it is used.
+This not only makes each configuration easier to read, it puts the configuration closer to where it is used.
 
 ### Specialized tasks
 
-In another example, say that the `build` task in one package `dependsOn` a
-`compile` task. You could universally declare it as `dependsOn: ["compile"]`.
-This means that your root `turbo.json` has to have an empty `compile` task
-entry:
+In another example, say that the `build` task in one package `dependsOn` a `compile` task. You could universally declare it as `dependsOn: ["compile"]`. This means that your root `turbo.json` has to have an empty `compile` task entry:
 
-```json title="./turbo.json"
+```
 {
   "tasks": {
     "build": {
@@ -344,10 +308,9 @@ entry:
 }
 ```
 
-With Package Configurations, you can move that `compile` task into the
-`apps/my-custom-app/turbo.json`,
+With Package Configurations, you can move that `compile` task into the `apps/my-custom-app/turbo.json`,
 
-```json title="./apps/my-app/turbo.json"
+```
 {
   "extends": ["//"],
   "tasks": {
@@ -361,7 +324,7 @@ With Package Configurations, you can move that `compile` task into the
 
 and remove it from the root:
 
-```diff title="./turbo.json"
+```
 {
   "tasks": {
 +    "build": {}
@@ -373,25 +336,19 @@ and remove it from the root:
 }
 ```
 
-Now, the owners of `my-app`, can have full ownership over their `build` task,
-but continue to inherit any other tasks defined at the root.
+Now, the owners of `my-app`, can have full ownership over their `build` task, but continue to inherit any other tasks defined at the root.
 
 ## Comparison to package-specific tasks
 
-The [`package#task` syntax](/docs/crafting-your-repository/configuring-tasks#depending-on-a-specific-task-in-a-specific-package) in the root `turbo.json` **completely overwrites** all task configuration—nothing is inherited.
+The [`package#task` syntax](../crafting-your-repository/configuring-tasks.md#depending-on-a-specific-task-in-a-specific-package) in the root `turbo.json` **completely overwrites** all task configuration—nothing is inherited.
 
 With Package Configurations, scalar fields are inherited and only the fields you specify are overridden. This means less duplication when you only need to change one or two properties.
 
-<Callout type="info">
-  Although there are no plans to remove package-specific task configurations, we
-  expect that Package Configurations can be used for most use cases instead.
-</Callout>
-
-## Boundaries Tags <ExperimentalBadge>Experimental</ExperimentalBadge>
+## Boundaries Tags Experimental
 
 Package Configurations are also used to declare Tags for Boundaries. To do so, add a `tags` field to your `turbo.json`:
 
-```diff title="./apps/my-app/turbo.json"
+```
 {
 + "tags": ["my-tag"],
   "extends": ["//"],
@@ -404,21 +361,17 @@ Package Configurations are also used to declare Tags for Boundaries. To do so, a
 }
 ```
 
-From there, you can define rules for which dependencies or dependents a tag can have. Check out the [Boundaries documentation](/docs/reference/boundaries#tags) for more details.
+From there, you can define rules for which dependencies or dependents a tag can have. Check out the [Boundaries documentation](boundaries.md#tags) for more details.
 
 ## Limitations
 
-Although the general idea is the same as the root `turbo.json`, Package
-Configurations come with a set of guardrails that can prevent packages from creating
-potentially confusing situations.
+Although the general idea is the same as the root `turbo.json`, Package Configurations come with a set of guardrails that can prevent packages from creating potentially confusing situations.
 
-### Package Configurations cannot use [the `workspace#task` syntax](/docs/crafting-your-repository/running-tasks) as task entries
+### Package Configurations cannot use the workspace#task syntax as task entries
 
-The `package` is inferred based on the location of the configuration, and it is
-not possible to change configuration for another package. For example, in a
-Package Configuration for `my-nextjs-app`:
+The `package` is inferred based on the location of the configuration, and it is not possible to change configuration for another package. For example, in a Package Configuration for `my-nextjs-app`:
 
-```jsonc title="./apps/my-nextjs-app/turbo.json"
+```
 {
   "tasks": {
     "my-nextjs-app#build": {
@@ -441,38 +394,24 @@ Package Configuration for `my-nextjs-app`:
 
 Note that the `build` task can still depend on a package-specific task:
 
-```jsonc title="./apps/my-nextjs-app/turbo.json"
+```
 {
   "tasks": {
     "build": {
-      "dependsOn": ["some-pkg#compile"], // [!code highlight]
+      "dependsOn": ["some-pkg#compile"],
     },
   },
 }
 ```
 
-### Package Configurations can only override values in the `tasks` key
+### Package Configurations can only override values in the tasks key
 
-It is not possible to override [global configuration](/docs/reference/configuration#global-options) like `globalEnv` or `globalDependencies` in a Package Configuration. Configuration that would need to be altered in a Package Configuration is not truly global and should be configured differently.
+It is not possible to override [global configuration](configuration.md#global-options) like `globalEnv` or `globalDependencies` in a Package Configuration. Configuration that would need to be altered in a Package Configuration is not truly global and should be configured differently.
 
-### Root turbo.json cannot use the `extends` key
+### Root turbo.json cannot use the extends key
 
-To avoid creating circular dependencies on packages, the root `turbo.json`
-cannot extend from anything. The `extends` key will be ignored.
+To avoid creating circular dependencies on packages, the root `turbo.json` cannot extend from anything. The `extends` key will be ignored.
 
 ## Troubleshooting
 
-In large monorepos, it can sometimes be difficult to understand how Turborepo is
-interpreting your configuration. To help, we've added a `resolvedTaskDefinition`
-to the [Dry Run](/docs/reference/run#--dry----dry-run) output. If you run `turbo run build --dry-run`, for example, the
-output will include the combination of all `turbo.json` configurations that were
-considered before running the `build` task.
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+In large monorepos, it can sometimes be difficult to understand how Turborepo is interpreting your configuration. To help, we've added a `resolvedTaskDefinition` to the [Dry Run](run.md#--dry----dry-run) output. If you run `turbo run build --dry-run`, for example, the output will include the combination of all `turbo.json` configurations that were considered before running the `build` task.

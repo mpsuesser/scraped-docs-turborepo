@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/telemetry
 title: "Telemetry"
-description: "Understand what anonymous telemetry data Turborepo collects and how to opt out."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "Learn more about Turborepo's anonymous telemetry."
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # Telemetry
@@ -27,7 +27,7 @@ Furthermore, this data allows us to verify if improvements are improving the bas
 
 We track general usage information, specifically, we track the following with anonymized telemetry data using random identifiers:
 
-* Command invoked ([turbo run](/docs/reference/run), [turbo prune](/docs/reference/prune), [turbo gen](/docs/reference/generate), etc.)
+* Command invoked ([turbo run](reference/run.md), [turbo prune](reference/prune.md), [turbo gen](reference/generate.md), etc.)
 * Version of `turbo`
 * General machine information (e.g. number of CPUs, macOS/Windows/Linux, whether or not the command was run within CI)
 * Size of application (total number of workspaces)
@@ -73,8 +73,8 @@ turbo telemetry enable
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

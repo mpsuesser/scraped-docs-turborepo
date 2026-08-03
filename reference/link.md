@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/reference/link
 title: "link"
-description: "All flags and options for the `turbo link` command that connects your repository to Remote Cache."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "API reference for the `turbo link` command"
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # link
@@ -16,7 +16,7 @@ Link the repository to a Remote Cache provider.
 turbo link
 ```
 
-The selected owner (either a user or an organization) will be able to share [cache artifacts](/docs/core-concepts/remote-caching) through [Remote Caching](/docs/core-concepts/remote-caching).
+The selected owner (either a user or an organization) will be able to share [cache artifacts](../core-concepts/remote-caching.md) through [Remote Caching](../core-concepts/remote-caching.md).
 
 ## Flag options
 
@@ -47,8 +47,8 @@ turbo link --scope=your-team
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/reference/watch
 title: "watch"
-description: "All flags and options for the `turbo watch` command that re-runs tasks on code changes."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "API reference for the `watch` command"
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # watch
@@ -16,9 +16,9 @@ Re-run tasks in your repository, based on code changes.
 turbo watch [tasks]
 ```
 
-`turbo watch` is dependency-aware, meaning tasks will re-run in the order [configured in `turbo.json`](/docs/reference/configuration).
+`turbo watch` is dependency-aware, meaning tasks will re-run in the order [configured in `turbo.json`](configuration.md).
 
-By default, `turbo watch` operates at the package level: if any file in a package changes, all tasks in that package are re-run. Enable [`futureFlags.watchUsingTaskInputs`](/docs/reference/configuration#watchusingtaskinputs) to filter at the task level using each task's [`inputs`](/docs/reference/configuration#inputs) globs instead.
+By default, `turbo watch` operates at the package level: if any file in a package changes, all tasks in that package are re-run. Enable [`futureFlags.watchUsingTaskInputs`](configuration.md#watchusingtaskinputs) to filter at the task level using each task's [`inputs`](configuration.md#inputs) globs instead.
 
 If no tasks are provided, `turbo` will display what tasks are available for the packages in the repository.
 
@@ -28,18 +28,18 @@ turbo watch
 
 ## Using `turbo watch` with persistent tasks
 
-Persistent tasks are marked with [`"persistent": true`](/docs/reference/configuration#persistent), meaning they won't exit. Because of this, they cannot be depended on in your task graph.
+Persistent tasks are marked with [`"persistent": true`](configuration.md#persistent), meaning they won't exit. Because of this, they cannot be depended on in your task graph.
 
-This means that persistent tasks will be ignored when using `turbo watch`, working the same way they do with [`turbo run`](/docs/reference/run), allowing persistent and non-persistent tasks to be run at the same time.
+This means that persistent tasks will be ignored when using `turbo watch`, working the same way they do with [`turbo run`](run.md), allowing persistent and non-persistent tasks to be run at the same time.
 
 ### Dependency-aware persistent tasks
 
-When your script has a built-in watcher (like `next dev`) capable of detecting changes in dependencies, you don't need to use `turbo watch`. Instead, use your script's built-in watcher and mark the task as long-running using [`"persistent": true`](/docs/reference/configuration#persistent).
+When your script has a built-in watcher (like `next dev`) capable of detecting changes in dependencies, you don't need to use `turbo watch`. Instead, use your script's built-in watcher and mark the task as long-running using [`"persistent": true`](configuration.md#persistent).
 
 ### Persistent tasks without dependency awareness
 
 Some tools aren't monorepo-friendly, and do not hot-reload modules in dependencies. In those cases, you should
-mark the task as [`interruptible: true`](/docs/reference/configuration#interruptible) to have `turbo watch`
+mark the task as [`interruptible: true`](configuration.md#interruptible) to have `turbo watch`
 restart the task when relevant changes are detected.
 
 ## Limitations
@@ -62,8 +62,8 @@ Watch Mode has some logic to prevent this from happening using file hashes, but 
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

@@ -2,18 +2,16 @@
 url: https://turborepo.dev/docs/guides/migrating-from-nx
 title: "Migrating from Nx"
 description: "Step-by-step instructions for migrating your Nx monorepo to Turborepo."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# Migrating from Nx
-
-
+Learn how to migrate to Turborepo from Nx.
 
 This guide will help you migrate an existing Nx repository to Turborepo.
 
-* Explore key concepts by [migrating from an Nx starter to Turborepo](#migration-steps)
-* Considerations for [more complex migration scenarios](#advanced-migration-considerations)
+- Explore key concepts by [migrating from an Nx starter to Turborepo](#migration-steps)
+- Considerations for [more complex migration scenarios](#advanced-migration-considerations)
 
 ## Why switch?
 
@@ -21,7 +19,7 @@ There are many reasons why you may be choosing to migrate from Nx to Turborepo. 
 
 ### Using ecosystem standards
 
-Turborepo's goal is to be lightweight, leaning on your repository as the source of truth. An example of this is Turborepo being [built on top of JavaScript package manager workspaces](/docs/crafting-your-repository/structuring-a-repository) for it's JavaScript/TypeScript support.
+Turborepo's goal is to be lightweight, leaning on your repository as the source of truth. An example of this is Turborepo being [built on top of JavaScript package manager workspaces](../crafting-your-repository/structuring-a-repository.md) for it's JavaScript/TypeScript support.
 
 By contrast, Nx uses layers of plugins, dependencies, and other Nx-specific code to infer information about your repository. While these plugins can provide a layer of functionality and are optional, Nx users looking to migrate often cite removing Nx-specific code from their codebase as a key motivation for their change.
 
@@ -35,124 +33,122 @@ Turborepo chooses to let you handle your tooling on your own terms, configuring 
 
 Migrating to Turborepo will likely require deleting previous configuration that you had for Nx and replacing it with less configuration for Turborepo, since Turborepo will automatically infer your repository's needs. For example, here are the tool-specific configurations you'll find in the equivalent starters for Turborepo and Nx [used below](#migration-steps).
 
-<Tabs items={["Turborepo", "Nx"]}>
-  <Tab value="Turborepo">
-    ```json title="turbo.json"
+#### Turborepo
+
+```
+{
+  "$schema": "/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**", "!.next/dev/**"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}
+```
+
+#### Nx
+
+```
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": [
+      "default",
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/eslint.config.cjs",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/jest.config.[jt]s",
+      "!{projectRoot}/src/test-setup.[jt]s",
+      "!{projectRoot}/test-setup.[jt]s"
+    ],
+    "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
+  },
+  "nxCloudId": "6789ec521d90a2165398f39a",
+  "plugins": [
     {
-      "$schema": "/schema.json",
-      "ui": "tui",
-      "tasks": {
-        "build": {
-          "dependsOn": ["^build"],
-          "inputs": ["$TURBO_DEFAULT$", ".env*"],
-          "outputs": [".next/**", "!.next/cache/**", "!.next/dev/**"]
-        },
-        "lint": {
-          "dependsOn": ["^lint"]
-        },
-        "check-types": {
-          "dependsOn": ["^check-types"]
-        },
-        "dev": {
-          "cache": false,
-          "persistent": true
-        }
+      "plugin": "@nx/next/plugin",
+      "options": {
+        "startTargetName": "start",
+        "buildTargetName": "build",
+        "devTargetName": "dev",
+        "serveStaticTargetName": "serve-static"
+      }
+    },
+    {
+      "plugin": "@nx/playwright/plugin",
+      "options": {
+        "targetName": "e2e"
+      }
+    },
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    {
+      "plugin": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
       }
     }
-    ```
-  </Tab>
-
-  <Tab value="Nx">
-    ```json title="nx.json"
-    {
-      "$schema": "./node_modules/nx/schemas/nx-schema.json",
-      "namedInputs": {
-        "default": ["{projectRoot}/**/*", "sharedGlobals"],
-        "production": [
-          "default",
-          "!{projectRoot}/.eslintrc.json",
-          "!{projectRoot}/eslint.config.cjs",
-          "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
-          "!{projectRoot}/tsconfig.spec.json",
-          "!{projectRoot}/jest.config.[jt]s",
-          "!{projectRoot}/src/test-setup.[jt]s",
-          "!{projectRoot}/test-setup.[jt]s"
-        ],
-        "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
-      },
-      "nxCloudId": "6789ec521d90a2165398f39a",
-      "plugins": [
-        {
-          "plugin": "@nx/next/plugin",
-          "options": {
-            "startTargetName": "start",
-            "buildTargetName": "build",
-            "devTargetName": "dev",
-            "serveStaticTargetName": "serve-static"
-          }
-        },
-        {
-          "plugin": "@nx/playwright/plugin",
-          "options": {
-            "targetName": "e2e"
-          }
-        },
-        {
-          "plugin": "@nx/eslint/plugin",
-          "options": {
-            "targetName": "lint"
-          }
-        },
-        {
-          "plugin": "@nx/jest/plugin",
-          "options": {
-            "targetName": "test"
-          }
-        }
-      ],
-      "targetDefaults": {
-        "e2e-ci--**/*": {
-          "dependsOn": ["^build"]
-        }
-      },
-      "generators": {
-        "@nx/next": {
-          "application": {
-            "style": "tailwind",
-            "linter": "eslint"
-          }
-        }
+  ],
+  "targetDefaults": {
+    "e2e-ci--**/*": {
+      "dependsOn": ["^build"]
+    }
+  },
+  "generators": {
+    "@nx/next": {
+      "application": {
+        "style": "tailwind",
+        "linter": "eslint"
       }
     }
-    ```
+  }
+}
+```
 
-    ```json title="project.json"
-    {
-      "name": "starter",
-      "$schema": "../../node_modules/nx/schemas/project-schema.json",
-      "sourceRoot": "apps/starter",
-      "projectType": "application",
-      "tags": [],
-      "// targets": "to see all targets run: nx show project starter --web",
-      "targets": {}
-    }
-    ```
-  </Tab>
-</Tabs>
+```
+{
+  "name": "starter",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/starter",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project starter --web",
+  "targets": {}
+}
+```
 
 ## Migration steps
 
 Our goal for this migration is to get a working Turborepo task as quickly as possible, so that you can adopt Turborepo features incrementally. We'll start by using the Nx scaffolder to create a repository with a Next.js app.
 
-```bash title="Terminal"
+```
 npx create-nx-workspace --preset=next --ci=skip --e2eTestRunner=none --style=tailwind --nextAppDir=true --nextSrcDir=false --packageManager=pnpm --appName=starter
 ```
 
-### Step 1: Update .gitignore
+### Step 1: Update.gitignore
 
-Turborepo uses the .turbo directory to hold local caches and other information about your repository. For this reason, it should be added to your `.gitignore`.
+Turborepo uses the.turbo directory to hold local caches and other information about your repository. For this reason, it should be added to your `.gitignore`.
 
-```txt title=".gitignore"
+```
 .turbo
 ```
 
@@ -160,38 +156,36 @@ Turborepo uses the .turbo directory to hold local caches and other information a
 
 Turborepo is built on top of package manager workspaces, a JavaScript ecosystem standard. Add the directory paths to the workspace that will contain packages.
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```yml title="pnpm-workspace.yaml"
-    packages:
-      - apps/*
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```json title="package.json"
-    {
-      "workspaces": ["apps/*"]
-    }
-    ```
-  </Tab>
+```
+packages:
+  - apps/*
+```
 
-  <Tab value="npm">
-    ```json title="package.json"
-    {
-      "workspaces": ["apps/*"]
-    }
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```json title="package.json"
-    {
-      "workspaces": ["apps/*"]
-    }
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+{
+  "workspaces": ["apps/*"]
+}
+```
+
+#### npm
+
+```
+{
+  "workspaces": ["apps/*"]
+}
+```
+
+#### bun
+
+```
+{
+  "workspaces": ["apps/*"]
+}
+```
 
 ### Step 3: Add a package.json to the application
 
@@ -199,7 +193,7 @@ Rather than adding additional configuration files like `project.json`, Turborepo
 
 Add a `package.json` to the `starter` application. Create a `package.json` at `./apps/starter/package.json` that contains a `dev` and `build` script.
 
-```json title="./apps/starter/package.json"
+```
 {
   "name": "starter",
   "scripts": {
@@ -211,102 +205,98 @@ Add a `package.json` to the `starter` application. Create a `package.json` at `.
 
 ### Step 4: Remove Nx plugin
 
-Remove the Nx plugin from ./apps/starter/next.config.js. The example file below doesn't have configuration, though your existing Next.js application may need some.
+Remove the Nx plugin from./apps/starter/next.config.js. The example file below doesn't have configuration, though your existing Next.js application may need some.
 
-```js title="./apps/starter/next.config.js"
+```
 /** @type {import('next').NextConfig} */
 const nextConfig = {};
 
 module.exports = nextConfig;
 ```
 
-### Step 5: Add `devEngines.packageManager`
+### Step 5: Add devEngines.packageManager
 
 The root package.json needs to have a package manager declaration. We recommend `devEngines.packageManager`. This ensures developers in the repository use the correct package manager, and that Turborepo can optimize your package graph based on your lockfile.
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```json title="./package.json"
-    {
-      "devEngines": {
-        "packageManager": {
-          "name": "pnpm",
-          "version": "9.0.0"
-        }
-      }
-    }
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```json title="./package.json"
-    {
-      "devEngines": {
-        "packageManager": {
-          "name": "yarn",
-          "version": "1.22.19"
-        }
-      }
+```
+{
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "9.0.0"
     }
-    ```
-  </Tab>
+  }
+}
+```
 
-  <Tab value="npm">
-    ```json title="./package.json"
-    {
-      "devEngines": {
-        "packageManager": {
-          "name": "npm",
-          "version": "10.0.0"
-        }
-      }
-    }
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```json title="./package.json"
-    {
-      "devEngines": {
-        "packageManager": {
-          "name": "bun",
-          "version": "1.2.0"
-        }
-      }
+```
+{
+  "devEngines": {
+    "packageManager": {
+      "name": "yarn",
+      "version": "1.22.19"
     }
-    ```
-  </Tab>
-</PackageManagerTabs>
+  }
+}
+```
+
+#### npm
+
+```
+{
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "version": "10.0.0"
+    }
+  }
+}
+```
+
+#### bun
+
+```
+{
+  "devEngines": {
+    "packageManager": {
+      "name": "bun",
+      "version": "1.2.0"
+    }
+  }
+}
+```
 
 ### Step 6: Run you package manager's install command
 
 Update your lockfile by running your installation command.
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm install
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```bash title="Terminal"
-    yarn install
-    ```
-  </Tab>
+```
+pnpm install
+```
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npm install
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    bun install
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+yarn install
+```
+
+#### npm
+
+```
+npm install
+```
+
+#### bun
+
+```
+bun install
+```
 
 Once you've done this, you should see a lockfile diff, indicating that the package has been added to the package manager's workspace.
 
@@ -314,65 +304,61 @@ Once you've done this, you should see a lockfile diff, indicating that the packa
 
 Add Turborepo to the root `package.json` of the workspace.
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm add turbo --save-dev --workspace-root
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```bash title="Terminal"
-     yarn add turbo --save-dev --ignore-workspace-root-check
-    ```
-  </Tab>
+```
+pnpm add turbo --save-dev --workspace-root
+```
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npm install turbo --save-dev
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    bun install turbo --dev
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+yarn add turbo --save-dev --ignore-workspace-root-check
+```
+
+#### npm
+
+```
+npm install turbo --save-dev
+```
+
+#### bun
+
+```
+bun install turbo --dev
+```
 
 You can also optionally install `turbo` globally for added convenience when working with Turborepo.
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm add turbo --global
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```bash title="Terminal"
-    yarn global add turbo
-    ```
-  </Tab>
+```
+pnpm add turbo --global
+```
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npm install turbo --global
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    bun install turbo --global
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+yarn global add turbo
+```
 
-### Step 8: Add a `turbo.json`
+#### npm
+
+```
+npm install turbo --global
+```
+
+#### bun
+
+```
+bun install turbo --global
+```
+
+### Step 8: Add a turbo.json
 
 Create a `turbo.json` at the root to register your tasks and describe their task dependencies.
 
-```json title="./turbo.json"
+```
 {
   "tasks": {
     "build": {
@@ -387,41 +373,39 @@ Create a `turbo.json` at the root to register your tasks and describe their task
 }
 ```
 
-### Step 9: Run `turbo build`
+### Step 9: Run turbo build
 
 Build the application with Turborepo. Using global `turbo`, this would be `turbo build`. You can also run the command through your package manager:
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm exec turbo build
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```bash title="Terminal"
-     yarn dlx turbo build
-    ```
-  </Tab>
+```
+pnpm exec turbo build
+```
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npx turbo run build
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    bunx turbo run build
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+yarn dlx turbo build
+```
+
+#### npm
+
+```
+npx turbo run build
+```
+
+#### bun
+
+```
+bunx turbo run build
+```
 
 ### Step 10: Enable Remote Caching (optional)
 
 By default, Turborepo will connect to the free-to-use Vercel Remote Cache when you run:
 
-```bash title="Terminal"
+```
 turbo login
 turbo link
 ```
@@ -436,15 +420,15 @@ While the migration guide above is a good starting point, the breadth of possibi
 
 We encourage incremental migration, meaning you will have both of Nx and Turborepo in your repository at the same time. Make sure to spend time understanding how your Nx task graph is constructed. Splitting up the task graph may include strategies like:
 
-* **Migrating one task at a time**: Changing `nx run lint` to `turbo run lint`
-* **Migrating one package/project at a time**: Changing `nx run-many lint test --projects=web` to `turbo run lint test --filter=web`
-* **Double-running some of your tasks**: To ensure stability, you may choose to run `turbo run lint` **and** `nx run lint` while you're still getting comfortable and building certainty in the early phases of your migration.
+- **Migrating one task at a time**: Changing `nx run lint` to `turbo run lint`
+- **Migrating one package/project at a time**: Changing `nx run-many lint test --projects=web` to `turbo run lint test --filter=web`
+- **Double-running some of your tasks**: To ensure stability, you may choose to run `turbo run lint` **and** `nx run lint` while you're still getting comfortable and building certainty in the early phases of your migration.
 
 ### Installing dependencies where they're used
 
-Turborepo recommends [installing packages where they're used](/docs/crafting-your-repository/managing-dependencies#best-practices-for-dependency-installation) to improve cache hit ratios, help dependency pruning capability, and clarify for developers which dependencies are meant for which packages. This is different from the Nx strategy, where all dependencies are installed at the root of the repository, making all dependencies available to all packages in the workspace.
+Turborepo recommends [installing packages where they're used](../crafting-your-repository/managing-dependencies.md#best-practices-for-dependency-installation) to improve cache hit ratios, help dependency pruning capability, and clarify for developers which dependencies are meant for which packages. This is different from the Nx strategy, where all dependencies are installed at the root of the repository, making all dependencies available to all packages in the workspace.
 
-Historically, Nx has recommended installing all dependencies in the root of the repository, making all dependencies available to all packages in the Workspace. If you followed this guidance, we highly recommend that you move dependencies to the `package.json`'s for packages and applications that need them. [Visit our documentation on managing dependencies](/docs/crafting-your-repository/managing-dependencies) to learn more.
+Historically, Nx has recommended installing all dependencies in the root of the repository, making all dependencies available to all packages in the Workspace. If you followed this guidance, we highly recommend that you move dependencies to the `package.json` 's for packages and applications that need them. [Visit our documentation on managing dependencies](../crafting-your-repository/managing-dependencies.md) to learn more.
 
 ### Creating shared packages
 
@@ -456,57 +440,42 @@ You'll follow roughly the same set of steps as above to add a package to your pa
 
 ### Multi-language monorepos
 
-Turborepo natively supports JavaScript and TypeScript, with secondary support for any other languages you'd like to use. [Visit the Multi-Language support documentation](/docs/guides/multi-language) to learn more.
+Turborepo natively supports JavaScript and TypeScript, with secondary support for any other languages you'd like to use. [Visit the Multi-Language support documentation](multi-language.md) to learn more.
 
 ## Configuration equivalents
 
 Configuration found in `nx.json` can be mapped to `turbo.json` using the tables below.
 
-<Callout type="info">
-  The majorify of globs for capturing files are the same between Nx and
-  Turborepo. See [our file glob specification](/docs/reference/globs) for
-  details and edge cases.
-</Callout>
-
 ### Global configuration
 
-| Nx                         | Turborepo                                                                |
-| -------------------------- | ------------------------------------------------------------------------ |
-| `sharedGlobals`            | [`globalDependencies`](/docs/reference/configuration#globaldependencies) |
-| `sharedGlobals.env`        | [`globalEnv`](/docs/reference/configuration#globalenv)                   |
-| `sharedGlobals.namedInput` | [`globalDependencies`](/docs/reference/configuration#globaldependencies) |
-| `cacheDirectory`           | [`cacheDir`](/docs/reference/configuration#cachedir)                     |
+| Nx | Turborepo |
+| --- | --- |
+| `sharedGlobals` | [`globalDependencies`](../reference/configuration.md#globaldependencies) |
+| `sharedGlobals.env` | [`globalEnv`](../reference/configuration.md#globalenv) |
+| `sharedGlobals.namedInput` | [`globalDependencies`](../reference/configuration.md#globaldependencies) |
+| `cacheDirectory` | [`cacheDir`](../reference/configuration.md#cachedir) |
 
 ### Task configuration
 
-| Nx              | Turborepo                                                      |
-| --------------- | -------------------------------------------------------------- |
-| `inputs` files  | [`tasks[task].inputs`](/docs/reference/configuration#inputs)   |
-| `inputs.env`    | [`tasks[task].env`](/docs/reference/configuration#env)         |
-| `outputs` files | [`tasks[task].outputs`](/docs/reference/configuration#outputs) |
-| `cache`         | [`tasks[task].cache`](/docs/reference/configuration#cache)     |
+| Nx | Turborepo |
+| --- | --- |
+| `inputs` files | [`tasks[task].inputs`](../reference/configuration.md#inputs) |
+| `inputs.env` | [`tasks[task].env`](../reference/configuration.md#env) |
+| `outputs` files | [`tasks[task].outputs`](../reference/configuration.md#outputs) |
+| `cache` | [`tasks[task].cache`](../reference/configuration.md#cache) |
 
 ### CLI equivalents
 
-| Nx               | Turborepo                                                               |
-| ---------------- | ----------------------------------------------------------------------- |
-| `nx generate`    | [`turbo generate`](/docs/reference/generate)                            |
-| `nx run`         | [`turbo run`](/docs/reference/run)                                      |
-| `nx run-many`    | [`turbo run`](/docs/reference/run)                                      |
-| `nx reset`       | [`--force`](/docs/reference/run#--force)                                |
-| `--parallel`     | [`--concurrency`](/docs/reference/run#--concurrency-number--percentage) |
-| `--nxBail`       | [`--continue`](/docs/reference/run#--continueoption)                    |
-| `--projects`     | [`--filter`](/docs/reference/run#--filter-string)                       |
-| `--graph`        | [`--graph`](/docs/reference/run#--graph-file-name)                      |
-| `--output-style` | [`--log-order`](/docs/reference/run#--log-order-option)                 |
-| `--no-cloud`     | [`--cache`](/docs/reference/run#--cache-options)                        |
-| `--verbose`      | [`--verbosity`](/docs/reference/run#--verbosity)                        |
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+| Nx | Turborepo |
+| --- | --- |
+| `nx generate` | [`turbo generate`](../reference/generate.md) |
+| `nx run` | [`turbo run`](../reference/run.md) |
+| `nx run-many` | [`turbo run`](../reference/run.md) |
+| `nx reset` | [`--force`](../reference/run.md#--force) |
+| `--parallel` | [`--concurrency`](../reference/run.md#--concurrency-number--percentage) |
+| `--nxBail` | [`--continue`](../reference/run.md#--continueoption) |
+| `--projects` | [`--filter`](../reference/run.md#--filter-string) |
+| `--graph` | [`--graph`](../reference/run.md#--graph-file-name) |
+| `--output-style` | [`--log-order`](../reference/run.md#--log-order-option) |
+| `--no-cloud` | [`--cache`](../reference/run.md#--cache-options) |
+| `--verbose` | [`--verbosity`](../reference/run.md#--verbosity) |

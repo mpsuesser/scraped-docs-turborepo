@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/guides/microfrontends
 title: "Microfrontends"
 description: "Set up Turborepo's built-in proxy to route traffic between multiple frontend applications during local development."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# Microfrontends
-
-
+Learn how to use Turborepo's built-in microfrontends proxy for local development.
 
 Microfrontends are an architectural pattern where a web application is decomposed into smaller, independently developed and deployed applications that work together.
 
@@ -16,54 +14,27 @@ Turborepo provides built-in support for running vertical microfrontends (sometim
 
 Let's imagine you have a monorepo with multiple frontend applications:
 
-<Files>
-  <Folder name="apps" defaultOpen>
-    <Folder name="web">
-      <File name="package.json" />
+package.json
 
-      <File name="next.config.js" />
-    </Folder>
-
-    <Folder name="docs">
-      <File name="package.json" />
-
-      <File name="next.config.js" />
-    </Folder>
-
-    <Folder name="marketing">
-      <File name="package.json" />
-
-      <File name="vite.config.ts" />
-    </Folder>
-  </Folder>
-
-  <File name="package.json" />
-
-  <File name="turbo.json" />
-</Files>
+turbo.json
 
 In production, these applications might be deployed separately and composed together using a reverse proxy or edge routing. But during development, you want to:
 
-* Run all applications simultaneously with a single command
-* Access them through a unified URL (e.g., `http://localhost:3024`)
-* Route requests to the correct application based on path patterns
-* Support hot module reloading and WebSocket connections
-* Avoid port conflicts and manual coordination
+- Run all applications simultaneously with a single command
+- Access them through a unified URL (e.g., `http://localhost:3024`)
+- Route requests to the correct application based on path patterns
+- Support hot module reloading and WebSocket connections
+- Avoid port conflicts and manual coordination
 
 ## Getting started
 
 Turborepo provides a built-in proxy server that automatically routes traffic between your microfrontend applications during development. The proxy reads a `microfrontends.json` configuration file and starts when you run `turbo dev`.
 
-<Callout type="info">
-  You can try the following instructions with the monorepo created by `npx
-    create-turbo@latest -e with-microfrontends`.
-</Callout>
-
-### Create `microfrontends.json`
+### Create microfrontends.json
 
 Create a `microfrontends.json` file in your parent application. This application is the one that all requests will fall through to when not matched by another application.
 
-```json title="./apps/web/microfrontends.json"
+```
 {
   "$schema": "https://turborepo.dev/microfrontends/schema.json",
   "applications": {
@@ -94,59 +65,55 @@ Create a `microfrontends.json` file in your parent application. This application
 
 Next, use the `turbo get-mfe-port` command to set the ports in your application's development scripts. This command injects the port number when running `turbo dev`:
 
-<Tabs items={['Next.js', 'Vite']} storageKey="framework-preference">
-  <Tab value="Next.js">
-    ```json title="./apps/web/package.json"
-    {
-      "scripts": {
-        "dev": "next dev --port $(turbo get-mfe-port)"
-      }
-    }
-    ```
-  </Tab>
+#### Next.js
 
-  <Tab value="Vite">
-    ```json title="./apps/web/package.json"
-    {
-      "scripts": {
-        "dev": "vite dev --port $TURBO_MFE_PORT"
-      }
-    }
-    ```
-  </Tab>
-</Tabs>
+```
+{
+  "scripts": {
+    "dev": "next dev --port $(turbo get-mfe-port)"
+  }
+}
+```
+
+#### Vite
+
+```
+{
+  "scripts": {
+    "dev": "vite dev --port $TURBO_MFE_PORT"
+  }
+}
+```
 
 ### Handle base paths
 
 If you're using a framework, set the base path according to the needs of the framework.
 
-<Tabs items={['Next.js', 'Vite']} storageKey="framework-preference">
-  <Tab value="Next.js">
-    ```ts title="./apps/my-app/next.config.ts"
-    import type { NextConfig } from "next";
+#### Next.js
 
-    const nextConfig: NextConfig = {
-      basePath: "/docs",
-    };
+```
+import type { NextConfig } from "next";
 
-    export default nextConfig;
-    ```
-  </Tab>
+const nextConfig: NextConfig = {
+  basePath: "/docs",
+};
 
-  <Tab value="Vite">
-    ```ts title="./apps/my-app/vite.config.ts"
-    import { defineConfig } from "vite";
+export default nextConfig;
+```
 
-    export default defineConfig({
-      base: "/admin",
-    });
-    ```
-  </Tab>
-</Tabs>
+#### Vite
 
-[Visit the Microfrontends section of your framework](/docs/guides/frameworks) for framework-specific guidance.
+```
+import { defineConfig } from "vite";
 
-### Run `turbo dev`
+export default defineConfig({
+  base: "/admin",
+});
+```
+
+[Visit the Microfrontends section of your framework](frameworks.md) for framework-specific guidance.
+
+### Run turbo dev
 
 When you run `turbo dev`, Turborepo will:
 
@@ -157,27 +124,17 @@ When you run `turbo dev`, Turborepo will:
 
 Now you can access all of your microfrontends applications at `http://localhost:3024`.
 
-<Callout type="info">
-  Turborepo's microfrontends proxy and Module Federation solve different parts
-  of local development. The proxy composes independently running applications by
-  route. Module Federation composes JavaScript modules at runtime inside an
-  application. For Module Federation examples, use
-  [`with-vite-module-federation`](https://github.com/vercel/turborepo/tree/main/examples/with-vite-module-federation)
-  or
-  [`with-rsbuild-module-federation`](https://github.com/vercel/turborepo/tree/main/examples/with-rsbuild-module-federation).
-</Callout>
-
 ## Configuration
 
 Each application in the `applications` object can have the following properties:
 
 If not provided, the application key is used to match the name in \`package.json.
 
-### `development.local`
+### development.local
 
 The port where the application runs locally.
 
-```json title="./apps/web/microfrontends.json"
+```
 {
   "development": {
     "local": {
@@ -189,11 +146,11 @@ The port where the application runs locally.
 
 If you omit the port, Turborepo will generate a deterministic port based on the application name (between 3000-8000).
 
-### `development.fallback`
+### development.fallback
 
 Optionally provide a target to proxy to when an application is not running locally. This is most frequently used to route to production to make commands like `turbo dev --filter=web` that only run a subset of applications a seamless experience.
 
-```json title="./apps/web/microfrontends.json"
+```
 {
   "development": {
     "fallback": "example.com"
@@ -201,13 +158,13 @@ Optionally provide a target to proxy to when an application is not running local
 }
 ```
 
-### `routing`
+### routing
 
 An array of path groups that should route to this application. If no routing is provided, the application becomes the **default application** that catches all unmatched routes.
 
 Only one application can have no `routing` configuration. This is your "root" application that handles all routes not matched by other applications.
 
-```json title="./apps/web/microfrontends.json"
+```
 {
   "routing": [
     {
@@ -220,12 +177,12 @@ Only one application can have no `routing` configuration. This is your "root" ap
 }
 ```
 
-* Paths are **case-sensitive**: `/Blog` and `/blog` are different routes
-* Trailing slashes are normalized: `/home` and `/home/` match the same route
+- Paths are **case-sensitive**: `/Blog` and `/blog` are different routes
+- Trailing slashes are normalized: `/home` and `/home/` match the same route
 
 #### Exact matches
 
-```json title="./apps/web/microfrontends.json"
+```
 {
   "paths": ["/pricing", "/about", "/contact"]
 }
@@ -235,7 +192,7 @@ These paths match exactly as written.
 
 #### Parameters
 
-```json title="./apps/web/microfrontends.json"
+```
 {
   "paths": ["/blog/:slug", "/users/:id/profile"]
 }
@@ -245,7 +202,7 @@ Segments starting with `:` match any single path segment. For example, `/blog/:s
 
 #### Wildcards
 
-```json title="./apps/web/microfrontends.json"
+```
 {
   "paths": ["/docs/:path*", "/api/:version*"]
 }
@@ -255,7 +212,7 @@ Parameters ending with `*` match zero or more path segments. For example, `/docs
 
 You can also use the `+` modifier to match one or more segments (excluding the empty path):
 
-```json title="./apps/web/microfrontends.json"
+```
 {
   "paths": ["/api/:path+"]
 }
@@ -267,7 +224,7 @@ This matches `/api/users` and `/api/users/123`, but not `/api` or `/api/`.
 
 You can define sophisticated routing with nested parameters:
 
-```json title="./apps/web/microfrontends.json"
+```
 {
   "routing": [
     {
@@ -285,7 +242,7 @@ You can define sophisticated routing with nested parameters:
 
 Organize routes into logical groups for better maintainability:
 
-```json title="./apps/web/microfrontends.json"
+```
 {
   "$schema": "https://turborepo.dev/microfrontends/schema.json",
   "applications": {
@@ -310,11 +267,11 @@ Organize routes into logical groups for better maintainability:
 
 The `group` field is for organizational purposes and doesn't affect routing behavior.
 
-### `packageName`
+### packageName
 
 Optionally use the name of the package from `package.json` in your workspace.
 
-```json title="./apps/main/microfrontends.json"
+```
 {
   "applications": {
     "main-site": {
@@ -324,13 +281,13 @@ Optionally use the name of the package from `package.json` in your workspace.
 }
 ```
 
-### `options.localProxyPort`
+### options.localProxyPort
 
 Optionally change the proxy port using the `localProxyPort` option
 
 Defaults to `3024`.
 
-```json title="./apps/web/microfrontends.json"
+```
 {
   "options": {
     "localProxyPort": 8080
@@ -348,15 +305,15 @@ To start, we've built Turborepo's local proxy to integrate with Vercel's microfr
 
 Vercel has native support for microfrontends that provide:
 
-* Production proxy implementation with enhance performance
-* Fallback URL support across environments
-* Vercel toolbar integration
-* Feature flag support
-* Asset prefix handling
+- Production proxy implementation with enhance performance
+- Fallback URL support across environments
+- Vercel toolbar integration
+- Feature flag support
+- Asset prefix handling
 
 [Learn more in Vercel's documentation](https://vercel.com/docs/microfrontends).
 
-#### Migrating to `@vercel/microfrontends`
+#### Migrating to @vercel/microfrontends
 
 If you install [`@vercel/microfrontends`](https://www.npmjs.com/package/@vercel/microfrontends) in any package or add it to your workspace, Turborepo will automatically defer to it instead of using the built-in proxy. This allows for a gradual migration path.
 
@@ -393,7 +350,7 @@ Verify that:
 3. Each application's port is available
 4. All dependencies are installed
 
-### `turbo get-mfe-port` not working
+### turbo get-mfe-port not working
 
 If you're getting an error when running `turbo get-mfe-port`, ensure that:
 
@@ -403,7 +360,7 @@ If you're getting an error when running `turbo get-mfe-port`, ensure that:
 4. The current package is listed in the `applications` section of `microfrontends.json`
 5. If using `--skip-infer`, you must also specify `--cwd` pointing to your repository root:
 
-```bash title="Terminal"
+```
 turbo --skip-infer --cwd ../.. get-mfe-port
 ```
 
@@ -411,7 +368,7 @@ turbo --skip-infer --cwd ../.. get-mfe-port
 
 Here's a full example of a microfrontends configuration for an e-commerce platform:
 
-```json title="./apps/web/microfrontends.json"
+```
 {
   "$schema": "https://turborepo.dev/microfrontends/schema.json",
   "options": {
@@ -488,16 +445,7 @@ Here's a full example of a microfrontends configuration for an e-commerce platfo
 
 With this configuration:
 
-* The `web` app handles the homepage and any unmatched routes
-* The `docs` app handles all documentation
-* The `blog` app handles blog posts and author pages
-* The `shop` app handles e-commerce functionality
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+- The `web` app handles the homepage and any unmatched routes
+- The `docs` app handles all documentation
+- The `blog` app handles blog posts and author pages
+- The `shop` app handles e-commerce functionality

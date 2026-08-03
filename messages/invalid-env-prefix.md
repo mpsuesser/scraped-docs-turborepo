@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/messages/invalid-env-prefix
 title: "Invalid environment variable prefix"
-description: "How to fix the deprecated `$` prefix syntax when declaring environment variables in turbo.json."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "Learn more about errors with invalid environment variable prefixes in Turborepo."
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # Invalid environment variable prefix
@@ -34,13 +34,13 @@ Remove the `$` prefix from your environment variable declaration.
 ```
 
 You can migrate to the `env` and `globalEnv` keys using `npx @turbo/codemod migrate-env-var-dependencies`.
-Check out [the codemod's documentation for more details](/docs/reference/turbo-codemod#turborepo-1x).
+Check out [the codemod's documentation for more details](../reference/turbo-codemod.md#turborepo-1x).
 
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

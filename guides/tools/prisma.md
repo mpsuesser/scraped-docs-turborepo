@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/guides/tools/prisma
 title: "Prisma"
-description: "Integrate Prisma as a shared database package in your Turborepo monorepo."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "Learn how to use Prisma in a Turborepo."
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # Prisma
@@ -17,7 +17,7 @@ import { CreateTurboCallout } from "./create-turbo-callout.tsx";
 [Their official guide](https://www.prisma.io/docs/guides/turborepo) describes how to integrate Prisma into a Turborepo, including:
 
 * Prisma client initialization
-* Packaging the client as an [Internal Package](/docs/core-concepts/internal-packages)
+* Packaging the client as an [Internal Package](../../core-concepts/internal-packages.md)
 * Performing migrations
 * Working on your applications locally
 * Deploying
@@ -33,8 +33,8 @@ npx create-turbo@latest -e with-prisma
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/reference/prune
 title: "prune"
-description: "All flags and options for the `turbo prune` command that generates a partial monorepo for a target package."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "API reference for the `turbo prune` command"
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # prune
@@ -176,7 +176,7 @@ Run `turbo prune frontend` to generate a pruned workspace for the `frontend` app
 
 Defaults to `false`.
 
-Alter the output directory to make it easier to use with [Docker best practices and layer caching](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/). For an example Dockerfile using this flag, see the [Docker guide](/docs/guides/tools/docker). The directory will contain:
+Alter the output directory to make it easier to use with [Docker best practices and layer caching](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/). For an example Dockerfile using this flag, see the [Docker guide](../guides/tools/docker.md). The directory will contain:
 
 * A folder named `json` with the pruned workspace's `package.json` files.
 * A folder named `full` with the pruned workspace's full source code for the internal packages needed to build the target.
@@ -280,9 +280,9 @@ Exclude in-workspace packages listed only in `devDependencies` when selecting wh
 
 ### Including `globalDependencies`
 
-By default, `turbo prune` does not copy files referenced by [`globalDependencies`](/docs/reference/configuration#globaldependencies) into the output directory. The `globalDependencies` field is preserved in the pruned `turbo.json`, but the files themselves (e.g., a root `tsconfig.json` or `.env`) are not included.
+By default, `turbo prune` does not copy files referenced by [`globalDependencies`](configuration.md#globaldependencies) into the output directory. The `globalDependencies` field is preserved in the pruned `turbo.json`, but the files themselves (e.g., a root `tsconfig.json` or `.env`) are not included.
 
-Enable the [`pruneIncludesGlobalFiles`](/docs/reference/configuration#pruneincludesglobalfiles) future flag to copy these files:
+Enable the [`pruneIncludesGlobalFiles`](configuration.md#pruneincludesglobalfiles) future flag to copy these files:
 
 ```jsonc title="./turbo.json"
 {
@@ -308,8 +308,8 @@ The repository structure is not retained, as the focus is on producing a standal
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

@@ -2,65 +2,51 @@
 url: https://turborepo.dev/docs/guides/tools/typescript
 title: "TypeScript"
 description: "Share TypeScript configuration, set up compilation, and enable fast type checking across your monorepo."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# TypeScript
-
-
+Learn how to use TypeScript in a monorepo.
 
 TypeScript is an excellent tool in monorepos, allowing teams to safely add types to their JavaScript code. While there is some complexity to getting set up, this guide will walk you through the important parts of a TypeScript setup for most use cases.
 
-* [Sharing TypeScript configuration](#sharing-tsconfigjson)
-* [Building a TypeScript package](#building-a-typescript-package)
-* [Making type checking faster across your workspace](#linting-your-codebase)
-
-<Callout type="info">
-  This guide assumes you are using a recent version of TypeScript and uses some
-  features that are only available in those versions. You may need to adjust the
-  guidance on this page if you are unable to features from those versions.
-</Callout>
-
-## Sharing `tsconfig.json`
+## Sharing tsconfig.json
 
 You want to build consistency into your TypeScript configurations so that your entire repo can use great defaults and your fellow developers can know what to expect when writing code in the Workspace.
 
 TypeScript's `tsconfig.json` sets the configuration for the TypeScript compiler and features an [`extends` key](https://www.typescriptlang.org/tsconfig#extends) that you'll use to share configuration across your workspace.
 
-This guide will use [`create-turbo`](/docs/reference/create-turbo) as an example.
+This guide will use [`create-turbo`](../../reference/create-turbo.md) as an example.
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm dlx create-turbo@latest
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```bash title="Terminal"
-    yarn dlx create-turbo@latest
-    ```
-  </Tab>
+```
+pnpm dlx create-turbo@latest
+```
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npx create-turbo@latest
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    bunx create-turbo@latest
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+yarn dlx create-turbo@latest
+```
 
-### Use a base `tsconfig` file
+#### npm
+
+```
+npx create-turbo@latest
+```
+
+#### bun
+
+```
+bunx create-turbo@latest
+```
+
+### Use a base tsconfig file
 
 Inside `packages/typescript-config`, you have a few `json` files which represent different ways you might want to configure TypeScript in various packages. The `base.json` file is extended by every other `tsconfig.json` in the workspace and looks like this:
 
-```json title="./packages/typescript-config/base.json"
+```
 {
   "compilerOptions": {
     "esModuleInterop": true,
@@ -77,7 +63,7 @@ Inside `packages/typescript-config`, you have a few `json` files which represent
 }
 ```
 
-<LinkToDocumentation href="https://www.typescriptlang.org/tsconfig" text="tsconfig options reference" />
+[→ tsconfig options reference](https://www.typescriptlang.org/tsconfig)
 
 ### Creating the rest of the package
 
@@ -85,7 +71,7 @@ The other `tsconfig` files in this package use the `extends` key to start with t
 
 Inside `package.json`, name the package so it can be referenced in the rest of the Workspace:
 
-```json title="packages/typescript-config/package.json"
+```
 {
   "name": "@repo/typescript-config"
 }
@@ -97,55 +83,53 @@ Inside `package.json`, name the package so it can be referenced in the rest of t
 
 First, install the `@repo/typescript-config` package into your package:
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```json title="./apps/web/package.json"
-    {
-      "devDependencies": {
-         "@repo/typescript-config": "workspace:*",
-         "typescript": "latest"
-      }
-    }
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```json title="./apps/web/package.json"
-    {
-      "devDependencies": {
-         "@repo/typescript-config": "*",
-         "typescript": "latest"
-      }
-    }
-    ```
-  </Tab>
+```
+{
+  "devDependencies": {
+     "@repo/typescript-config": "workspace:*",
+     "typescript": "latest"
+  }
+}
+```
 
-  <Tab value="npm">
-    ```json title="./apps/web/package.json"
-    {
-      "devDependencies": {
-         "@repo/typescript-config": "*",
-         "typescript": "latest"
-      }
-    }
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```json title="./apps/web/package.json"
-    {
-      "devDependencies": {
-         "@repo/typescript-config": "workspace:*",
-         "typescript": "latest"
-      }
-    }
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+{
+  "devDependencies": {
+     "@repo/typescript-config": "*",
+     "typescript": "latest"
+  }
+}
+```
+
+#### npm
+
+```
+{
+  "devDependencies": {
+     "@repo/typescript-config": "*",
+     "typescript": "latest"
+  }
+}
+```
+
+#### bun
+
+```
+{
+  "devDependencies": {
+     "@repo/typescript-config": "workspace:*",
+     "typescript": "latest"
+  }
+}
+```
 
 Then, extend the `tsconfig.json` for the package from the `@repo/typescript-config` package. In this example, the `web` package is a Next.js application:
 
-```json title="./apps/web/tsconfig.json"
+```
 {
   "extends": "@repo/typescript-config/nextjs.json",
   "compilerOptions": {
@@ -160,7 +144,7 @@ Then, extend the `tsconfig.json` for the package from the `@repo/typescript-conf
 
 First, make sure your code gets compiled with `tsc` so there will be a `dist` directory. You'll need a `build` script as well as a `dev` script:
 
-```json title="./packages/ui/package.json"
+```
 {
   "scripts": {
     "dev": "tsc --watch",
@@ -171,7 +155,7 @@ First, make sure your code gets compiled with `tsc` so there will be a `dist` di
 
 Then, set up the entrypoints for your package in `package.json` so that other packages can use the compiled code:
 
-```json title="./packages/ui/package.json"
+```
 {
   "exports": {
     "./*": {
@@ -184,15 +168,9 @@ Then, set up the entrypoints for your package in `package.json` so that other pa
 
 Setting up `exports` this way has several advantages:
 
-* Using the `types` field allows `tsserver` to use the code in `src` as the source of truth for your code's types. Your editor will always be up-to-date with the latest interfaces from your code.
-* You can quickly add new entrypoints to your package without creating [dangerous barrel files](https://vercel.com/blog/how-we-optimized-package-imports-in-next-js#what's-the-problem-with-barrel-files).
-* You'll receive auto-importing suggestions for your imports across package boundaries in your editor.
-
-<Callout type="warn">
-  If you're publishing the package, you cannot use references to source code in
-  `types` since only the compiled code will be published to npm. You'll need to
-  generate and reference declaration files and source maps.
-</Callout>
+- Using the `types` field allows `tsserver` to use the code in `src` as the source of truth for your code's types. Your editor will always be up-to-date with the latest interfaces from your code.
+- You can quickly add new entrypoints to your package without creating [dangerous barrel files](https://vercel.com/blog/how-we-optimized-package-imports-in-next-js#what's-the-problem-with-barrel-files).
+- You'll receive auto-importing suggestions for your imports across package boundaries in your editor.
 
 ## Linting your codebase
 
@@ -200,7 +178,7 @@ To use TypeScript as a linter, you can check the types across your workspace **f
 
 First, add a `check-types` script to any package that you want to check the types for:
 
-```json title="./apps/web/package.json"
+```
 {
   "scripts": {
     "check-types": "tsc --noEmit"
@@ -208,9 +186,9 @@ First, add a `check-types` script to any package that you want to check the type
 }
 ```
 
-Then, create a `check-types` task in `turbo.json`. From the [Configuring tasks guide](/docs/crafting-your-repository/configuring-tasks#dependent-tasks-that-can-be-run-in-parallel), we can make the task run in parallel while respecting source code changes from other packages using a [Transit Node](/docs/core-concepts/package-and-task-graph#transit-nodes):
+Then, create a `check-types` task in `turbo.json`. From the [Configuring tasks guide](../../crafting-your-repository/configuring-tasks.md#dependent-tasks-that-can-be-run-in-parallel), we can make the task run in parallel while respecting source code changes from other packages using a [Transit Node](../../core-concepts/package-and-task-graph.md#transit-nodes):
 
-```json title="./turbo.json"
+```
 {
   "tasks": {
     "topo": {
@@ -227,134 +205,119 @@ Then, run your task using `turbo check-types`.
 
 ## Best practices
 
-### Use `tsc` to compile your packages
+### Use tsc to compile your packages
 
-For [Internal Packages](/docs/core-concepts/internal-packages), we recommend that you use `tsc` to compile your TypeScript libraries whenever possible. While you can use a bundler, it's not necessary and adds extra complexity to your build process. Additionally, bundling a library can mangle the code before it makes it to your applications' bundlers, causing hard to debug issues.
+For [Internal Packages](../../core-concepts/internal-packages.md), we recommend that you use `tsc` to compile your TypeScript libraries whenever possible. While you can use a bundler, it's not necessary and adds extra complexity to your build process. Additionally, bundling a library can mangle the code before it makes it to your applications' bundlers, causing hard to debug issues.
 
 ### Enable go-to-definition across package boundaries
 
-"Go-to-definition" is an editor feature for quickly navigating to the original declaration or definition of a symbol (like a variable or function) with a click or hotkey. Once TypeScript is configured correctly, you can navigate across [Internal Packages](/docs/core-concepts/internal-packages) with ease.
+"Go-to-definition" is an editor feature for quickly navigating to the original declaration or definition of a symbol (like a variable or function) with a click or hotkey. Once TypeScript is configured correctly, you can navigate across [Internal Packages](../../core-concepts/internal-packages.md) with ease.
 
 #### Just-in-Time Packages
 
-Exports from [Just-in-Time Packages](/docs/core-concepts/internal-packages#just-in-time-packages) will automatically bring you to the original TypeScript source code. Go-to-definition will work as expected.
+Exports from [Just-in-Time Packages](../../core-concepts/internal-packages.md#just-in-time-packages) will automatically bring you to the original TypeScript source code. Go-to-definition will work as expected.
 
 #### Compiled Packages
 
-Exports from [Compiled Packages](/docs/core-concepts/internal-packages#compiled-packages) require the use of [`declaration`](https://www.typescriptlang.org/tsconfig/#declaration) and [`declarationMap`](https://www.typescriptlang.org/tsconfig/#declarationMap) configurations for go-to-definition to work. After you've enabled these two configurations for the package, compile the package with `tsc`, and open the output directory to find declaration files and source maps.
+Exports from [Compiled Packages](../../core-concepts/internal-packages.md#compiled-packages) require the use of [`declaration`](https://www.typescriptlang.org/tsconfig/#declaration) and [`declarationMap`](https://www.typescriptlang.org/tsconfig/#declarationMap) configurations for go-to-definition to work. After you've enabled these two configurations for the package, compile the package with `tsc`, and open the output directory to find declaration files and source maps.
 
-<Files>
-  <Folder defaultOpen name="packages">
-    <Folder defaultOpen name="ui">
-      <Folder defaultOpen name="dist">
-        <File name="button.js" />
+button.js
 
-        <File name="button.d.ts" green />
+button.d.ts
 
-        <File name="button.d.ts.map" green />
-      </Folder>
-    </Folder>
-  </Folder>
-</Files>
+button.d.ts.map
 
 With these two files in place, your editor will now navigate to the original source code.
 
-### Use Node.js subpath imports instead of TypeScript compiler `paths`
+### Use Node.js subpath imports instead of TypeScript compiler paths
 
-It's possible to create absolute imports in your packages using [the TypeScript compiler's `paths` option](https://www.typescriptlang.org/tsconfig#paths), but these paths can cause failed compilation when using [Just-in-Time Packages](https://turborepo.dev/docs/core-concepts/internal-packages#just-in-time-packages). [As of TypeScript 5.4](https://devblogs.microsoft.com/typescript/announcing-typescript-5-4/#auto-import-support-for-subpath-imports), you can use [Node.js subpath imports](https://nodejs.org/api/packages.html#imports) instead for a more robust solution.
+It's possible to create absolute imports in your packages using [the TypeScript compiler's `paths` option](https://www.typescriptlang.org/tsconfig#paths), but these paths can cause failed compilation when using [Just-in-Time Packages](../../core-concepts/internal-packages.md#just-in-time-packages). [As of TypeScript 5.4](https://devblogs.microsoft.com/typescript/announcing-typescript-5-4/#auto-import-support-for-subpath-imports), you can use [Node.js subpath imports](https://nodejs.org/api/packages.html#imports) instead for a more robust solution.
 
 #### Just-in-Time Packages
 
-In [Just-in-Time packages](https://turborepo.dev/docs/core-concepts/internal-packages#just-in-time-packages), `imports` must target the source code in the package, since build outputs like `dist` won't be created.
+In [Just-in-Time packages](../../core-concepts/internal-packages.md#just-in-time-packages), `imports` must target the source code in the package, since build outputs like `dist` won't be created.
 
-<Tabs storageKey="ts-imports-jit" items={["package.json", "Source code"]}>
-  <Tab value="package.json">
-    ```json title="./packages/ui/package.json"
-    {
-      "imports": {
-        "#*": "./src/*"
-      }
-    }
-    ```
-  </Tab>
+#### package.json
 
-  <Tab value="Source code">
-    ```tsx title="./packages/ui/button.tsx"
-    import { MY_STRING } from "#utils.ts" // Uses .ts extension // [!code highlight]
+```
+{
+  "imports": {
+    "#*": "./src/*"
+  }
+}
+```
 
-    export const Button = () => {
-      return (
-        <button>{MY_STRING}</button>
-      )
-    }
-    ```
-  </Tab>
-</Tabs>
+#### Source code
 
-If you prefer to import without file extensions, add explicit fallbacks for the source files
-you want to support:
+```
+import { MY_STRING } from "#utils.ts" // Uses .ts extension
 
-<Tabs storageKey="ts-imports-jit-extensionless" items={["package.json", "Source code"]}>
-  <Tab value="package.json">
-    ```json title="./packages/ui/package.json"
-    {
-      "imports": {
-        "#*": [
-          "./src/*",
-          "./src/*.ts",
-          "./src/*.tsx",
-          "./src/*/index.ts",
-          "./src/*/index.tsx"
-        ]
-      }
-    }
-    ```
-  </Tab>
+export const Button = () => {
+  return (
+    <button>{MY_STRING}</button>
+  )
+}
+```
 
-  <Tab value="Source code">
-    ```tsx title="./packages/ui/button.tsx"
-    import { Card } from "#card" // Uses fallback entries to resolve without an extension // [!code highlight]
+If you prefer to import without file extensions, add explicit fallbacks for the source files you want to support:
 
-    export const Button = () => {
-      return (
-        <button>
-          <Card />
-        </button>
-      )
-    }
-    ```
-  </Tab>
-</Tabs>
+#### package.json
+
+```
+{
+  "imports": {
+    "#*": [
+      "./src/*",
+      "./src/*.ts",
+      "./src/*.tsx",
+      "./src/*/index.ts",
+      "./src/*/index.tsx"
+    ]
+  }
+}
+```
+
+#### Source code
+
+```
+import { Card } from "#card" // Uses fallback entries to resolve without an extension
+
+export const Button = () => {
+  return (
+    <button>
+      <Card />
+    </button>
+  )
+}
+```
 
 #### Compiled Packages
 
-In [Compiled packages](https://turborepo.dev/docs/core-concepts/internal-packages#compiled-packages), `imports` target the built outputs for the package.
+In [Compiled packages](../../core-concepts/internal-packages.md#compiled-packages), `imports` target the built outputs for the package.
 
-<Tabs storageKey="ts-imports-compiled" items={["package.json", "Source code"]}>
-  <Tab value="package.json">
-    ```json title="./packages/ui/package.json"
-    {
-      "imports": {
-        "#*": "./dist/*"
-      }
-    }
-    ```
-  </Tab>
+#### package.json
 
-  <Tab value="Source code">
-    ```tsx title="./packages/ui/button.tsx"
-    import { MY_STRING } from "#utils.js"; // Uses .js extension // [!code highlight]
+```
+{
+  "imports": {
+    "#*": "./dist/*"
+  }
+}
+```
 
-    export const Button = () => {
-      return <button>{MY_STRING}</button>;
-    };
-    ```
-  </Tab>
-</Tabs>
+#### Source code
 
-### You likely don't need a `tsconfig.json` file in the root of your project
+```
+import { MY_STRING } from "#utils.js"; // Uses .js extension
 
-As mentioned in the [Structuring your repository guide](/docs/crafting-your-repository/structuring-a-repository#anatomy-of-a-package), you want to treat each package in your tooling as its own unit. This means each package should have its own `tsconfig.json` to use instead of referencing a `tsconfig.json` in the root of your project. Following this practice will make it easier for Turborepo to cache your type checking tasks, simplifying your configuration.
+export const Button = () => {
+  return <button>{MY_STRING}</button>;
+};
+```
+
+### You likely don't need a tsconfig.json file in the root of your project
+
+As mentioned in the [Structuring your repository guide](../../crafting-your-repository/structuring-a-repository.md#anatomy-of-a-package), you want to treat each package in your tooling as its own unit. This means each package should have its own `tsconfig.json` to use instead of referencing a `tsconfig.json` in the root of your project. Following this practice will make it easier for Turborepo to cache your type checking tasks, simplifying your configuration.
 
 The only case in which you may want to have a `tsconfig.json` in the Workspace root is to set configuration for TypeScript files that are not in packages. For example, if you have a script written with TypeScript that you need to run from the root, you may need a `tsconfig.json` for that file.
 
@@ -370,13 +333,4 @@ We don't recommend using TypeScript Project References as they introduce both an
 
 `tsserver` is not able to use different TypeScript versions for different packages in your code editor. Instead, it will discover a specific version and use that everywhere.
 
-This can result in differences between the linting errors that show in your editor and when you run `tsc` scripts to check types. If this is an issue for you, consider [keeping the TypeScript dependency on the same version](/docs/crafting-your-repository/managing-dependencies#keeping-dependencies-on-the-same-version).
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+This can result in differences between the linting errors that show in your editor and when you run `tsc` scripts to check types. If this is an issue for you, consider [keeping the TypeScript dependency on the same version](../../crafting-your-repository/managing-dependencies.md#keeping-dependencies-on-the-same-version).

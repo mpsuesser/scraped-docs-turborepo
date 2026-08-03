@@ -2,31 +2,19 @@
 url: https://turborepo.dev/docs/guides/tools/oxc
 title: "Oxc (oxlint and oxfmt)"
 description: "Configure oxlint and oxfmt as root tasks for fast linting and formatting in your monorepo."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# Oxc (oxlint and oxfmt)
-
-
-
-import { CreateTurboCallout } from "./create-turbo-callout.tsx";
+Learn how to use oxlint and oxfmt in your Turborepo projects.
 
 [Oxc](https://oxc.rs/) is a collection of high-performance JavaScript and TypeScript tools written in Rust, including [oxlint](https://oxc.rs/docs/guide/usage/linter) (a fast linter) and [oxfmt](https://oxc.rs/docs/guide/usage/formatter) (a fast formatter).
 
-<CreateTurboCallout />
-
 ## Using Oxc tools with Turborepo
 
-Similar to [Biome](/docs/guides/tools/biome), oxlint and oxfmt are **extraordinarily fast** tools. For this reason, we recommend using [Root Tasks](/docs/crafting-your-repository/configuring-tasks#registering-root-tasks) rather than creating separate scripts in each of your packages.
+Similar to [Biome](biome.md), oxlint and oxfmt are **extraordinarily fast** tools. For this reason, we recommend using [Root Tasks](../../crafting-your-repository/configuring-tasks.md#registering-root-tasks) rather than creating separate scripts in each of your packages.
 
-<Callout type="info" title="Caching behavior">
-  Using oxlint or oxfmt at the root of the project will result in cache misses
-  for all tasks when you upgrade versions or change configuration. If you prefer
-  the tradeoff of higher cache hit ratios in these situations over less
-  configuration, you can still run these tools in separate scripts like the
-  other recommendations in our guides.
-</Callout>
+Caching behavior
 
 ## Setting up oxlint
 
@@ -34,37 +22,35 @@ Similar to [Biome](/docs/guides/tools/biome), oxlint and oxfmt are **extraordina
 
 First, install oxlint in your repository:
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm add --save-dev -w oxlint
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```bash title="Terminal"
-    yarn add --dev oxlint
-    ```
-  </Tab>
+```
+pnpm add --save-dev -w oxlint
+```
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npm install --save-dev oxlint
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    bun add --dev oxlint
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+yarn add --dev oxlint
+```
+
+#### npm
+
+```
+npm install --save-dev oxlint
+```
+
+#### bun
+
+```
+bun add --dev oxlint
+```
 
 ### Create scripts
 
 Add scripts to the root `package.json` of your repository:
 
-```json title="./package.json"
+```
 {
   "scripts": {
     "lint": "oxlint .",
@@ -75,9 +61,9 @@ Add scripts to the root `package.json` of your repository:
 
 ### Create root tasks
 
-Register the scripts to Turborepo as [Root Tasks](/docs/crafting-your-repository/configuring-tasks#registering-root-tasks):
+Register the scripts to Turborepo as [Root Tasks](../../crafting-your-repository/configuring-tasks.md#registering-root-tasks):
 
-```json title="./turbo.json"
+```
 {
   "tasks": {
     "//#lint": {},
@@ -90,64 +76,47 @@ Register the scripts to Turborepo as [Root Tasks](/docs/crafting-your-repository
 
 You can now run `turbo run lint` to lint your entire repository.
 
-<Callout type="warn" title="Type-aware linting">
-  If you enable [type-aware linting rules](https://oxc.rs/docs/guide/usage/linter/config#type-aware-linting) in oxlint, the linter needs TypeScript type information to work correctly. This means any dependencies that must be built before type-checking (such as [Compiled Packages](/docs/core-concepts/internal-packages#compiled-packages) in your monorepo) also need to be built before linting.
-
-  For example, to build Compiled Packages before running formatting and linting:
-
-  ```bash title="Terminal"
-  turbo run build --filter=./packages/* && turbo run lint
-  ```
-
-  Alternatively, you can switch to per-package lint tasks with `dependsOn: ["^build"]` to let Turborepo handle the ordering for you.
-</Callout>
+Type-aware linting
 
 ## Setting up oxfmt
 
 oxfmt is a fast code formatter for JavaScript and TypeScript, designed to be a drop-in replacement for Prettier.
 
-<Callout type="warn" title="oxfmt is experimental">
-  oxfmt is currently in alpha and may not have full feature parity with
-  Prettier. Check the [oxfmt
-  documentation](https://oxc.rs/docs/guide/usage/formatter) for the latest
-  status and supported options.
-</Callout>
+oxfmt is experimental
 
 ### Install oxfmt
 
 Install oxfmt as a dev dependency:
 
-<PackageManagerTabs>
-  <Tab value="pnpm">
-    ```bash title="Terminal"
-    pnpm add --save-dev -w oxfmt
-    ```
-  </Tab>
+#### pnpm
 
-  <Tab value="yarn">
-    ```bash title="Terminal"
-    yarn add --dev oxfmt
-    ```
-  </Tab>
+```
+pnpm add --save-dev -w oxfmt
+```
 
-  <Tab value="npm">
-    ```bash title="Terminal"
-    npm install --save-dev oxfmt
-    ```
-  </Tab>
+#### yarn
 
-  <Tab value="bun">
-    ```bash title="Terminal"
-    bun add --dev oxfmt
-    ```
-  </Tab>
-</PackageManagerTabs>
+```
+yarn add --dev oxfmt
+```
+
+#### npm
+
+```
+npm install --save-dev oxfmt
+```
+
+#### bun
+
+```
+bun add --dev oxfmt
+```
 
 ### Create scripts
 
 Add formatting scripts to the root `package.json`:
 
-```json title="./package.json"
+```
 {
   "scripts": {
     "format": "oxfmt --check",
@@ -160,7 +129,7 @@ Add formatting scripts to the root `package.json`:
 
 Register the scripts to Turborepo:
 
-```json title="./turbo.json"
+```
 {
   "tasks": {
     "//#format": {},
@@ -177,7 +146,7 @@ You can now run `turbo run format` to check formatting and `turbo run format:fix
 
 For repositories using both tools, you can orchestrate them with a unified quality task:
 
-```json title="./package.json"
+```
 {
   "scripts": {
     "lint": "oxlint .",
@@ -188,7 +157,7 @@ For repositories using both tools, you can orchestrate them with a unified quali
 }
 ```
 
-```json title="./turbo.json"
+```
 {
   "tasks": {
     "//#quality": {
@@ -212,14 +181,5 @@ For repositories using both tools, you can orchestrate them with a unified quali
 
 With this configuration:
 
-* Run `turbo run quality` to check both linting and formatting in parallel (safe because neither modifies files)
-* Run `turbo run quality:fix` to fix both linting and formatting issues, with formatting running after lint fixes to avoid file write race conditions
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+- Run `turbo run quality` to check both linting and formatting in parallel (safe because neither modifies files)
+- Run `turbo run quality:fix` to fix both linting and formatting issues, with formatting running after lint fixes to avoid file write race conditions

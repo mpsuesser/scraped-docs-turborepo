@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/acknowledgments
 title: "Acknowledgements"
-description: "Credits and thanks to the developers, build systems, and monorepo tools that inspired Turborepo."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+description: "Thank you to all these developers, build systems, and monorepo tools for their support and assistance."
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
 # Acknowledgements
@@ -52,8 +52,8 @@ Additionally, we're grateful to:
 
 ---
 
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
 
-For an index of all available documentation, see [/llms.txt](/llms.txt)
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

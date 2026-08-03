@@ -2,37 +2,25 @@
 url: https://turborepo.dev/docs/guides/tools/biome
 title: "Biome"
 description: "Configure Biome as a root task for fast formatting and linting across your monorepo."
-access_date: 2026-08-03T17:27:52.096Z
-current_date: 2026-08-03T17:27:52.096Z
+access_date: 2026-08-03T18:13:51.263Z
+current_date: 2026-08-03T18:13:51.263Z
 ---
 
-# Biome
-
-
-
-import { CreateTurboCallout } from "./create-turbo-callout.tsx";
+Learn how to use Biome in your Turborepo projects.
 
 [Biome](https://biomejs.dev/) is a fast formatter for JavaScript, TypeScript, JSX, and JSON that saves CI and developer time.
 
-<CreateTurboCallout />
-
 ## Using Biome with Turborepo
 
-Biome is a rare exception to most tools that are used with Turborepo because it is **so extraordinarily fast**. For this reason, we recommend using a [Root Task](/docs/crafting-your-repository/configuring-tasks#registering-root-tasks) rather than creating separate scripts in each of your packages.
+Biome is a rare exception to most tools that are used with Turborepo because it is **so extraordinarily fast**. For this reason, we recommend using a [Root Task](../../crafting-your-repository/configuring-tasks.md#registering-root-tasks) rather than creating separate scripts in each of your packages.
 
-<Callout type="info" title="Caching behavior">
-  Using Biome at the root of the project will result in cache misses for all
-  tasks when you upgrade Biome versions or change configuration. If you prefer
-  the tradeoff of higher cache hit ratios in these situations over less
-  configuration, you can still use Biome in separate scripts like the other
-  recommendations in our guides.
-</Callout>
+Caching behavior
 
 ### Initialize Biome
 
 First, [follow the installation documentation to set up Biome](https://biomejs.dev/guides/getting-started/) in your repository. You'll then be able to create a script to use Biome in the root of your repository:
 
-```json title="./package.json"
+```
 {
   "scripts": {
     "format-and-lint": "biome check .",
@@ -43,17 +31,11 @@ First, [follow the installation documentation to set up Biome](https://biomejs.d
 
 ### Create a root task
 
-In practice, Biome is unlikely to be a bottleneck in the iteration speed of your repository. For this reason, we can have less configuration to manage in our repository by using Biome in a [Root Task](/docs/crafting-your-repository/configuring-tasks#registering-root-tasks).
+In practice, Biome is unlikely to be a bottleneck in the iteration speed of your repository. For this reason, we can have less configuration to manage in our repository by using Biome in a [Root Task](../../crafting-your-repository/configuring-tasks.md#registering-root-tasks).
 
-<Callout type="info">
-  If you believe Biome may be faster in your repository split up into tasks in
-  packages, you are free to do so. We encourage you to experiment with what's
-  best for your use case.
-</Callout>
+To create a [Root Task](../../crafting-your-repository/configuring-tasks.md#registering-root-tasks), register the scripts to Turborepo:
 
-To create a [Root Task](/docs/crafting-your-repository/configuring-tasks#registering-root-tasks), register the scripts to Turborepo:
-
-```json title="./turbo.json"
+```
 {
   "tasks": {
     "//#format-and-lint": {},
@@ -65,12 +47,3 @@ To create a [Root Task](/docs/crafting-your-repository/configuring-tasks#registe
 ```
 
 You'll now be able to run these scripts using `turbo run format-and-lint` and `turbo run format-and-lint:fix`.
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
