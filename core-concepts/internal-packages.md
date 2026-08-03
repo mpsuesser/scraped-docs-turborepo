@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/core-concepts/internal-packages
 title: "Internal Packages"
 description: "Understand how internal packages work and their compilation strategies for sharing code across your monorepo."
-access_date: 2026-08-03T19:02:53.509Z
-current_date: 2026-08-03T19:02:53.509Z
+access_date: 2026-08-03T19:10:40.966Z
+current_date: 2026-08-03T19:10:40.966Z
 ---
 
 Learn how to build Internal Packages in your monorepo.

@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/caching
 title: "Caching"
 description: "Configure task caching to avoid repeating work, using fingerprinting for inputs and restoring outputs from cache."
-access_date: 2026-08-03T19:02:53.509Z
-current_date: 2026-08-03T19:02:53.509Z
+access_date: 2026-08-03T19:10:40.966Z
+current_date: 2026-08-03T19:10:40.966Z
 ---
 
 Turborepo uses caching to speed up builds, ensuring you **never do the same work twice**. When your task is cacheable, Turborepo will restore the results of your task from cache using a fingerprint from the first time the task ran.

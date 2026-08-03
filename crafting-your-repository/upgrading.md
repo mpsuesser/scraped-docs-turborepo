@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/upgrading
 title: "Upgrading"
 description: "Migrate from Turborepo 1.x to 2.0 using codemods and handle breaking changes."
-access_date: 2026-08-03T19:02:53.509Z
-current_date: 2026-08-03T19:02:53.509Z
+access_date: 2026-08-03T19:10:40.966Z
+current_date: 2026-08-03T19:10:40.966Z
 ---
 
 Learn how to upgrade \`turbo\` to get the latest improvements to your repository.

@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/telemetry
 title: "Telemetry"
 description: "Learn more about Turborepo's anonymous telemetry."
-access_date: 2026-08-03T19:02:53.509Z
-current_date: 2026-08-03T19:02:53.509Z
+access_date: 2026-08-03T19:10:40.966Z
+current_date: 2026-08-03T19:10:40.966Z
 ---
 
 # Telemetry

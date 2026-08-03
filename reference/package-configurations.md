@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/package-configurations
 title: "Package Configurations"
 description: "Reference for creating per-package turbo.json overrides to customize task behavior."
-access_date: 2026-08-03T19:02:53.509Z
-current_date: 2026-08-03T19:02:53.509Z
+access_date: 2026-08-03T19:10:40.966Z
+current_date: 2026-08-03T19:10:40.966Z
 ---
 
 Learn how to use Package Configurations to bring greater task flexibility to your monorepo's package.

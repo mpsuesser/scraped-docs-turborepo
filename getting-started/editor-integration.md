@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/getting-started/editor-integration
 title: "Editor integration"
 description: "Set up JSON Schema validation, ESLint integration, and the Turborepo LSP in your editor."
-access_date: 2026-08-03T19:02:53.509Z
-current_date: 2026-08-03T19:02:53.509Z
+access_date: 2026-08-03T19:10:40.966Z
+current_date: 2026-08-03T19:10:40.966Z
 ---
 
 To get the best experience with `turbo`, Turborepo provides a few utilities for integrating with your editor.

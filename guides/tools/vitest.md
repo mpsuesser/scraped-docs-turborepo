@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/vitest
 title: "Vitest"
 description: "Configure Vitest for cached, parallelized testing across monorepo packages with optional merged coverage."
-access_date: 2026-08-03T19:02:53.509Z
-current_date: 2026-08-03T19:02:53.509Z
+access_date: 2026-08-03T19:10:40.966Z
+current_date: 2026-08-03T19:10:40.966Z
 ---
 
 Learn how to use Vitest in a monorepo.

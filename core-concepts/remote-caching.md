@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/core-concepts/remote-caching
 title: "Remote Caching"
 description: "Share a single Turborepo cache across your team and CI to avoid duplicated work."
-access_date: 2026-08-03T19:02:53.509Z
-current_date: 2026-08-03T19:02:53.509Z
+access_date: 2026-08-03T19:10:40.966Z
+current_date: 2026-08-03T19:10:40.966Z
 ---
 
 Share cache artifacts across machines for even faster builds.

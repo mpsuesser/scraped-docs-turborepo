@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/running-tasks
 title: "Running tasks"
 description: "Execute tasks using the turbo CLI with scripts, global turbo, filters, and multi-task parallelization."
-access_date: 2026-08-03T19:02:53.509Z
-current_date: 2026-08-03T19:02:53.509Z
+access_date: 2026-08-03T19:10:40.966Z
+current_date: 2026-08-03T19:10:40.966Z
 ---
 
 Learn how to run tasks in your repository through the \`turbo\` CLI.

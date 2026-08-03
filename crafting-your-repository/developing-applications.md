@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/developing-applications
 title: "Developing applications"
 description: "Run long-lived development tasks with the terminal UI, watch mode, and package filtering."
-access_date: 2026-08-03T19:02:53.509Z
-current_date: 2026-08-03T19:02:53.509Z
+access_date: 2026-08-03T19:10:40.966Z
+current_date: 2026-08-03T19:10:40.966Z
 ---
 
 Learn how to develop applications in your repository.
