@@ -2,13 +2,13 @@
 url: https://turborepo.dev/docs/crafting-your-repository/caching
 title: "Caching"
 description: "Configure task caching to avoid repeating work, using fingerprinting for inputs and restoring outputs from cache."
-access_date: 2026-08-03T22:13:48.040Z
-current_date: 2026-08-03T22:13:48.040Z
+access_date: 2026-08-03T23:32:48.885Z
+current_date: 2026-08-03T23:32:48.885Z
 ---
 
 Turborepo uses caching to speed up builds, ensuring you **never do the same work twice**. When your task is cacheable, Turborepo will restore the results of your task from cache using a fingerprint from the first time the task ran.
 
-![12 tasks are being ran in 3 packages, resulting in a ">>> FULL TURBO" cache hit. The total time it takes to restore these tasks from cache is 80 milliseconds.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwhy-turborepo-solution.2xt1tkfstms2z.png&w=3840&q=75&dpl=dpl_3e7bCGLx2BB2kjUwnY6yf9rBou2K)
+![12 tasks are being ran in 3 packages, resulting in a ">>> FULL TURBO" cache hit. The total time it takes to restore these tasks from cache is 80 milliseconds.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fwhy-turborepo-solution.2xt1tkfstms2z.png&w=3840&q=75&dpl=dpl_2gHs6x7AmLDbozVYgS8nTZ4zEmmp)
 
 Turborepo's caching results in significant time savings when working locally - and is even more powerful when [Remote Caching](../core-concepts/remote-caching.md) is enabled, sharing a cache among your entire team and CI.
 
@@ -67,7 +67,7 @@ This will result in a cache miss, since you've never ran `turbo` before with thi
 
 Run `turbo build` again. You will see a message like this:
 
-![A terminal window showing two tasks that have been ran through turbo. They successfully complete in 116 milliseconds.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffull-turbo.2ot08zh_9yksr.png&w=3840&q=75&dpl=dpl_3e7bCGLx2BB2kjUwnY6yf9rBou2K)
+![A terminal window showing two tasks that have been ran through turbo. They successfully complete in 116 milliseconds.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffull-turbo.2ot08zh_9yksr.png&w=3840&q=75&dpl=dpl_2gHs6x7AmLDbozVYgS8nTZ4zEmmp)
 
 Because the inputs' fingerprint is already in the cache, there's no reason to rebuild your applications from zero again. You can restore the results of the previous build from cache, saving resources and time.
 
