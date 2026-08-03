@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/shadcn-ui
 title: "shadcn/ui"
 description: "Initialize and use shadcn/ui components in your Turborepo monorepo."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 Learn how to use shadcn/ui in a Turborepo.

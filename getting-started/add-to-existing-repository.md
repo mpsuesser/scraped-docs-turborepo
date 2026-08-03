@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/getting-started/add-to-existing-repository
 title: "Add to an existing repository"
 description: "Incrementally adopt Turborepo in an existing single-package or multi-package repository."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 Turborepo can be incrementally adopted in **any repository, single or multi-package**, to speed up the developer and CI workflows of the repository.

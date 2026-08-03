@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/vercel
 title: "Vercel"
 description: "Deploy your Turborepo on Vercel with zero-config Remote Caching."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 Learn how to use Turborepo on Vercel.

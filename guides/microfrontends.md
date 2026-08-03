@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/microfrontends
 title: "Microfrontends"
 description: "Set up Turborepo's built-in proxy to route traffic between multiple frontend applications during local development."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 Learn how to use Turborepo's built-in microfrontends proxy for local development.

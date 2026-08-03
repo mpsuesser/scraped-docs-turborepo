@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/configuration
 title: "Configuring turbo.json"
 description: "Complete reference for all turbo.json configuration options and their behavior."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 Learn how to configure Turborepo through \`turbo.json\`.

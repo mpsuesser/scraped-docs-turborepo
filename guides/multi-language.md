@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/multi-language
 title: "Multi-language support"
 description: "Add unsupported languages such as Go to Turborepo by wrapping projects in package-manager workspaces."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 Integrate unsupported languages with package scripts and workspace boundaries.

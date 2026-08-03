@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/messages/missing-root-task-in-turbo-json
 title: "Missing root task in turbo.json"
 description: "Learn more about errors for missing root tasks in turbo.json in Turborepo."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 # Missing root task in turbo.json

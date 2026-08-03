@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/creating-an-internal-package
 title: "Creating an Internal Package"
 description: "Build a new internal package from scratch to share code across your monorepo."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 Learn how to create an Internal Package for your monorepo.

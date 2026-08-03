@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/messages/package-task-in-single-package-workspace
 title: "Package task in single-package workspace error"
 description: "Learn more about errors with package tasks in single-package workspaces."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 # Package task in single-package workspace error

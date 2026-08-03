@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/configuring-tasks
 title: "Configuring tasks"
 description: "Define task dependencies, outputs, and inputs in turbo.json to orchestrate your repository's workflows."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 Learn how to describe the workflows in your repository to get them done as fast as possible.

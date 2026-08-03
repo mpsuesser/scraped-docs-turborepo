@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/turbo-codemod
 title: "@turbo/codemod"
 description: "Reference for the `@turbo/codemod` package that automates Turborepo version migrations."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 Learn more about how Turborepo uses codemods to make version migrations easy.

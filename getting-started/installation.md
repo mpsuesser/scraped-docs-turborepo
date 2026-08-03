@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/getting-started/installation
 title: "Installation"
 description: "Install Turborepo globally and in your repository using your preferred package manager."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 Learn how to get started with Turborepo.

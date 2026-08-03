@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference
 title: "Turborepo API reference"
 description: "Learn about Turborepo's APIs using the reference."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 # Turborepo API reference

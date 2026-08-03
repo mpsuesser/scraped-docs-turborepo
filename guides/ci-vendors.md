@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/ci-vendors
 title: "Continuous Integration"
 description: "Recipes for using Turborepo with Vercel, GitHub Actions, and other continuous integration providers."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 # Continuous Integration

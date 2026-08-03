@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/generate
 title: "generate"
 description: "All flags and options for the `turbo generate` command used to scaffold new packages and run custom generators."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 Extend your Turborepo with new apps and packages.

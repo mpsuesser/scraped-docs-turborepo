@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/turbo-gen
 title: "@turbo/gen"
 description: "Reference for the `@turbo/gen` package that provides type definitions for Turborepo code generators."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 # @turbo/gen

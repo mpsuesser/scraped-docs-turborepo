@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/jest
 title: "Jest"
 description: "Set up Jest test suites across monorepo packages with Turborepo caching and parallelization."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 Learn how to use Jest in a Turborepo.

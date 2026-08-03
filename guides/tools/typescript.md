@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/typescript
 title: "TypeScript"
 description: "Share TypeScript configuration, set up compilation, and enable fast type checking across your monorepo."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 Learn how to use TypeScript in a monorepo.

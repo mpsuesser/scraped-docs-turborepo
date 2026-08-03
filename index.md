@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs
 title: "Introduction"
 description: "Learn what Turborepo is, how it solves monorepo scaling problems, and how to navigate the documentation."
-access_date: 2026-08-03T18:24:07.617Z
-current_date: 2026-08-03T18:24:07.617Z
+access_date: 2026-08-03T18:56:55.656Z
+current_date: 2026-08-03T18:56:55.656Z
 ---
 
 ## What is Turborepo?
