@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/constructing-ci
 title: "Constructing CI"
 description: "Set up CI pipelines with Remote Caching, task filtering, Docker support, and affected package detection for maximum speed."
-access_date: 2026-08-03T19:40:59.569Z
-current_date: 2026-08-03T19:40:59.569Z
+access_date: 2026-08-03T19:46:13.967Z
+current_date: 2026-08-03T19:46:13.967Z
 ---
 
 Learn how Turborepo can help you efficiently complete all the necessary tasks and accelerate your development workflow.

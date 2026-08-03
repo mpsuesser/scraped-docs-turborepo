@@ -1,48 +1,57 @@
 ---
 url: https://turborepo.dev/docs/guides
 title: "Guides"
-description: "Learn how to use your favorite tooling in a Turborepo."
-access_date: 2026-08-03T19:40:59.569Z
-current_date: 2026-08-03T19:40:59.569Z
+description: "Browse guides for frameworks, CI providers, tools, and common use cases in Turborepo."
+access_date: 2026-08-03T19:46:13.967Z
+current_date: 2026-08-03T19:46:13.967Z
 ---
 
-# Guides
-
-
+Learn how to use your favorite tooling in a Turborepo.
 
 Turborepo works with your favorite frameworks, CI providers, tools, and use cases.
 
 In our community-supported guides, you'll find examples of how to use `turbo` with the rest of your tooling.
 
-<Cards>
-  <Card title="Using AI" description="Get the most out of AI coding assistants" href="/docs/guides/ai" />
+### [Using AI](guides/ai.md)
 
-  <Card title="Frameworks" description="Integrate frameworks into your Turborepo" href="/docs/guides/frameworks" />
+Get the most out of AI coding assistants
 
-  <Card title="Continuous Integration" description="Use Turborepo with your CI" href="/docs/guides/ci-vendors" />
+### [Frameworks](guides/frameworks.md)
 
-  <Card title="Tools" description="Bring your favorite tooling" href="/docs/guides/tools" />
+Integrate frameworks into your Turborepo
 
-  <Card title="Single-package workspaces" description="Integrate with a standalone application" href="/docs/guides/single-package-workspaces" />
+### [Continuous Integration](guides/ci-vendors.md)
 
-  <Card title="Runtime dependencies" description="Coordinate services that depend on each other while running" href="/docs/guides/coordinating-runtime-dependencies" />
+Use Turborepo with your CI
 
-  <Card title="Generating code" description="Create new code fast" href="/docs/guides/generating-code" />
+### [Tools](guides/tools.md)
 
-  <Card title="Skipping tasks" description="Go fast by doing nothing" href="/docs/guides/skipping-tasks" />
+Bring your favorite tooling
 
-  <Card title="Publishing packages" description="Use your packages outside of your Turborepo" href="/docs/guides/publishing-libraries" />
+### [Single-package workspaces](guides/single-package-workspaces.md)
 
-  <Card title="Handling platforms" description="OS, Node.js version, and other factors" href="/docs/guides/handling-platforms" />
+Integrate with a standalone application
 
-  <Card title="Multi-language support" description="Many languages, one repository" href="/docs/guides/multi-language" />
-</Cards>
+### [Runtime dependencies](guides/coordinating-runtime-dependencies.md)
 
+Coordinate services that depend on each other while running
 
----
+### [Generating code](guides/generating-code.md)
 
-For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+Create new code fast
 
-For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+### [Skipping tasks](guides/skipping-tasks.md)
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)
+Go fast by doing nothing
+
+### [Publishing packages](guides/publishing-libraries.md)
+
+Use your packages outside of your Turborepo
+
+### [Handling platforms](guides/handling-platforms.md)
+
+OS, Node.js version, and other factors
+
+### [Multi-language support](guides/multi-language.md)
+
+Many languages, one repository

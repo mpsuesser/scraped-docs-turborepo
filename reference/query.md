@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/query
 title: "query"
 description: "All flags and options for the `turbo query` command that runs GraphQL queries against your monorepo."
-access_date: 2026-08-03T19:40:59.569Z
-current_date: 2026-08-03T19:40:59.569Z
+access_date: 2026-08-03T19:46:13.967Z
+current_date: 2026-08-03T19:46:13.967Z
 ---
 
 Run GraphQL queries against your monorepo.

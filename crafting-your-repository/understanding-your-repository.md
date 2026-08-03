@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/understanding-your-repository
 title: "Understanding your repository"
 description: "Learn how to understand your repository structure using Turborepo."
-access_date: 2026-08-03T19:40:59.569Z
-current_date: 2026-08-03T19:40:59.569Z
+access_date: 2026-08-03T19:46:13.967Z
+current_date: 2026-08-03T19:46:13.967Z
 ---
 
 # Understanding your repository

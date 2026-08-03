@@ -1,22 +1,18 @@
 ---
 url: https://turborepo.dev/docs/reference/prune
 title: "prune"
-description: "API reference for the `turbo prune` command"
-access_date: 2026-08-03T19:40:59.569Z
-current_date: 2026-08-03T19:40:59.569Z
+description: "All flags and options for the `turbo prune` command that generates a partial monorepo for a target package."
+access_date: 2026-08-03T19:46:13.967Z
+current_date: 2026-08-03T19:46:13.967Z
 ---
-
-# prune
-
-
 
 Generate a partial monorepo for a target package. The output will be placed into a directory named `out` containing the following:
 
-* The full source code of all internal packages needed to build the target.
-* A pruned lockfile containing the subset of the original lockfile needed to build the target.
-* A copy of the root `package.json`.
+- The full source code of all internal packages needed to build the target.
+- A pruned lockfile containing the subset of the original lockfile needed to build the target.
+- A copy of the root `package.json`.
 
-```bash title="Terminal"
+```
 turbo prune [package]
 ```
 
@@ -24,267 +20,67 @@ turbo prune [package]
 
 Starting with a repository with the following structure:
 
-<Files>
-  <File name="package.json" />
+package.json
 
-  <File name="pnpm-lock.yaml" />
-
-  <Folder name="apps" defaultOpen>
-    <Folder name="admin">
-      <File name="package.json" />
-
-      <File name="next-env.d.ts" />
-
-      <File name="next.config.js" />
-
-      <Folder name="src">
-        <Folder name="app">
-          <File name="page.tsx" />
-        </Folder>
-      </Folder>
-
-      <File name="tsconfig.json" />
-    </Folder>
-
-    <Folder name="frontend">
-      <File name="package.json" />
-
-      <File name="next-env.d.ts" />
-
-      <File name="next.config.js" />
-
-      <Folder name="src">
-        <Folder name="app">
-          <File name="page.tsx" />
-        </Folder>
-      </Folder>
-
-      <File name="tsconfig.json" />
-    </Folder>
-  </Folder>
-
-  <Folder name="packages" defaultOpen>
-    <Folder name="scripts">
-      <File name="package.json" />
-
-      <Folder name="src">
-        <File name="index.tsx" />
-      </Folder>
-
-      <File name="tsconfig.json" />
-    </Folder>
-
-    <Folder name="shared">
-      <File name="package.json" />
-
-      <Folder name="src">
-        <Folder name="__tests__">
-          <File name="sum.test.ts" />
-
-          <File name="tsconfig.json" />
-        </Folder>
-
-        <File name="index.ts" />
-
-        <File name="sum.ts" />
-      </Folder>
-
-      <File name="tsconfig.json" />
-    </Folder>
-
-    <Folder name="ui">
-      <File name="package.json" />
-
-      <Folder name="src">
-        <File name="index.tsx" />
-      </Folder>
-
-      <File name="tsconfig.json" />
-    </Folder>
-
-    <Folder name="utils">
-      <File name="package.json" />
-
-      <Folder name="src">
-        <File name="index.tsx" />
-      </Folder>
-
-      <File name="tsconfig.json" />
-    </Folder>
-  </Folder>
-</Files>
+pnpm-lock.yaml
 
 Run `turbo prune frontend` to generate a pruned workspace for the `frontend` application in an `out` directory:
 
-<Files>
-  <File name="package.json" />
+package.json
 
-  <File name="pnpm-lock.yaml (partial)" />
-
-  <Folder name="apps" defaultOpen>
-    <Folder name="frontend">
-      <File name="package.json" />
-
-      <File name="next-env.d.ts" />
-
-      <File name="next.config.js" />
-
-      <Folder name="src">
-        <Folder name="app">
-          <File name="page.tsx" />
-        </Folder>
-      </Folder>
-
-      <File name="tsconfig.json" />
-    </Folder>
-  </Folder>
-
-  <Folder name="packages" defaultOpen>
-    <Folder name="shared">
-      <File name="package.json" />
-
-      <Folder name="src">
-        <Folder name="__tests__">
-          <File name="sum.test.ts" />
-
-          <File name="tsconfig.json" />
-        </Folder>
-
-        <File name="index.ts" />
-
-        <File name="sum.ts" />
-      </Folder>
-
-      <File name="tsconfig.json" />
-    </Folder>
-
-    <Folder name="ui">
-      <File name="package.json" />
-
-      <Folder name="src">
-        <File name="index.tsx" />
-      </Folder>
-
-      <File name="tsconfig.json" />
-    </Folder>
-  </Folder>
-</Files>
+pnpm-lock.yaml (partial)
 
 ### Options
 
-#### `--docker`
+#### \--docker
 
 Defaults to `false`.
 
 Alter the output directory to make it easier to use with [Docker best practices and layer caching](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/). For an example Dockerfile using this flag, see the [Docker guide](../guides/tools/docker.md). The directory will contain:
 
-* A folder named `json` with the pruned workspace's `package.json` files.
-* A folder named `full` with the pruned workspace's full source code for the internal packages needed to build the target.
-* A pruned lockfile containing the subset of the original lockfile needed to build the target.
+- A folder named `json` with the pruned workspace's `package.json` files.
+- A folder named `full` with the pruned workspace's full source code for the internal packages needed to build the target.
+- A pruned lockfile containing the subset of the original lockfile needed to build the target.
 
 Using the same example from above, running `turbo prune frontend --docker` will generate the following:
 
-<Files>
-  <File name="pnpm-lock.yaml (partial)" />
+pnpm-lock.yaml (partial)
 
-  <Folder name="full" defaultOpen>
-    <File name="package.json (from repo root)" />
+package.json (from repo root)
 
-    <Folder name="apps">
-      <Folder name="frontend">
-        <File name="package.json" />
+package.json (from repo root)
 
-        <File name="next-env.d.ts" />
+package.json
 
-        <File name="next.config.js" />
+package.json
 
-        <Folder name="src">
-          <Folder name="app">
-            <File name="page.tsx" />
-          </Folder>
-        </Folder>
+package.json
 
-        <File name="tsconfig.json" />
-      </Folder>
-    </Folder>
-
-    <Folder name="packages">
-      <Folder name="shared">
-        <File name="package.json" />
-
-        <Folder name="src">
-          <Folder name="__tests__">
-            <File name="sum.test.ts" />
-
-            <File name="tsconfig.json" />
-          </Folder>
-
-          <File name="index.ts" />
-
-          <File name="sum.ts" />
-        </Folder>
-
-        <File name="tsconfig.json" />
-      </Folder>
-
-      <Folder name="ui">
-        <File name="package.json" />
-
-        <Folder name="src">
-          <File name="index.tsx" />
-        </Folder>
-
-        <File name="tsconfig.json" />
-      </Folder>
-    </Folder>
-  </Folder>
-
-  <Folder name="json" defaultOpen>
-    <File name="package.json (from repo root)" />
-
-    <Folder name="apps" defaultOpen>
-      <Folder name="frontend" defaultOpen>
-        <File name="package.json" />
-      </Folder>
-    </Folder>
-
-    <Folder name="packages" defaultOpen>
-      <Folder name="ui" defaultOpen>
-        <File name="package.json" />
-      </Folder>
-
-      <Folder name="shared" defaultOpen>
-        <File name="package.json" />
-      </Folder>
-    </Folder>
-  </Folder>
-</Files>
-
-#### `--out-dir <path>`
+#### \--out-dir <path>
 
 Defaults to `./out`.
 
 Customize the directory the pruned output is generated in.
 
-#### `--use-gitignore[=<bool>]`
+#### \--use-gitignore\[=<bool>\]
 
 Default: `true`
 
 Respect `.gitignore` file(s) when copying files to the output directory.
 
-#### `--production`
+#### \--production
 
 Default: `false`
 
 Exclude in-workspace packages listed only in `devDependencies` when selecting which packages to include in the pruned output. Only workspace packages reachable through `dependencies` (and non-optional peer workspace dependencies) are included. For Bun repositories, references to excluded workspaces are also removed from the pruned manifests and lockfile so the output can be installed with a frozen lockfile.
 
-### Including `globalDependencies`
+### Including globalDependencies
 
 By default, `turbo prune` does not copy files referenced by [`globalDependencies`](configuration.md#globaldependencies) into the output directory. The `globalDependencies` field is preserved in the pruned `turbo.json`, but the files themselves (e.g., a root `tsconfig.json` or `.env`) are not included.
 
 Enable the [`pruneIncludesGlobalFiles`](configuration.md#pruneincludesglobalfiles) future flag to copy these files:
 
-```jsonc title="./turbo.json"
+```
 {
   "globalDependencies": ["tsconfig.json", ".env"],
   "futureFlags": {
@@ -295,21 +91,10 @@ Enable the [`pruneIncludesGlobalFiles`](configuration.md#pruneincludesglobalfile
 
 With this flag, all files matching the `globalDependencies` globs will be included in the pruned output. In `--docker` mode, they are copied to both the `full` and `json` directories.
 
-### Comparison to `pnpm deploy`
+### Comparison to pnpm deploy
 
 While both `turbo prune` and [`pnpm deploy`](https://pnpm.io/cli/deploy) are used to isolate packages in a monorepo, they serve different purposes and produce different outputs.
 
 Where `turbo prune` generates a partial monorepo, `pnpm deploy` generates a directory that only contains the contents of the target package.
 
-The `pnpm deploy` generated directory has a self-contained `node_modules` with hard linked internal dependencies.
-This results in a portable package that can be directly copied to a server and used without additional steps.
-The repository structure is not retained, as the focus is on producing a standalone deployable package.
-
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)
+The `pnpm deploy` generated directory has a self-contained `node_modules` with hard linked internal dependencies. This results in a portable package that can be directly copied to a server and used without additional steps. The repository structure is not retained, as the focus is on producing a standalone deployable package.

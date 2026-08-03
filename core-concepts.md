@@ -1,32 +1,29 @@
 ---
 url: https://turborepo.dev/docs/core-concepts
 title: "Core concepts"
-description: "Learn about the core concepts behind Turborepo."
-access_date: 2026-08-03T19:40:59.569Z
-current_date: 2026-08-03T19:40:59.569Z
+description: "Explore the foundational concepts that power Turborepo's monorepo tooling."
+access_date: 2026-08-03T19:46:13.967Z
+current_date: 2026-08-03T19:46:13.967Z
 ---
 
-# Core concepts
-
-
+Learn about the core concepts behind Turborepo.
 
 Learn more about the core concepts of Turborepo:
 
-<Cards>
-  <Card title="Remote Caching" href="/docs/core-concepts/remote-caching" description="Save time by never doing the same work twice" />
+### [Remote Caching](core-concepts/remote-caching.md)
 
-  <Card title="Package types" href="/docs/core-concepts/package-types" description="Application and Library Packages" />
+Save time by never doing the same work twice
 
-  <Card title="Internal Packages" href="/docs/core-concepts/internal-packages" description="Easily share code inside your repository" />
+### [Package types](core-concepts/package-types.md)
 
-  <Card title="Package and Task Graphs" href="/docs/core-concepts/package-and-task-graph" description="How Turborepo relates your tasks to each other" />
-</Cards>
+Application and Library Packages
 
+### [Internal Packages](core-concepts/internal-packages.md)
 
----
+Easily share code inside your repository
 
-For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+### [Package and Task Graphs](core-concepts/package-and-task-graph.md)
 
-For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+How Turborepo relates your tasks to each other
 
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)
+[Previous@turbo/gen](reference/turbo-gen.md) [NextRemote Caching](core-concepts/remote-caching.md)

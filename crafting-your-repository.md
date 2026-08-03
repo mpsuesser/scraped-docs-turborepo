@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository
 title: "Crafting your repository"
 description: "Step-by-step guides for designing, building, and optimizing a monorepo with Turborepo."
-access_date: 2026-08-03T19:40:59.569Z
-current_date: 2026-08-03T19:40:59.569Z
+access_date: 2026-08-03T19:46:13.967Z
+current_date: 2026-08-03T19:46:13.967Z
 ---
 
 Architecting a monorepo is a careful process. Through these guides, you'll learn how to design and build a monorepo that will make every team faster - no matter the size.

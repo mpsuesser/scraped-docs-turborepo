@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/core-concepts/package-types
 title: "Package types"
 description: "Learn about the different types of packages in a workspace."
-access_date: 2026-08-03T19:40:59.569Z
-current_date: 2026-08-03T19:40:59.569Z
+access_date: 2026-08-03T19:46:13.967Z
+current_date: 2026-08-03T19:46:13.967Z
 ---
 
 # Package types

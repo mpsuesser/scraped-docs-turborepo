@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/prisma
 title: "Prisma"
 description: "Learn how to use Prisma in a Turborepo."
-access_date: 2026-08-03T19:40:59.569Z
-current_date: 2026-08-03T19:40:59.569Z
+access_date: 2026-08-03T19:46:13.967Z
+current_date: 2026-08-03T19:46:13.967Z
 ---
 
 # Prisma

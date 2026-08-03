@@ -1,46 +1,37 @@
 ---
 url: https://turborepo.dev/docs/guides/tools
 title: "Tools"
-description: "Learn how to use your favorite tools in a monorepo."
-access_date: 2026-08-03T19:40:59.569Z
-current_date: 2026-08-03T19:40:59.569Z
+description: "Browse guides for integrating popular development tools with Turborepo."
+access_date: 2026-08-03T19:46:13.967Z
+current_date: 2026-08-03T19:46:13.967Z
 ---
 
-# Tools
+[Guides](../guides.md)
 
-
+Learn how to use your favorite tools in a monorepo.
 
 Turborepo works with **all of your favorite tooling**. Below, you'll find guides for the most common tools being used with Turborepo.
 
-<Cards>
-  <Card title="Biome" href="/docs/guides/tools/biome" />
+### [Biome](tools/biome.md)
 
-  <Card title="Docker" href="/docs/guides/tools/docker" />
+### [Docker](tools/docker.md)
 
-  <Card title="ESLint" href="/docs/guides/tools/eslint" />
+### [ESLint](tools/eslint.md)
 
-  <Card title="Jest" href="/docs/guides/tools/jest" />
+### [Jest](tools/jest.md)
 
-  <Card title="Oxc (oxlint, oxfmt)" href="/docs/guides/tools/oxc" />
+### [Oxc (oxlint, oxfmt)](tools/oxc.md)
 
-  <Card title="Prisma" href="/docs/guides/tools/prisma" />
+### [Prisma](tools/prisma.md)
 
-  <Card title="Rust (experimental)" href="/docs/guides/tools/rust" />
+### [Rust (experimental)](tools/rust.md)
 
-  <Card title="shadcn/ui" href="/docs/guides/tools/shadcn-ui" />
+### [shadcn/ui](tools/shadcn-ui.md)
 
-  <Card title="Storybook" href="/docs/guides/tools/storybook" />
+### [Storybook](tools/storybook.md)
 
-  <Card title="TypeScript" href="/docs/guides/tools/typescript" />
+### [TypeScript](tools/typescript.md)
 
-  <Card title="Vitest" href="/docs/guides/tools/vitest" />
-</Cards>
+### [Vitest](tools/vitest.md)
 
-
----
-
-For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
-
-For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)
+[PreviousTravis CI](ci-vendors/travis-ci.md) [NextBiome](tools/biome.md)

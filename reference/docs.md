@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/docs
 title: "docs"
 description: "API reference for the `turbo docs` command"
-access_date: 2026-08-03T19:40:59.569Z
-current_date: 2026-08-03T19:40:59.569Z
+access_date: 2026-08-03T19:46:13.967Z
+current_date: 2026-08-03T19:46:13.967Z
 ---
 
 # docs

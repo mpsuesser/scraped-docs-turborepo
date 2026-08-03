@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/messages/invalid-env-prefix
 title: "Invalid environment variable prefix"
 description: "Learn more about errors with invalid environment variable prefixes in Turborepo."
-access_date: 2026-08-03T19:40:59.569Z
-current_date: 2026-08-03T19:40:59.569Z
+access_date: 2026-08-03T19:46:13.967Z
+current_date: 2026-08-03T19:46:13.967Z
 ---
 
 # Invalid environment variable prefix
