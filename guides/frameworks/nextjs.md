@@ -1,0 +1,152 @@
+---
+url: https://turborepo.dev/docs/guides/frameworks/nextjs
+title: "Next.js"
+description: "Add and configure Next.js applications in your Turborepo monorepo."
+access_date: 2026-08-03T17:27:52.096Z
+current_date: 2026-08-03T17:27:52.096Z
+---
+
+# Next.js
+
+
+
+[Next.js](https://nextjs.org) is the React framework for the web. Used by some of the world's largest companies, Next.js enables you to create high-quality web applications with the power of React components.
+
+## Quickstart
+
+To get started with Next.js in a Turborepo quickly, follow the [quickstart](/docs/getting-started/installation) to create a repository with two Next.js applications:
+
+<PackageManagerTabs>
+  <Tab value="pnpm">
+    ```bash title="Terminal"
+    pnpm dlx create-turbo@latest
+    ```
+  </Tab>
+
+  <Tab value="yarn">
+    ```bash title="Terminal"
+    yarn dlx create-turbo@latest
+    ```
+  </Tab>
+
+  <Tab value="npm">
+    ```bash title="Terminal"
+    npx create-turbo@latest
+    ```
+  </Tab>
+
+  <Tab value="bun">
+    ```bash title="Terminal"
+    bunx create-turbo@latest
+    ```
+  </Tab>
+</PackageManagerTabs>
+
+## Adding a Next.js application to an existing repository
+
+Use [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app) to set up a new Next.js application in a package. From the root of your repository, run:
+
+<PackageManagerTabs>
+  <Tab value="pnpm">
+    ```bash title="Terminal"
+    pnpm dlx create-next-app@latest apps/my-app
+    ```
+  </Tab>
+
+  <Tab value="yarn">
+    ```bash title="Terminal"
+    yarn dlx create-next-app@latest apps/my-app
+    ```
+  </Tab>
+
+  <Tab value="npm">
+    ```bash title="Terminal"
+    npx create-next-app@latest apps/my-app
+    ```
+  </Tab>
+
+  <Tab value="bun">
+    ```bash title="Terminal"
+    bunx create-next-app@latest apps/my-app
+    ```
+  </Tab>
+</PackageManagerTabs>
+
+## Integrating with your repository
+
+To add [Internal Packages](/docs/core-concepts/internal-packages) to your new application, install them into the app with your package manager:
+
+<PackageManagerTabs>
+  <Tab value="pnpm">
+    ```diff title="./apps/my-app/package.json"
+    {
+      "name": "my-app",
+      "dependencies": {
+    +   "@repo/ui": "workspace:*"
+      }
+    }
+    ```
+  </Tab>
+
+  <Tab value="yarn">
+    ```diff title="./apps/my-app/package.json"
+    {
+      "name": "my-app",
+      "dependencies": {
+    +   "@repo/ui": "*"
+      }
+    }
+    ```
+  </Tab>
+
+  <Tab value="npm">
+    ```diff title="./apps/my-app/package.json"
+    {
+     "name": "my-app",
+      "dependencies": {
+    +   "@repo/ui": "*"
+      }
+    }
+    ```
+  </Tab>
+
+  <Tab value="bun">
+    ```diff title="./apps/my-app/package.json"
+    {
+     "name": "my-app",
+      "dependencies": {
+    +   "@repo/ui": "workspace:*"
+      }
+    }
+    ```
+  </Tab>
+</PackageManagerTabs>
+
+Make sure to run your package manager's install command. You also may need to update `scripts` in `package.json` to fit your use case in your repository.
+
+### Customizing tasks
+
+By default, the new application will use the tasks defined in the root `turbo.json`. If you'd like to configure tasks differently for the new application, use [Package Configurations](/docs/reference/package-configurations).
+
+### Microfrontends
+
+When using Next.js with [Turborepo's microfrontends](/docs/guides/microfrontends), make sure to set the `basePath` property for child applications. This ensures the assets like images and CSS will be routed to the correct application.
+
+```ts title="./apps/my-app/next.config.ts"
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  basePath: "/docs",
+};
+
+export default nextConfig;
+```
+
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](/agents.md)
