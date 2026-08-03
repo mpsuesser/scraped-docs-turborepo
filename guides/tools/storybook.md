@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/storybook
 title: "Storybook"
 description: "Set up Storybook for developing and documenting UI components in your monorepo."
-access_date: 2026-08-03T18:56:55.656Z
-current_date: 2026-08-03T18:56:55.656Z
+access_date: 2026-08-03T19:02:53.509Z
+current_date: 2026-08-03T19:02:53.509Z
 ---
 
 Learn how to use Storybook in a Turborepo.

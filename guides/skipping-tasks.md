@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/skipping-tasks
 title: "Skipping tasks"
 description: "Use `turbo query affected` to skip CI tasks entirely when a workspace has no relevant code changes."
-access_date: 2026-08-03T18:56:55.656Z
-current_date: 2026-08-03T18:56:55.656Z
+access_date: 2026-08-03T19:02:53.509Z
+current_date: 2026-08-03T19:02:53.509Z
 ---
 
 [Caching](../crafting-your-repository/caching.md) dramatically speeds up your tasks - but you may be able to go even faster by checking if your workspace is actually affected by code changes. If it isn't, you can skip executing a task altogether.

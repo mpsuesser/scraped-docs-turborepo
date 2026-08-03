@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/migrating-from-nx
 title: "Migrating from Nx"
 description: "Step-by-step instructions for migrating your Nx monorepo to Turborepo."
-access_date: 2026-08-03T18:56:55.656Z
-current_date: 2026-08-03T18:56:55.656Z
+access_date: 2026-08-03T19:02:53.509Z
+current_date: 2026-08-03T19:02:53.509Z
 ---
 
 Learn how to migrate to Turborepo from Nx.

@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/single-package-workspaces
 title: "Single-package workspaces"
 description: "Use Turborepo's caching and task parallelization in a standalone application without a monorepo."
-access_date: 2026-08-03T18:56:55.656Z
-current_date: 2026-08-03T18:56:55.656Z
+access_date: 2026-08-03T19:02:53.509Z
+current_date: 2026-08-03T19:02:53.509Z
 ---
 
 Learn how to use Turborepo in a single-package workspace.

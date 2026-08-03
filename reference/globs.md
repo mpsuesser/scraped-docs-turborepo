@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/globs
 title: "File glob specification"
 description: "Learn about the file glob specification used by `turbo`."
-access_date: 2026-08-03T18:56:55.656Z
-current_date: 2026-08-03T18:56:55.656Z
+access_date: 2026-08-03T19:02:53.509Z
+current_date: 2026-08-03T19:02:53.509Z
 ---
 
 # File glob specification

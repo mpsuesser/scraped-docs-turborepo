@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/managing-dependencies
 title: "Managing dependencies"
 description: "Install, organize, and maintain external and internal dependencies across packages in your workspace."
-access_date: 2026-08-03T18:56:55.656Z
-current_date: 2026-08-03T18:56:55.656Z
+access_date: 2026-08-03T19:02:53.509Z
+current_date: 2026-08-03T19:02:53.509Z
 ---
 
 Learn how to manage dependencies in your monorepo's workspace.

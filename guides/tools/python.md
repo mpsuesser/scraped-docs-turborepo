@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/python
 title: "Python (Experimental)"
 description: "Discover uv workspace members as Turborepo packages and run native uv tasks."
-access_date: 2026-08-03T18:56:55.656Z
-current_date: 2026-08-03T18:56:55.656Z
+access_date: 2026-08-03T19:02:53.509Z
+current_date: 2026-08-03T19:02:53.509Z
 ---
 
 Use experimental native uv workspace support with Turborepo.

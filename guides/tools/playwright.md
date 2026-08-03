@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/playwright
 title: "Playwright"
 description: "Set up Playwright end-to-end test suites with proper caching and dependency graph configuration."
-access_date: 2026-08-03T18:56:55.656Z
-current_date: 2026-08-03T18:56:55.656Z
+access_date: 2026-08-03T19:02:53.509Z
+current_date: 2026-08-03T19:02:53.509Z
 ---
 
 Learn how to use Playwright in a Turborepo.
