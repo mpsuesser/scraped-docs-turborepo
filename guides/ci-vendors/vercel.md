@@ -2,13 +2,13 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/vercel
 title: "Vercel"
 description: "Deploy your Turborepo on Vercel with zero-config Remote Caching."
-access_date: 2026-08-04T13:59:51.750Z
-current_date: 2026-08-04T13:59:51.750Z
+access_date: 2026-08-04T14:55:55.614Z
+current_date: 2026-08-04T14:55:55.614Z
 ---
 
 Learn how to use Turborepo on Vercel.
 
-![](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fturborepo-x-vercel.3ei-d2654h24u.png&w=3840&q=75&dpl=dpl_2fMevw768TXMvpBvgHHCnCaENL6m)
+![](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fturborepo-x-vercel.3ei-d2654h24u.png&w=3840&q=75&dpl=dpl_3F46xSPrLipxuWzbbUM4iFdKneg3)
 
 Vercel's zero-config integration with Turborepo automatically understands your monorepo.
 

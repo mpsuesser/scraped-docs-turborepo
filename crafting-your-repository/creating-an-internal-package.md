@@ -2,15 +2,15 @@
 url: https://turborepo.dev/docs/crafting-your-repository/creating-an-internal-package
 title: "Creating an Internal Package"
 description: "Build a new internal package from scratch to share code across your monorepo."
-access_date: 2026-08-04T13:59:51.750Z
-current_date: 2026-08-04T13:59:51.750Z
+access_date: 2026-08-04T14:55:55.614Z
+current_date: 2026-08-04T14:55:55.614Z
 ---
 
 Learn how to create an Internal Package for your monorepo.
 
 [Internal Packages](../core-concepts/internal-packages.md) are the building blocks of your workspace, giving you a powerful way to share code and functionality across your repo. Turborepo automatically understands the relationships between Internal Packages using the dependencies in `package.json`, creating a [Package Graph](../core-concepts/package-and-task-graph.md#package-graph) under the hood to optimize your repository's workflows.
 
-![Visual representation of a Package Graph in a Turborepo.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpackage-graph.3wg5le2polz_5.png&w=3840&q=75&dpl=dpl_2fMevw768TXMvpBvgHHCnCaENL6m)
+![Visual representation of a Package Graph in a Turborepo.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpackage-graph.3wg5le2polz_5.png&w=3840&q=75&dpl=dpl_3F46xSPrLipxuWzbbUM4iFdKneg3)
 
 Let's create your first Internal Package to share math utilities in your repo using the guidance in the [Anatomy of a package](structuring-a-repository.md#anatomy-of-a-package) section and the [Compiled Packages](../core-concepts/internal-packages.md#compiled-packages) pattern. In the steps below, we assume you've [created a new repository using `create-turbo`](../getting-started/installation.md) or are using a similarly structured repository.
 
