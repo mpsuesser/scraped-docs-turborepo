@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/gitlab-ci
 title: "GitLab CI"
 description: "Configure GitLab CI pipelines to run Turborepo tasks with Remote Caching."
-access_date: 2026-08-03T23:32:48.885Z
-current_date: 2026-08-03T23:32:48.885Z
+access_date: 2026-08-04T13:59:51.750Z
+current_date: 2026-08-04T13:59:51.750Z
 ---
 
 Learn how to use GitLab CI with Turborepo.
@@ -133,13 +133,13 @@ To use Vercel Remote Caching, you can get the value of these variables in a few 
 
 1. Create a Scoped Access Token to your account in the [Vercel Dashboard](https://vercel.com/account/tokens)
 
-![Vercel Access Tokens](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fvercel-create-token.2km5ecr58yqs2.png&w=3840&q=75&dpl=dpl_2gHs6x7AmLDbozVYgS8nTZ4zEmmp)
+![Vercel Access Tokens](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fvercel-create-token.2km5ecr58yqs2.png&w=3840&q=75&dpl=dpl_2fMevw768TXMvpBvgHHCnCaENL6m)
 
 Copy the value to a safe place. You'll need it in a moment.
 
 2. Go to your GitLab repository settings and click on the **Settings** and then **CI/CD** tab. Create a new variable called `TURBO_TOKEN` and enter the value of your Scoped Access Token.
 
-![GitLab CI Variables](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fgitlab-ci-variables.2uk5w48asgn0n.png&w=3840&q=75&dpl=dpl_2gHs6x7AmLDbozVYgS8nTZ4zEmmp) ![GitLab CI Create Variable](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fgitlab-ci-create-variable.3k43b_fjxz0eu.png&w=3840&q=75&dpl=dpl_2gHs6x7AmLDbozVYgS8nTZ4zEmmp)
+![GitLab CI Variables](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fgitlab-ci-variables.2uk5w48asgn0n.png&w=3840&q=75&dpl=dpl_2fMevw768TXMvpBvgHHCnCaENL6m) ![GitLab CI Create Variable](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fgitlab-ci-create-variable.3k43b_fjxz0eu.png&w=3840&q=75&dpl=dpl_2fMevw768TXMvpBvgHHCnCaENL6m)
 
 3. Make a second secret called `TURBO_TEAM` and set it to your team slug - the part after `vercel.com/` in [your Team URL](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fsettings&title=Find+Team+URL). For example, the slug for `vercel.com/acme` is `acme`.
 
