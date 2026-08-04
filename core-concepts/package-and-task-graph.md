@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/core-concepts/package-and-task-graph
 title: "Package and Task Graphs"
 description: "Learn how Turborepo uses directed acyclic graphs to model package dependencies and task relationships."
-access_date: 2026-08-04T14:55:55.614Z
-current_date: 2026-08-04T14:55:55.614Z
+access_date: 2026-08-04T15:46:32.475Z
+current_date: 2026-08-04T15:46:32.475Z
 ---
 
 Turborepo builds a Task Graph based on your configuration and repository structure.
@@ -36,7 +36,7 @@ You also have a `build` task that depends on `^build`:
 
 Turborepo will build a task graph like this:
 
-![Task graph visualization. The diagram has one node at the top named "apps/web" with two lines that connect to other nodes, "packages/ui" and "packages/utils" respectively.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsimple-task-graph.198vsfavysc04.png&w=3840&q=75&dpl=dpl_3F46xSPrLipxuWzbbUM4iFdKneg3)
+![Task graph visualization. The diagram has one node at the top named "apps/web" with two lines that connect to other nodes, "packages/ui" and "packages/utils" respectively.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fimmutable%2Fmedia%2Fsimple-task-graph.3v58fn8ie397-.png&w=3840&q=75)
 
 ### Transit Nodes
 
@@ -46,7 +46,7 @@ Let's assume the `docs` app and the `core` package each have a `build` task, but
 
 Turborepo will build this Task Graph:
 
-![A Task Graph visualization with a Transit Node. The diagram has one node at the top named "apps/doc" with a line that connects to a "packages/ui" node. This node does not have a "build" task. The "packages/ui" node has another line to a "packages/core" node that does have a "build" task.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftransitive-nodes.07iwz2fbxj6m-.png&w=3840&q=75&dpl=dpl_3F46xSPrLipxuWzbbUM4iFdKneg3)
+![A Task Graph visualization with a Transit Node. The diagram has one node at the top named "apps/doc" with a line that connects to a "packages/ui" node. This node does not have a "build" task. The "packages/ui" node has another line to a "packages/core" node that does have a "build" task.](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fimmutable%2Fmedia%2Ftransitive-nodes.0na686xkn-hv2.png&w=3840&q=75)
 
 You can think of this graph in a series of steps:
 
