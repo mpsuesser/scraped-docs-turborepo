@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/using-environment-variables
 title: "Using environment variables"
 description: "Account for environment variables in task hashing, configure environment modes, and handle .env files."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-08-05T18:05:17.395Z
+current_date: 2026-08-05T18:05:17.395Z
 ---
 
 Learn how to handle environments for your applications.
@@ -109,7 +109,7 @@ When you're using Loose Mode, `MY_API_URL` is available in the task runtime **ev
 
 ### Platform Environment Variables
 
-When deploying your application to [Vercel](https://vercel.com/new?ref=turborepo), you likely already have [environment variables](https://vercel.com/docs/projects/environment-variables) configured on your project. Turborepo will automatically check these variables against your `turbo.json` configuration to ensure that you've [accounted for them](#adding-environment-variables-to-task-hashes), and will warn you about any missing variables.
+When deploying your application to [Vercel](https://vercel.com/new?ref=turborepo), you likely already have [environment variables](https://vercel.com/docs/environment-variables) configured on your project. Turborepo will automatically check these variables against your `turbo.json` configuration to ensure that you've [accounted for them](#adding-environment-variables-to-task-hashes), and will warn you about any missing variables.
 
 This functionality can be disabled by setting `TURBO_PLATFORM_ENV_DISABLED=true`
 

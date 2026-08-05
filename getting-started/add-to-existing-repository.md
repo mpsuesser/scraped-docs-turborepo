@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/getting-started/add-to-existing-repository
 title: "Add to an existing repository"
 description: "Incrementally adopt Turborepo in an existing single-package or multi-package repository."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-08-05T18:05:17.395Z
+current_date: 2026-08-05T18:05:17.395Z
 ---
 
 Turborepo can be incrementally adopted in **any repository, single or multi-package**, to speed up the developer and CI workflows of the repository.
@@ -12,7 +12,7 @@ After installing `turbo` and configuring your tasks in `turbo.json`, you'll noti
 
 ## Preparing a single-package workspace
 
-A [single-package workspace](https://vercel.com/docs/vercel-platform/glossary#single-package-workspace) is, for example, what you get after running `npx create-next-app` or `npm create vite`. You don't need to do any extra work for Turborepo to handle your repo so you can jump to the first step below.
+A [single-package workspace](https://vercel.com/docs/glossary#single-package-workspace) is, for example, what you get after running `npx create-next-app` or `npm create vite`. You don't need to do any extra work for Turborepo to handle your repo so you can jump to the first step below.
 
 To learn more about Turborepo in single-package workspaces, visit [the dedicated guide](../guides/single-package-workspaces.md).
 

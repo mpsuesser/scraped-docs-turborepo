@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/frameworks/framework-bindings
 title: "Framework bindings in libraries"
 description: "Use peerDependencies and export paths to create framework-specific bindings in shared library packages."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-08-05T18:05:17.395Z
+current_date: 2026-08-05T18:05:17.395Z
 ---
 
 Learn how to create framework bindings in packages.
@@ -51,7 +51,7 @@ Using export paths to split a package into framework-specific entrypoints is the
 The example below shows a library with two entrypoints, each for a different type of link component. These abstractions likely contain your own styles, APIs, and other adjustments on top of the element they're wrapping.
 
 - `./link`: An `<a>` HTML tag with some default styles from your design system
-- `./next-js/link`: A customized version of [the Next.js `Link` component](https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#link-component) with props that are preset to your organization's preferences
+- `./next-js/link`: A customized version of [the Next.js `Link` component](https://nextjs.org/docs/app/getting-started/linking-and-navigating#link-component) with props that are preset to your organization's preferences
 - `./svelte/link`: A customized version of an [`a` tag for Svelte](https://svelte.dev/docs/kit/link-options) with presets.
 
 ```

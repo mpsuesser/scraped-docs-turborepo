@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs
 title: "Introduction"
 description: "Learn what Turborepo is, how it solves monorepo scaling problems, and how to navigate the documentation."
-access_date: 2026-08-04T15:46:32.475Z
-current_date: 2026-08-04T15:46:32.475Z
+access_date: 2026-08-05T18:05:17.395Z
+current_date: 2026-08-05T18:05:17.395Z
 ---
 
 ## What is Turborepo?
@@ -34,7 +34,7 @@ Turborepo can be **adopted incrementally** and you can **add it to any repositor
 
 ## How to use these docs
 
-We will do our best to keep jargon to a minimum - but there are some need-to-know words that will be important to understand as you read through the docs. We've created [a glossary page](https://vercel.com/docs/vercel-platform/glossary) to help you out in case you're learning about these terms.
+We will do our best to keep jargon to a minimum - but there are some need-to-know words that will be important to understand as you read through the docs. We've created [a glossary page](https://vercel.com/docs/glossary) to help you out in case you're learning about these terms.
 
 ## Join the community
 

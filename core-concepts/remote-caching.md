@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/core-concepts/remote-caching
 title: "Remote Caching"
 description: "Share a single Turborepo cache across your team and CI to avoid duplicated work."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-08-05T18:05:17.395Z
+current_date: 2026-08-05T18:05:17.395Z
 ---
 
 Share cache artifacts across machines for even faster builds.
@@ -86,7 +86,7 @@ Then, run the same build again. If things are working properly, `turbo` should n
 
 ### Remote Caching on Vercel
 
-If you are building and hosting your apps on Vercel, Remote Caching will be automatically set up on your behalf once you use `turbo`. Refer to the [Vercel documentation](https://vercel.com/docs/concepts/monorepos/remote-caching?utm_source=turborepo.dev&utm_medium=referral&utm_campaign=docs-link) for more information.
+If you are building and hosting your apps on Vercel, Remote Caching will be automatically set up on your behalf once you use `turbo`. Refer to the [Vercel documentation](https://vercel.com/docs/monorepos/remote-caching?utm_source=turborepo.dev&utm_medium=referral&utm_campaign=docs-link) for more information.
 
 ### Artifact Integrity and Authenticity Verification
 
@@ -110,7 +110,7 @@ A Remote Cache can be implemented by any HTTP server that meets Turborepo's Remo
 
 [Vercel](https://vercel.com/), the creators and maintainers of Turborepo, provide a managed Remote Cache that is fully compatible with Turborepo.
 
-Using [Vercel Remote Cache](https://vercel.com/docs/monorepos/remote-caching) is zero-configuration and automatically integrates with [Vercel deployments](https://vercel.com/docs/deployments/overview) through the open-source [Vercel Remote Cache SDK](https://github.com/vercel/remote-cache).
+Using [Vercel Remote Cache](https://vercel.com/docs/monorepos/remote-caching) is zero-configuration and automatically integrates with [Vercel deployments](https://vercel.com/docs/deployments) through the open-source [Vercel Remote Cache SDK](https://github.com/vercel/remote-cache).
 
 Learn more about [Turborepo on Vercel](https://vercel.com/docs/monorepos/turborepo) or [deploy a template for free](https://vercel.com/templates?search=turborepo) to try it out.
 

@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/constructing-ci
 title: "Constructing CI"
 description: "Set up CI pipelines with Remote Caching, task filtering, Docker support, and affected package detection for maximum speed."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-08-05T18:05:17.395Z
+current_date: 2026-08-05T18:05:17.395Z
 ---
 
 Learn how Turborepo can help you efficiently complete all the necessary tasks and accelerate your development workflow.
@@ -19,7 +19,7 @@ To enable Remote Caching for your CI, setup the environment variables for Turbor
 | Environment Variable | Description |
 | --- | --- |
 | `TURBO_TOKEN` | The Bearer token to access the Remote Cache |
-| `TURBO_TEAM` | The account name associated with your repository. When using [Vercel Remote Cache](https://vercel.com/docs/monorepos/remote-caching), this is [your team's slug](https://vercel.com/docs/accounts/create-a-team#find-your-team-id). |
+| `TURBO_TEAM` | The account name associated with your repository. When using [Vercel Remote Cache](https://vercel.com/docs/monorepos/remote-caching), this is [your team's slug](https://vercel.com/docs/accounts#creating-a-team). |
 
 When you run tasks through `turbo`, your CI will be able to hit cache, speeding up your pipelines.
 

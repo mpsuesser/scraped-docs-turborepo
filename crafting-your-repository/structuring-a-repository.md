@@ -2,13 +2,13 @@
 url: https://turborepo.dev/docs/crafting-your-repository/structuring-a-repository
 title: "Structuring a repository"
 description: "Set up a multi-package workspace with the directory structure, package.json files, and lockfile that Turborepo expects."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-08-05T18:05:17.395Z
+current_date: 2026-08-05T18:05:17.395Z
 ---
 
 Start by creating a repository using the conventions of the ecosystem.
 
-`turbo` is built on top of [Workspaces](https://vercel.com/docs/vercel-platform/glossary#workspace), a feature of package managers in the JavaScript ecosystem that allows you to group multiple packages in one repository.
+`turbo` is built on top of [Workspaces](https://vercel.com/docs/glossary#workspace), a feature of package managers in the JavaScript ecosystem that allows you to group multiple packages in one repository.
 
 Following these conventions is important because it allows you to:
 
@@ -49,7 +49,7 @@ You can then review the repository for the characteristics described in this gui
 
 ## Anatomy of a workspace
 
-In JavaScript, a workspace can either be [a single package](../guides/single-package-workspaces.md) or a collection of packages. In these guides, we'll be focusing on [a multi-package workspace](https://vercel.com/docs/vercel-platform/glossary#monorepo), often called a "monorepo".
+In JavaScript, a workspace can either be [a single package](../guides/single-package-workspaces.md) or a collection of packages. In these guides, we'll be focusing on [a multi-package workspace](https://vercel.com/docs/glossary#monorepo), often called a "monorepo".
 
 Below, the structural elements of `create-turbo` that make it a valid workspace are highlighted.
 

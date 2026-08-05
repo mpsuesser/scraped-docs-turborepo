@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/messages/recursive-turbo-invocations
 title: "Recursive `turbo` invocations"
 description: "Learn more about errors with recursive scripts and tasks in Turborepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-08-05T18:05:17.395Z
+current_date: 2026-08-05T18:05:17.395Z
 ---
 
 # Recursive `turbo` invocations
@@ -40,7 +40,7 @@ To resolve this, ensure that the name of the script in `package.json` is not the
 
 ### Package manager Workspace misconfiguration
 
-A misconfigured workspace can make it appear that a [multi-package workspace](https://vercel.com/docs/vercel-platform/glossary#multi-package-workspace) is a single-package workspace. This causes Turborepo to infer that the repository is of the wrong type, causing it to see the script in `package.json` to be recursive.
+A misconfigured workspace can make it appear that a [multi-package workspace](https://vercel.com/docs/glossary#multi-package-workspace) is a single-package workspace. This causes Turborepo to infer that the repository is of the wrong type, causing it to see the script in `package.json` to be recursive.
 
 Your repo can end up in this state in a few ways, with the most common being that the [packages are not defined according to your package manager](../crafting-your-repository/structuring-a-repository.md#specifying-packages-in-a-monorepo). An npm workspace that is missing the `workspaces` field in `package.json` or a pnpm workspace that is missing a `pnpm-workspace.yaml` file can result in this error message.
 

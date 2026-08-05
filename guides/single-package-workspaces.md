@@ -2,13 +2,13 @@
 url: https://turborepo.dev/docs/guides/single-package-workspaces
 title: "Single-package workspaces"
 description: "Use Turborepo's caching and task parallelization in a standalone application without a monorepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-08-05T18:05:17.395Z
+current_date: 2026-08-05T18:05:17.395Z
 ---
 
 Learn how to use Turborepo in a single-package workspace.
 
-While Turborepo is highly effective in [multi-package workspaces](https://vercel.com/docs/vercel-platform/glossary#multi-package-workspace) (commonly referred to as monorepos), it can also be used to make [single-package workspaces](https://vercel.com/docs/vercel-platform/glossary#single-package-workspace) faster.
+While Turborepo is highly effective in [multi-package workspaces](https://vercel.com/docs/glossary#multi-package-workspace) (commonly referred to as monorepos), it can also be used to make [single-package workspaces](https://vercel.com/docs/glossary#single-package-workspace) faster.
 
 Turborepo's most important features work in single-package workspaces including local and [Remote Caching](../core-concepts/remote-caching.md) and task parallelization. Features that don't work are ones that don't make sense in the context of a single package, like package tasks (`app#build`).
 
