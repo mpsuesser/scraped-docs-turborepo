@@ -2,13 +2,13 @@
 url: https://turborepo.dev/docs
 title: "Introduction"
 description: "Learn what Turborepo is, how it solves monorepo scaling problems, and how to navigate the documentation."
-access_date: 2026-08-05T18:05:17.395Z
-current_date: 2026-08-05T18:05:17.395Z
+access_date: 2026-08-17T21:27:25.577Z
+current_date: 2026-08-17T21:27:25.577Z
 ---
 
 ## What is Turborepo?
 
-Turborepo is a high-performance build system for JavaScript and TypeScript codebases. It is designed for scaling monorepos and also makes workflows in [single-package workspaces](guides/single-package-workspaces.md) faster, too.
+Turborepo is the build system for coding agents. It is designed for scaling monorepos and also makes workflows in [single-package workspaces](guides/single-package-workspaces.md) faster, too.
 
 From individual developers to the largest enterprise engineering organizations in the world, Turborepo is saving years of engineering time and millions of dollars in compute costs through a lightweight approach to optimizing the tasks you need to run in your repository.
 
