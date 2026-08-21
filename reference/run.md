@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/run
 title: "run"
 description: "All flags and options for the `turbo run` command used to execute tasks."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-08-21T13:25:13.609Z
+current_date: 2026-08-21T13:25:13.609Z
 ---
 
 Run tasks specified in `turbo.json`.
@@ -521,7 +521,7 @@ turbo run build --profile
 turbo run build --profile=my-profile
 ```
 
-### \---anon-profile
+### \--anon-profile
 
 This flag works the same as `--profile`, but attempts to redacts sensitive information. This is useful for sharing your profiles.
 

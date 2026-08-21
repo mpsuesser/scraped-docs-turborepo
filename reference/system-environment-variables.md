@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/system-environment-variables
 title: "System environment variables"
 description: "Learn about system variables used by Turborepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-08-21T13:25:13.609Z
+current_date: 2026-08-21T13:25:13.609Z
 ---
 
 # System environment variables
@@ -76,7 +76,7 @@ System environment variables are always overridden by flag values provided direc
 
       <td>
         Control reading and writing for cache sources. Uses the same syntax as
-        <code>[--cache](run.md#--cache-options)</code>.
+        <a href="/docs/reference/run#--cache-options"><code>--cache</code></a>.
       </td>
     </tr>
 
@@ -555,7 +555,7 @@ System environment variables are always overridden by flag values provided direc
       </td>
 
       <td>
-        Controls [concurrency](https://turborepo.dev/repo/docs/reference/run#--concurrency-number--percentage) settings in run or watch mode.
+        Controls [concurrency](run.md#--concurrency-number--percentage) settings in run or watch mode.
       </td>
     </tr>
 
