@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/rust
 title: "Rust (Experimental)"
 description: "Discover Cargo workspace crates as Turborepo packages and run native Cargo tasks."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-08-26T23:14:45.913Z
+current_date: 2026-08-26T23:14:45.913Z
 ---
 
 Use experimental native Cargo workspace support with Turborepo.
@@ -160,7 +160,7 @@ With zero configuration, Turborepo creates task hashes using:
 - Root Cargo files
 - Relevant Cargo and compiler environment
 - The resolved external dependency closure from `Cargo.lock`
-- The complete `rustc -vV` identity.
+- The complete `rustc -vV` identity. If Turborepo cannot resolve it, Cargo tasks remain runnable but implicit caching is disabled with a warning.
 
 The built-in `format` task also includes `rustfmt.toml`, `.rustfmt.toml`, and `RUSTFMT` in its derived inputs. Because formatting mutates source files, it defaults to uncached.
 
@@ -171,7 +171,7 @@ Project-specific hashing inputs must be accounted for manually. This includes:
 
 ### Output caching
 
-Automatic output caching stores only the exact final `bin`, `cdylib`, and `staticlib` deliverables. It does not cache Cargo's incremental `target/` state or use profile or target wildcards. Library builds default to `cache: false` because their Cargo-internal artifacts are not stable Turborepo outputs. Enabling library build caching requires an explicit `cache: true`; configure `outputs` as needed to describe restorable artifacts. `outputs` alone does not override the uncached default.
+Automatic output caching stores only the exact final `bin`, `cdylib`, and `staticlib` deliverables. It does not cache Cargo's incremental `target/` state or use profile or target wildcards. Library builds default to `cache: false` because their Cargo-internal artifacts are not stable Turborepo outputs, and Turborepo emits a warning explaining this default. Enabling library build caching requires an explicit `cache: true`; configure `outputs` as needed to describe restorable artifacts. `outputs` alone does not override the uncached default.
 
 Turborepo resolves exact outputs for these layouts:
 
