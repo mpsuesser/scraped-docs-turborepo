@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/rust
 title: "Rust (Experimental)"
 description: "Discover Cargo workspace crates as Turborepo packages and run native Cargo tasks."
-access_date: 2026-08-26T23:14:45.913Z
-current_date: 2026-08-26T23:14:45.913Z
+access_date: 2026-08-27T02:08:19.550Z
+current_date: 2026-08-27T02:08:19.550Z
 ---
 
 Use experimental native Cargo workspace support with Turborepo.
@@ -187,7 +187,7 @@ Untracked inputs are more strict. External, included, or symlinked Cargo configu
 
 ## Limitations
 
-- Only the root virtual Cargo workspace is discovered. Root crates are rejected, nested workspaces are not independently discovered, and resolved external or non-member local path dependencies fail closed.
+- Only the root Cargo workspace is discovered. A package defined in the root `Cargo.toml` participates in task execution, but cannot be a `turbo prune` target because its package directory is the entire repository. Nested workspaces are not independently discovered, and resolved external or non-member local path dependencies fail closed.
 - `cdylib` / `staticlib` -only entrypoints are build-only. Multi-bin crates require both `package.default-run` and an authored task definition for native `run` and `dev`; pass-through arguments cannot supply Cargo's `--bin` option.
 - Automatic artifact caching is deliberately disabled for unresolved output layouts and untracked inputs. Explicit outputs can authorize an unresolved output layout, but untracked inputs require an explicit `cache` setting. Cargo's full `target/` directory is never a task output.
 - The synthetic workspace package has no directory and cannot be passed to `turbo prune`; prune an entrypoint crate instead.
