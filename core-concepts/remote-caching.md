@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/core-concepts/remote-caching
 title: "Remote Caching"
 description: "Share a single Turborepo cache across your team and CI to avoid duplicated work."
-access_date: 2026-08-27T13:03:50.723Z
-current_date: 2026-08-27T13:03:50.723Z
+access_date: 2026-08-27T23:35:55.562Z
+current_date: 2026-08-27T23:35:55.562Z
 ---
 
 Share cache artifacts across machines for even faster builds.
@@ -124,8 +124,8 @@ turbo login --manual
 
 #### OpenAPI specification
 
-- [Human-readable viewer](../openapi.md)
-- [JSON](https://turborepo.dev/api/remote-cache-spec)
+- [Human-readable viewer](https://turborepo.dev/en/docs/openapi)
+- [JSON](https://turborepo.dev/en/api/remote-cache-spec)
 
 At this time, all versions of `turbo` are compatible with the `v8` endpoints.
 
