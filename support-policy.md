@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/support-policy
 title: "Support policy"
 description: "Supported package managers, platforms, Node.js versions, and LTS policy for Turborepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-03T21:18:59.663Z
+current_date: 2026-09-03T21:18:59.663Z
 ---
 
 ## Package managers
@@ -92,7 +92,7 @@ We encourage you to help us test experimental APIs in side projects, proof-of-co
 
 - [`turbo boundaries`](reference/boundaries.md) and [Tags](reference/boundaries.md#tags)
 - [`--experimental-write-cache` for `turbo watch`](reference/watch.md#caching)
-- [`--output=json` for `turbo ls --affected` flag](reference/ls.md)
+- [`--output` for `turbo ls`](reference/ls.md#--output-format)
 
 ### Deprecated
 

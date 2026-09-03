@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/ls
 title: "ls"
 description: "All flags and options for the `turbo ls` command that lists packages in your monorepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-03T21:18:59.663Z
+current_date: 2026-09-03T21:18:59.663Z
 ---
 
 List packages in your monorepo.
@@ -27,6 +27,15 @@ turbo ls web @repo/ui [package(s)]
 ```
 
 ## Flags
+
+### \--filter (-F)
+
+Use pnpm-style package selectors to narrow the package list. Same syntax as [`turbo run --filter`](run.md#--filter-string).
+
+```
+turbo ls --filter=web...
+turbo ls -F my-app...
+```
 
 ### \--affected
 
