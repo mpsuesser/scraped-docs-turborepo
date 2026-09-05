@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/python
 title: "Python (Experimental)"
 description: "Discover uv workspace members as Turborepo packages and run native uv tasks."
-access_date: 2026-09-03T21:18:59.663Z
-current_date: 2026-09-03T21:18:59.663Z
+access_date: 2026-09-05T05:49:08.041Z
+current_date: 2026-09-05T05:49:08.041Z
 ---
 
 Use experimental native uv workspace support with Turborepo.
@@ -78,7 +78,11 @@ Turborepo also detects common Python tools declared in `[project].dependencies`,
 | Pyright | `turbo check`, `turbo check:pyright` | `uv run --active --frozen --package <name> pyright <dir>` |
 | pytest | `turbo test` | `uv run --active --frozen --package <name> pytest <dir>` |
 
-Tools declared in the root `pyproject.toml` apply to every member unless a member declares its own tool for that role, and root-declared tools run once without `--package`. `lint` and `check` run every detected tool for that role. `format` runs one formatter, preferring Ruff over Black. A root pytest declaration creates one repository-wide `test` task on the workspace package; a member declaration creates `test` for that member only.
+Tools declared in the root `pyproject.toml` apply to every member unless a member declares its own tool for that role, and root-declared tools run once without `--package`. `lint` and `check` run every detected tool for that role.
+
+- `format` runs one formatter, preferring Ruff over Black.
+- A root pytest declaration creates one repository-wide `test` task running `uv run --active --frozen --all-packages pytest`, installing src-layout workspace members before collection. A member declaration creates `test` for that member only. When both declare pytest, both scopes run.
+- Without a declared type checker, the built-in `check` task runs uv's bundled ty type checker. Declared mypy, ty, or Pyright tools take precedence when present.
 
 You can use [`--filter`](../../reference/run.md#--filter-string) to target a specific member in the workspace.
 
@@ -137,7 +141,7 @@ With zero configuration, Turborepo creates task hashes using:
 - The resolved external dependency closure from `uv.lock`, scoped to each member
 - The uv and Python interpreter identities. If Turborepo cannot resolve them, uv tasks remain runnable but implicit caching is disabled with a warning.
 
-Automatic inputs exclude `.venv`, `__pycache__`, and tool cache directories such as `.ruff_cache`, `.mypy_cache`, and `.pytest_cache`. Because formatting mutates source files, `format` tasks default to uncached. The fallback `uv check` task is also uncached because uv resolves its bundled checker independently of `uv.lock`.
+Automatic inputs exclude `.venv`, `__pycache__`, and tool cache directories such as `.ruff_cache`, `.mypy_cache`, and `.pytest_cache` at any depth. Because formatting mutates source files, `format` tasks default to uncached. The built-in `uv check` task is cacheable when Turborepo can identify uv and Python.
 
 Project-specific hashing inputs must be accounted for manually. This includes:
 
