@@ -2,11 +2,11 @@
 url: https://turborepo.dev/docs/guides/tools
 title: "Tools"
 description: "Browse guides for integrating popular development tools with Turborepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-10T14:21:32.981Z
+current_date: 2026-09-10T14:21:32.981Z
 ---
 
-[Guides](../guides.md)
+[Guides](../guides.md) Tools
 
 Learn how to use your favorite tools in a monorepo.
 
