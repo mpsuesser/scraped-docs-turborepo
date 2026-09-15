@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/prune
 title: "prune"
 description: "All flags and options for the `turbo prune` command that generates a partial monorepo for a target package."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-15T22:22:09.020Z
+current_date: 2026-09-15T22:22:09.020Z
 ---
 
 Generate a partial monorepo for a target package. The output will be placed into a directory named `out` containing the following:
@@ -15,6 +15,14 @@ Generate a partial monorepo for a target package. The output will be placed into
 ```
 turbo prune [package]
 ```
+
+### Task dependencies
+
+By default, `turbo prune` follows package dependencies, not task dependencies. An explicit dependency such as `"dependsOn": ["mycrate#build:types"]` does not by itself retain `mycrate` in the pruned output.
+
+Enable [`futureFlags.affectedUsingTaskInputs`](configuration.md#affectedusingtaskinputs) to also retain packages required by task dependencies, including dependencies across enabled toolchains. Their package dependencies and inherited Package Configurations are retained as well.
+
+The command still accepts package names, not task names. It considers all configured tasks of retained packages, not only `build`. With `--production`, package development dependencies are excluded unless they are otherwise required, for example by an explicit task dependency.
 
 ### Example
 

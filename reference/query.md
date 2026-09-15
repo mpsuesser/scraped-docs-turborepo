@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/query
 title: "query"
 description: "All flags and options for the `turbo query` command that runs GraphQL queries against your monorepo."
-access_date: 2026-09-14T19:48:42.431Z
-current_date: 2026-09-14T19:48:42.431Z
+access_date: 2026-09-15T22:22:09.020Z
+current_date: 2026-09-15T22:22:09.020Z
 ---
 
 Run GraphQL queries against your monorepo.
@@ -35,6 +35,14 @@ When passed a file path, the command will read the file and run the query.
 ```
 turbo query query.gql
 ```
+
+## Affected packages
+
+By default, `affectedPackages` follows the Package Graph. An explicit `package#task` dependency does not create a package dependency.
+
+With [`futureFlags.affectedUsingTaskInputs`](configuration.md#affectedusingtaskinputs) enabled, `affectedPackages` instead returns the unique packages that own affected tasks. It matches changed files against task `inputs` and follows the Task Graph to dependent tasks, including across enabled toolchains. Packages with no affected tasks are omitted. Unchanged prerequisites are not included merely because an affected task needs them.
+
+This also applies to `turbo query affected --packages`. Use `affectedTasks` when you need the individual tasks rather than their package names, and `withDependencies` when you need their execution prerequisites.
 
 ## Task planning
 
