@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/go
 title: "Go (Experimental)"
 description: "Discover go.work modules as Turborepo packages and run native Go tasks."
-access_date: 2026-09-07T07:30:22.241Z
-current_date: 2026-09-07T07:30:22.241Z
+access_date: 2026-09-15T03:49:44.703Z
+current_date: 2026-09-15T03:49:44.703Z
 ---
 
 Use experimental native Go workspace support with Turborepo.
@@ -61,7 +61,9 @@ The synthetic `go-workspace` scope depends on every member and hosts workspace-w
 | Any module | `turbo test` | `go test ./...` |
 | Any module | `turbo lint` | `go vet ./...` |
 | Any module | `turbo format` | `go fmt ./...` |
-| `go-workspace` | `test`, `lint`, `format` | The same command with every member directory pattern |
+| `go-workspace` | `test`, `lint` | The same command with every member directory pattern |
+
+Running `turbo run format` from the repository root runs `go fmt ./...` in each member module. There is no built-in `go-workspace#format` task because `go fmt` does not support cross-module workspace patterns. Formatting stays package-aware, leaving `testdata` and nested non-member modules untouched.
 
 Turborepo does not guess when a module has zero or multiple runnable `main` packages. Those modules do not receive `dev`.
 
