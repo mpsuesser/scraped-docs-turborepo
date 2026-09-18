@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/core-concepts/internal-packages
 title: "Internal Packages"
 description: "Understand how internal packages work and their compilation strategies for sharing code across your monorepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to build Internal Packages in your monorepo.
@@ -43,6 +43,26 @@ Internal Packages are used in your repository by installing them in `package.jso
 ```
 
 #### bun
+
+```
+{
+  "dependencies": {
+    "@repo/ui": "workspace:*"
+  }
+}
+```
+
+#### nub
+
+```
+{
+  "dependencies": {
+    "@repo/ui": "workspace:*"
+  }
+}
+```
+
+#### aube
 
 ```
 {

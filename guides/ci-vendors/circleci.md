@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/circleci
 title: "CircleCI"
 description: "Configure CircleCI workflows to run Turborepo tasks with Remote Caching."
-access_date: 2026-08-04T15:46:32.475Z
-current_date: 2026-08-04T15:46:32.475Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to use CircleCI with Turborepo.
@@ -160,6 +160,68 @@ jobs:
           TURBO_UI: "false"
       - run:
         command: bun run test
+        environment:
+          TURBO_UI: "false"
+```
+
+#### nub
+
+```
+version: 2.1
+orbs:
+  node: circleci/node@5.0.2
+workflows:
+  test:
+    jobs:
+      - test
+jobs:
+  test:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+        command: npm i -g nub
+        environment:
+          TURBO_UI: "false"
+      - run:
+        command: nub run build
+        environment:
+          TURBO_UI: "false"
+      - run:
+        command: nub run test
+        environment:
+          TURBO_UI: "false"
+```
+
+#### aube
+
+```
+version: 2.1
+orbs:
+  node: circleci/node@5.0.2
+workflows:
+  test:
+    jobs:
+      - test
+jobs:
+  test:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+        command: npm i -g aube
+        environment:
+          TURBO_UI: "false"
+      - run:
+        command: aube run build
+        environment:
+          TURBO_UI: "false"
+      - run:
+        command: aube run test
         environment:
           TURBO_UI: "false"
 ```

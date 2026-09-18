@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/caching
 title: "Caching"
 description: "Configure task caching to avoid repeating work, using fingerprinting for inputs and restoring outputs from cache."
-access_date: 2026-08-04T15:46:32.475Z
-current_date: 2026-08-04T15:46:32.475Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Turborepo uses caching to speed up builds, ensuring you **never do the same work twice**. When your task is cacheable, Turborepo will restore the results of your task from cache using a fingerprint from the first time the task ran.
@@ -59,6 +59,18 @@ npm run build
 
 ```
 bun run build
+```
+
+#### nub
+
+```
+nub run build
+```
+
+#### aube
+
+```
+aube run build
 ```
 
 This will result in a cache miss, since you've never ran `turbo` before with this [set of inputs](#task-inputs) in this repository. The inputs are turned into a hash to check for in your local filesystem cache or in [the Remote Cache](../core-concepts/remote-caching.md).

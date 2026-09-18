@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/single-package-workspaces
 title: "Single-package workspaces"
 description: "Use Turborepo's caching and task parallelization in a standalone application without a monorepo."
-access_date: 2026-08-05T18:05:17.395Z
-current_date: 2026-08-05T18:05:17.395Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to use Turborepo in a single-package workspace.
@@ -38,6 +38,18 @@ npm install turbo --save-dev
 
 ```
 bun install turbo --dev
+```
+
+#### nub
+
+```
+nub add turbo --save-dev
+```
+
+#### aube
+
+```
+aube add turbo --save-dev
 ```
 
 ### Running a package.json script using global turbo (optional)

@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/managing-dependencies
 title: "Managing dependencies"
 description: "Install, organize, and maintain external and internal dependencies across packages in your workspace."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to manage dependencies in your monorepo's workspace.
@@ -45,6 +45,28 @@ Learn how to manage dependencies in your monorepo's workspace.
 ```
 
 #### bun
+
+```
+{
+  "dependencies": {
+    "next": "latest", // External dependency
+    "@repo/ui": "workspace:*" // Internal dependency
+  }
+}
+```
+
+#### nub
+
+```
+{
+  "dependencies": {
+    "next": "latest", // External dependency
+    "@repo/ui": "workspace:*" // Internal dependency
+  }
+}
+```
+
+#### aube
 
 ```
 {
@@ -106,6 +128,24 @@ cd packages/ui && bun install jest --dev
 ```
 
 [→ bun documentation](https://bun.sh/docs/install/workspaces)
+
+#### nub
+
+```
+cd apps/web && nub add jest --save-dev
+cd packages/ui && nub add jest --save-dev
+```
+
+[→ nub documentation](https://nub.dev/)
+
+#### aube
+
+```
+cd apps/web && aube add jest --save-dev
+cd packages/ui && aube add jest --save-dev
+```
+
+[→ aube documentation](https://aube.jdx.dev/)
 
 This practice has several benefits:
 
@@ -197,6 +237,22 @@ bun update typescript --latest
 ```
 
 [\-> Bun documentation](https://bun.sh/docs/cli/update)
+
+#### nub
+
+```
+nub update typescript --latest
+```
+
+[\-> nub documentation](https://nub.dev/)
+
+#### aube
+
+```
+aube update typescript --latest
+```
+
+[\-> aube documentation](https://aube.jdx.dev/)
 
 #### pnpm catalogs
 

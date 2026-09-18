@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/eslint
 title: "ESLint"
 description: "Configure ESLint for consistent linting across your monorepo packages with a shared config."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to use ESLint in a monorepo.
@@ -89,6 +89,26 @@ In our `web` app, we first need to add `@repo/eslint-config` as a dependency.
 ```
 
 #### bun
+
+```
+{
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*"
+  }
+}
+```
+
+#### nub
+
+```
+{
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*"
+  }
+}
+```
+
+#### aube
 
 ```
 {
@@ -215,6 +235,26 @@ In our `web` app, we first need to add `@repo/eslint-config` as a dependency.
 ```
 
 #### bun
+
+```
+{
+  "dependencies": {
+    "@repo/eslint-config": "workspace:*"
+  }
+}
+```
+
+#### nub
+
+```
+{
+  "dependencies": {
+    "@repo/eslint-config": "workspace:*"
+  }
+}
+```
+
+#### aube
 
 ```
 {

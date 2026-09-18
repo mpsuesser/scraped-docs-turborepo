@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/travis-ci
 title: "Travis CI"
 description: "Configure Travis CI to run Turborepo tasks with Remote Caching."
-access_date: 2026-08-04T15:46:32.475Z
-current_date: 2026-08-04T15:46:32.475Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 The following example shows how to use Turborepo with [Travis CI](https://www.travis-ci.com/).
@@ -113,6 +113,46 @@ script:
   - bun run build
 script:
   - bun run test
+```
+
+#### nub
+
+```
+language: node_js
+node_js:
+  - lts/*
+cache:
+  npm: false
+  directories:
+    - "~/.pnpm-store"
+before_install:
+  - npm install -g nub
+install:
+  - nub install
+script:
+  - nub run build
+script:
+  - nub run test
+```
+
+#### aube
+
+```
+language: node_js
+node_js:
+  - lts/*
+cache:
+  npm: false
+  directories:
+    - "~/.pnpm-store"
+before_install:
+  - npm install -g aube
+install:
+  - aube install
+script:
+  - aube run build
+script:
+  - aube run test
 ```
 
 ## Remote Caching

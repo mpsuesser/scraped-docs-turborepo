@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/frameworks/nextjs
 title: "Next.js"
 description: "Add and configure Next.js applications in your Turborepo monorepo."
-access_date: 2026-08-05T18:05:17.395Z
-current_date: 2026-08-05T18:05:17.395Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to use Next.js in a monorepo.
@@ -38,6 +38,18 @@ npx create-turbo@latest
 bunx create-turbo@latest
 ```
 
+#### nub
+
+```
+nubx create-turbo@latest
+```
+
+#### aube
+
+```
+aubx create-turbo@latest
+```
+
 ## Adding a Next.js application to an existing repository
 
 Use [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) to set up a new Next.js application in a package. From the root of your repository, run:
@@ -64,6 +76,18 @@ npx create-next-app@latest apps/my-app
 
 ```
 bunx create-next-app@latest apps/my-app
+```
+
+#### nub
+
+```
+nubx create-next-app@latest apps/my-app
+```
+
+#### aube
+
+```
+aubx create-next-app@latest apps/my-app
 ```
 
 ## Integrating with your repository
@@ -104,6 +128,28 @@ To add [Internal Packages](../../core-concepts/internal-packages.md) to your new
 ```
 
 #### bun
+
+```
+{
+ "name": "my-app",
+  "dependencies": {
++   "@repo/ui": "workspace:*"
+  }
+}
+```
+
+#### nub
+
+```
+{
+ "name": "my-app",
+  "dependencies": {
++   "@repo/ui": "workspace:*"
+  }
+}
+```
+
+#### aube
 
 ```
 {

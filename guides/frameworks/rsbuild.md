@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/frameworks/rsbuild
 title: "Rsbuild"
 description: "Add and configure Rsbuild applications in your Turborepo monorepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn more about using Rsbuild in your monorepo.
@@ -38,6 +38,18 @@ npx create-turbo@latest -e with-rsbuild
 bunx create-turbo@latest -e with-rsbuild
 ```
 
+#### nub
+
+```
+nubx create-turbo@latest -e with-rsbuild
+```
+
+#### aube
+
+```
+aubx create-turbo@latest -e with-rsbuild
+```
+
 ## Adding an Rsbuild application to an existing repository
 
 Use [`create-rsbuild`](https://rsbuild.rs/guide/start/quick-start) to set up a new Rsbuild application in a package. From the root of your repository, run:
@@ -64,6 +76,18 @@ npx -y create-rsbuild@latest apps/my-app --template react
 
 ```
 bunx create-rsbuild@latest apps/my-app --template react
+```
+
+#### nub
+
+```
+nubx create-rsbuild@latest apps/my-app --template react
+```
+
+#### aube
+
+```
+aubx create-rsbuild@latest apps/my-app --template react
 ```
 
 ## Integrating with your repository
@@ -104,6 +128,28 @@ To add [Internal Packages](../../core-concepts/internal-packages.md) to your new
 ```
 
 #### bun
+
+```
+{
+ "name": "my-app",
+  "dependencies": {
++   "@repo/ui": "workspace:*"
+  }
+}
+```
+
+#### nub
+
+```
+{
+ "name": "my-app",
+  "dependencies": {
++   "@repo/ui": "workspace:*"
+  }
+}
+```
+
+#### aube
 
 ```
 {
@@ -160,6 +206,18 @@ npx create-turbo@latest -e with-rsbuild-module-federation
 
 ```
 bunx create-turbo@latest -e with-rsbuild-module-federation
+```
+
+#### nub
+
+```
+nubx create-turbo@latest -e with-rsbuild-module-federation
+```
+
+#### aube
+
+```
+aubx create-turbo@latest -e with-rsbuild-module-federation
 ```
 
 The example includes a `react-host` Rsbuild app, a `react-remote` Rsbuild app, and an `@mf-rsbuild-example/shared-ui` package. The host consumes the remote's exposed `./remote-app` module through `mf-manifest.json`, and both apps share React dependencies through [Module Federation](https://module-federation.io/).

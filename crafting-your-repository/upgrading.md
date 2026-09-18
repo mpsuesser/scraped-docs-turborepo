@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/upgrading
 title: "Upgrading"
 description: "Migrate from Turborepo 1.x to 2.0 using codemods and handle breaking changes."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to upgrade \`turbo\` to get the latest improvements to your repository.
@@ -36,6 +36,18 @@ npx @turbo/codemod migrate
 
 ```
 bunx @turbo/codemod migrate
+```
+
+#### nub
+
+```
+nubx @turbo/codemod migrate
+```
+
+#### aube
+
+```
+aubx @turbo/codemod migrate
 ```
 
 This will update your `turbo.json` (s) for many of the breaking changes from 1.x to 2.0.
@@ -95,6 +107,32 @@ Turborepo 2.0 requires that your Workspace define a package manager declaration 
 +   "packageManager": {
 +     "name": "bun",
 +     "version": "1.2.0"
++   }
++ }
+}
+```
+
+#### nub
+
+```
+{
++ "devEngines": {
++   "packageManager": {
++     "name": "nub",
++     "version": "0.8.3"
++   }
++ }
+}
+```
+
+#### aube
+
+```
+{
++ "devEngines": {
++   "packageManager": {
++     "name": "aube",
++     "version": "2.2.9"
 +   }
 + }
 }

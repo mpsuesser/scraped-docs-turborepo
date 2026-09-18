@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/structuring-a-repository
 title: "Structuring a repository"
 description: "Set up a multi-package workspace with the directory structure, package.json files, and lockfile that Turborepo expects."
-access_date: 2026-08-05T18:05:17.395Z
-current_date: 2026-08-05T18:05:17.395Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Start by creating a repository using the conventions of the ecosystem.
@@ -43,6 +43,18 @@ npx create-turbo@latest
 
 ```
 bunx create-turbo@latest
+```
+
+#### nub
+
+```
+nubx create-turbo@latest
+```
+
+#### aube
+
+```
+aubx create-turbo@latest
 ```
 
 You can then review the repository for the characteristics described in this guide.
@@ -90,6 +102,26 @@ package.json
 package.json
 
 bun.lock
+
+turbo.json
+
+package.json
+
+#### nub
+
+package.json
+
+nub.lock
+
+turbo.json
+
+package.json
+
+#### aube
+
+package.json
+
+aube-lock.yaml
 
 turbo.json
 
@@ -157,6 +189,29 @@ packages:
 ```
 
 [→ bun workspace documentation](https://bun.sh/docs/install/workspaces)
+
+#### nub
+
+```
+{
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
+```
+
+[→ nub documentation](https://nub.dev/)
+
+#### aube
+
+```
+packages:
+  - "apps/*"
+  - "packages/*"
+```
+
+[→ aube workspace documentation](https://aube.jdx.dev/)
 
 Using this configuration, every directory **with a `package.json`** in the `apps` or `packages` directories will be considered a package.
 
@@ -257,6 +312,37 @@ The root `package.json` is the base for your workspace. Below is a common exampl
   },
   "workspaces": ["apps/*", "packages/*"]
 }
+```
+
+#### nub
+
+```
+{
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint"
+  },
+  "devDependencies": {
+    "turbo": "latest"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "nub",
+      "version": "0.8.3"
+    }
+  },
+  "workspaces": ["apps/*", "packages/*"]
+}
+```
+
+#### aube
+
+```
+packages:
+  - "apps/*"
+  - "packages/*"
 ```
 
 ### Root turbo.json

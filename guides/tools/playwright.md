@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/playwright
 title: "Playwright"
 description: "Set up Playwright end-to-end test suites with proper caching and dependency graph configuration."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to use Playwright in a Turborepo.
@@ -119,6 +119,28 @@ You can also create a common package for shared utilities that you need in your 
 ```
 
 #### bun
+
+```
+{
+  "name": "@repo/playwright-utilities",
+  "peerDependencies": {
+    "playwright": "workspace:*"
+  }
+}
+```
+
+#### nub
+
+```
+{
+  "name": "@repo/playwright-utilities",
+  "peerDependencies": {
+    "playwright": "workspace:*"
+  }
+}
+```
+
+#### aube
 
 ```
 {

@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/getting-started/installation
 title: "Installation"
 description: "Install Turborepo globally and in your repository using your preferred package manager."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to get started with Turborepo.
@@ -32,6 +32,18 @@ npx create-turbo@latest
 
 ```
 bunx create-turbo@latest
+```
+
+#### nub
+
+```
+nubx create-turbo@latest
+```
+
+#### aube
+
+```
+aubx create-turbo@latest
 ```
 
 The starter repository will have:
@@ -73,6 +85,18 @@ npm install turbo --global
 bun install turbo --global
 ```
 
+#### nub
+
+```
+nub add turbo --global
+```
+
+#### aube
+
+```
+aube add turbo --global
+```
+
 Once installed globally, you can run your scripts through `turbo` from your terminal, quickly running one-off commands to use within your repository. For example:
 
 - `turbo build`: Run `build` scripts following your repository's dependency graph
@@ -112,6 +136,18 @@ npm install turbo --save-dev
 
 ```
 bun install turbo --dev
+```
+
+#### nub
+
+```
+nub add turbo --save-dev
+```
+
+#### aube
+
+```
+aube add turbo --save-dev
 ```
 
 You can continue to use your global installation of `turbo` to run commands. Global `turbo` will defer to the local version of your repository if it exists.

@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/buildkite
 title: "Buildkite"
 description: "Configure Buildkite pipelines to run Turborepo tasks with Remote Caching."
-access_date: 2026-08-04T15:46:32.475Z
-current_date: 2026-08-04T15:46:32.475Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to use Buildkite with Turborepo.
@@ -102,6 +102,36 @@ steps:
     command: |
       bun install
       bun run build
+```
+
+#### nub
+
+```
+steps:
+  - label: ":test_tube: Test"
+    command: |
+      nub install
+      nub run test
+
+  - label: ":hammer: Build"
+    command: |
+      nub install
+      nub run build
+```
+
+#### aube
+
+```
+steps:
+  - label: ":test_tube: Test"
+    command: |
+      aube install
+      aube run test
+
+  - label: ":hammer: Build"
+    command: |
+      aube install
+      aube run build
 ```
 
 ## Create a Pipeline

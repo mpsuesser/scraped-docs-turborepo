@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/storybook
 title: "Storybook"
 description: "Set up Storybook for developing and documenting UI components in your monorepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to use Storybook in a Turborepo.
@@ -38,6 +38,18 @@ npx create-turbo@latest -e design-system
 bunx create-turbo@latest -e design-system
 ```
 
+#### nub
+
+```
+nubx create-turbo@latest -e design-system
+```
+
+#### aube
+
+```
+aubx create-turbo@latest -e design-system
+```
+
 ## Guide
 
 ### Create a monorepo
@@ -66,6 +78,18 @@ npx create-turbo@latest
 
 ```
 bunx create-turbo@latest
+```
+
+#### nub
+
+```
+nubx create-turbo@latest
+```
+
+#### aube
+
+```
+aubx create-turbo@latest
 ```
 
 ### Create a directory for the app
@@ -105,6 +129,18 @@ npm create storybook@latest
 bun create storybook@latest
 ```
 
+#### nub
+
+```
+nubx create-storybook@latest
+```
+
+#### aube
+
+```
+aubx create-storybook@latest
+```
+
 Follow the prompts to create an application. For the rest of this guide, we'll assume React and TypeScript.
 
 ### Add your UI kit to Storybook
@@ -133,6 +169,18 @@ npm install @repo/ui --workspace=storybook
 
 ```
 cd apps/storybook && bun install @repo/ui
+```
+
+#### nub
+
+```
+cd apps/storybook && nub add @repo/ui
+```
+
+#### aube
+
+```
+cd apps/storybook && aube add @repo/ui
 ```
 
 ### Set up a story for your Button component
@@ -262,6 +310,18 @@ npm install @storybook/react --workspace=@repo/ui --save-dev
 
 ```
 cd packages/ui && bun install @storybook/react --dev
+```
+
+#### nub
+
+```
+cd packages/ui && nub add @storybook/react --save-dev
+```
+
+#### aube
+
+```
+cd packages/ui && aube add @storybook/react --save-dev
 ```
 
 #### Configure caching

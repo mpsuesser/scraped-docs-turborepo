@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools
 title: "Tools"
 description: "Browse guides for integrating popular development tools with Turborepo."
-access_date: 2026-09-10T14:21:32.981Z
-current_date: 2026-09-10T14:21:32.981Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 [Guides](../guides.md) Tools
@@ -23,6 +23,8 @@ Turborepo works with **all of your favorite tooling**. Below, you'll find guides
 ### [Oxc (oxlint, oxfmt)](tools/oxc.md)
 
 ### [Prisma](tools/prisma.md)
+
+### [Go (experimental)](tools/go.md)
 
 ### [Rust (experimental)](tools/rust.md)
 

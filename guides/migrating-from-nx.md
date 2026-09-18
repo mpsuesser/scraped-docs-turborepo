@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/migrating-from-nx
 title: "Migrating from Nx"
 description: "Step-by-step instructions for migrating your Nx monorepo to Turborepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to migrate to Turborepo from Nx.
@@ -187,6 +187,21 @@ packages:
 }
 ```
 
+#### nub
+
+```
+{
+  "workspaces": ["apps/*"]
+}
+```
+
+#### aube
+
+```
+packages:
+  - "apps/*"
+```
+
 ### Step 3: Add a package.json to the application
 
 Rather than adding additional configuration files like `project.json`, Turborepo uses the standard `package.json` file.
@@ -270,6 +285,32 @@ The root package.json needs to have a package manager declaration. We recommend 
 }
 ```
 
+#### nub
+
+```
+{
+  "devEngines": {
+    "packageManager": {
+      "name": "nub",
+      "version": "0.8.3"
+    }
+  }
+}
+```
+
+#### aube
+
+```
+{
+  "devEngines": {
+    "packageManager": {
+      "name": "aube",
+      "version": "2.2.9"
+    }
+  }
+}
+```
+
 ### Step 6: Run you package manager's install command
 
 Update your lockfile by running your installation command.
@@ -296,6 +337,18 @@ npm install
 
 ```
 bun install
+```
+
+#### nub
+
+```
+nub install
+```
+
+#### aube
+
+```
+aube install
 ```
 
 Once you've done this, you should see a lockfile diff, indicating that the package has been added to the package manager's workspace.
@@ -328,6 +381,18 @@ npm install turbo --save-dev
 bun install turbo --dev
 ```
 
+#### nub
+
+```
+nub add turbo --save-dev
+```
+
+#### aube
+
+```
+aube add turbo --save-dev
+```
+
 You can also optionally install `turbo` globally for added convenience when working with Turborepo.
 
 #### pnpm
@@ -352,6 +417,18 @@ npm install turbo --global
 
 ```
 bun install turbo --global
+```
+
+#### nub
+
+```
+nub add turbo --global
+```
+
+#### aube
+
+```
+aube add turbo --global
 ```
 
 ### Step 8: Add a turbo.json
@@ -399,6 +476,18 @@ npx turbo run build
 
 ```
 bunx turbo run build
+```
+
+#### nub
+
+```
+nubx turbo run build
+```
+
+#### aube
+
+```
+aubx turbo run build
 ```
 
 ### Step 10: Enable Remote Caching (optional)

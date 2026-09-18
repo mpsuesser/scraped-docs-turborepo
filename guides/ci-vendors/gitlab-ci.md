@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/gitlab-ci
 title: "GitLab CI"
 description: "Configure GitLab CI pipelines to run Turborepo tasks with Remote Caching."
-access_date: 2026-08-04T15:46:32.475Z
-current_date: 2026-08-04T15:46:32.475Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to use GitLab CI with Turborepo.
@@ -120,6 +120,48 @@ script: - bun run build
 
 test:
 script: - bun run test
+```
+
+#### nub
+
+```
+default:
+  image: node:20
+  cache:
+    key:
+      files:
+        - nub.lock
+    paths:
+      - node_modules/
+  before_script:
+      - nub install
+
+build:
+script: - nub run build
+
+test:
+script: - nub run test
+```
+
+#### aube
+
+```
+default:
+  image: node:20
+  cache:
+    key:
+      files:
+        - aube-lock.yaml
+    paths:
+      - node_modules/
+  before_script:
+      - aube install
+
+build:
+script: - aube run build
+
+test:
+script: - aube run test
 ```
 
 ## Remote Caching

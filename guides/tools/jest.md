@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/jest
 title: "Jest"
 description: "Set up Jest test suites across monorepo packages with Turborepo caching and parallelization."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to use Jest in a Turborepo.
@@ -44,6 +44,20 @@ npm install jest --workspace=web --workspace=@repo/ui --save-dev
 ```
 cd apps/web && bun install jest --dev
 cd packages/ui && bun install jest --dev
+```
+
+#### nub
+
+```
+cd apps/web && nub add jest --save-dev
+cd packages/ui && nub add jest --save-dev
+```
+
+#### aube
+
+```
+cd apps/web && aube add jest --save-dev
+cd packages/ui && aube add jest --save-dev
 ```
 
 Both the `apps/web` and `packages/ui` have their own test suites, so we'll add a `test` script to their `package.json`:

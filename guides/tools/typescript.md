@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/typescript
 title: "TypeScript"
 description: "Share TypeScript configuration, set up compilation, and enable fast type checking across your monorepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to use TypeScript in a monorepo.
@@ -40,6 +40,18 @@ npx create-turbo@latest
 
 ```
 bunx create-turbo@latest
+```
+
+#### nub
+
+```
+nubx create-turbo@latest
+```
+
+#### aube
+
+```
+aubx create-turbo@latest
 ```
 
 ### Use a base tsconfig file
@@ -117,6 +129,28 @@ First, install the `@repo/typescript-config` package into your package:
 ```
 
 #### bun
+
+```
+{
+  "devDependencies": {
+     "@repo/typescript-config": "workspace:*",
+     "typescript": "latest"
+  }
+}
+```
+
+#### nub
+
+```
+{
+  "devDependencies": {
+     "@repo/typescript-config": "workspace:*",
+     "typescript": "latest"
+  }
+}
+```
+
+#### aube
 
 ```
 {

@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/frameworks/nuxt
 title: "Nuxt"
 description: "Add and configure Nuxt applications in your Turborepo monorepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn more about using Nuxt in your monorepo.
@@ -38,6 +38,18 @@ npx create-turbo@latest -e with-vue-nuxt
 bunx create-turbo@latest -e with-vue-nuxt
 ```
 
+#### nub
+
+```
+nubx create-turbo@latest -e with-vue-nuxt
+```
+
+#### aube
+
+```
+aubx create-turbo@latest -e with-vue-nuxt
+```
+
 ## Adding a Nuxt application to an existing repository
 
 Use [Nuxi](https://www.npmjs.com/package/nuxi), Nuxt's CLI, to set up a new Nuxt application in a package. From the root of your repository, run:
@@ -64,6 +76,18 @@ npx nuxi@latest init apps/my-app
 
 ```
 bunx nuxi@latest init apps/my-app
+```
+
+#### nub
+
+```
+nubx nuxi@latest init apps/my-app
+```
+
+#### aube
+
+```
+aubx nuxi@latest init apps/my-app
 ```
 
 ## Integrating with your repository
@@ -104,6 +128,28 @@ To add [Internal Packages](../../core-concepts/internal-packages.md) to your new
 ```
 
 #### bun
+
+```
+{
+ "name": "my-app",
+  "dependencies": {
++   "@repo/ui": "workspace:*"
+  }
+}
+```
+
+#### nub
+
+```
+{
+ "name": "my-app",
+  "dependencies": {
++   "@repo/ui": "workspace:*"
+  }
+}
+```
+
+#### aube
 
 ```
 {

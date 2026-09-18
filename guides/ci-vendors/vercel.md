@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/vercel
 title: "Vercel"
 description: "Deploy your Turborepo on Vercel with zero-config Remote Caching."
-access_date: 2026-08-05T18:05:17.395Z
-current_date: 2026-08-05T18:05:17.395Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to use Turborepo on Vercel.
@@ -49,5 +49,21 @@ You can speed up installs by only installing the dependencies for the applicatio
 ```
 {
   "installCommand": "bun install --filter web"
+}
+```
+
+#### nub
+
+```
+{
+  "installCommand": "nub install --filter web"
+}
+```
+
+#### aube
+
+```
+{
+  "installCommand": "aube install --filter web"
 }
 ```

@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/creating-an-internal-package
 title: "Creating an Internal Package"
 description: "Build a new internal package from scratch to share code across your monorepo."
-access_date: 2026-08-04T15:46:32.475Z
-current_date: 2026-08-04T15:46:32.475Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to create an Internal Package for your monorepo.
@@ -134,6 +134,60 @@ Next, create the `package.json` for the package. By adding this file, you'll ful
 }
 ```
 
+#### nub
+
+```
+{
+  "name": "@repo/math",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "exports": {
+    "./add": {
+      "types": "./src/add.ts",
+      "default": "./dist/add.js"
+    },
+    "./subtract": {
+      "types": "./src/subtract.ts",
+      "default": "./dist/subtract.js"
+    }
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "typescript": "latest"
+  }
+}
+```
+
+#### aube
+
+```
+{
+  "name": "@repo/math",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "exports": {
+    "./add": {
+      "types": "./src/add.ts",
+      "default": "./dist/add.js"
+    },
+    "./subtract": {
+      "types": "./src/subtract.ts",
+      "default": "./dist/subtract.js"
+    }
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "typescript": "latest"
+  }
+}
+```
+
 Let's break down this `package.json` piece-by-piece:
 
 - **`name`**: This is the most critical field for package discoverability. The value `@repo/math` becomes the exact identifier used in import statements throughout your workspace. If you change this name, you must update all import statements accordingly.
@@ -222,6 +276,28 @@ You're ready to use your new package in an application. Let's add it to the `web
 ```
 
 #### bun
+
+```
+"dependencies": {
++   "@repo/math": "workspace:*",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+```
+
+#### nub
+
+```
+"dependencies": {
++   "@repo/math": "workspace:*",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+```
+
+#### aube
 
 ```
 "dependencies": {

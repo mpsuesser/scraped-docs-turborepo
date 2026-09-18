@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/tailwind
 title: "Tailwind CSS"
 description: "Share Tailwind CSS configuration and styles across packages in your monorepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to use Tailwind CSS in a Turborepo.
@@ -38,6 +38,18 @@ npx create-turbo@latest -e with-tailwind
 bunx create-turbo@latest -e with-tailwind
 ```
 
+#### nub
+
+```
+nubx create-turbo@latest -e with-tailwind
+```
+
+#### aube
+
+```
+aubx create-turbo@latest -e with-tailwind
+```
+
 ## Guide
 
 ### Create a monorepo
@@ -66,6 +78,18 @@ npx create-turbo@latest
 
 ```
 bunx create-turbo@latest
+```
+
+#### nub
+
+```
+nubx create-turbo@latest
+```
+
+#### aube
+
+```
+aubx create-turbo@latest
 ```
 
 ### Add Tailwind CSS to your application
@@ -226,6 +250,20 @@ npm install @repo/ui @repo/tailwind-config --workspace=web --workspace=@repo/ui 
 ```
 cd apps/web && bun install @repo/ui @repo/tailwind-config --dev
 cd packages/ui && bun install @repo/ui @repo/tailwind-config --dev
+```
+
+#### nub
+
+```
+cd apps/web && nub add @repo/ui @repo/tailwind-config --save-dev
+cd packages/ui && nub add @repo/ui @repo/tailwind-config --save-dev
+```
+
+#### aube
+
+```
+cd apps/web && aube add @repo/ui @repo/tailwind-config --save-dev
+cd packages/ui && aube add @repo/ui @repo/tailwind-config --save-dev
 ```
 
 Then, configure the files in your application so the styles from the UI package are reflected in the application.

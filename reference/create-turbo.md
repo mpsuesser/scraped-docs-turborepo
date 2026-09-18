@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/create-turbo
 title: "create-turbo"
 description: "Reference for the `create-turbo` CLI that scaffolds a new Turborepo monorepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Quickly set up a new Turborepo repository from scratch.
@@ -34,6 +34,18 @@ npx create-turbo@latest
 bunx create-turbo@latest
 ```
 
+#### nub
+
+```
+nubx create-turbo@latest
+```
+
+#### aube
+
+```
+aubx create-turbo@latest
+```
+
 ## Start with an example
 
 The community curates a set of examples to showcase ways to use common tools and libraries with Turborepo. To bootstrap your monorepo with one of the examples, use the `--example` flag:
@@ -60,6 +72,18 @@ npx create-turbo@latest --example [example-name]
 
 ```
 bunx create-turbo@latest --example [example-name]
+```
+
+#### nub
+
+```
+nubx create-turbo@latest --example [example-name]
+```
+
+#### aube
+
+```
+aubx create-turbo@latest --example [example-name]
 ```
 
 Use any of the example's names below:
@@ -137,10 +161,22 @@ npx create-turbo@latest --example [github-url]
 bunx create-turbo@latest --example [github-url]
 ```
 
+#### nub
+
+```
+nubx create-turbo@latest --example [github-url]
+```
+
+#### aube
+
+```
+aubx create-turbo@latest --example [github-url]
+```
+
 ## Options
 
 ```
--m, --package-manager to use (choices: "npm", "yarn", "pnpm", "bun")
+-m, --package-manager to use (choices: "npm", "yarn", "pnpm", "bun", "nub", "aube")
 
 --skip-install: Do not run a package manager install after creating the project (Default: false)
 

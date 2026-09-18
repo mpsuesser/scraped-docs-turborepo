@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/shadcn-ui
 title: "shadcn/ui"
 description: "Initialize and use shadcn/ui components in your Turborepo monorepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to use shadcn/ui in a Turborepo.
@@ -36,6 +36,18 @@ npx shadcn@canary init
 bunx shadcn@canary init
 ```
 
+#### nub
+
+```
+nubx shadcn@canary init
+```
+
+#### aube
+
+```
+aubx shadcn@canary init
+```
+
 When prompted, select the option for monorepos.
 
 To add a component, run:
@@ -62,6 +74,18 @@ npx shadcn@canary add [COMPONENT]
 
 ```
 bunx shadcn@canary add [COMPONENT]
+```
+
+#### nub
+
+```
+nubx shadcn@canary add [COMPONENT]
+```
+
+#### aube
+
+```
+aubx shadcn@canary add [COMPONENT]
 ```
 
 ## More information

@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/getting-started/examples
 title: "Start with an example"
 description: "Browse core-maintained and community examples to bootstrap a Turborepo with your favorite tools."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Use `create-turbo` to bootstrap an example with your favorite tooling.
@@ -46,6 +46,26 @@ bunx create-turbo@latest --example [example-name]
 
 # Use a GitHub repository from the community
 bunx create-turbo@latest --example [github-url]
+```
+
+#### nub
+
+```
+# Use an example listed below
+nubx create-turbo@latest --example [example-name]
+
+# Use a GitHub repository from the community
+nubx create-turbo@latest --example [github-url]
+```
+
+#### aube
+
+```
+# Use an example listed below
+aubx create-turbo@latest --example [example-name]
+
+# Use a GitHub repository from the community
+aubx create-turbo@latest --example [github-url]
 ```
 
 ## Core-maintained examples

@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/support-policy
 title: "Support policy"
 description: "Supported package managers, platforms, Node.js versions, and LTS policy for Turborepo."
-access_date: 2026-09-03T21:18:59.663Z
-current_date: 2026-09-03T21:18:59.663Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 ## Package managers
@@ -16,6 +16,8 @@ Core `turbo` functionality depends on the package managers in the JavaScript eco
 | npm 8+ | Stable |
 | yarn 1+ | Stable (Includes Yarn Plug'n'Play) |
 | bun 1.2+ | Stable |
+| nub 0.8+ | Stable |
+| aube 2.2+ | Stable |
 
 ## Platforms
 
@@ -90,6 +92,9 @@ We encourage you to help us test experimental APIs in side projects, proof-of-co
 
 **APIs currently in the Experimental phase:**
 
+- [Rust support](guides/tools/rust.md)
+- [uv support](guides/tools/python.md)
+- [Go support](guides/tools/go.md)
 - [`turbo boundaries`](reference/boundaries.md) and [Tags](reference/boundaries.md#tags)
 - [`--experimental-write-cache` for `turbo watch`](reference/watch.md#caching)
 - [`--output` for `turbo ls`](reference/ls.md#--output-format)

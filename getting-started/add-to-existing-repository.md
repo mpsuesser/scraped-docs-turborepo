@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/getting-started/add-to-existing-repository
 title: "Add to an existing repository"
 description: "Incrementally adopt Turborepo in an existing single-package or multi-package repository."
-access_date: 2026-08-05T18:05:17.395Z
-current_date: 2026-08-05T18:05:17.395Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Turborepo can be incrementally adopted in **any repository, single or multi-package**, to speed up the developer and CI workflows of the repository.
@@ -64,6 +64,24 @@ npm install turbo --save-dev
 bun install turbo --global
 # Install in repository
 bun install turbo --dev
+```
+
+#### nub
+
+```
+# Global install
+nub add turbo --global
+# Install in repository
+nub add turbo --save-dev
+```
+
+#### aube
+
+```
+# Global install
+aube add turbo --global
+# Install in repository
+aube add turbo --save-dev
 ```
 
 To learn more about why we recommend both installations, visit the [Installation page](installation.md).
@@ -214,6 +232,32 @@ Turborepo optimizes your repository using information from your package manager.
 }
 ```
 
+#### nub
+
+```
+{
++  "devEngines": {
++    "packageManager": {
++      "name": "nub",
++      "version": "0.8.3"
++    }
++  }
+}
+```
+
+#### aube
+
+```
+{
++  "devEngines": {
++    "packageManager": {
++      "name": "aube",
++      "version": "2.2.9"
++    }
++  }
+}
+```
+
 ### Set up package manager workspaces
 
 For [multi-package workspaces](https://vercel.com/docs/glossary#multi-package-workspace), you'll need to configure your package manager to recognize your workspace structure.
@@ -268,6 +312,29 @@ packages:
 ```
 
 [→ bun workspace documentation](https://bun.sh/docs/install/workspaces)
+
+#### nub
+
+```
+{
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
+```
+
+[→ nub documentation](https://nub.dev/)
+
+#### aube
+
+```
+packages:
+  - "apps/*"
+  - "packages/*"
+```
+
+[→ aube workspace documentation](https://aube.jdx.dev/)
 
 For more details on how to structure your repository, see [Structuring a Repository](../crafting-your-repository/structuring-a-repository.md#declaring-directories-for-packages).
 

@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/eslint-plugin-turbo
 title: "eslint-plugin-turbo"
 description: "Reference for the `eslint-plugin-turbo` package that detects undeclared environment variables in your code."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 [The `eslint-plugin-turbo` package](https://www.npmjs.com/package/eslint-plugin-turbo) helps you find environment variables that are used in your code that are not a part of Turborepo's hashing. Environment variables used in your source code that are not accounted for in `turbo.json` will be highlighted in your editor and errors will show as ESLint output.
@@ -34,6 +34,18 @@ npm i --save-dev eslint-plugin-turbo -w @acme/eslint-config
 
 ```
 cd packages/eslint-config && bun install eslint-plugin-turbo --dev
+```
+
+#### nub
+
+```
+cd packages/eslint-config && nub add eslint-plugin-turbo --save-dev
+```
+
+#### aube
+
+```
+cd packages/eslint-config && aube add eslint-plugin-turbo --save-dev
 ```
 
 ## Usage (Flat Config eslint.config.js)

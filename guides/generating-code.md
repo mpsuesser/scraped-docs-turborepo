@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/generating-code
 title: "Generating code"
 description: "Use Turborepo's built-in generators and custom Plop configurations to scaffold new packages and code."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to generate code using Turborepo.
@@ -111,6 +111,30 @@ package.json
 package.json
 
 bun.lock
+
+turbo.json
+
+#### nub
+
+package.json
+
+package.json
+
+package.json
+
+nub.lock
+
+turbo.json
+
+#### aube
+
+package.json
+
+package.json
+
+package.json
+
+aube-lock.yaml
 
 turbo.json
 

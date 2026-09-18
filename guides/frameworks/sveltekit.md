@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/frameworks/sveltekit
 title: "SvelteKit"
 description: "Add and configure SvelteKit applications in your Turborepo monorepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn more about using SvelteKit in your monorepo.
@@ -38,6 +38,18 @@ npx create-turbo@latest -e with-svelte
 bunx create-turbo@latest -e with-svelte
 ```
 
+#### nub
+
+```
+nubx create-turbo@latest -e with-svelte
+```
+
+#### aube
+
+```
+aubx create-turbo@latest -e with-svelte
+```
+
 ## Adding a SvelteKit application to an existing repository
 
 Use [`npm create svelte`](https://kit.svelte.dev/docs/creating-a-project) to set up a new SvelteKit application in a package. From the root of your repository, run:
@@ -64,6 +76,18 @@ npx sv create
 
 ```
 bunx sv create
+```
+
+#### nub
+
+```
+nubx sv create
+```
+
+#### aube
+
+```
+aubx sv create
 ```
 
 ## Integrating with your repository
@@ -104,6 +128,28 @@ To add [Internal Packages](../../core-concepts/internal-packages.md) to your new
 ```
 
 #### bun
+
+```
+{
+ "name": "my-app",
+  "dependencies": {
++   "@repo/ui": "workspace:*"
+  }
+}
+```
+
+#### nub
+
+```
+{
+ "name": "my-app",
+  "dependencies": {
++   "@repo/ui": "workspace:*"
+  }
+}
+```
+
+#### aube
 
 ```
 {

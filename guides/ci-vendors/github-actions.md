@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/github-actions
 title: "GitHub Actions"
 description: "Configure GitHub Actions workflows to run Turborepo tasks with Remote Caching."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-18T17:01:21.919Z
+current_date: 2026-09-18T17:01:21.919Z
 ---
 
 Learn how to use GitHub Actions with Turborepo.
@@ -203,6 +203,86 @@ jobs:
 
       - name: Test
         run: bun run test
+```
+
+#### nub
+
+```
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  build:
+    name: Build and Test
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-node@v4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: nub install
+
+      - name: Build
+        run: nub run build
+
+      - name: Test
+        run: nub run test
+```
+
+#### aube
+
+```
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  build:
+    name: Build and Test
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-node@v4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: aube install
+
+      - name: Build
+        run: aube run build
+
+      - name: Test
+        run: aube run test
 ```
 
 ## Remote Caching with Vercel Remote Cache
