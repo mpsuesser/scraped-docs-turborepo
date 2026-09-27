@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/getting-started/editor-integration
 title: "Editor integration"
 description: "Set up JSON Schema validation, ESLint integration, and the Turborepo LSP in your editor."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-27T17:58:42.380Z
+current_date: 2026-09-27T17:58:42.380Z
 ---
 
 To get the best experience with `turbo`, Turborepo provides a few utilities for integrating with your editor.
@@ -18,7 +18,7 @@ Starting with Turborepo 2.5.7, versioned schemas are available via subdomain, fo
 
 ```
 {
-  "$schema": "https://v2-5-7.turborepo.dev/schema.json"
+  "$schema": "https://turborepo.dev/schema.json"
 }
 ```
 
