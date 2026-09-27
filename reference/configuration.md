@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/configuration
 title: "Configuring turbo.json"
 description: "Complete reference for all turbo.json configuration options and their behavior."
-access_date: 2026-09-15T22:22:09.020Z
-current_date: 2026-09-15T22:22:09.020Z
+access_date: 2026-09-27T15:19:40.262Z
+current_date: 2026-09-27T15:19:40.262Z
 ---
 
 Learn how to configure Turborepo through \`turbo.json\`.
@@ -92,6 +92,22 @@ When set to `true`, disables the update notification that appears when a new ver
   "noUpdateNotifier": true
 }
 ```
+
+### agentGuidance
+
+Default: `true`
+
+When an AI coding agent is detected, `turbo` maintains a managed block in the repository-root `AGENTS.md` that points to the documentation bundled with the installed `turbo` package. The guidance is refreshed before repository-scoped commands, and only Turborepo's own block is updated. Existing instructions and other tools' blocks are preserved.
+
+This is a root-only option; it cannot be set in package-level `turbo.json` files. Use it in either `turbo.json` or `turbo.jsonc` to stop future automatic updates:
+
+```
+{
+  "agentGuidance": false
+}
+```
+
+Opting out does not delete an existing `AGENTS.md` file or Turborepo block. Existing repositories receive the guidance on a later `turbo` invocation when an agent is detected. New projects created from the default starter include it immediately.
 
 ### concurrency
 
