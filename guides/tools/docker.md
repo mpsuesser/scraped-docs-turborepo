@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/docker
 title: "Docker"
 description: "Use turbo prune to create optimized Docker images from your monorepo with minimal dependencies."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-28T04:49:15.786Z
+current_date: 2026-09-28T04:49:15.786Z
 ---
 
 Learn how to use Docker in a monorepo.
@@ -115,6 +115,8 @@ Build the Dockerfile from the root of your monorepo:
 docker build -f apps/web/Dockerfile .
 ```
 
+Standalone release archives start at 2.11.5. To use an older `turbo` version, install it with your package manager in the `prepare` stage instead of downloading an archive (for example, `RUN yarn global add turbo@2.11.4`).
+
 ```
 FROM node:18-alpine AS base
 RUN apk update
@@ -124,9 +126,27 @@ WORKDIR /app
 
 # ---
 FROM base AS prepare
-# Replace <your-major-version> with the major version installed in your repository. For example:
-# RUN yarn global add turbo@^2
-RUN yarn global add turbo@^<your-major-version>
+RUN apk add --no-cache curl
+# Pin a release compatible with the turbo version in your repository.
+ARG TURBO_VERSION=2.11.5
+RUN set -eu; \
+    case "$(uname -m)" in \
+      x86_64) target=x86_64-unknown-linux-musl ;; \
+      aarch64) target=aarch64-unknown-linux-musl ;; \
+      *) echo 'Unsupported architecture' >&2; exit 1 ;; \
+    esac; \
+    archive="turbo-$TURBO_VERSION-$target.tar.gz"; \
+    release="https://github.com/vercel/turborepo/releases/download/v$TURBO_VERSION"; \
+    cd /tmp; \
+    curl -fsSL "$release/SHA256SUMS" -o SHA256SUMS; \
+    curl -fsSL "$release/$archive" -o "$archive"; \
+    awk -v name="$archive" '$2 == name && NF == 2 { print }' SHA256SUMS > turbo-checksum; \
+    [ "$(wc -l < turbo-checksum)" -eq 1 ]; \
+    sha256sum -c turbo-checksum; \
+    [ "$(tar -tzf "$archive")" = turbo ]; \
+    tar -xzf "$archive" -C /usr/local/bin turbo; \
+    chmod 755 /usr/local/bin/turbo; \
+    rm SHA256SUMS turbo-checksum "$archive"
 COPY . .
 # Add lockfile and package.json's of isolated subworkspace
 # Generate a partial monorepo with a pruned lockfile for a target workspace.

@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/bin
 title: "bin"
 description: "API reference for the `turbo bin` command"
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-28T04:49:15.786Z
+current_date: 2026-09-28T04:49:15.786Z
 ---
 
 # bin
@@ -16,7 +16,7 @@ Get the path to the `turbo` binary.
 turbo bin
 ```
 
-When using [**global `turbo`**](../getting-started/installation.md#global-installation), this will be the path to the global `turbo` binary. You're likely to see a path to the global directory of the package manager you used to install `turbo`.
+When using [**global `turbo`**](../getting-started/installation.md#global-installation), this will be the path to the global binary, such as `~/.local/bin/turbo` on macOS/Linux or `%LOCALAPPDATA%\Programs\Turborepo\bin\turbo.exe` on Windows.
 
 When using [**local `turbo`**](../getting-started/installation.md#repository-installation), this will be the path to the local `turbo` binary. When `turbo` is installed in your repository, it is likely to be a path to `node_modules`.
 

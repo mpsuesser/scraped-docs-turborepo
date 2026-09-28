@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/getting-started/installation
 title: "Installation"
-description: "Install Turborepo globally and in your repository using your preferred package manager."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+description: "Install Turborepo globally and in your repository."
+access_date: 2026-09-28T04:49:15.786Z
+current_date: 2026-09-28T04:49:15.786Z
 ---
 
 Learn how to get started with Turborepo.
@@ -55,64 +55,38 @@ For more details on the starter, [visit the README for the basic starter on GitH
 
 ## Installing turbo
 
-`turbo` can be installed both globally **and** in your repository. We highly recommend installing both ways so you can take advantage of fast, convenient workflows *and* a stable version of `turbo` for all developers working in your repository.
+You can install `turbo` globally and pin a version in your repository. When a local binary is installed, the global binary defers to it.
 
 ### Global installation
 
 A global install of `turbo` brings flexibility and speed to your local workflows.
 
-#### pnpm
+#### macOS and Linux
 
 ```
-pnpm add turbo --global
+curl -fsSL https://turborepo.dev/install | sh
 ```
 
-#### yarn
+#### Windows x64
 
 ```
-yarn global add turbo
+irm https://turborepo.dev/install.ps1 | iex
 ```
 
-#### npm
-
-```
-npm install turbo --global
-```
-
-#### bun
-
-```
-bun install turbo --global
-```
-
-#### nub
-
-```
-nub add turbo --global
-```
-
-#### aube
-
-```
-aube add turbo --global
-```
-
-Once installed globally, you can run your scripts through `turbo` from your terminal, quickly running one-off commands to use within your repository. For example:
+After installing `turbo`, you can run commands from your terminal. For example:
 
 - `turbo build`: Run `build` scripts following your repository's dependency graph
 - `turbo build --filter=docs --dry`: Quickly print an outline of the `build` task for your `docs` package (without running it)
 - `turbo generate`: Run [Generators](../guides/generating-code.md) to add new code to your repository
 - `cd apps/docs && turbo build`: Run the `build` script in the `docs` package and its dependencies. For more, visit the [Automatic Package Scoping section](../crafting-your-repository/running-tasks.md#automatic-package-scoping).
 
-Avoid multiple global installations
-
 #### Using global turbo in CI
 
-You can also take advantage of global `turbo` when creating your CI pipelines. Visit the [Constructing CI](../crafting-your-repository/constructing-ci.md#global-turbo-in-ci) guide for more information.
+To use the global binary in CI, see [Constructing CI](../crafting-your-repository/constructing-ci.md#global-turbo-in-ci).
 
 ### Repository installation
 
-When collaborating with other developers in a repository, it's a good idea to pin versions of dependencies. You can do this with `turbo` by adding it as a `devDependency` in the root of your repository:
+To pin the `turbo` version used in a repository, add it as a `devDependency` at the root:
 
 #### pnpm
 
@@ -150,6 +124,4 @@ nub add turbo --save-dev
 aube add turbo --save-dev
 ```
 
-You can continue to use your global installation of `turbo` to run commands. Global `turbo` will defer to the local version of your repository if it exists.
-
-This lets you to get the best of both installations: easily run commands in your terminal while maintaining a pinned version for consistent usage for all developers in the repository.
+When you invoke the global binary from this repository, it uses the installed local version instead.

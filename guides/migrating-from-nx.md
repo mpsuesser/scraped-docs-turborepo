@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/migrating-from-nx
 title: "Migrating from Nx"
 description: "Step-by-step instructions for migrating your Nx monorepo to Turborepo."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+access_date: 2026-09-28T04:49:15.786Z
+current_date: 2026-09-28T04:49:15.786Z
 ---
 
 Learn how to migrate to Turborepo from Nx.
@@ -393,42 +393,18 @@ nub add turbo --save-dev
 aube add turbo --save-dev
 ```
 
-You can also optionally install `turbo` globally for added convenience when working with Turborepo.
+To run `turbo` directly from your terminal, install the global binary:
 
-#### pnpm
-
-```
-pnpm add turbo --global
-```
-
-#### yarn
+#### macOS and Linux
 
 ```
-yarn global add turbo
+curl -fsSL https://turborepo.dev/install | sh
 ```
 
-#### npm
+#### Windows x64
 
 ```
-npm install turbo --global
-```
-
-#### bun
-
-```
-bun install turbo --global
-```
-
-#### nub
-
-```
-nub add turbo --global
-```
-
-#### aube
-
-```
-aube add turbo --global
+irm https://turborepo.dev/install.ps1 | iex
 ```
 
 ### Step 8: Add a turbo.json

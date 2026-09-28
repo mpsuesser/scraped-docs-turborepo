@@ -2,32 +2,34 @@
 url: https://turborepo.dev/docs/getting-started
 title: "Getting started"
 description: "Choose a learning path to start using Turborepo in a new or existing repository."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-09-28T04:49:15.786Z
+current_date: 2026-09-28T04:49:15.786Z
 ---
+
+Get started with Turborepo.
 
 If you're new to Turborepo, you can follow these steps to get started.
 
 ## Install Turborepo
 
-Install `turbo` globally so you can conveniently run `turbo` commands in your terminal from anywhere in your repository.
+Install the standalone `turbo` binary to run commands from your terminal. See the [installation guide](getting-started/installation.md#global-installation) for supported platforms and instructions.
 
-#### npm
+## Choose your learning path
 
-```
-npm install turbo --global
-```
+### [Use create-turbo](getting-started/installation.md)
 
-#### yarn
+Start with a template
 
-```
-yarn global add turbo
-```
+### [Use an example](getting-started/examples.md)
 
-#### pnpm
+Start with a framework-specific example
 
-```
-pnpm add turbo --global
-```
+### [Follow the in-depth guides](crafting-your-repository.md)
 
-To learn more about installing `turbo`, see the [installation guide](getting-started/installation.md).
+From zero to monorepo
+
+### [Add to an existing repository](getting-started/add-to-existing-repository.md)
+
+Make your current repo fast
+
+[PreviousIntroduction](index.md) [NextInstallation](getting-started/installation.md)

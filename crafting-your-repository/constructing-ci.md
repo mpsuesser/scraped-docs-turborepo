@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/constructing-ci
 title: "Constructing CI"
 description: "Set up CI pipelines with Remote Caching, task filtering, Docker support, and affected package detection for maximum speed."
-access_date: 2026-08-05T18:05:17.395Z
-current_date: 2026-08-05T18:05:17.395Z
+access_date: 2026-09-28T04:49:15.786Z
+current_date: 2026-09-28T04:49:15.786Z
 ---
 
 Learn how Turborepo can help you efficiently complete all the necessary tasks and accelerate your development workflow.
@@ -150,7 +150,20 @@ Using global `turbo` is convenient in CI workflows, allowing you to easily run c
 
 However, in some cases, you may be running `turbo` commands or scripts that use `turbo` **before installing packages with your package manager**. One example of this is [using `turbo prune` to create a Docker image](../guides/tools/docker.md#example). In this situation, global `turbo` will not be able to use the version from `package.json` because the binary for that version hasn't been installed yet.
 
-For this reason, we encourage you to **pin your global installation of `turbo` in CI to the major version in `package.json`** since breaking changes will not be introduced within a major version. You could additionally opt for added stability by pinning an exact version, trading off for maintenance burden to receive bug fixes in patch releases.
+For CI steps before dependencies are installed, pin the standalone binary to an exact version compatible with your repository's `turbo` dependency. Set `TURBO_VERSION` when running the [installer](../getting-started/installation.md#global-installation):
+
+#### macOS and Linux
+
+```
+curl -fsSL https://turborepo.dev/install | TURBO_VERSION=2.11.5 sh
+```
+
+#### Windows x64
+
+```
+$env:TURBO_VERSION = '2.11.5'
+irm https://turborepo.dev/install.ps1 | iex
+```
 
 ### Use turbo run in CI
 

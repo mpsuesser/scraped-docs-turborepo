@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/getting-started/add-to-existing-repository
 title: "Add to an existing repository"
 description: "Incrementally adopt Turborepo in an existing single-package or multi-package repository."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+access_date: 2026-09-28T04:49:15.786Z
+current_date: 2026-09-28T04:49:15.786Z
 ---
 
 Turborepo can be incrementally adopted in **any repository, single or multi-package**, to speed up the developer and CI workflows of the repository.
@@ -26,65 +26,61 @@ Note that you don't have to start running *all* your tasks for *all* your packag
 
 ### Install turbo
 
-We recommend you install `turbo` both globally and into your repository's root for the best developer experience.
+Install `turbo` globally.
+
+#### macOS and Linux
+
+```
+curl -fsSL https://turborepo.dev/install | sh
+```
+
+#### Windows x64
+
+```
+irm https://turborepo.dev/install.ps1 | iex
+```
+
+Then pin `turbo` in your repository's root:
 
 #### pnpm
 
 Ensure you have created a `pnpm-workspace.yaml` file before you begin the installation. Failure to have this file will result in an error that says: ` --workspace-root may only be used inside a workspace`.
 
 ```
-# Global install
-pnpm add turbo --global
-# Install in repository
 pnpm add turbo --save-dev --workspace-root
 ```
 
 #### yarn
 
 ```
-# Global install
-yarn global add turbo
-# Install in repository
 yarn add turbo --dev
 ```
 
 #### npm
 
 ```
-# Global install
-npm install turbo --global
-# Install in repository
 npm install turbo --save-dev
 ```
 
 #### bun
 
 ```
-# Global install
-bun install turbo --global
-# Install in repository
 bun install turbo --dev
 ```
 
 #### nub
 
 ```
-# Global install
-nub add turbo --global
-# Install in repository
 nub add turbo --save-dev
 ```
 
 #### aube
 
 ```
-# Global install
-aube add turbo --global
-# Install in repository
 aube add turbo --save-dev
 ```
 
-To learn more about why we recommend both installations, visit the [Installation page](installation.md).
+The installed local version takes precedence when you run the global binary in your repository. See [Installation](installation.md#repository-installation) for details.
 
 ### Add a turbo.json file
 
