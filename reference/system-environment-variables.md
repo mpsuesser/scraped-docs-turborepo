@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/system-environment-variables
 title: "System environment variables"
 description: "Learn about system variables used by Turborepo."
-access_date: 2026-08-21T13:25:13.609Z
-current_date: 2026-08-21T13:25:13.609Z
+access_date: 2026-09-29T13:35:58.474Z
+current_date: 2026-09-29T13:35:58.474Z
 ---
 
 # System environment variables
@@ -182,6 +182,30 @@ System environment variables are always overridden by flag values provided direc
       <td>
         Enables global <code>turbo</code> to install the correct local version
         if one is not found.
+      </td>
+    </tr>
+
+    <tr id="turbo_env_mode">
+      <td>
+        <code>
+          TURBO_ENV_MODE
+        </code>
+      </td>
+
+      <td>
+        <span>
+          Sets the environment mode, similar to using the
+        </span>
+
+        {" "}
+
+        <code>
+          [--env-mode](run.md#--env-mode-option)
+        </code>
+
+        <span>
+           flag.
+        </span>
       </td>
     </tr>
 
@@ -443,6 +467,19 @@ System environment variables are always overridden by flag values provided direc
       </td>
     </tr>
 
+    <tr id="turbo_root_turbo_json">
+      <td>
+        <code>
+          TURBO_ROOT_TURBO_JSON
+        </code>
+      </td>
+
+      <td>
+        Use the <code>turbo.json</code> located at the provided path instead of
+        the one at the root of the repository.
+      </td>
+    </tr>
+
     <tr id="turbo_run_summary">
       <td>
         <code>
@@ -535,6 +572,19 @@ System environment variables are always overridden by flag values provided direc
       </td>
     </tr>
 
+    <tr id="turbo_tui_scrollback_length">
+      <td>
+        <code>
+          TURBO_TUI_SCROLLBACK_LENGTH
+        </code>
+      </td>
+
+      <td>
+        Number of lines to keep in scrollback for each task in the terminal
+        UI. Defaults to <code>2048</code>.
+      </td>
+    </tr>
+
     <tr id="turbo_ui">
       <td>
         <code>
@@ -544,6 +594,19 @@ System environment variables are always overridden by flag values provided direc
 
       <td>
         Enables TUI when passed true or 1, disables when passed false or 0.
+      </td>
+    </tr>
+
+    <tr id="turbo_watch_startup_timeout">
+      <td>
+        <code>
+          TURBO_WATCH_STARTUP_TIMEOUT
+        </code>
+      </td>
+
+      <td>
+        Number of seconds <code>turbo watch</code> waits for the file watcher
+        to become ready before failing. Defaults to <code>120</code>.
       </td>
     </tr>
 

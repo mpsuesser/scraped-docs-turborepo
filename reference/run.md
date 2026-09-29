@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/run
 title: "run"
 description: "All flags and options for the `turbo run` command used to execute tasks."
-access_date: 2026-08-21T13:25:13.609Z
-current_date: 2026-08-21T13:25:13.609Z
+access_date: 2026-09-29T13:35:58.474Z
+current_date: 2026-09-29T13:35:58.474Z
 ---
 
 Run tasks specified in `turbo.json`.
@@ -86,6 +86,16 @@ turbo run build --cache=local:rw
 
 # Do not use local cache. Only read from Remote Cache.
 turbo run build --cache=local:,remote:r
+```
+
+### \--cache-workers <number>
+
+Default: `10`
+
+Set the number of concurrent cache operations.
+
+```
+turbo run build --cache-workers=4
 ```
 
 ### \--cache-dir <path>
@@ -547,6 +557,14 @@ Ignore the local filesystem cache for all tasks, using Remote Cache for reading 
 
 ```
 turbo run build --remote-only
+```
+
+### \--single-package
+
+Run `turbo` in [single-package workspace](../guides/single-package-workspaces.md) mode, treating the repository as one package instead of discovering workspace packages.
+
+```
+turbo run build --single-package
 ```
 
 ### \--summarize
