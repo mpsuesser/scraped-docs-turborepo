@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/query
 title: "query"
 description: "All flags and options for the `turbo query` command that runs GraphQL queries against your monorepo."
-access_date: 2026-09-30T13:59:58.115Z
-current_date: 2026-09-30T13:59:58.115Z
+access_date: 2026-09-30T15:39:27.637Z
+current_date: 2026-09-30T15:39:27.637Z
 ---
 
 Run GraphQL queries against your monorepo.
@@ -94,19 +94,36 @@ Packages and tasks expose a `tags` array, returning `[]` when no labels are conf
 
 A task's `tags` contains its resolved task labels only, after configuration inheritance and `$TURBO_EXTENDS$` composition. Order and duplicate labels are preserved, and the inheritance marker is not exposed. Select `package { tags }` to read its package labels separately.
 
+Use `has: { field: TAG, value: "label" }` to filter by exact, case-sensitive membership. Package predicates match package labels only. Task predicates match either resolved task labels or package labels.
+
 ```
+turbo query '
 query {
-  packages {
-    items {
-      name
-      tags
-      tasks {
-        items { fullName tags package { tags } }
-      }
+  packages(filter: {has: {field: TAG, value: "frontend"}}) {
+    items { name tags }
+  }
+  package(name: "web") {
+    tasks(filter: {has: {field: TAG, value: "ci"}}) {
+      items { fullName tags package { tags } }
     }
   }
 }
+'
 ```
+
+Task predicates support `and`, `or`, and `not`, as well as `equal` and `notEqual` on `NAME` and `FULL_NAME`. The optional task `filter` is available on package task lists, task dependency/dependent lists, and `withDependencies`.
+
+For affected tasks, pass `taskFilter` alongside the existing package `filter` or task-name `tasks` arguments:
+
+```
+query {
+  affectedTasks(base: "origin/main", head: "HEAD", taskFilter: {has: {field: TAG, value: "ci"}}) {
+    items { fullName tags package { tags } }
+  }
+}
+```
+
+Affected-task filters intersect before required prerequisites are added, so prerequisites may not carry the selected tag. Filters on dependency/dependent lists and `withDependencies` apply after traversal; they narrow the returned list without pruning traversal through non-matching tasks.
 
 ## Shorthands
 

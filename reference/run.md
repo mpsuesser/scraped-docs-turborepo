@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/run
 title: "run"
 description: "All flags and options for the `turbo run` command used to execute tasks."
-access_date: 2026-09-29T13:35:58.474Z
-current_date: 2026-09-29T13:35:58.474Z
+access_date: 2026-09-30T15:39:27.637Z
+current_date: 2026-09-30T15:39:27.637Z
 ---
 
 Run tasks specified in `turbo.json`.
@@ -232,6 +232,30 @@ Filters can be combined to create combinations of packages, directories, and git
 - `^`: Omit the target from the selection when using `...`.
 
 For in-depth discussion and practical use cases of filtering, visit [the Running Tasks page](../crafting-your-repository/running-tasks.md).
+
+#### Filtering by tag
+
+Use `tag:<label>` to select tasks with a matching [task or package tag](configuration.md#task-tags). A package tag matches every requested task in that package; a task tag matches only tasks carrying that label. No future flag is required.
+
+```
+turbo run test --filter=tag:ci
+turbo run test --filter=tag:ci --filter='!tag:slow'
+turbo run test --affected --filter=tag:ci
+```
+
+Labels match exactly and case-sensitively, not as globs. Multiple include filters form a union; exclusions remove selected tasks. Required dependencies and co-scheduled `with` tasks are still retained, even if they do not match the tag.
+
+The `...` and `^` modifiers on tag selectors traverse the Task Graph: `...tag:ci` includes dependents and `tag:ci...` includes dependencies. Directory and Git qualifiers can further narrow a tag selector, for example `tag:ci{./apps/*}[HEAD^1]`. Git-qualified tag selectors match changed files against task inputs.
+
+For labels containing selector syntax, use a JSON string after `tag:` and preserve the double quotes with shell quoting:
+
+```
+# Match the literal label "ci...", rather than expanding dependencies
+turbo run test --filter='tag:"ci..."'
+
+# Match the literal label "ci[main]{dir}"
+turbo run test --filter='tag:"ci[main]{dir}"'
+```
 
 #### Using a task identifier
 
