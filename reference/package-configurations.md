@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/package-configurations
 title: "Package Configurations"
 description: "Reference for creating per-package turbo.json overrides to customize task behavior."
-access_date: 2026-09-30T03:06:23.193Z
-current_date: 2026-09-30T03:06:23.193Z
+access_date: 2026-09-30T13:59:58.115Z
+current_date: 2026-09-30T13:59:58.115Z
 ---
 
 Learn how to use Package Configurations to bring greater task flexibility to your monorepo's package.
@@ -41,6 +41,8 @@ For example, if your root `turbo.json` sets `"outputLogs": "hash-only"` for a ta
 ### Array fields replace by default
 
 Array fields like `outputs`, `env`, `inputs`, `dependsOn`, `passThroughEnv`, and task `tags` **completely replace** the root configuration's values by default.
+
+For task `tags`, omission inherits the labels, an explicit array replaces them, and `[]` clears them. Use `"tags": ["$TURBO_EXTENDS$", "frontend"]` to append to inherited labels instead. Top-level package tags remain separate: they label the current package rather than being inherited as task configuration.
 
 ```
 {

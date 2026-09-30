@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/query
 title: "query"
 description: "All flags and options for the `turbo query` command that runs GraphQL queries against your monorepo."
-access_date: 2026-09-15T22:22:09.020Z
-current_date: 2026-09-15T22:22:09.020Z
+access_date: 2026-09-30T13:59:58.115Z
+current_date: 2026-09-30T13:59:58.115Z
 ---
 
 Run GraphQL queries against your monorepo.
@@ -89,6 +89,24 @@ This does not change `affectedTasks.items`: that collection retains its existing
 Both fields return arrays, using `[]` when no patterns are configured. Global patterns remain separate from task patterns. Wildcards and exclusions are preserved: these are configuration patterns, not environment variable values, expanded names, framework-inferred variables, or a complete process environment.
 
 The query does not execute tasks or report cache hits. Unlike dry-run summaries, this selection does not include file-hash inventories.
+
+Packages and tasks expose a `tags` array, returning `[]` when no labels are configured. Package tags come from the package's loaded `turbo.json` and do not include task labels or inherit root package labels.
+
+A task's `tags` contains its resolved task labels only, after configuration inheritance and `$TURBO_EXTENDS$` composition. Order and duplicate labels are preserved, and the inheritance marker is not exposed. Select `package { tags }` to read its package labels separately.
+
+```
+query {
+  packages {
+    items {
+      name
+      tags
+      tasks {
+        items { fullName tags package { tags } }
+      }
+    }
+  }
+}
+```
 
 ## Shorthands
 
