@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/configuration
 title: "Configuring turbo.json"
 description: "Complete reference for all turbo.json configuration options and their behavior."
-access_date: 2026-09-27T15:19:40.262Z
-current_date: 2026-09-27T15:19:40.262Z
+access_date: 2026-09-30T03:06:23.193Z
+current_date: 2026-09-30T03:06:23.193Z
 ---
 
 Learn how to configure Turborepo through \`turbo.json\`.
@@ -462,9 +462,9 @@ When enabled, Turborepo will honor the `experimentalObservability.otel` configur
 }
 ```
 
-Adds a tag to a package for use with [Boundaries](boundaries.md).
+Adds arbitrary string labels to a package. Labels do not need to be registered in `boundaries.tags`. Package tags can still be used with [Boundaries](boundaries.md); existing boundary rules are unchanged.
 
-This key only works in [Package Configurations](package-configurations.md). Using this key in a root `turbo.json` will result in an error.
+Top-level tags label the package containing the configuration. Root `turbo.json` tags label the root package, not every package in the repository. Package tags are separate from task tags and are not inherited through task configuration.
 
 ### global
 
@@ -537,6 +537,40 @@ In the example below, we've defined three tasks under the `tasks` key: `build`, 
 ## Task options
 
 Using the options available in the tasks you define in `tasks`, you can describe how `turbo` will run your tasks.
+
+### Task tags
+
+Add `tags` to a task definition in the root `turbo.json` or a [Package Configuration](package-configurations.md):
+
+```
+{
+  "tasks": {
+    "test": {
+      "tags": ["ci", "slow"],
+    },
+  },
+}
+```
+
+Task tags are arbitrary string labels. Their configured order and duplicates are preserved. They do not change task dependencies, commands, or boundary rules.
+
+If a Package Configuration omits task `tags`, it inherits them. An explicit array replaces inherited task tags, and `"tags": []` clears them. To append labels instead of replacing them, use [`$TURBO_EXTENDS$`](#turbo_extends), just like other task array fields:
+
+```
+{
+  "extends": ["//"],
+  "tasks": {
+    "test": {
+      // Inherits "ci" and "slow", then adds "frontend"
+      "tags": ["$TURBO_EXTENDS$", "frontend"],
+    },
+  },
+}
+```
+
+The marker is removed from resolved task tags, yielding `["ci", "slow", "frontend"]`. The same inheritance and composition rules apply when extending task configuration from other packages. A task with `"extends": false` starts with fresh configuration rather than inherited tags. Clearing task tags does not remove package tags.
+
+Tags are not included in the resolved task hash data. However, changing tags in a package's `turbo.json` can still invalidate its cache when that file is included in the task's file inputs.
 
 ### extends (task-level)
 
@@ -867,6 +901,7 @@ This microsyntax can be used in the following array fields:
 - `inputs`
 - `outputs`
 - `passThroughEnv`
+- Task `tags`
 - `with`
 
 For example, if your root `turbo.json` defines:
