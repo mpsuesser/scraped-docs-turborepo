@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/configuration
 title: "Configuring turbo.json"
 description: "Complete reference for all turbo.json configuration options and their behavior."
-access_date: 2026-09-30T03:06:23.193Z
-current_date: 2026-09-30T03:06:23.193Z
+access_date: 2026-10-04T00:42:20.646Z
+current_date: 2026-10-04T00:42:20.646Z
 ---
 
 Learn how to configure Turborepo through \`turbo.json\`.
@@ -231,6 +231,22 @@ Read more about [Environment Modes](../crafting-your-repository/using-environmen
 ```
 
 Enable experimental features that will become the default behavior in future versions of Turborepo.
+
+#### experimentalSetup
+
+Experimental
+
+Default: `false`
+
+Opt into experimental setup features that are still in progress. This flag can only be set in the root `turbo.json`, and every future setup surface must require it to be `true`.
+
+```
+{
+  "futureFlags": {
+    "experimentalSetup": true,
+  },
+}
+```
 
 #### errorsOnlyShowHash
 
