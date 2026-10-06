@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/configuration
 title: "Configuring turbo.json"
 description: "Complete reference for all turbo.json configuration options and their behavior."
-access_date: 2026-10-04T00:42:20.646Z
-current_date: 2026-10-04T00:42:20.646Z
+access_date: 2026-10-06T09:09:36.577Z
+current_date: 2026-10-06T09:09:36.577Z
 ---
 
 Learn how to configure Turborepo through \`turbo.json\`.
@@ -247,6 +247,26 @@ Opt into experimental setup features that are still in progress. This flag can o
   },
 }
 ```
+
+`turbo setup --help` works without the flag, Node.js, a package manager, or a local `turbo` installation. Actual invocation requires this root flag. For now, run from the repository root or select it with `--cwd`; automatic setup root discovery and compatible local CLI handoff are separate follow-ups. Setup never runs Turborepo tasks.
+
+The experimental command accepts existing global options and these controls. Their provisioning behavior is reserved for follow-up implementations:
+
+| Control | Intended behavior |
+| --- | --- |
+| `--plan` | Report proposed setup without writing or installing. |
+| `--check` | Check installed state without writing, resolving, or downloading. |
+| `--force` | Reinstall selected versions; do not refresh resolution. |
+| `--frozen` | Require a current `turbo.lock`; inferred by default in CI. |
+| `--no-frozen` | Allow lock creation or updates, including in CI. |
+| `--offline` | Use cached artifacts only, with no HTTP requests. |
+| `--tools-only` | Skip dependency installation. |
+| `--no-lock` | Provision without writing `turbo.lock`; override CI-inferred frozen mode. |
+| `--update-lock` | Refresh floating requests and provision repository-policy-selected tools. |
+
+`--frozen` conflicts with `--no-frozen`, `--no-lock`, and `--update-lock`. `--no-lock` also conflicts with `--update-lock`. Inferred CI frozen mode rejects `--update-lock`; intentional CI refresh requires `--no-frozen`. `--plan` and `--check` conflict, and neither ever writes. `--check` conflicts with `--force`, `--update-lock`, and `--no-lock`. `--plan --force` and `--plan --update-lock` may report proposed changes but never perform them.
+
+There are no per-tool selectors or lock-only subcommands. `turbo exec -- <command>` is a separate, later command, not setup syntax.
 
 #### errorsOnlyShowHash
 
