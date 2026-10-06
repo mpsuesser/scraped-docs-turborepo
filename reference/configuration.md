@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/configuration
 title: "Configuring turbo.json"
 description: "Complete reference for all turbo.json configuration options and their behavior."
-access_date: 2026-10-06T09:09:36.577Z
-current_date: 2026-10-06T09:09:36.577Z
+access_date: 2026-10-06T15:56:10.080Z
+current_date: 2026-10-06T15:56:10.080Z
 ---
 
 Learn how to configure Turborepo through \`turbo.json\`.
@@ -403,9 +403,9 @@ With this configuration, running `turbo prune frontend` will include `tsconfig.j
 
 Default: `false`
 
-Resolve [`--filter`](run.md#--filter-string) at the **task level** instead of the **package level**. Git-range filters (e.g. `--filter=[main]`) match changed files against each task's [`inputs`](#inputs) globs, and the `...` dependency/dependent syntax traverses the Task Graph in addition to the Package Graph.
+Resolve [`--filter`](run.md#--filter-string) at the **task level** instead of the **package level**. Git-range filters (e.g. `--filter=[main]`) match changed files against each task's [`inputs`](#inputs) globs, and the `...` dependency/dependent syntax traverses the Task Graph instead of the Package Graph.
 
-Without this flag, `--filter` operates on the Package Graph: a git-range selector marks entire packages as matched if any file in the package changed, and `...` follows package-level dependencies. With this flag, resolution moves to the Task Graph: only tasks whose `inputs` actually match the changed files are selected, and `...` follows task-level dependencies (e.g. `web#build -> schema#gen` is traversed even if `web` has no package-level dependency on `schema`).
+Without this flag, `--filter` operates on the Package Graph: a git-range selector marks entire packages as matched if any file in the package changed, and `...` follows package-level dependencies. With this flag, resolution moves to the Task Graph: only tasks whose `inputs` actually match the changed files are selected, and `...` follows task-level dependencies (e.g. `web#build -> schema#gen` is traversed even if `web` has no package-level dependency on `schema`). Package dependencies alone do not cause tasks in dependency packages to be selected.
 
 ```
 {
