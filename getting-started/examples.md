@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/getting-started/examples
 title: "Start with an example"
 description: "Browse core-maintained and community examples to bootstrap a Turborepo with your favorite tools."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+access_date: 2026-10-10T22:36:18.264Z
+current_date: 2026-10-10T22:36:18.264Z
 ---
 
 Use `create-turbo` to bootstrap an example with your favorite tooling.
@@ -90,7 +90,7 @@ The community curates a set of examples to showcase ways to use common tools and
 | --- | --- |
 | [Design System](https://github.com/vercel/turborepo/tree/main/examples/design-system) | Unify your site's look and feel by sharing a design system across multiple apps |
 | [Angular](https://github.com/vercel/turborepo/tree/main/examples/with-angular) | Minimal Turborepo example for learning the fundamentals |
-| [Yarn Berry](https://github.com/vercel/turborepo/tree/main/examples/with-berry) | Monorepo example using Yarn Berry (Yarn 3) |
+| [Yarn Berry](https://github.com/vercel/turborepo/tree/main/examples/with-berry) | Monorepo example using modern Yarn (Berry) |
 | [Biome](https://github.com/vercel/turborepo/tree/main/examples/with-biome) | Basic monorepo example with two Next.js applications and integrated Biome configuration |
 | [Changesets](https://github.com/vercel/turborepo/tree/main/examples/with-changesets) | Configured to publish packages via Changesets |
 | [Docker](https://github.com/vercel/turborepo/tree/main/examples/with-docker) | Monorepo with an Express API and a Next.js App deployed with Docker utilizing turbo prune |
