@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/python
 title: "Python (Experimental)"
 description: "Discover uv workspace members as Turborepo packages and run native uv tasks."
-access_date: 2026-09-05T05:49:08.041Z
-current_date: 2026-09-05T05:49:08.041Z
+access_date: 2026-10-11T14:04:58.809Z
+current_date: 2026-10-11T14:04:58.809Z
 ---
 
 Use experimental native uv workspace support with Turborepo.
@@ -136,7 +136,7 @@ With zero configuration, Turborepo creates task hashes using:
 
 - The selected member's source files, plus its internal dependency sources for `check` and `test`
 - Every member's source files when verification runs through the workspace package, and the whole repository for a root pytest task because pytest controls collection
-- Root uv files (`pyproject.toml`, `uv.toml`, `.python-version`) and supported tool configuration such as `ruff.toml`, `mypy.ini`, `pyrightconfig.json`, `pytest.ini`, and `ty.toml`
+- Root uv files (`pyproject.toml`, `uv.toml`, `.python-version`) and supported tool configuration such as `ruff.toml`, `mypy.ini`, `pyrightconfig.json`, `pytest.ini`, and `ty.toml`. Ruff and pytest configuration (including `conftest.py`) in directories between the root and a member are included too.
 - Relevant uv and pip environment variables
 - The resolved external dependency closure from `uv.lock`, scoped to each member
 - The uv and Python interpreter identities. If Turborepo cannot resolve them, uv tasks remain runnable but implicit caching is disabled with a warning.
