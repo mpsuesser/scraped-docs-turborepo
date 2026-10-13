@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/rust
 title: "Rust (Experimental)"
 description: "Discover Cargo workspace crates as Turborepo packages and run native Cargo tasks."
-access_date: 2026-09-03T21:18:59.663Z
-current_date: 2026-09-03T21:18:59.663Z
+access_date: 2026-10-13T18:20:57.380Z
+current_date: 2026-10-13T18:20:57.380Z
 ---
 
 Use experimental native Cargo workspace support with Turborepo.
@@ -140,8 +140,41 @@ The built-in `format` task also includes `rustfmt.toml`, `.rustfmt.toml`, and `R
 
 Project-specific hashing inputs must be accounted for manually. This includes:
 
-- Environment variables must read by build scripts still need to be declared in the task's [`env`](../../reference/configuration.md#env) configuration
+- Environment variables read by build scripts still need to be declared in the task's [`env`](../../reference/configuration.md#env) configuration
 - File inputs that are not included by default. Use [`inputs`](../../reference/configuration.md#inputs) to define your own file inputs and [`$TURBO_DEFAULT$`](../../reference/configuration.md#turbo_default) to preserve zero-configuration file inputs
+
+Files that a crate reads from outside its own directory and outside its local dependency crates are not part of the default inputs. Common sources are:
+
+- `include_str!`, `include_bytes!`, and `include!` with a path that leaves the crate, such as `include_str!("../../shared/schema.json")` or a path built from `env!("CARGO_MANIFEST_DIR")`
+- `#[path = "..."]` modules outside the crate
+- Build scripts that read files elsewhere in the repository (these also need `cargo:rerun-if-changed` for Cargo itself)
+
+Without a declaration, editing such a file does not change the task hash, and Turborepo restores the previous result from cache. Declaring the files on one crate's task is not enough: every task that compiles the crate reads them too, including the tasks of crates that depend on it and workspace-wide `test`, `check`, and `lint`. Declare them on each of those tasks:
+
+```
+{
+  "tasks": {
+    "build": {
+      "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/shared/schema/**"]
+    },
+    "test": {
+      "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/shared/schema/**"]
+    },
+    "check": {
+      "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/shared/schema/**"]
+    },
+    "lint": {
+      "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/shared/schema/**"]
+    }
+  }
+}
+```
+
+In a repository that also has JavaScript packages, these task-wide keys apply to those packages as well. That is safe but causes extra cache misses. To avoid it, declare the inputs as `<package>#<task>` entries for each affected crate instead.
+
+Explicit input globs hash files from the filesystem, including gitignored ones, so keep them narrow. A glob over a whole package directory also picks up its `.turbo` logs, `node_modules`, and build output.
+
+To find these files, check the `.d` dep-info file Cargo writes next to each build artifact (for example, `target/debug/my-crate.d`). It lists every file the compile read, including files read by dependency crates. It only exists after Cargo has actually compiled the crate, not after Turborepo restored it from cache.
 
 ### Output caching
 

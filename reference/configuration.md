@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/configuration
 title: "Configuring turbo.json"
 description: "Complete reference for all turbo.json configuration options and their behavior."
-access_date: 2026-10-06T20:39:47.668Z
-current_date: 2026-10-06T20:39:47.668Z
+access_date: 2026-10-13T18:20:57.380Z
+current_date: 2026-10-13T18:20:57.380Z
 ---
 
 Learn how to configure Turborepo through \`turbo.json\`.
@@ -95,19 +95,19 @@ When set to `true`, disables the update notification that appears when a new ver
 
 ### agentGuidance
 
-Default: `true`
+Default: `false`
 
-When an AI coding agent is detected, `turbo` maintains a managed block in the repository-root `AGENTS.md` that points to the documentation bundled with the installed `turbo` package. The guidance is refreshed before repository-scoped commands, and only Turborepo's own block is updated. Existing instructions and other tools' blocks are preserved.
+When an AI coding agent is detected, `turbo` can maintain a managed block in the repository-root `AGENTS.md` that points to the documentation bundled with the installed `turbo` package. The guidance is refreshed before repository-scoped commands, and only Turborepo's own block is updated. Existing instructions and other tools' blocks are preserved.
 
-This is a root-only option; it cannot be set in package-level `turbo.json` files. Use it in either `turbo.json` or `turbo.jsonc` to stop future automatic updates:
+This is a root-only option; it cannot be set in package-level `turbo.json` files. Use it in either `turbo.json` or `turbo.jsonc` to opt in to automatic updates:
 
 ```
 {
-  "agentGuidance": false
+  "agentGuidance": true
 }
 ```
 
-Opting out does not delete an existing `AGENTS.md` file or Turborepo block. Existing repositories receive the guidance on a later `turbo` invocation when an agent is detected. New projects created from the default starter include it immediately.
+Opting out does not delete an existing `AGENTS.md` file or Turborepo block. Existing repositories receive or refresh the guidance only after opting in. New projects created from the default starter include it immediately.
 
 ### concurrency
 
