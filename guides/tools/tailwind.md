@@ -1,12 +1,12 @@
 ---
 url: https://turborepo.dev/docs/guides/tools/tailwind
 title: "Tailwind CSS"
-description: "Share Tailwind CSS configuration and styles across packages in your monorepo."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+description: "Learn how to use Tailwind CSS in a Turborepo."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Learn how to use Tailwind CSS in a Turborepo.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 [Tailwind CSS](https://tailwindcss.com/) is a CSS framework that allows you to rapidly build modern websites without ever leaving your HTML.
 
@@ -16,89 +16,91 @@ If you'd rather use a template, this guide is walking through how to build [this
 
 #### pnpm
 
-```
+```bash title="Terminal"
 pnpm dlx create-turbo@latest -e with-tailwind
 ```
 
 #### yarn
 
-```
+```bash title="Terminal"
 yarn dlx create-turbo@latest -e with-tailwind
 ```
 
 #### npm
 
-```
+```bash title="Terminal"
 npx create-turbo@latest -e with-tailwind
 ```
 
 #### bun
 
-```
+```bash title="Terminal"
 bunx create-turbo@latest -e with-tailwind
 ```
 
 #### nub
 
-```
+```bash title="Terminal"
 nubx create-turbo@latest -e with-tailwind
 ```
 
 #### aube
 
-```
+```bash title="Terminal"
 aubx create-turbo@latest -e with-tailwind
 ```
 
 ## Guide
 
-### Create a monorepo
+> This guide is for Tailwind CSS v4.
+
+### 1. Create a monorepo
 
 If you don't have an existing project, use [create-turbo](../../getting-started/installation.md) to create a new monorepo:
 
 #### pnpm
 
-```
+```bash title="Terminal"
 pnpm dlx create-turbo@latest
 ```
 
 #### yarn
 
-```
+```bash title="Terminal"
 yarn dlx create-turbo@latest
 ```
 
 #### npm
 
-```
+```bash title="Terminal"
 npx create-turbo@latest
 ```
 
 #### bun
 
-```
+```bash title="Terminal"
 bunx create-turbo@latest
 ```
 
 #### nub
 
-```
+```bash title="Terminal"
 nubx create-turbo@latest
 ```
 
 #### aube
 
-```
+```bash title="Terminal"
 aubx create-turbo@latest
 ```
 
-### Add Tailwind CSS to your application
+### 2. Add Tailwind CSS to your application
 
 [Follow Tailwind CSS's guides](https://tailwindcss.com/docs/installation/using-vite) to set up Tailwind CSS for your frontend framework.
 
 Once completed, you can start working on bringing your UI package into the applications.
 
-### Create a shared Tailwind CSS configuration package
+### 3. Create a shared Tailwind CSS configuration package
 
 First, build an [Internal Package](../../core-concepts/internal-packages.md) with four files:
 
@@ -106,7 +108,7 @@ First, build an [Internal Package](../../core-concepts/internal-packages.md) wit
 
 This `package.json` installs Tailwind CSS so we can create the file shared styles and export for the rest of the repository.
 
-```
+```json title="./packages/tailwind-config/package.json"
 {
   "name": "@repo/tailwind-config",
   "version": "0.0.0",
@@ -127,7 +129,7 @@ This `package.json` installs Tailwind CSS so we can create the file shared style
 
 This `shared-styles.css` file will be shared to the libraries and applications in the repository. The variables shown will be available anywhere that the file is included.
 
-```
+```css title="./packages/tailwind-config/shared-styles.css"
 @import "tailwindcss";
 
 @theme {
@@ -141,7 +143,7 @@ This `shared-styles.css` file will be shared to the libraries and applications i
 
 If your frontends need a PostCSS configuration file, you can create one to share.
 
-```
+```js title="./packages/tailwind-config/postcss.config.js"
 export const postcssConfig = {
   plugins: {
     "@tailwindcss/postcss": {},
@@ -149,7 +151,7 @@ export const postcssConfig = {
 };
 ```
 
-### Create the UI package
+### 4. Create the UI package
 
 You can now build the components to share to your applications.
 
@@ -159,7 +161,7 @@ For a full example, [visit the source code for `@repo/ui` package in the Tailwin
 
 The `package.json` installs the dependencies for the package, sets up scripts for development and build environments, and marks the exports for the package.
 
-```
+```json title="./packages/ui/package.json"
 {
   "exports": {
     "./styles.css": "./dist/index.css",
@@ -181,11 +183,15 @@ The `package.json` installs the dependencies for the package, sets up scripts fo
 }
 ```
 
+> Above, we've only included the code related to setting up Tailwind. The full
+> package.json is
+> [here](https://github.com/vercel/turborepo/tree/main/examples/with-tailwind/packages/ui/package.json).
+
 #### turbo.json
 
 Create a `build` and `dev` task that runs the scripts for building of components and style sheets in parallel.
 
-```
+```json title="./packages/ui/turbo.json"
 {
   "extends": ["//"],
   "tasks": {
@@ -217,51 +223,54 @@ Create a `build` and `dev` task that runs the scripts for building of components
 
 This `styles.css` contains component-level styles for the shared UI library.
 
-```
+```css title="./packages/ui/src/styles.css"
 /* Component-level styles for the UI package */
 @import "tailwindcss" prefix(ui);
 ```
 
-### Use the UI package in an application
+> Tailwind classes used in this package should be prefixed with `ui:` to avoid
+> style specificity issues.
+
+### 5. Use the UI package in an application
 
 Install the packages you've created into your application.
 
 #### pnpm
 
-```
+```bash title="Terminal"
 pnpm add @repo/ui @repo/tailwind-config --save-dev --filter=@repo/ui --filter=web
 ```
 
 #### yarn
 
-```
+```bash title="Terminal"
 yarn workspace web add @repo/ui @repo/tailwind-config --dev
 yarn workspace @repo/ui add @repo/ui @repo/tailwind-config --dev
 ```
 
 #### npm
 
-```
+```bash title="Terminal"
 npm install @repo/ui @repo/tailwind-config --workspace=web --workspace=@repo/ui --save-dev
 ```
 
 #### bun
 
-```
+```bash title="Terminal"
 cd apps/web && bun install @repo/ui @repo/tailwind-config --dev
 cd packages/ui && bun install @repo/ui @repo/tailwind-config --dev
 ```
 
 #### nub
 
-```
+```bash title="Terminal"
 cd apps/web && nub add @repo/ui @repo/tailwind-config --save-dev
 cd packages/ui && nub add @repo/ui @repo/tailwind-config --save-dev
 ```
 
 #### aube
 
-```
+```bash title="Terminal"
 cd apps/web && aube add @repo/ui @repo/tailwind-config --save-dev
 cd packages/ui && aube add @repo/ui @repo/tailwind-config --save-dev
 ```
@@ -270,22 +279,30 @@ Then, configure the files in your application so the styles from the UI package 
 
 #### globals.css
 
-```
+```css title="./apps/web/app/globals.css"
 @import "tailwindcss";
 @import "@repo/tailwind-config";
 ```
 
 #### layout.tsx
 
-```
+```tsx title="./apps/web/app/layout.tsx"
 import "@repo/ui/styles.css";
 import "./globals.css";
 ```
 
 #### postcss.config.js (Optional)
 
-```
+```js title="./apps/web/postcss.config.js"
 import { postcssConfig } from "@repo/tailwind-config/postcss";
 
 export default postcssConfig;
 ```
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

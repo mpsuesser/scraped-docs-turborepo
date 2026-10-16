@@ -1,20 +1,20 @@
 ---
 url: https://turborepo.dev/docs/guides/multi-language
 title: "Multi-language support"
-description: "Use package scripts to build JavaScript and .NET projects in one task graph."
-access_date: 2026-10-16T18:25:44.917Z
-current_date: 2026-10-16T18:25:44.917Z
+description: "Run other language toolchains alongside JavaScript packages."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Run other language toolchains alongside JavaScript packages.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Turborepo can run other language toolchains through scripts in `package.json`. Add a package for each independently cacheable project and declare its dependencies so Turborepo can order tasks and invalidate cached results.
 
 For experimental native workspace support, see the [Rust](tools/rust.md), [Python](tools/python.md), and [Go](tools/go.md) guides. Those integrations discover projects and dependencies from their native workspace files.
 
-This example combines a JavaScript package with a.NET console application and a C# library. Start with [Turborepo installed](../getting-started/installation.md) in your repository, and install the [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) so `dotnet` is available on `PATH`.
+This example combines a JavaScript package with a .NET console application and a C# library. Start with [Turborepo installed](../getting-started/installation.md) in your repository, and install the [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) so `dotnet` is available on `PATH`.
 
-```
+```text
 .
 ├── apps/api/
 │   ├── Api.csproj
@@ -35,54 +35,46 @@ This example combines a JavaScript package with a.NET console application and a 
 
 ## Add the package-manager workspaces
 
-Include both the application and library directories. Their `package.json` files make the.NET projects visible to Turborepo:
+Include both the application and library directories. Their `package.json` files make the .NET projects visible to Turborepo:
 
 #### pnpm
 
-```
+```yaml title="./pnpm-workspace.yaml"
 packages:
   - "apps/*"
   - "packages/*"
 ```
 
-[→ pnpm workspace documentation](https://pnpm.io/pnpm-workspace_yaml)
-
 #### yarn
 
-```
+```json title="./package.json"
 {
   "private": true,
   "workspaces": ["apps/*", "packages/*"]
 }
 ```
-
-[→ Yarn workspace documentation](https://yarnpkg.com/features/workspaces#how-are-workspaces-declared)
 
 #### npm
 
-```
+```json title="./package.json"
 {
   "private": true,
   "workspaces": ["apps/*", "packages/*"]
 }
 ```
-
-[→ npm workspace documentation](https://docs.npmjs.com/cli/using-npm/workspaces)
 
 #### bun
 
-```
+```json title="./package.json"
 {
   "private": true,
   "workspaces": ["apps/*", "packages/*"]
 }
 ```
 
-[→ Bun workspace documentation](https://bun.sh/docs/install/workspaces)
-
 The JavaScript package has a normal package name and script:
 
-```
+```json title="./packages/web/package.json"
 {
   "name": "web",
   "version": "1.0.0",
@@ -93,11 +85,11 @@ The JavaScript package has a normal package name and script:
 }
 ```
 
-## Add the.NET projects
+## Add the .NET projects
 
-Pin the.NET SDK at the repository root so machines sharing cached builds use the same compiler. Install the version specified here:
+Pin the .NET SDK at the repository root so machines sharing cached builds use the same compiler. Install the version specified here:
 
-```
+```json title="./global.json"
 {
   "sdk": {
     "version": "10.0.401",
@@ -110,7 +102,7 @@ Pin the.NET SDK at the repository root so machines sharing cached builds use the
 
 Create the library project and its source file:
 
-```
+```xml title="./packages/lib/Lib.csproj"
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -119,7 +111,7 @@ Create the library project and its source file:
 </Project>
 ```
 
-```
+```csharp title="./packages/lib/Message.cs"
 namespace Acme.Lib;
 
 public static class Message
@@ -128,9 +120,9 @@ public static class Message
 }
 ```
 
-The application uses a `ProjectReference` to resolve the library in.NET:
+The application uses a `ProjectReference` to resolve the library in .NET:
 
-```
+```xml title="./apps/api/Api.csproj"
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -143,7 +135,7 @@ The application uses a `ProjectReference` to resolve the library in.NET:
 </Project>
 ```
 
-```
+```csharp title="./apps/api/Program.cs"
 System.Console.WriteLine(Acme.Lib.Message.Text());
 ```
 
@@ -151,7 +143,7 @@ System.Console.WriteLine(Acme.Lib.Message.Text());
 
 Add a `package.json` beside each `.csproj` with a script that invokes the [.NET CLI](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-build):
 
-```
+```json title="./packages/lib/package.json"
 {
   "name": "lib",
   "version": "1.0.0",
@@ -162,7 +154,7 @@ Add a `package.json` beside each `.csproj` with a script that invokes the [.NET 
 }
 ```
 
-```
+```json title="./apps/api/package.json"
 {
   "name": "api",
   "version": "1.0.0",
@@ -178,24 +170,24 @@ Add a `package.json` beside each `.csproj` with a script that invokes the [.NET 
 
 For npm, use `"lib": "*"` instead of `"workspace:*"`. Run your package manager's install command from the repository root to link the workspaces and update its lockfile.
 
-Keep the `package.json` dependency in sync with the `ProjectReference`..NET uses the project reference to compile the application, while Turborepo uses the package dependency to build `lib` before `api` and invalidate `api` 's cache when the library changes. Turborepo does not read `.csproj` references or manage NuGet dependencies. Review both declarations whenever you add or remove a project reference.
+Keep the `package.json` dependency in sync with the `ProjectReference`. .NET uses the project reference to compile the application, while Turborepo uses the package dependency to build `lib` before `api` and invalidate `api`'s cache when the library changes. Turborepo does not read `.csproj` references or manage NuGet dependencies. Review both declarations whenever you add or remove a project reference.
 
-The `DefaultItemExcludes` entries keep.NET from compiling source files reached through workspace links in `node_modules`.
+The `DefaultItemExcludes` entries keep .NET from compiling source files reached through workspace links in `node_modules`.
 
 ## Configure tasks and caching
 
 Ignore `bin/` and `obj/` to keep generated files out of the default input hash. The `outputs` setting below still lets Turborepo cache and restore `bin/`:
 
-```
+```text title="./.gitignore"
 node_modules/
 .turbo/
 bin/
 obj/
 ```
 
-Configure the build task and cache the binaries produced by each.NET project:
+Configure the build task and cache the binaries produced by each .NET project:
 
-```
+```json title="./turbo.json"
 {
   "$schema": "https://turborepo.dev/schema.json",
   "globalDependencies": ["global.json"],
@@ -211,13 +203,13 @@ Configure the build task and cache the binaries produced by each.NET project:
 }
 ```
 
-Output paths are relative to each package. The.NET builds write to `bin/Release/net10.0`; the JavaScript script only prints a message and has no files to cache. `obj/` contains intermediate and restore state and is not cached here. A build that needs it can recreate it through `dotnet build` 's implicit restore.
+Output paths are relative to each package. The .NET builds write to `bin/Release/net10.0`; the JavaScript script only prints a message and has no files to cache. `obj/` contains intermediate and restore state and is not cached here. A build that needs it can recreate it through `dotnet build`'s implicit restore.
 
-Adding `global.json` to [`globalDependencies`](../reference/configuration.md#globaldependencies) makes SDK version changes in that file invalidate cached tasks. Update the pinned version when upgrading the SDK; Turborepo does not detect the installed.NET SDK version automatically. If you add shared files such as `Directory.Build.props`, `Directory.Build.targets`, or `NuGet.Config`, include those in your task inputs or global dependencies too. Keep the build environment consistent between machines that share cached outputs.
+Adding `global.json` to [`globalDependencies`](../reference/configuration.md#globaldependencies) makes SDK version changes in that file invalidate cached tasks. Update the pinned version when upgrading the SDK; Turborepo does not detect the installed .NET SDK version automatically. If you add shared files such as `Directory.Build.props`, `Directory.Build.targets`, or `NuGet.Config`, include those in your task inputs or global dependencies too. Keep the build environment consistent between machines that share cached outputs.
 
-Run all builds, or select the.NET application:
+Run all builds, or select the .NET application:
 
-```
+```bash title="Terminal"
 turbo run build
 turbo run build --filter=api
 dotnet apps/api/bin/Release/net10.0/Api.dll
@@ -225,4 +217,12 @@ dotnet apps/api/bin/Release/net10.0/Api.dll
 
 The application prints `API ready`. A second unchanged `turbo run build` restores the cached results. Editing `packages/lib/Message.cs` causes both `lib` and its dependent `api` to rebuild, while `web` can still use its cache.
 
-.NET still checks project references during the application's build and normally skips recompilation when they are up to date. The package dependency lets Turborepo schedule and cache each project independently; it does not replace.NET's dependency resolution.
+.NET still checks project references during the application's build and normally skips recompilation when they are up to date. The package dependency lets Turborepo schedule and cache each project independently; it does not replace .NET's dependency resolution.
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/reference/docs
 title: "docs"
 description: "API reference for the `turbo docs` command"
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# docs
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Search the Turborepo documentation directly from the command line.
 
@@ -55,7 +53,6 @@ turbo docs "task dependencies" --docs-version 2.8.0
 ## Minimum version
 
 The minimum supported version is **2.7.5**.
-
 
 ---
 

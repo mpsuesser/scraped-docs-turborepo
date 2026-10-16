@@ -1,14 +1,12 @@
 ---
 url: https://turborepo.dev/docs/reference/turbo-gen
 title: "@turbo/gen"
-description: "Reference for the `@turbo/gen` package that provides type definitions for Turborepo code generators."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+description: "Quickly generate new code in your Turborepo."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# @turbo/gen
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Use this package for type definitions in your [Turborepo code generators](generate.md).
 
@@ -58,7 +56,6 @@ Each `TurboConfig` object has the following shape:
 | `isRootConfig`    | `boolean` | Whether the configuration is from the root of the monorepo.                |
 
 For more information, [visit the Generating code guide](../guides/generating-code.md).
-
 
 ---
 

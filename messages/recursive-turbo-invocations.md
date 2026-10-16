@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/messages/recursive-turbo-invocations
 title: "Recursive `turbo` invocations"
 description: "Learn more about errors with recursive scripts and tasks in Turborepo."
-access_date: 2026-08-05T18:05:17.395Z
-current_date: 2026-08-05T18:05:17.395Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# Recursive `turbo` invocations
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 ## Why this error occurred
 
@@ -45,7 +43,6 @@ A misconfigured workspace can make it appear that a [multi-package workspace](ht
 Your repo can end up in this state in a few ways, with the most common being that the [packages are not defined according to your package manager](../crafting-your-repository/structuring-a-repository.md#specifying-packages-in-a-monorepo). An npm workspace that is missing the `workspaces` field in `package.json` or a pnpm workspace that is missing a `pnpm-workspace.yaml` file can result in this error message.
 
 Check that your repository is complying with standards for multi-package workspaces and correct any issues.
-
 
 ---
 

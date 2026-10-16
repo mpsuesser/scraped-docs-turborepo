@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/reference/devtools
 title: "devtools"
 description: "API reference for the `turbo devtools` command"
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# devtools
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Visualize your monorepo's package graph in the browser.
 
@@ -35,7 +33,6 @@ Do not automatically open the browser when the server starts.
 ```bash title="Terminal"
 turbo devtools --no-open
 ```
-
 
 ---
 

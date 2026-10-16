@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/reference/globs
 title: "File glob specification"
 description: "Learn about the file glob specification used by `turbo`."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# File glob specification
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 File globs are used throughout Turborepo for configuring which files to include or exclude in various contexts, allowing you to specifically define the files you want `turbo` to use.
 
@@ -38,7 +36,6 @@ File globs are used throughout Turborepo for configuring which files to include 
 | `!dist/*.js`       | Ignore all `.js` files in the `dist` directory                                                    |
 | `dist/**/*.js`     | Recursively match all `.js` files in the `dist` directory and its sub-directories                 |
 | `../scripts/**`    | Up one directory, match all files and sub-directories in the `scripts` directory                  |
-
 
 ---
 

@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/openapi
 title: "Remote Cache API"
 description: "OpenAPI specification for self-hosted Remote Cache servers."
-access_date: 2026-09-03T21:18:59.663Z
-current_date: 2026-09-03T21:18:59.663Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# Remote Cache API
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 # Remote Cache API
 
@@ -49,7 +47,6 @@ For self-hosted implementations, the token format and validation logic is up to 
 ## Download the spec
 
 The full OpenAPI specification is available at [`/api/remote-cache-spec`](https://turborepo.dev/api/remote-cache-spec).
-
 
 ---
 

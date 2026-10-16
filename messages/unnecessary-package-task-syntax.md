@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/messages/unnecessary-package-task-syntax
 title: "Unnecessary package task syntax error"
 description: "Learn more about errors with unnecessary package task syntax in Turborepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# Unnecessary package task syntax error
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 ## Why this error occurred
 
@@ -45,7 +43,6 @@ Remove the package prefix from the task name:
   }
 }
 ```
-
 
 ---
 

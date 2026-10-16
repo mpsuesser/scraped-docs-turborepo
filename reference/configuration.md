@@ -1,12 +1,12 @@
 ---
 url: https://turborepo.dev/docs/reference/configuration
 title: "Configuring turbo.json"
-description: "Complete reference for all turbo.json configuration options and their behavior."
-access_date: 2026-10-13T18:20:57.380Z
-current_date: 2026-10-13T18:20:57.380Z
+description: "Learn how to configure Turborepo through `turbo.json`."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Learn how to configure Turborepo through \`turbo.json\`.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Configure the behavior of `turbo` by using a `turbo.json` file in your Workspace's root directory. You can also:
 
@@ -15,9 +15,9 @@ Configure the behavior of `turbo` by using a `turbo.json` file in your Workspace
 
 ## Global options
 
-### extends
+### `extends`
 
-```
+```jsonc title="./apps/web/turbo.json"
 {
   "extends": ["//"],
 }
@@ -29,9 +29,9 @@ Extend from the root `turbo.json` to create specific configuration for a package
 - You can also extend from other packages (e.g., `["//", "shared-config"]`).
 - If `extends` is used in the root `turbo.json`, it will be ignored.
 
-### globalDependencies
+### `globalDependencies`
 
-```
+```jsonc title="./turbo.json"
 {
   "globalDependencies": ["tsconfig.json"],
 }
@@ -41,9 +41,17 @@ A list of globs that you want to include in all task hashes. **If any file match
 
 By default, the root `package.json`, lockfile, and source files in internal packages that the root package depends on are included in [the global hash](../crafting-your-repository/caching.md#root-workspace-dependencies) and can't be ignored. Any added `globalDependencies` will also be included in the global hash.
 
-### globalEnv
+> Globs must be in the repository's source control root. Globs outside of the
+> repository aren't supported.
 
-```
+> By default, `turbo prune` does not copy `globalDependencies` files into the
+> pruned output. Enable the
+> [`pruneIncludesGlobalFiles`](#pruneincludesglobalfiles) future flag to include
+> them.
+
+### `globalEnv`
+
+```jsonc title="./turbo.json"
 {
   "globalEnv": ["GITHUB_TOKEN", "PACKAGE_VERSION", "NODE_ENV"],
 }
@@ -53,9 +61,9 @@ A list of environment variables that you want to impact the hash of all tasks. A
 
 For more on wildcard and negation syntax, [see the `env` section](#env).
 
-### globalPassThroughEnv
+### `globalPassThroughEnv`
 
-```
+```jsonc title="./turbo.json"
 {
   "globalPassThroughEnv": ["AWS_SECRET_KEY", "GITHUB_TOKEN"],
 }
@@ -65,9 +73,12 @@ A list of environment variables that you want to make available to tasks. Using 
 
 Additionally, Turborepo has a built-in set of global passthrough variables for common cases, like operating system environment variables. This includes variables like `HOME`, `PATH`, `APPDATA`, `SHELL`, `PWD`, and more. The full list can be found [in the source code](https://github.com/vercel/turborepo/blob/main/crates/turborepo-env/src/lib.rs).
 
-Passthrough values do not contribute to hashes for caching
+> **Passthrough values do not contribute to hashes for caching:**
+>
+> If you want changes in these variables to cause cache misses, you will need to
+> include them in [`env`](#env) or [`globalEnv`](#globalenv).
 
-### ui
+### `ui`
 
 Default: `"stream"`
 
@@ -75,25 +86,25 @@ Select a terminal UI for the repository.
 
 `"tui"` allows for viewing each log at once and interacting with the task. `"stream"` outputs logs as they come in and is not interactive.
 
-```
+```json title="./turbo.json"
 {
   "ui": "tui" | "stream"
 }
 ```
 
-### noUpdateNotifier
+### `noUpdateNotifier`
 
 Default: `false`
 
 When set to `true`, disables the update notification that appears when a new version of `turbo` is available.
 
-```
+```json title="./turbo.json"
 {
   "noUpdateNotifier": true
 }
 ```
 
-### agentGuidance
+### `agentGuidance`
 
 Default: `false`
 
@@ -101,7 +112,7 @@ When an AI coding agent is detected, `turbo` can maintain a managed block in the
 
 This is a root-only option; it cannot be set in package-level `turbo.json` files. Use it in either `turbo.json` or `turbo.jsonc` to opt in to automatic updates:
 
-```
+```json title="./turbo.json"
 {
   "agentGuidance": true
 }
@@ -109,7 +120,7 @@ This is a root-only option; it cannot be set in package-level `turbo.json` files
 
 Opting out does not delete an existing `AGENTS.md` file or Turborepo block. Existing repositories receive or refresh the guidance only after opting in. New projects created from the default starter include it immediately.
 
-### concurrency
+### `concurrency`
 
 Default: `"10"`
 
@@ -119,13 +130,13 @@ Set/limit the maximum concurrency for task execution. Must be an integer greater
 - Use `100%` to use all available logical processors.
 - This option is ignored if the deprecated [`--parallel`](run.md#--parallel) flag is also passed.
 
-```
+```jsonc title="./turbo.json"
 {
   "concurrency": "1",
 }
 ```
 
-### dangerouslyDisablePackageManagerCheck
+### `dangerouslyDisablePackageManagerCheck`
 
 Default: `false`
 
@@ -133,31 +144,47 @@ Turborepo uses your repository's lockfile to determine caching behavior, [Packag
 
 To help with incremental migration or in situations where you can't use a package manager declaration, you may use `--dangerously-disable-package-manager-check` to opt out of this check and assume the risks of unstable lockfiles producing unpredictable behavior. When disabled, Turborepo will attempt a best-effort discovery of the intended package manager meant for the repository.
 
-```
+```jsonc title="./turbo.json"
 {
   "dangerouslyDisablePackageManagerCheck": true,
 }
 ```
 
-### cacheDir
+> You may also opt out of this check via
+> [`flag`](run.md#--dangerously-disable-package-manager-check) or
+> the
+> [`TURBO_DANGEROUSLY_DISABLE_PACKAGE_MANAGER_CHECK`](system-environment-variables.md)
+> environment variable.
+
+### `cacheDir`
 
 Default: `".turbo/cache"`
 
 Specify the filesystem cache directory.
 
-```
+```jsonc title="./turbo.json"
 {
   "cacheDir": ".turbo/cache",
 }
 ```
 
-### cacheMaxAge
+> When no `cacheDir` is specified and you're working in a [Git
+> worktree](https://git-scm.com/docs/git-worktree), Turborepo automatically
+> shares the cache with the main worktree. This allows cache hits across
+> different branches checked out in separate worktrees. Cache artifacts are
+> restored without rewriting their contents, so outputs containing absolute
+> worktree paths can point to another checkout after a cache hit. Setting an
+> explicit relative `cacheDir`, such as `.turbo/cache`, resolves from the root
+> of the current worktree and disables sharing, giving each worktree its own
+> local cache.
+
+### `cacheMaxAge`
 
 Default: `"0"` (disabled)
 
 Maximum age of local cache entries before automatic eviction. Entries older than this value are removed when eviction runs at the start of each `turbo run`. Eviction runs in a background thread so it does not block tasks.
 
-```
+```jsonc title="./turbo.json"
 {
   "cacheMaxAge": "7d",
 }
@@ -166,22 +193,29 @@ Maximum age of local cache entries before automatic eviction. Entries older than
 Accepts a human-readable duration string with the following units:
 
 | Unit | Example |
-| --- | --- |
-| `s` | `30s` |
-| `m` | `5m` |
-| `h` | `24h` |
-| `d` | `7d` |
-| `w` | `2w` |
+| ---- | ------- |
+| `s`  | `30s`   |
+| `m`  | `5m`    |
+| `h`  | `24h`   |
+| `d`  | `7d`    |
+| `w`  | `2w`    |
 
 Set to `"0"` to disable age-based eviction.
 
-### cacheMaxSize
+> Local cache eviction is opt-in today. We expect to enable it by default in
+> Turborepo 3.0.
+
+> You may also set this option via the
+> [`TURBO_CACHE_MAX_AGE`](system-environment-variables.md#turbo_cache_max_age)
+> environment variable.
+
+### `cacheMaxSize`
 
 Default: `"0"` (disabled)
 
 Maximum total size of the local filesystem cache. When the cache exceeds this limit, the oldest entries are evicted until the cache is within the limit. Eviction runs in a background thread at the start of each `turbo run`, so it does not block tasks.
 
-```
+```jsonc title="./turbo.json"
 {
   "cacheMaxSize": "10GB",
 }
@@ -190,20 +224,28 @@ Maximum total size of the local filesystem cache. When the cache exceeds this li
 Accepts a human-readable size string with the following units (case-insensitive):
 
 | Unit | Example |
-| --- | --- |
+| ---- | ------- |
 | `MB` | `500MB` |
-| `GB` | `10GB` |
-| `TB` | `1TB` |
+| `GB` | `10GB`  |
+| `TB` | `1TB`   |
 
 Fractional values like `1.5GB` are supported. Set to `"0"` to disable size-based eviction.
 
-### daemon
+> Size-based eviction runs after age-based eviction. If both `cacheMaxAge` and
+> `cacheMaxSize` are set, stale entries are removed first by age, then the
+> remaining entries are checked against the size limit.
+
+> You may also set this option via the
+> [`TURBO_CACHE_MAX_SIZE`](system-environment-variables.md#turbo_cache_max_size)
+> environment variable.
+
+### `daemon`
 
 **Deprecated**: The daemon is no longer used for `turbo run` and this option will be removed in version 3.0. The `--daemon` and `--no-daemon` flags are also deprecated.
 
 The daemon is still used by `turbo watch` and the Turborepo LSP.
 
-### envMode
+### `envMode`
 
 Default: `"strict"`
 
@@ -212,7 +254,7 @@ Turborepo's Environment Modes allow you to control which environment variables a
 - `"strict"`: Filter environment variables to only those that are specified in the `env` and `globalEnv` keys in `turbo.json`.
 - `"loose"`: Allow all environment variables for the process to be available.
 
-```
+```jsonc title="./turbo.json"
 {
   "envMode": "strict",
 }
@@ -220,9 +262,9 @@ Turborepo's Environment Modes allow you to control which environment variables a
 
 Read more about [Environment Modes](../crafting-your-repository/using-environment-variables.md#environment-modes).
 
-### futureFlags
+### `futureFlags`
 
-```
+```jsonc title="./turbo.json"
 {
   "futureFlags": {
     "errorsOnlyShowHash": true,
@@ -232,7 +274,14 @@ Read more about [Environment Modes](../crafting-your-repository/using-environmen
 
 Enable experimental features that will become the default behavior in future versions of Turborepo.
 
-#### errorsOnlyShowHash
+> `futureFlags` can only be set in the root `turbo.json`. An error will be
+> thrown if set in a [Package
+> Configuration](package-configurations.md).
+
+> Future flags that change behavior can invalidate the [task
+> cache](../crafting-your-repository/caching.md).
+
+#### `errorsOnlyShowHash`
 
 Default: `false`
 
@@ -243,7 +292,7 @@ With this flag enabled, successful tasks will show messages like:
 - `cache miss, executing <hash> (only logging errors)` - when a task starts execution
 - `cache hit, replaying logs (no errors) <hash>` - when a task is restored from cache
 
-```
+```jsonc title="./turbo.json"
 {
   "futureFlags": {
     "errorsOnlyShowHash": true,
@@ -256,7 +305,7 @@ With this flag enabled, successful tasks will show messages like:
 }
 ```
 
-#### longerSignatureKey
+#### `longerSignatureKey`
 
 Default: `false`
 
@@ -264,7 +313,7 @@ Enforce a minimum length of 32 bytes for the `TURBO_REMOTE_CACHE_SIGNATURE_KEY` 
 
 When this flag is enabled and the key is too short, Turborepo will fail immediately at the start of the run with an error message indicating the key length and the minimum requirement.
 
-```
+```jsonc title="./turbo.json"
 {
   "futureFlags": {
     "longerSignatureKey": true,
@@ -275,7 +324,7 @@ When this flag is enabled and the key is too short, Turborepo will fail immediat
 }
 ```
 
-#### affectedUsingTaskInputs
+#### `affectedUsingTaskInputs`
 
 Default: `false`
 
@@ -283,7 +332,7 @@ Use task-level [`inputs`](#inputs) globs to determine which tasks are affected b
 
 Without this flag, `--affected` operates at the **package level**: if any file in a package changed, all tasks in that package are selected. With this flag, `--affected` operates at the **task level**: a task is only selected if the changed files match its `inputs` configuration.
 
-```
+```jsonc title="./turbo.json"
 {
   "futureFlags": {
     "affectedUsingTaskInputs": true,
@@ -300,12 +349,17 @@ In this example, if only `README.md` changed in a package, `build` would not run
 
 This flag also makes package-oriented queries and pruning follow the Task Graph:
 
-- [`turbo query`](query.md) 's `affectedPackages` returns the packages that own affected tasks, including dependents connected only through explicit `package#task` dependencies. Packages with no affected tasks are omitted, and unchanged task prerequisites are not reported as affected.
+- [`turbo query`](query.md)'s `affectedPackages` returns the packages that own affected tasks, including dependents connected only through explicit `package#task` dependencies. Packages with no affected tasks are omitted, and unchanged task prerequisites are not reported as affected.
 - [`turbo prune`](prune.md) retains packages needed by the tasks of retained packages, along with their package dependencies and inherited Package Configurations. The arguments remain package names, so pruning considers all configured tasks rather than a single task such as `build`.
 
 Both behaviors follow task dependencies within and across enabled toolchains. For example, a JavaScript task depending on `mycrate#build:types` can make its package affected when the Rust task changes, and pruning the JavaScript package retains the crate even without a package-manifest dependency. With the flag disabled, both operations retain their package-based behavior.
 
-#### githubActionsRemoteBaseRefFallback
+> Changes to root configuration files (`package.json`, `turbo.json`,
+> `turbo.jsonc`), the package manager lockfile, or
+> [`globalDependencies`](#globaldependencies) will always cause all tasks to be
+> selected, regardless of individual task `inputs`.
+
+#### `githubActionsRemoteBaseRefFallback`
 
 Default: `false`
 
@@ -313,7 +367,7 @@ When GitHub Actions reports a pull request's base branch but that branch is not 
 
 Local refs continue to take precedence. This flag only affects base refs inferred from GitHub Actions. Explicit refs provided through `TURBO_SCM_BASE` and default `main` or `master` resolution are unchanged.
 
-```
+```jsonc title="./turbo.json"
 {
   "futureFlags": {
     "githubActionsRemoteBaseRefFallback": true,
@@ -321,7 +375,7 @@ Local refs continue to take precedence. This flag only affects base refs inferre
 }
 ```
 
-#### watchUsingTaskInputs
+#### `watchUsingTaskInputs`
 
 Default: `false`
 
@@ -329,7 +383,7 @@ Use task-level [`inputs`](#inputs) globs to determine which tasks to re-run when
 
 Without this flag, `turbo watch` operates at the **package level**: if any file in a package changes, all tasks in that package are re-run. With this flag, `turbo watch` operates at the **task level**: a task is only re-run if the changed files match its `inputs` configuration.
 
-```
+```jsonc title="./turbo.json"
 {
   "futureFlags": {
     "watchUsingTaskInputs": true,
@@ -344,7 +398,12 @@ Without this flag, `turbo watch` operates at the **package level**: if any file 
 
 In this example, editing `README.md` in a package would not trigger a `build` re-run because it is excluded from the task's inputs. Editing `src/index.ts` would trigger it because it matches `$TURBO_DEFAULT$`.
 
-#### pruneIncludesGlobalFiles
+> Changes to root configuration files (`package.json`, `turbo.json`,
+> `turbo.jsonc`), the package manager lockfile, or
+> [`globalDependencies`](#globaldependencies) will always cause all tasks to be
+> re-run, regardless of individual task `inputs`.
+
+#### `pruneIncludesGlobalFiles`
 
 Default: `false`
 
@@ -352,7 +411,7 @@ Copy files matching [`globalDependencies`](#globaldependencies) globs into the [
 
 Without this flag, the `globalDependencies` entries are preserved in the pruned `turbo.json` but the actual files they reference (e.g. a root `tsconfig.json`) are not copied. This can cause tasks to behave differently in the pruned output because the files they depend on are missing.
 
-```
+```jsonc title="./turbo.json"
 {
   "globalDependencies": ["tsconfig.json"],
   "futureFlags": {
@@ -363,7 +422,7 @@ Without this flag, the `globalDependencies` entries are preserved in the pruned 
 
 With this configuration, running `turbo prune frontend` will include `tsconfig.json` in the output alongside the pruned workspaces and lockfile. Both inclusion and `!` exclusion globs are supported.
 
-#### filterUsingTasks
+#### `filterUsingTasks`
 
 Default: `false`
 
@@ -371,7 +430,7 @@ Resolve [`--filter`](run.md#--filter-string) at the **task level** instead of th
 
 Without this flag, `--filter` operates on the Package Graph: a git-range selector marks entire packages as matched if any file in the package changed, and `...` follows package-level dependencies. With this flag, resolution moves to the Task Graph: only tasks whose `inputs` actually match the changed files are selected, and `...` follows task-level dependencies (e.g. `web#build -> schema#gen` is traversed even if `web` has no package-level dependency on `schema`). Package dependencies alone do not cause tasks in dependency packages to be selected.
 
-```
+```jsonc title="./turbo.json"
 {
   "futureFlags": {
     "filterUsingTasks": true,
@@ -384,15 +443,23 @@ Without this flag, `--filter` operates on the Package Graph: a git-range selecto
 }
 ```
 
-In this example, `--filter=[main]` would not select `build` for a package if only `README.md` changed, because `README.md` is excluded from `build` 's inputs.
+In this example, `--filter=[main]` would not select `build` for a package if only `README.md` changed, because `README.md` is excluded from `build`'s inputs.
 
-#### strictTaskEntrypointSelection
+> Changes to root configuration files (`package.json`, `turbo.json`,
+> `turbo.jsonc`), the package manager lockfile, or
+> [`globalDependencies`](#globaldependencies) will always cause all tasks to be
+> selected, regardless of individual task `inputs`.
+
+#### `strictTaskEntrypointSelection`
 
 Default: `false`
 
-Select requested tasks according to whether they resolve a command in the repository. When at least one package can run a requested task, packages without a command do not become entrypoints and their dependencies are not included merely because the task was requested.
+Select requested tasks according to whether they resolve a command in the
+repository. When at least one package can run a requested task, packages
+without a command do not become entrypoints and their dependencies are not
+included merely because the task was requested.
 
-```
+```jsonc title="./turbo.json"
 {
   "futureFlags": {
     "strictTaskEntrypointSelection": true,
@@ -405,38 +472,48 @@ Select requested tasks according to whether they resolve a command in the reposi
 }
 ```
 
-If `web` has a `test` command and `docs` does not, `turbo run test` starts from `web#test` but not `docs#test`. Missing tasks reached from retained tasks remain in the Task Graph, preserving Transit Nodes and cache invalidation.
+If `web` has a `test` command and `docs` does not, `turbo run test` starts from
+`web#test` but not `docs#test`. Missing tasks reached from retained tasks remain
+in the Task Graph, preserving Transit Nodes and cache invalidation.
 
-When no package resolves a command for a configured or implicitly registered task, it remains available for graph-only orchestration. For example, a scriptless `ci:checks` task can continue to run its configured dependencies. When any of those dependency branches reaches a runnable command, branches that never reach runnable work are removed. A fully scriptless graph is preserved when none of its branches contains a runnable command.
+When no package resolves a command for a configured or implicitly registered
+task, it remains available for graph-only orchestration. For example, a
+scriptless `ci:checks` task can continue to run its configured dependencies.
+When any of those dependency branches reaches a runnable command, branches that
+never reach runnable work are removed. A fully scriptless graph is preserved
+when none of its branches contains a runnable command.
 
-This flag is independent of [`filterUsingTasks`](#filterusingtasks). When both are enabled, a plain task-level filter drops a matching task without a command, while `...` can explicitly select executable dependencies or dependents through that missing task node.
+This flag is independent of [`filterUsingTasks`](#filterusingtasks). When both
+are enabled, a plain task-level filter drops a matching task without a command,
+while `...` can explicitly select executable dependencies or dependents through
+that missing task node.
 
-#### globalConfiguration
+#### `globalConfiguration`
 
 Default: `false`
 
 Move global configuration keys under a top-level [`global`](#global) key for clarity. When enabled, the following renames apply:
 
-| Old key | New location |
-| --- | --- |
-| `globalDependencies` | `global.inputs` |
-| `globalEnv` | `global.env` |
-| `globalPassThroughEnv` | `global.passThroughEnv` |
-| `ui` | `global.ui` |
-| `envMode` | `global.envMode` |
-| `cacheDir` | `global.cacheDir` |
-| `cacheMaxAge` | `global.cacheMaxAge` |
-| `cacheMaxSize` | `global.cacheMaxSize` |
-| `concurrency` | `global.concurrency` |
-| `daemon` | `global.daemon` |
-| `noUpdateNotifier` | `global.noUpdateNotifier` |
+| Old key                                 | New location                                   |
+| --------------------------------------- | ---------------------------------------------- |
+| `globalDependencies`                    | `global.inputs`                                |
+| `globalEnv`                             | `global.env`                                   |
+| `globalPassThroughEnv`                  | `global.passThroughEnv`                        |
+| `ui`                                    | `global.ui`                                    |
+| `envMode`                               | `global.envMode`                               |
+| `cacheDir`                              | `global.cacheDir`                              |
+| `cacheMaxAge`                           | `global.cacheMaxAge`                           |
+| `cacheMaxSize`                          | `global.cacheMaxSize`                          |
+| `concurrency`                           | `global.concurrency`                           |
+| `daemon`                                | `global.daemon`                                |
+| `noUpdateNotifier`                      | `global.noUpdateNotifier`                      |
 | `dangerouslyDisablePackageManagerCheck` | `global.dangerouslyDisablePackageManagerCheck` |
-| `remoteCache` | `global.remoteCache` |
-| `experimentalObservability` | `global.experimentalObservability` |
+| `remoteCache`                           | `global.remoteCache`                           |
+| `experimentalObservability`             | `global.experimentalObservability`             |
 
 Using any of the old top-level keys while this flag is enabled will produce a hard error with a rename hint.
 
-```
+```jsonc title="./turbo.json"
 {
   "futureFlags": {
     "globalConfiguration": true,
@@ -448,7 +525,12 @@ Using any of the old top-level keys while this flag is enabled will produce a ha
 }
 ```
 
-#### experimentalObservability
+> `globalDependencies` is renamed to `global.inputs` and its semantics change:
+> files are prepended to every task's `inputs` for per-task hashing instead of
+> contributing to the global hash. This allows individual tasks to exclude
+> specific global files via negation globs.
+
+#### `experimentalObservability`
 
 Default: `false`
 
@@ -456,7 +538,9 @@ When enabled, Turborepo will honor the `experimentalObservability.otel` configur
 
 [Visit the Experimental observability section to learn more](#experimental-observability).
 
-```
+### `tags` Experimental
+
+```jsonc title="./apps/web/turbo.json"
 {
   "tags": ["utils"],
 }
@@ -466,9 +550,9 @@ Adds arbitrary string labels to a package. Labels do not need to be registered i
 
 Top-level tags label the package containing the configuration. Root `turbo.json` tags label the root package, not every package in the repository. Package tags are separate from task tags and are not inherited through task configuration.
 
-### global
+### `global`
 
-```
+```jsonc title="./turbo.json"
 {
   "futureFlags": {
     "globalConfiguration": true,
@@ -487,26 +571,31 @@ A top-level key that namespaces all global configuration options. Requires the [
 
 When enabled, existing top-level keys are moved under `global` with these renames:
 
-| Old key | New key |
-| --- | --- |
-| `globalDependencies` | `global.inputs` |
-| `globalEnv` | `global.env` |
-| `globalPassThroughEnv` | `global.passThroughEnv` |
-| `ui` | `global.ui` |
-| `envMode` | `global.envMode` |
-| `cacheDir` | `global.cacheDir` |
-| `cacheMaxAge` | `global.cacheMaxAge` |
-| `cacheMaxSize` | `global.cacheMaxSize` |
-| `concurrency` | `global.concurrency` |
-| `daemon` | `global.daemon` |
-| `noUpdateNotifier` | `global.noUpdateNotifier` |
+| Old key                                 | New key                                        |
+| --------------------------------------- | ---------------------------------------------- |
+| `globalDependencies`                    | `global.inputs`                                |
+| `globalEnv`                             | `global.env`                                   |
+| `globalPassThroughEnv`                  | `global.passThroughEnv`                        |
+| `ui`                                    | `global.ui`                                    |
+| `envMode`                               | `global.envMode`                               |
+| `cacheDir`                              | `global.cacheDir`                              |
+| `cacheMaxAge`                           | `global.cacheMaxAge`                           |
+| `cacheMaxSize`                          | `global.cacheMaxSize`                          |
+| `concurrency`                           | `global.concurrency`                           |
+| `daemon`                                | `global.daemon`                                |
+| `noUpdateNotifier`                      | `global.noUpdateNotifier`                      |
 | `dangerouslyDisablePackageManagerCheck` | `global.dangerouslyDisablePackageManagerCheck` |
-| `remoteCache` | `global.remoteCache` |
-| `experimentalObservability` | `global.experimentalObservability` |
+| `remoteCache`                           | `global.remoteCache`                           |
+| `experimentalObservability`             | `global.experimentalObservability`             |
+
+> `globalDependencies` is renamed to `global.inputs` and its semantics change:
+> files are prepended to every task's `inputs` for per-task hashing instead of
+> contributing to the global hash. This allows individual tasks to exclude
+> specific global files via negation globs.
 
 ## Defining tasks
 
-### tasks
+### `tasks`
 
 Each key in the `tasks` object is the name of a task that can be executed by [`turbo run`](run.md). Turborepo will search the packages described in your [Workspace's configuration](../crafting-your-repository/structuring-a-repository.md#specifying-packages-in-a-monorepo) for scripts in `package.json` with the name of the task.
 
@@ -514,7 +603,7 @@ Using the rest of the configuration described in the task, Turborepo will run th
 
 In the example below, we've defined three tasks under the `tasks` key: `build`, `test`, and `dev`.
 
-```
+```jsonc title="./turbo.json"
 {
   "$schema": "https://turborepo.dev/schema.json",
   "tasks": {
@@ -542,7 +631,7 @@ Using the options available in the tasks you define in `tasks`, you can describe
 
 Add `tags` to a task definition in the root `turbo.json` or a [Package Configuration](package-configurations.md):
 
-```
+```jsonc title="./turbo.json"
 {
   "tasks": {
     "test": {
@@ -556,7 +645,7 @@ Task tags are arbitrary string labels. Their configured order and duplicates are
 
 If a Package Configuration omits task `tags`, it inherits them. An explicit array replaces inherited task tags, and `"tags": []` clears them. To append labels instead of replacing them, use [`$TURBO_EXTENDS$`](#turbo_extends), just like other task array fields:
 
-```
+```jsonc title="./apps/web/turbo.json"
 {
   "extends": ["//"],
   "tasks": {
@@ -572,11 +661,11 @@ The marker is removed from resolved task tags, yielding `["ci", "slow", "fronten
 
 Tags are not included in the resolved task hash data. However, changing tags in a package's `turbo.json` can still invalidate its cache when that file is included in the task's file inputs.
 
-### extends (task-level)
+### `extends` (task-level)
 
 Controls whether a task inherits configuration from the extends chain. This option is only available in [Package Configurations](package-configurations.md), not in the root `turbo.json`.
 
-```
+```jsonc title="./packages/ui/turbo.json"
 {
   "extends": ["//"],
   "tasks": {
@@ -587,18 +676,18 @@ Controls whether a task inherits configuration from the extends chain. This opti
 }
 ```
 
-| Value | Behavior |
-| --- | --- |
-| `false` | Task is excluded from inheritance. If no other config is provided, the task won't exist for this package. If other config is provided, creates a fresh task definition with no inheritance. |
-| `true` (default) | Task inherits configuration normally from the extends chain. |
+| Value            | Behavior                                                                                                                                                                                    |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `false`          | Task is excluded from inheritance. If no other config is provided, the task won't exist for this package. If other config is provided, creates a fresh task definition with no inheritance. |
+| `true` (default) | Task inherits configuration normally from the extends chain.                                                                                                                                |
 
 See [Excluding tasks from inheritance](package-configurations.md#excluding-tasks-from-inheritance) for examples and more details.
 
-### description
+### `description`
 
 A human- or agent-readable description of what a task does.
 
-```
+```jsonc title="./turbo.json"
 {
   "tasks": {
     "build": {
@@ -610,7 +699,7 @@ A human- or agent-readable description of what a task does.
 
 This field is for documentation purposes only and does not affect task execution or caching behavior.
 
-### dependsOn
+### `dependsOn`
 
 A list of tasks that are required to complete before the task begins running.
 
@@ -620,7 +709,7 @@ There are three types of `dependsOn` relationships: [dependency relationships](#
 
 Prefixing a string in `dependsOn` with a `^` tells `turbo` that the task must wait for tasks in the package's dependencies to complete first. For example, in the `turbo.json` below:
 
-```
+```jsonc title="./turbo.json"
 {
   "tasks": {
     "build": {
@@ -636,7 +725,7 @@ Prefixing a string in `dependsOn` with a `^` tells `turbo` that the task must wa
 
 Task names without the `^` prefix describe a task that depends on a different task within the same package. For example, in the `turbo.json` below:
 
-```
+```jsonc title="./turbo.json"
 {
   "tasks": {
     "test": {
@@ -652,7 +741,7 @@ The `test` task will only run after the `lint` and `build` tasks have completed 
 
 Specify a task dependency between specific package tasks.
 
-```
+```json title="./turbo.json"
 {
   "tasks": {
     "web#lint": {
@@ -664,11 +753,11 @@ Specify a task dependency between specific package tasks.
 
 In this `turbo.json`, the `web#lint` task will wait for the `utils#build` task to complete.
 
-### env
+### `env`
 
 The list of environment variables a task depends on.
 
-```
+```jsonc title="./turbo.json"
 {
   "tasks": {
     "build": {
@@ -681,11 +770,18 @@ The list of environment variables a task depends on.
 }
 ```
 
+> Turborepo automatically includes environment variables prefixed by common
+> frameworks through [Framework
+> Inference](../crafting-your-repository/using-environment-variables.md#framework-inference).
+> For example, if your package is a Next.js project, you do not need to specify
+> any environment variables that [start with
+> `NEXT_PUBLIC_`](https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser).
+
 #### Wildcards
 
 Turborepo supports wildcards for environment variables so you can easily account for all environment variables with a given prefix. For example, the `turbo.json` below include all environment variables that start with `MY_API_` into the hash:
 
-```
+```json title="./turbo.json"
 {
   "tasks": {
     "build": {
@@ -699,7 +795,7 @@ Turborepo supports wildcards for environment variables so you can easily account
 
 A leading `!` means that the entire pattern will be negated. For instance, the `turbo.json` below will ignore the `MY_API_URL` variable.
 
-```
+```json title="./turbo.json"
 {
   "tasks": {
     "build": {
@@ -711,46 +807,51 @@ A leading `!` means that the entire pattern will be negated. For instance, the `
 
 #### Examples
 
-| Pattern | Description |
-| --- | --- |
-| `"*"` | Matches every environment variable. |
-| `"!*"` | Excludes every environment variable. |
-| `"FOO*"` | Matches `FOO`, `FOOD`, `FOO_FIGHTERS`, etc. |
-| `"FOO\*"` | Resolves to `"FOO*"` and matches `FOO`, `FOOD`, and `FOO_FIGHTERS`. |
-| `"FOO\\*"` | Matches a single environment variable named `FOO*`. |
-| `"!FOO*"` | Excludes all environment variables that start with `FOO`. |
-| `"\!FOO"` | Resolves to `"!FOO"`, and excludes a single environment variable named `!FOO`. |
-| `"\\!FOO"` | Matches a single environment variable named `!FOO`. |
-| `"FOO!"` | Matches a single environment variable named `FOO!`. |
+| Pattern    | Description                                                                    |
+| ---------- | ------------------------------------------------------------------------------ |
+| `"*"`      | Matches every environment variable.                                            |
+| `"!*"`     | Excludes every environment variable.                                           |
+| `"FOO*"`   | Matches `FOO`, `FOOD`, `FOO_FIGHTERS`, etc.                                    |
+| `"FOO\*"`  | Resolves to `"FOO*"` and matches `FOO`, `FOOD`, and `FOO_FIGHTERS`.            |
+| `"FOO\\*"` | Matches a single environment variable named `FOO*`.                            |
+| `"!FOO*"`  | Excludes all environment variables that start with `FOO`.                      |
+| `"\!FOO"`  | Resolves to `"!FOO"`, and excludes a single environment variable named `!FOO`. |
+| `"\\!FOO"` | Matches a single environment variable named `!FOO`.                            |
+| `"FOO!"`   | Matches a single environment variable named `FOO!`.                            |
 
-### passThroughEnv
+### `passThroughEnv`
 
 An allowlist of environment variables that should be made available to this task's runtime, even when in [Strict Environment Mode](../crafting-your-repository/using-environment-variables.md#strict-mode).
 
-```
+```jsonc title="./turbo.json"
 {
   "tasks": {
     "build": {
-      // Values will be available within \`build\` scripts
+      // Values will be available within `build` scripts
       "passThroughEnv": ["AWS_SECRET_KEY", "GITHUB_TOKEN"],
     },
   },
 }
 ```
 
-### outputs
+> Values provided in `passThroughEnv` do not contribute to the cache key for the
+> task. If you'd like changes to these variables to cause cache misses, you will
+> need to include them in [`env`](#env) or [`globalEnv`](#globalenv).
+
+### `outputs`
 
 A list of file glob patterns relative to the package's `package.json` to cache when the task is successfully completed.
 
 See [`$TURBO_ROOT$`](#turbo_root) if output paths need to be relative to the repository root.
 
-Output paths must resolve inside the repository root. Turborepo will not cache outputs that escape the repository.
+Output paths must resolve inside the repository root. Turborepo will not cache
+outputs that escape the repository.
 
-```
+```jsonc title="./turbo.json"
 {
   "tasks": {
     "build": {
-      // Cache all files emitted to the packages's \`dist\` directory
+      // Cache all files emitted to the packages's `dist` directory
       "outputs": ["dist/**"],
     },
   },
@@ -759,13 +860,13 @@ Output paths must resolve inside the repository root. Turborepo will not cache o
 
 Omitting this key or passing an empty array tells `turbo` to cache nothing (except logs, which are always cached when caching is enabled).
 
-### cache
+### `cache`
 
 Default: `true`
 
 Defines if task outputs should be cached. Setting `cache` to false is useful for long-running development tasks and ensuring that a task always runs when it is in the task's execution graph.
 
-```
+```jsonc title="./turbo.json"
 {
   "tasks": {
     "build": {
@@ -779,7 +880,7 @@ Defines if task outputs should be cached. Setting `cache` to false is useful for
 }
 ```
 
-### inputs
+### `inputs`
 
 Default: `[]`, all files in the package that are checked into source control
 
@@ -791,7 +892,7 @@ A list of file glob patterns relative to the package's `package.json` to conside
 
 Visit the [file glob specification](globs.md) for more information on globbing syntax.
 
-```
+```jsonc title="./turbo.json"
 {
   "tasks": {
     "test": {
@@ -801,11 +902,16 @@ Visit the [file glob specification](globs.md) for more information on globbing s
 }
 ```
 
-#### $TURBO\_DEFAULT$
+> Using the `inputs` key opts you out of `turbo`'s default behavior of
+> considering `.gitignore`. You must reconstruct the globs from `.gitignore` as
+> desired or use `$TURBO_DEFAULT$` to build off of the default behavior.
 
-Because specifying an `inputs` key immediately opts out of the default behavior, you may use the special string `$TURBO_DEFAULT$` within the `inputs` array to restore `turbo` 's default behavior. This allows you to tweak the default behavior for more granularity.
+#### `$TURBO_DEFAULT$`
 
-```
+Because specifying an `inputs` key immediately opts out of the default behavior, you may use
+the special string `$TURBO_DEFAULT$` within the `inputs` array to restore `turbo`'s default behavior. This allows you to tweak the default behavior for more granularity.
+
+```jsonc title="./turbo.json"
 {
   "tasks": {
     "check-types": {
@@ -816,17 +922,17 @@ Because specifying an `inputs` key immediately opts out of the default behavior,
 }
 ```
 
-#### $TURBO\_ROOT$
+#### `$TURBO_ROOT$`
 
 Tasks might reference a file that lies outside of their directory.
 
 Starting a file glob with `$TURBO_ROOT$` will change the glob to be relative to the root of the repository instead of the package directory.
 
-```
+```jsonc title="./turbo.json"
 {
   "tasks": {
     "check-types": {
-      // Consider all Typescript files in \`src/\` and the root tsconfig.json as inputs
+      // Consider all Typescript files in `src/` and the root tsconfig.json as inputs
       "inputs": ["$TURBO_ROOT$/tsconfig.json", "src/**/*.ts"],
     },
   },
@@ -835,13 +941,16 @@ Starting a file glob with `$TURBO_ROOT$` will change the glob to be relative to 
 
 #### Deferred hashing
 
-`inputs` entries can be structured objects that defer file hashing until after the task's dependencies have completed. Tasks that depend on a deferred task are also deferred until upstream hashes are available.
+`inputs` entries can be structured objects that defer file hashing until after
+the task's dependencies have completed. Tasks that depend on a deferred task are
+also deferred until upstream hashes are available.
 
-##### mode: "jit"
+##### `mode: "jit"`
 
-Hash the files matching `globs` just before the task executes, after its dependencies have completed.
+Hash the files matching `globs` just before the task executes, after its
+dependencies have completed.
 
-```
+```jsonc title="./turbo.json"
 {
   "tasks": {
     "codegen": {
@@ -862,11 +971,13 @@ Hash the files matching `globs` just before the task executes, after its depende
 }
 ```
 
-##### mode: "dependencyOutputs"
+##### `mode: "dependencyOutputs"`
 
-Hash the intersection of a dependency's declared `outputs` and `globs`. `dependencyOutputs` does not create task graph edges; selected tasks must already be present through `dependsOn`.
+Hash the intersection of a dependency's declared `outputs` and `globs`.
+`dependencyOutputs` does not create task graph edges; selected tasks must
+already be present through `dependsOn`.
 
-```
+```jsonc title="./turbo.json"
 {
   "tasks": {
     "check-types": {
@@ -890,7 +1001,7 @@ Hash the intersection of a dependency's declared `outputs` and `globs`. `depende
 - A selected `dependencyOutputs` task must declare `outputs`.
 - Tasks using `jit` or `dependencyOutputs` cannot know their final cache key until execution time, so `--dry=json` reports `hash: null` and a `hashReason`.
 
-#### $TURBO\_EXTENDS$
+#### `$TURBO_EXTENDS$`
 
 When using [Package Configurations](package-configurations.md), array fields completely replace the values from the root `turbo.json` by default. The `$TURBO_EXTENDS$` microsyntax changes this behavior to **append** instead of **replace**.
 
@@ -906,7 +1017,7 @@ This microsyntax can be used in the following array fields:
 
 For example, if your root `turbo.json` defines:
 
-```
+```jsonc title="./turbo.json"
 {
   "tasks": {
     "build": {
@@ -918,7 +1029,7 @@ For example, if your root `turbo.json` defines:
 
 A Package Configuration can add additional outputs while keeping the root outputs:
 
-```
+```jsonc title="./apps/web/turbo.json"
 {
   "extends": ["//"],
   "tasks": {
@@ -937,21 +1048,21 @@ A Package Configuration can add additional outputs while keeping the root output
 
 Without `$TURBO_EXTENDS$`, the `outputs` array would be completely replaced with `[".next/**", "!.next/cache/**", "!.next/dev/**"]`, dropping the `"dist/**"` from the root configuration.
 
-### outputLogs
+### `outputLogs`
 
 Default: `full`
 
 Set output logging verbosity. Can be overridden by the [`--output-logs`](run.md#--output-logs-option) CLI option.
 
-| Option | Description |
-| --- | --- |
-| `full` | Displays all logs |
-| `hash-only` | Only show the hashes of the tasks |
-| `new-only` | Only show logs from cache misses |
+| Option        | Description                       |
+| ------------- | --------------------------------- |
+| `full`        | Displays all logs                 |
+| `hash-only`   | Only show the hashes of the tasks |
+| `new-only`    | Only show logs from cache misses  |
 | `errors-only` | Only show logs from task failures |
-| `none` | Hides all task logs |
+| `none`        | Hides all task logs               |
 
-```
+```jsonc title="./turbo.json"
 {
   "tasks": {
     "build": {
@@ -961,7 +1072,12 @@ Set output logging verbosity. Can be overridden by the [`--output-logs`](run.md#
 }
 ```
 
-### persistent
+> When using `errors-only`, you can enable the
+> [`errorsOnlyShowHash`](#errorsonlyshowhash) future flag to show task hashes
+> when tasks complete successfully, providing visibility into running tasks
+> without full output logs.
+
+### `persistent`
 
 Default: `false`
 
@@ -971,7 +1087,7 @@ Because a long-running process won't exit, tasks that would depend on it would n
 
 This option is most useful for development servers or other "watch" tasks.
 
-```
+```jsonc title="./turbo.json"
 {
   "tasks": {
     "dev": {
@@ -983,7 +1099,7 @@ This option is most useful for development servers or other "watch" tasks.
 
 Tasks marked with `persistent` are also `interactive` by default.
 
-### interactive
+### `interactive`
 
 Default: `false` (Defaults to `true` for tasks marked as `persistent`)
 
@@ -991,7 +1107,7 @@ Label a task as `interactive` to make it accept inputs from `stdin` in the termi
 
 This option is most useful for scripts that can be manipulated while they are running, like Jest or Vitest.
 
-```
+```jsonc title="./turbo.json"
 {
   "tasks": {
     "test:watch": {
@@ -1002,19 +1118,21 @@ This option is most useful for scripts that can be manipulated while they are ru
 }
 ```
 
-### interruptible
+### `interruptible`
 
 Default: `false`
 
 Label a `persistent` task as `interruptible` to allow it to be restarted by `turbo watch`.
 
-`turbo watch` watches for changes to your packages and automatically restarts tasks that are affected. However, if a task is persistent, it will not be restarted by default. To enable restarting persistent tasks, set `interruptible` to `true`.
+`turbo watch` watches for changes to your packages and automatically restarts tasks
+that are affected. However, if a task is persistent, it will not be restarted by default.
+To enable restarting persistent tasks, set `interruptible` to `true`.
 
-### with
+### `with`
 
 A list of tasks that will be ran alongside this task. This is most useful for long-running tasks that you want to ensure always run at the same time.
 
-```
+```json title="./apps/web/turbo.json"
 {
   "tasks": {
     "dev": {
@@ -1030,30 +1148,32 @@ A list of tasks that will be ran alongside this task. This is most useful for lo
 
 The `boundaries` tag allows you to define rules for the [`boundaries` command](boundaries.md).
 
-```
+```json title="./turbo.json"
 {
   "boundaries": {}
 }
 ```
 
+### `tags`
+
 Each key in the `tags` object is the name of a tag that can be checked with [`turbo boundaries`](boundaries.md).
 
 In the configuration object for a tag, you can define rules for dependencies and dependents.
 
-#### dependencies and dependents
+#### `dependencies` and `dependents`
 
 Rules for a tag's dependencies and dependents.
 
 You can add an allowlist and a denylist:
 
-```
+```jsonc title="./turbo.json"
 {
   "boundaries": {
     "utils": {
       "dependencies": {
-        // permit only packages with the \`ui\` tag
+        // permit only packages with the `ui` tag
         "allow": ["ui"],
-        // and ban packages with the \`unsafe\` tag
+        // and ban packages with the `unsafe` tag
         "deny": ["unsafe"],
       },
     },
@@ -1063,12 +1183,12 @@ You can add an allowlist and a denylist:
 
 Both the allowlist and the denylist can be omitted.
 
-```
+```jsonc title="./turbo.json"
 {
   "boundaries": {
     "utils": {
       "dependencies": {
-        // only packages with the \`unsafe\` tag are banned, all other packages permitted
+        // only packages with the `unsafe` tag are banned, all other packages permitted
         "deny": ["unsafe"],
       },
     },
@@ -1078,12 +1198,12 @@ Both the allowlist and the denylist can be omitted.
 
 Rules can also be added for a tag's dependents, i.e. packages that import this tag.
 
-```
+```jsonc title="./turbo.json"
 {
   "boundaries": {
     "utils": {
       "dependents": {
-        // only packages with the \`web\` tag can import packages with the \`utils\` tag
+        // only packages with the `web` tag can import packages with the `utils` tag
         "allow": ["web"],
       },
     },
@@ -1095,65 +1215,79 @@ Rules can also be added for a tag's dependents, i.e. packages that import this t
 
 The global `remoteCache` option has a variety of fields for configuring remote cache usage
 
-```
+```jsonc title="./turbo.json"
 {
   "remoteCache": {},
 }
 ```
 
-### enabled
+### `enabled`
 
 Default: `true`
 
 Enables remote caching.
 
-When `false`, Turborepo will disable all remote cache operations, even if the repo has a valid token. If true, remote caching is enabled, but still requires the user to login and link their repo to a remote cache.
+When `false`, Turborepo will disable all remote cache operations, even if the repo has a valid token.
+If true, remote caching is enabled, but still requires the user to login and link their repo to a remote cache.
 
-### signature
+### `signature`
 
 Default: `false`
 
-Enables signature verification for requests to the remote cache. When `true`, Turborepo will sign every uploaded artifact using the value of the environment variable `TURBO_REMOTE_CACHE_SIGNATURE_KEY`. Turborepo will reject any downloaded artifacts that have an invalid signature or are missing a signature.
+Enables signature verification for requests to the remote cache.
+When `true`, Turborepo will sign every uploaded artifact using the value of the environment variable `TURBO_REMOTE_CACHE_SIGNATURE_KEY`.
+Turborepo will reject any downloaded artifacts that have an invalid signature or are missing a signature.
 
 This is not a security feature. Rather, it verifies the integrity of a cached artifact. This is a defense-in-depth measure against events like partial uploads or downloads with the Remote Cache. Turborepo natively tries to handle these situations where it can, but issues can still happen with the Remote Cache server itself.
 
-### preflight
+> Enable [`futureFlags.longerSignatureKey`](#longersignaturekey) to enforce a
+> minimum key length of 32 bytes. Short keys weaken the HMAC-SHA256 signature
+> and will be rejected in a future major version.
+
+### `preflight`
 
 Default: `false`
 
 When enabled, any HTTP request will be preceded by an OPTIONS request to determine if the request is supported by the endpoint.
 
-### timeout
+### `timeout`
 
 Default: `30`
 
-Sets a timeout for remote cache operations. Value is given in seconds and only whole values are accepted. If `0` is passed, then there is no timeout for any cache operations.
+Sets a timeout for remote cache operations.
+Value is given in seconds and only whole values are accepted.
+If `0` is passed, then there is no timeout for any cache operations.
 
-### uploadTimeout
+### `uploadTimeout`
 
 Default: `60`
 
-Sets a timeout for remote cache uploads. Value is given in seconds and only whole values are accepted. If `0` is passed, then there is no timeout for any remote cache uploads.
+Sets a timeout for remote cache uploads.
+Value is given in seconds and only whole values are accepted.
+If `0` is passed, then there is no timeout for any remote cache uploads.
 
-### apiUrl
+### `apiUrl`
 
 Default: `"https://vercel.com"`
 
 Set endpoint for API calls to the remote cache.
 
-### loginUrl
+### `loginUrl`
 
 Default: `"https://vercel.com"`
 
 Set endpoint for requesting tokens during `turbo login`.
 
-### teamId
+### `teamId`
 
-The ID of the Remote Cache team. Value will be passed as `teamId` in the querystring for all Remote Cache HTTP calls. Must start with `team_` or it will not be used.
+The ID of the Remote Cache team.
+Value will be passed as `teamId` in the querystring for all Remote Cache HTTP calls.
+Must start with `team_` or it will not be used.
 
-### teamSlug
+### `teamSlug`
 
-The slug of the Remote Cache team. Value will be passed as `slug` in the querystring for all Remote Cache HTTP calls.
+The slug of the Remote Cache team.
+Value will be passed as `slug` in the querystring for all Remote Cache HTTP calls.
 
 ## Experimental observability
 
@@ -1161,11 +1295,11 @@ Experimental
 
 Configure Turborepo to export metrics to observability backends like Datadog, Prometheus, or other OTLP-compatible collectors.
 
-### experimentalObservability
+### `experimentalObservability`
 
 The `experimentalObservability` configuration requires [`futureFlags.experimentalObservability`](#experimentalobservability) to be set to `true` in your root `turbo.json`. This applies to all configuration sources, including the `turbo.json` block, environment variables, and CLI flags. Turborepo will error if observability is configured without the future flag enabled.
 
-```
+```jsonc title="./turbo.json"
 {
   "futureFlags": {
     "experimentalObservability": true,
@@ -1201,13 +1335,13 @@ The `experimentalObservability` configuration requires [`futureFlags.experimenta
 }
 ```
 
-#### experimentalObservability.otel.enabled
+#### `experimentalObservability.otel.enabled`
 
 Default: `true` (when endpoint is provided)
 
 Enable or disable the OpenTelemetry metrics exporter.
 
-#### experimentalObservability.otel.protocol
+#### `experimentalObservability.otel.protocol`
 
 Default: `"grpc"`
 
@@ -1216,7 +1350,7 @@ The OTLP protocol to use. Supported values:
 - `"grpc"` - OTLP over gRPC
 - `"http/protobuf"` - OTLP over HTTP with protobuf encoding
 
-#### experimentalObservability.otel.endpoint
+#### `experimentalObservability.otel.endpoint`
 
 **Required** when using file-based configuration.
 
@@ -1227,11 +1361,14 @@ The OTLP collector endpoint URL. For example:
 
 If the endpoint is missing or empty when OTEL is enabled, the exporter will not be initialized and metrics will be disabled. The run will continue normally.
 
-#### experimentalObservability.otel.headers
+> OTEL endpoints must use `https://`. `http://` endpoints are rejected to ensure
+> metrics and authentication headers are sent over TLS.
+
+#### `experimentalObservability.otel.headers`
 
 Optional HTTP headers to include with export requests. Useful for authentication (e.g., API keys) or custom metadata.
 
-```
+```jsonc title="./turbo.json"
 {
   "experimentalObservability": {
     "otel": {
@@ -1243,23 +1380,35 @@ Optional HTTP headers to include with export requests. Useful for authentication
 }
 ```
 
-#### experimentalObservability.otel.timeoutMs
+> Avoid storing tokens or API keys in `turbo.json`. `turbo.json` is often
+> committed to source control, so prefer environment variables or your CI secret
+> manager for sensitive header values.
+
+> `headers` is tied to `endpoint` for security. If you override the endpoint
+> from a higher-priority source (e.g., setting `TURBO_EXPERIMENTAL_OTEL_ENDPOINT`
+> in your environment), headers from lower-priority sources like `turbo.json` are
+> **not inherited**. You must re-provide headers alongside the new endpoint.
+>
+> This prevents authentication credentials configured for one collector from
+> being sent to a different collector.
+
+#### `experimentalObservability.otel.timeoutMs`
 
 Default: `10000` (10 seconds)
 
 Timeout in milliseconds for export requests to the collector.
 
-#### experimentalObservability.otel.intervalMs
+#### `experimentalObservability.otel.intervalMs`
 
 Default: `15000` (15 seconds)
 
 Interval in milliseconds between periodic exports to the collector. This controls how frequently metrics are batched and sent to the OTLP collector during a run. A final flush is always performed when the run completes, regardless of this setting.
 
-#### experimentalObservability.otel.resource
+#### `experimentalObservability.otel.resource`
 
 Optional resource attributes to attach to all exported metrics. These help identify the source of metrics in your observability platform.
 
-```
+```jsonc title="./turbo.json"
 {
   "experimentalObservability": {
     "otel": {
@@ -1273,11 +1422,17 @@ Optional resource attributes to attach to all exported metrics. These help ident
 }
 ```
 
-#### experimentalObservability.otel.metrics
+#### `experimentalObservability.otel.metrics`
 
 Control which metric groups are exported.
 
-##### metrics.runSummary
+> Some metric attributes have **unbounded cardinality** — their unique values
+> grow without limit (e.g., a unique run ID per invocation, a unique hash per
+> input change). Backends like Datadog charge per unique metric series, so these
+> attributes are disabled by default and can be opted into via `runAttributes`
+> and `taskAttributes`.
+
+##### `metrics.runSummary`
 
 Default: `true`
 
@@ -1288,7 +1443,7 @@ Export run-level metrics:
 - Exit code
 - SCM branch
 
-##### metrics.taskDetails
+##### `metrics.taskDetails`
 
 Default: `false`
 
@@ -1298,45 +1453,61 @@ Export per-task metrics:
 - Cache hit/miss status and source
 - Task identifiers (task ID, package, hash)
 
-##### metrics.runAttributes
+##### `metrics.runAttributes`
 
 Control which run attributes are included in run-level metrics. These options only take effect when `runSummary` is enabled.
 
-###### runAttributes.id
+###### `runAttributes.id`
 
 Default: `false`
 
 Include the `turbo.run.id` attribute on run-level metrics. Each Turborepo invocation generates a unique run ID, so enabling this increases metric cardinality.
 
-###### runAttributes.scmRevision
+###### `runAttributes.scmRevision`
 
 Default: `false`
 
 Include the `turbo.scm.revision` attribute (full Git SHA) on run-level metrics. Each commit produces a unique value, so enabling this increases metric cardinality.
 
-##### metrics.taskAttributes
+##### `metrics.taskAttributes`
 
 Control which task attributes are included in per-task metrics. These options only take effect when `taskDetails` is enabled.
 
-###### taskAttributes.id
+###### `taskAttributes.id`
 
 Default: `false`
 
 Include the `turbo.task.id` attribute (`package#task`) on per-task metrics.
 
-###### taskAttributes.hashes
+###### `taskAttributes.hashes`
 
 Default: `false`
 
 Include the `turbo.task.hash` and `turbo.task.external_inputs_hash` attributes on per-task metrics. These are content hashes that change whenever task inputs change, so enabling this increases metric cardinality.
 
-#### experimentalObservability.otel.useRemoteCacheToken
+#### `experimentalObservability.otel.useRemoteCacheToken`
 
 Default: `false`
 
 When enabled, automatically adds an `Authorization: Bearer <token>` header to OTLP export requests using your existing remote cache credentials (from `turbo login` or the `TURBO_TOKEN` environment variable). Existing `Authorization` headers in the `headers` configuration are preserved and take precedence.
 
 This is useful when your OTLP collector uses the same authentication as your remote cache.
+
+> Like `headers`, `useRemoteCacheToken` is tied to `endpoint`. If the endpoint
+> is overridden from a higher-priority source, this flag is not inherited from
+> lower-priority sources. Set it alongside the endpoint to ensure the token is
+> sent to the intended collector.
+
+> Exporter failures are logged but do not cause the run to fail. If the
+> collector is unavailable or misconfigured, Turborepo will continue executing
+> tasks normally. Invalid or incomplete configuration (e.g., missing endpoint
+> when enabled) results in the exporter not being initialized, and metrics will
+> be disabled for that run.
+
+> Invalid or incomplete OTEL configuration (e.g., missing endpoint, invalid
+> protocol) results in metrics being disabled rather than causing runs to fail.
+> Turborepo will continue executing tasks normally even if the exporter cannot
+> be initialized.
 
 ### Multi-source configuration
 
@@ -1349,6 +1520,12 @@ Priority order (highest to lowest):
 3. `turbo.json`
 
 For example, if `turbo.json` configures `endpoint`, `enabled`, and `metrics`, and an environment variable overrides just `endpoint`, the `enabled` and `metrics` values from `turbo.json` are preserved.
+
+> **Changing the endpoint resets credentials.** `headers` and
+> `useRemoteCacheToken` are security-sensitive and tied to `endpoint`. If a
+> higher-priority source sets the endpoint, credentials from lower-priority
+> sources are discarded to prevent authentication tokens from being sent to
+> unintended collectors. Re-provide credentials alongside the new endpoint.
 
 ### Environment variables
 
@@ -1381,3 +1558,11 @@ You can override observability settings via CLI flags:
 - `--experimental-otel-metrics-run-summary` - Enable run summary metrics
 - `--experimental-otel-metrics-task-details` - Enable task details metrics
 - `--experimental-otel-use-remote-cache-token` - Use remote cache token for OTLP authentication
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

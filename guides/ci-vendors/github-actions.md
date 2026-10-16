@@ -1,18 +1,18 @@
 ---
 url: https://turborepo.dev/docs/guides/ci-vendors/github-actions
 title: "GitHub Actions"
-description: "Configure GitHub Actions workflows to run Turborepo tasks with Remote Caching."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+description: "Learn how to use GitHub Actions with Turborepo."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Learn how to use GitHub Actions with Turborepo.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 The following example shows how to use Turborepo with [GitHub Actions](https://github.com/features/actions).
 
 For a given root `package.json`:
 
-```
+```json title="./package.json"
 {
   "name": "my-turborepo",
   "scripts": {
@@ -27,7 +27,7 @@ For a given root `package.json`:
 
 And a `turbo.json`:
 
-```
+```json title="./turbo.json"
 {
   "$schema": "https://turborepo.dev/schema.json",
   "tasks": {
@@ -46,7 +46,7 @@ Create a file called `.github/workflows/ci.yml` in your repository with the foll
 
 #### pnpm
 
-```
+```yaml title=".github/workflows/ci.yml"
 name: CI
 
 on:
@@ -89,7 +89,7 @@ jobs:
 
 #### yarn
 
-```
+```yaml title=".github/workflows/ci.yml"
 name: CI
 
 on:
@@ -128,7 +128,7 @@ jobs:
 
 #### npm
 
-```
+```yaml title=".github/workflows/ci.yml"
 name: CI
 
 on:
@@ -167,7 +167,7 @@ jobs:
 
 #### bun
 
-```
+```yaml title=".github/workflows/ci.yml"
 name: CI
 
 on:
@@ -207,7 +207,7 @@ jobs:
 
 #### nub
 
-```
+```yaml title=".github/workflows/ci.yml"
 name: CI
 
 on:
@@ -247,7 +247,7 @@ jobs:
 
 #### aube
 
-```
+```yaml title=".github/workflows/ci.yml"
 name: CI
 
 on:
@@ -298,20 +298,20 @@ For the full setup, see [Use Remote Caching from external CI/CD](https://vercel.
 
 Follow [these instructions](https://vercel.com/docs/monorepos/remote-caching/external-ci-cd#openid-connect-oidc) to create an OIDC policy on your Vercel team and configure your `TURBO_TEAM` variable. Then add [`vercel/setup-turborepo-remote-cache-action`](https://github.com/vercel/setup-turborepo-remote-cache-action) before any step that runs `turbo`. It requests a GitHub OIDC token, exchanges it for a short-lived Turborepo access token, and sets `TURBO_TOKEN` and `TURBO_TEAM` environment variables for later steps that run `turbo`:
 
-```
+```yaml title=".github/workflows/ci.yml"
 # ...
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
+    permissions: # [!code highlight]
+      contents: read # [!code highlight]
+      id-token: write # [!code highlight]
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Turborepo Remote Cache
-        uses: vercel/setup-turborepo-remote-cache-action@v1.0.0
-        with:
-          team: ${{ vars.TURBO_TEAM }}
+      - name: Set up Turborepo Remote Cache # [!code highlight]
+        uses: vercel/setup-turborepo-remote-cache-action@v1.0.0 # [!code highlight]
+        with: # [!code highlight]
+          team: ${{ vars.TURBO_TEAM }} # [!code highlight]
     # ...
 ```
 
@@ -319,14 +319,14 @@ jobs:
 
 Follow [these instructions](https://vercel.com/docs/monorepos/remote-caching/external-ci-cd#personal-access-token-pat) to create a Personal Access Token, configure your `TURBO_TOKEN` secret, and configure your `TURBO_TEAM` variable. Then provide them to jobs that run `turbo`:
 
-```
+```yaml title=".github/workflows/ci.yml"
 # ...
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+    env: # [!code highlight]
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }} # [!code highlight]
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }} # [!code highlight]
     steps:
       - uses: actions/checkout@v4
     # ...
@@ -344,7 +344,7 @@ Supply a package.json script that will run tasks using Turborepo.
 
 Example `package.json` with a `build` script:
 
-```
+```json title="./package.json"
 {
   "name": "my-turborepo",
   "scripts": {
@@ -364,7 +364,7 @@ Configure your GitHub pipeline with a step which uses the `actions/cache@v4` act
 
 Example `ci` yaml with `.turbo` as chosen cache folder:
 
-```
+```yaml title=".github/workflows/ci.yml"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -372,12 +372,12 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Cache turbo build setup
-        uses: actions/cache@v4
-        with:
-          path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
-          restore-keys: |
+      - name: Cache turbo build setup # [!code highlight]
+        uses: actions/cache@v4 # [!code highlight]
+        with: # [!code highlight]
+          path: .turbo # [!code highlight]
+          key: ${{ runner.os }}-turbo-${{ github.sha }} # [!code highlight]
+          restore-keys: | # [!code highlight]
             ${{ runner.os }}-turbo-
 
       - name: Setup Node.js environment
@@ -392,3 +392,11 @@ jobs:
       - name: Build
         run: npm run build
 ```
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

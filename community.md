@@ -2,28 +2,26 @@
 url: https://turborepo.dev/docs/community
 title: "Community"
 description: "Learn about the Turborepo community."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# Community
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Turborepo has a large and active community of developers across the world. Here's how you can get involved.
 
 ## Contributing
 
-* [Documentation](https://github.com/vercel/turborepo/tree/main/docs): Suggest improvements or even write new sections to help build understanding of how to use Turborepo.
-* [Examples](https://github.com/vercel/turborepo/tree/main/examples): Help developers integrate Turborepo with other tools and services by improving an example.
-* [Code](https://github.com/vercel/turborepo/blob/main/CONTRIBUTING.md): Learn more about the underlying architecture, contribute bug fixes, and suggest new features.
+- [Documentation](https://github.com/vercel/turborepo/tree/main/docs): Suggest improvements or even write new sections to help build understanding of how to use Turborepo.
+- [Examples](https://github.com/vercel/turborepo/tree/main/examples): Help developers integrate Turborepo with other tools and services by improving an example.
+- [Code](https://github.com/vercel/turborepo/blob/main/CONTRIBUTING.md): Learn more about the underlying architecture, contribute bug fixes, and suggest new features.
 
 ## Discussions
 
 If you have a question about Turborepo or want to help others, join the conversation:
 
-* [GitHub Discussions](https://github.com/vercel/turborepo/discussions)
-* [Vercel Community](https://community.vercel.com/tag/turborepo)
+- [GitHub Discussions](https://github.com/vercel/turborepo/discussions)
+- [Vercel Community](https://community.vercel.com/tag/turborepo)
 
 ## Acknowledgements
 
@@ -37,33 +35,32 @@ At [Vercel](https://vercel.com/), we believe deeply in the open source movement 
 
 We'd like to make a special shoutout to other build systems, monorepo tools, and prior art:
 
-* Bazel - [https://bazel.build](https://bazel.build)
-* Buck - [https://buck.build](https://buck.build)
-* Please - [https://please.build](https://please.build)
-* Pants - [https://www.pantsbuild.org](https://www.pantsbuild.org)
-* Scoot - [https://github.com/twitter/scoot](https://github.com/twitter/scoot)
-* TSDX - [https://tsdx.io](https://tsdx.io)
-* Lerna - [https://lerna.js.org](https://lerna.js.org)
-* Lage - [https://microsoft.github.io/lage](https://microsoft.github.io/lage)
-* Backfill - [https://github.com/microsoft/backfill](https://github.com/microsoft/backfill)
-* Bolt - [https://github.com/boltpkg/bolt](https://github.com/boltpkg/bolt)
-* Rush - [https://rushjs.io](https://rushjs.io)
-* Preconstruct - [https://preconstruct.tools](https://preconstruct.tools)
-* Nx - [https://nx.dev](https://nx.dev)
-* Yarn - [https://yarnpkg.com](https://yarnpkg.com)
-* npm - [https://www.npmjs.com](https://www.npmjs.com)
-* pnpm - [https://pnpm.js.org](https://pnpm.js.org)
+- Bazel - [https://bazel.build](https://bazel.build)
+- Buck - [https://buck.build](https://buck.build)
+- Please - [https://please.build](https://please.build)
+- Pants - [https://www.pantsbuild.org](https://www.pantsbuild.org)
+- Scoot - [https://github.com/twitter/scoot](https://github.com/twitter/scoot)
+- TSDX - [https://tsdx.io](https://tsdx.io)
+- Lerna - [https://lerna.js.org](https://lerna.js.org)
+- Lage - [https://microsoft.github.io/lage](https://microsoft.github.io/lage)
+- Backfill - [https://github.com/microsoft/backfill](https://github.com/microsoft/backfill)
+- Bolt - [https://github.com/boltpkg/bolt](https://github.com/boltpkg/bolt)
+- Rush - [https://rushjs.io](https://rushjs.io)
+- Preconstruct - [https://preconstruct.tools](https://preconstruct.tools)
+- Nx - [https://nx.dev](https://nx.dev)
+- Yarn - [https://yarnpkg.com](https://yarnpkg.com)
+- npm - [https://www.npmjs.com](https://www.npmjs.com)
+- pnpm - [https://pnpm.js.org](https://pnpm.js.org)
 
 ### Additional Thanks
 
 Additionally, we're grateful to:
 
-* [Rick Button](https://x.com/rickbutton) for donating the `turbo` package name on npm
-* [Iheanyi Ekechukwu](https://x.com/kwuchu) for helping Jared pick up Golang during the Pandemic!
-* [Kenneth Chau](https://x.com/kenneth_chau) for Lage's Scope and Pipeline API and docs
-* [Miguel Oller](https://mobile.x.com/ollermi) and [MakeSwift.com](https://www.makeswift.com/) for piloting Turborepo
-* [Eric Koslow](https://x.com/ekosz1), [Jack Hanford](https://x.com/jackhanford), and [Lattice.com](https://lattice.com/) for piloting Turborepo
-
+- [Rick Button](https://x.com/rickbutton) for donating the `turbo` package name on npm
+- [Iheanyi Ekechukwu](https://x.com/kwuchu) for helping Jared pick up Golang during the Pandemic!
+- [Kenneth Chau](https://x.com/kenneth_chau) for Lage's Scope and Pipeline API and docs
+- [Miguel Oller](https://mobile.x.com/ollermi) and [MakeSwift.com](https://www.makeswift.com/) for piloting Turborepo
+- [Eric Koslow](https://x.com/ekosz1), [Jack Hanford](https://x.com/jackhanford), and [Lattice.com](https://lattice.com/) for piloting Turborepo
 
 ---
 

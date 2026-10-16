@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/guides/handling-platforms
 title: "Handling platforms"
 description: "Learn how to handle caching around operating systems, architectures, and other arbitrary conditions for Turborepo tasks."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# Handling platforms
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 ## Node.js versions
 
@@ -46,7 +44,7 @@ You won't want to commit this file to source control since it's dependent on env
 
 Now, make sure that `turbo` is aware of the file by adding it to task inputs. You can do this two ways:
 
-* **For specific tasks**: Include the file in [the `inputs` array](../reference/configuration.md#inputs) of the task(s):
+- **For specific tasks**: Include the file in [the `inputs` array](../reference/configuration.md#inputs) of the task(s):
 
 ```json title="./turbo.json"
 {
@@ -59,7 +57,7 @@ Now, make sure that `turbo` is aware of the file by adding it to task inputs. Yo
 }
 ```
 
-* **For all tasks**: Add the file to [`globalDependencies`](../reference/configuration.md#globaldependencies)
+- **For all tasks**: Add the file to [`globalDependencies`](../reference/configuration.md#globaldependencies)
 
 ```json title="./turbo.json"
 {
@@ -83,7 +81,6 @@ Last, you'll want to ensure that you run the script before running `turbo`. For 
 ```
 
 `turbo run build` will now take into account the contents of `turbo-cache-key.json` when calculating the hash for the `build` task.
-
 
 ---
 

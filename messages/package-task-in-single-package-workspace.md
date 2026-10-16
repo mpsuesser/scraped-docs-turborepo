@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/messages/package-task-in-single-package-workspace
 title: "Package task in single-package workspace error"
 description: "Learn more about errors with package tasks in single-package workspaces."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# Package task in single-package workspace error
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 ## Why this error occurred
 
@@ -40,7 +38,6 @@ Remove the package name from the task declaration.
 ```
 
 Alternatively, if you would like to have multiple packages, you can [specify the workspaces in your repository](../getting-started/add-to-existing-repository.md).
-
 
 ---
 

@@ -1,12 +1,12 @@
 ---
 url: https://turborepo.dev/docs/crafting-your-repository/constructing-ci
 title: "Constructing CI"
-description: "Set up CI pipelines with Remote Caching, task filtering, Docker support, and affected package detection for maximum speed."
-access_date: 2026-09-28T04:49:15.786Z
-current_date: 2026-09-28T04:49:15.786Z
+description: "Learn how Turborepo can help you efficiently complete all the necessary tasks and accelerate your development workflow."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Learn how Turborepo can help you efficiently complete all the necessary tasks and accelerate your development workflow.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Turborepo speeds up builds, lints, tests, and any other tasks that you need to do in your Continuous Integration pipelines. Through parallelization and [Remote Caching](../core-concepts/remote-caching.md), Turborepo makes your CI dramatically faster.
 
@@ -16,14 +16,18 @@ For examples of how to connect your CI vendor to Remote Cache and run tasks, vis
 
 To enable Remote Caching for your CI, setup the environment variables for Turborepo to access your Remote Cache.
 
-| Environment Variable | Description |
-| --- | --- |
-| `TURBO_TOKEN` | The Bearer token to access the Remote Cache |
-| `TURBO_TEAM` | The account name associated with your repository. When using [Vercel Remote Cache](https://vercel.com/docs/monorepos/remote-caching), this is [your team's slug](https://vercel.com/docs/accounts#creating-a-team). |
+| Environment Variable | Description                                                                                                                                                                                                         |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TURBO_TOKEN`        | The Bearer token to access the Remote Cache                                                                                                                                                                         |
+| `TURBO_TEAM`         | The account name associated with your repository. When using [Vercel Remote Cache](https://vercel.com/docs/monorepos/remote-caching), this is [your team's slug](https://vercel.com/docs/accounts#creating-a-team). |
 
 When you run tasks through `turbo`, your CI will be able to hit cache, speeding up your pipelines.
 
-Remote Cache hosting
+> **Remote Cache hosting:**
+>
+> Vercel's built-in CI/CD is automatically connected to your managed Vercel Remote Cache with zero configuration. To retrieve a token for connecting your other CI vendors to Vercel Remote Cache, visit the [Vercel Remote Cache documentation](https://vercel.com/docs/monorepos/remote-caching#use-remote-caching-from-external-ci/cd).
+>
+> For self-hosted Remote Cache options, visit [Turborepo's Remote Cache documentation](../core-concepts/remote-caching.md#remote-cache-api).
 
 ## Running tasks in CI
 
@@ -36,7 +40,11 @@ By [installing `turbo` globally](../getting-started/installation.md#global-insta
 
 You can filter your tasks using [the `--filter` flag](../reference/run.md#--filter-string) exactly the same as when you're working with `turbo` locally. Filtering by packages, directories, and Git history are all supported in CI.
 
-Using Git history in CI
+> **Using Git history in CI:**
+>
+> Filtering using source control changes is only possible when history is
+> available on the machine. If you are using shallow clones, history will not be
+> available.
 
 You can also use [the `--affected` flag](#running-only-affected-tasks) to only run tasks in packages that have changes.
 
@@ -44,13 +52,15 @@ You can also use [the `--affected` flag](#running-only-affected-tasks) to only r
 
 Docker is an important part of many deployment pipelines. [Turborepo's `prune` subcommand](../reference/prune.md) helps you ship lightweight images by removing unnecessary dependencies and code from your images.
 
+For more on how to deploy from a Turborepo with Docker, visit [the dedicated Docker guide](../guides/tools/docker.md).
+
 ## Skipping tasks and other unnecessary work
 
 ### Running only affected tasks
 
 You can use the `--affected` flag to only run tasks that have changes.
 
-```
+```bash title="Terminal"
 turbo run build --affected
 ```
 
@@ -60,9 +70,9 @@ You'll want to use this flag in situations like:
 - You're *not* using a Remote Cache, but still want to do as little work as possible in CI.
 - You *are* using a Remote Cache, and you're in a large repository. By minimizing the amount of tasks that will be restored from cache, there will be less data to send across the network, resulting in faster cache restoration.
 - You're already using [advanced filtering techniques](../reference/run.md#advanced-filtering-examples) to create similar behavior. You likely have the opportunity to simplify your scripting using this new flag.
-	- `--affected` will can handle shallow clones more gracefully than bespoke filtering because it falls back to running all tasks.
+  - `--affected` will can handle shallow clones more gracefully than bespoke filtering because it falls back to running all tasks.
 
-#### Using --affected in GitHub Actions
+#### Using `--affected` in GitHub Actions
 
 CI/CD pipelines are a perfect place to use `--affected`. With `--affected`, Turborepo can automatically detect that you're running in GitHub Actions by inspecting environment variables set by GitHub, like `GITHUB_BASE_REF`.
 
@@ -70,23 +80,23 @@ In the context of a PR, this means that Turborepo can determine which packages h
 
 While `GITHUB_BASE_REF` works well in `pull_request` and `pull_request_target` events, it is not available during regular push events. In those cases, we use `GITHUB_EVENT_PATH` to determine the base branch to compare your commit to. In force pushes and pushing branch with no additional commits, we compare to the parent of the first commit on the branch.
 
-### Skipping packages with turbo query affected
+### Skipping packages with `turbo query affected`
 
 As your codebase and CI grow, you may start to look for more ways to get even faster. While hitting cache is useful, you also may be able to skip work entirely. Using `turbo query affected`, you can skip lengthy container preparation steps like dependency installation that will end up resulting in a cache hit, anyway.
 
-### Checkout the repository
+### 1. Checkout the repository
 
 Start by cloning your repository. A clone with sufficient history is necessary for comparisons — if the checkout is too shallow, all packages will be considered changed. For example, cloning with `--filter=blob:none --depth=0` will ensure the right history is available.
 
 By default, `turbo query affected` compares against the merge-base with your default branch.
 
-### Check if the package is affected
+### 2. Check if the package is affected
 
 Use `turbo query affected` to check if a package has changes. The command outputs JSON that you can parse with a tool like `jq`:
 
 #### Check a package
 
-```
+```bash title="Terminal"
 affected=$(turbo query affected --packages web)
 count=$(echo "$affected" | jq '.data.affectedPackages.length')
 
@@ -103,7 +113,7 @@ fi
 
 Check if the `test` task for the `docs` package is affected. This respects [`inputs`](../reference/configuration.md#inputs) configuration, so only relevant file changes are considered:
 
-```
+```bash title="Terminal"
 affected=$(turbo query affected --tasks test --packages docs)
 count=$(echo "$affected" | jq '.data.affectedTasks.length')
 
@@ -119,11 +129,11 @@ fi
 
 If you only need a binary "affected or not" signal, use `--exit-code` as a shorthand. It exits with code `1` when results are found, `0` when nothing is affected, or `2` on errors:
 
-```
+```bash title="Terminal"
 turbo query affected --packages web --exit-code
 ```
 
-### Handle the result
+### 3. Handle the result
 
 The JSON output includes a `length` field that tells you how many packages or tasks are affected. When `length` is `0`, you can safely skip the rest of your CI pipeline.
 
@@ -144,7 +154,7 @@ For example, your CI could run these two commands to quickly handle quality chec
 
 As your codebase scales, you may find more specific opportunities to optimize your CI - but relying on caching is a great place to start.
 
-### Global turbo in CI
+### Global `turbo` in CI
 
 Using global `turbo` is convenient in CI workflows, allowing you to easily run commands specific to your CI and take advantage of [Automatic Workspace Scoping](running-tasks.md#automatic-package-scoping).
 
@@ -154,18 +164,20 @@ For CI steps before dependencies are installed, pin the standalone binary to an 
 
 #### macOS and Linux
 
-```
+```sh title="Terminal"
 curl -fsSL https://turborepo.dev/install | TURBO_VERSION=2.11.5 sh
 ```
 
 #### Windows x64
 
-```
+```powershell title="PowerShell"
 $env:TURBO_VERSION = '2.11.5'
 irm https://turborepo.dev/install.ps1 | iex
 ```
 
-### Use turbo run in CI
+> Standalone releases start at 2.11.5. To use an older version, install it with your package manager instead.
+
+### Use `turbo run` in CI
 
 `turbo run` is the most common command you will use when working in your Turborepo so it is aliased to `turbo` for convenience. While this is great for working locally, there are other subcommands for `turbo` like [`turbo prune`](../reference/prune.md) and [`turbo generate`](../reference/generate.md).
 
@@ -188,3 +200,11 @@ Check your configuration for the `env` and `globalEnv` keys.
 ## Next steps
 
 You now have everything you need to ship applications with Turborepo. To learn more about specific use cases, [check the Guides](../guides.md) or [dive deeper into core concepts](../core-concepts.md).
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

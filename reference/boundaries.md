@@ -1,29 +1,37 @@
 ---
 url: https://turborepo.dev/docs/reference/boundaries
 title: "boundaries"
-description: "Reference for the experimental `turbo boundaries` command that checks for workspace dependency violations."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+description: "API reference for the `turbo boundaries` command"
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
+
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Experimental
 
 Boundaries ensure that Turborepo features work correctly by checking for package manager Workspace violations.
 
-```
+```bash title="Terminal"
 turbo boundaries
 ```
 
-Boundaries RFC
+> **Boundaries RFC:**
+>
+> This feature is experimental, and we're looking for your feedback on [the
+> Boundaries RFC](https://github.com/vercel/turborepo/discussions/9435).
 
 This command will notify for two types of violations:
 
 - Importing a file outside of the package's directory
 - Importing a package that is not specified as a dependency in the package's `package.json`
 
-Boundaries also has a feature that lets you add tags to packages. These tags can be used to create rules for Boundaries to check. For example, you can add an `internal` tag to your UI package:
+## Tags
 
-```
+Boundaries also has a feature that lets you add tags to packages. These tags can be used to create rules
+for Boundaries to check. For example, you can add an `internal` tag to your UI package:
+
+```json title="./packages/ui/turbo.json"
 {
   "tags": ["internal"]
 }
@@ -31,7 +39,7 @@ Boundaries also has a feature that lets you add tags to packages. These tags can
 
 And then declare a rule that packages with a `public` tag cannot depend on packages with an `internal` tag:
 
-```
+```json title="./turbo.json"
 {
   "boundaries": {
     "tags": {
@@ -47,7 +55,7 @@ And then declare a rule that packages with a `public` tag cannot depend on packa
 
 Alternatively, you may want `public` packages to only depend on other `public` packages:
 
-```
+```json title="turbo.json"
 {
   "boundaries": {
     "tags": {
@@ -63,7 +71,7 @@ Alternatively, you may want `public` packages to only depend on other `public` p
 
 Likewise, you can add restrictions for a tag's dependents, i.e. packages that import packages with the tag.
 
-```
+```json title="turbo.json"
 {
   "boundaries": {
     "tags": {
@@ -79,7 +87,7 @@ Likewise, you can add restrictions for a tag's dependents, i.e. packages that im
 
 Package names can also be used in place of a tag in allow and deny lists.
 
-```
+```json title="turbo.json"
 {
   "boundaries": {
     "tags": {
@@ -93,4 +101,14 @@ Package names can also be used in place of a tag in allow and deny lists.
 }
 ```
 
-Tags allow you to ensure that the wrong package isn't getting imported somewhere in your graph. These rules are applied even for dependencies of dependencies, so if you import a package that in turn imports another package with a denied tag, you will still get a rule violation.
+Tags allow you to ensure that the wrong package isn't getting imported somewhere in your graph. These rules are
+applied even for dependencies of dependencies, so if you import a package that in turn imports another package
+with a denied tag, you will still get a rule violation.
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

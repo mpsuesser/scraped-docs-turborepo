@@ -2,11 +2,9 @@
 url: https://turborepo.dev/docs/crafting-your-repository/creating-an-internal-package
 title: "Creating an Internal Package"
 description: "Build a new internal package from scratch to share code across your monorepo."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
-
-Learn how to create an Internal Package for your monorepo.
 
 [Internal Packages](../core-concepts/internal-packages.md) are the building blocks of your workspace, giving you a powerful way to share code and functionality across your repo. Turborepo automatically understands the relationships between Internal Packages using the dependencies in `package.json`, creating a [Package Graph](../core-concepts/package-and-task-graph.md#package-graph) under the hood to optimize your repository's workflows.
 
@@ -25,6 +23,8 @@ turbo.json
 ### Add a package.json
 
 Next, create the `package.json` for the package. By adding this file, you'll fulfill [the two requirements for an Internal Package](structuring-a-repository.md#specifying-packages-in-a-monorepo), making it discoverable to Turborepo and the rest of your Workspace.
+
+The `name` field in your `package.json` determines how your package can be imported throughout your workspace. The name you choose here (e.g. `@repo/math`) is exactly how other packages will import it (e.g. `import {add}   from '@repo/math/add'`).
 
 #### pnpm
 
@@ -220,6 +220,8 @@ You've done four important things here:
 - [The `rootDir` key in `compilerOptions`](https://www.typescriptlang.org/tsconfig/#rootDir) ensures that the output in `outDir` uses the same structure as the `src` directory.
 - The [`include`](https://www.typescriptlang.org/tsconfig/#include) and [`exclude`](https://www.typescriptlang.org/tsconfig/#exclude) keys are not inherited from the base configuration, [according to the TypeScript specification](https://www.typescriptlang.org/tsconfig#include), so you've included them here.
 
+There's a lot more to learn about TypeScript configuration, but this is a good place to start for now. If you'd like to learn more, visit [the official TypeScript documentation](https://www.typescriptlang.org/tsconfig) or [our TypeScript guide](../guides/tools/typescript.md).
+
 ### Add a src directory with source code
 
 You can now write some code for your package. Create two files inside a `src` directory:
@@ -308,6 +310,8 @@ You're ready to use your new package in an application. Let's add it to the `web
   },
 ```
 
+You just changed the dependencies in your repo. Make sure to run your package manager's installation command to update your lockfile.
+
 `@repo/math` is now available in the `web` application, you can use it in your code:
 
 ```
@@ -341,6 +345,8 @@ If you've [installed `turbo` globally](../getting-started/installation.md#global
 
 The `@repo/math` package built before the `web` application built so that the runtime code in `./packages/math/dist` is available to the `web` application when it bundles.
 
+You can run `turbo build` again to see your `web` application rebuild in **milliseconds**. We'll discuss this at length in [the Caching guide](caching.md).
+
 ## Best practices for Internal Packages
 
 ### One "purpose" per package
@@ -361,6 +367,8 @@ Some examples include:
 When you're creating [Application Packages](../core-concepts/package-types.md#application-packages), it's best to avoid putting shared code in those packages. Instead, you should create a separate package for the shared code and have the application packages depend on that package.
 
 Additionally, Application Packages are not meant to be installed into other packages. Instead, they should be thought of as an entrypoint to your [Package Graph](../core-concepts/package-and-task-graph.md#package-graph).
+
+There are [rare exceptions](../core-concepts/package-types.md#installing-an-applicaiton-package-into-another-package) to this rule.
 
 ## Next steps
 

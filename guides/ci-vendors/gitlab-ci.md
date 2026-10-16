@@ -2,11 +2,9 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/gitlab-ci
 title: "GitLab CI"
 description: "Configure GitLab CI pipelines to run Turborepo tasks with Remote Caching."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
-
-Learn how to use GitLab CI with Turborepo.
 
 The following example shows how to use Turborepo with [GitLab CI](https://docs.gitlab.com/ee/ci/).
 

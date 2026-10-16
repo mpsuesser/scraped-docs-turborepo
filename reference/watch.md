@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/reference/watch
 title: "watch"
 description: "API reference for the `watch` command"
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# watch
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Re-run tasks in your repository, based on code changes.
 
@@ -58,7 +56,6 @@ If you have tasks that write to files checked into source control, there is a po
 files for changes and will re-run tasks in packages that have changed. If a task creates a change, then that will trigger the task again.
 
 Watch Mode has some logic to prevent this from happening using file hashes, but it isn't foolproof. To avoid this issue, we recommend removing any task outputs from git.
-
 
 ---
 

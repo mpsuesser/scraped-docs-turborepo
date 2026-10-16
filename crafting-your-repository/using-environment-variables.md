@@ -1,12 +1,12 @@
 ---
 url: https://turborepo.dev/docs/crafting-your-repository/using-environment-variables
 title: "Using environment variables"
-description: "Account for environment variables in task hashing, configure environment modes, and handle .env files."
-access_date: 2026-08-05T18:05:17.395Z
-current_date: 2026-08-05T18:05:17.395Z
+description: "Learn how to handle environments for your applications."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Learn how to handle environments for your applications.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Environment variable inputs are a vital part of your applications that you'll need to account for in your Turborepo configuration.
 
@@ -16,11 +16,20 @@ There are three important questions when working with environment variables in T
 - [Which Environment Mode will `turbo` use?](#environment-modes)
 - [Have I handled my `.env` files?](#handling-env-files)
 
+> Failing to account for environment variables in your configuration can result
+> in shipping your application with the wrong configuration. This can cause
+> serious issues like shipping your preview deployments to production.
+
+> Turborepo also uses [System Environment
+> Variables](../reference/system-environment-variables.md) to configure its own
+> behavior. Below, you'll find information about environment variables for your
+> task's runtime and how they affect task hashing.
+
 ## Adding environment variables to task hashes
 
 Turborepo needs to be aware of your environment variables to account for changes in application behavior. To do this, use the `env` and `globalEnv` keys in your `turbo.json` file.
 
-```
+```json title="./turbo.json"
 {
   "globalEnv": ["IMPORTANT_GLOBAL_VARIABLE"],
   "tasks": {
@@ -34,24 +43,30 @@ Turborepo needs to be aware of your environment variables to account for changes
 - **globalEnv**: Changes to the values of any environment variables in this list will change the hash for all tasks.
 - **env**: Includes changes to the values of environment variables that affect the task, allowing for better granularity. For example, a `lint` task probably doesn't need to miss cache when the value of `API_KEY` changes, but a `build` task likely should.
 
+> Turborepo supports wildcards for environment variables so you can easily
+> account for all environment variables with a given prefix. Visit [the API
+> reference for `env`](../reference/configuration.md#wildcards) for more.
+
 ### Framework Inference
 
 Turborepo automatically adds prefix wildcards to your [`env`](../reference/configuration.md#env) key for common frameworks. If you're using one of the frameworks below in a package, you don't need to specify environment variables with these prefixes:
 
-| Framework | `env` wildcards |
-| --- | --- |
-| Next.js | `NEXT_PUBLIC_*` |
-| Vite | `VITE_*` |
-| Create React App | `REACT_APP_*` |
-| Gatsby | `GATSBY_*` |
-| Nuxt | `NUXT_*`, `NUXT_ENV_*` |
-| Expo | `EXPO_PUBLIC_*` |
-| Astro | `PUBLIC_*` |
-| SvelteKit | `PUBLIC_*` |
-| Remix | `REMIX_*` |
-| SolidStart | `VITE_*` |
-| RedwoodJS | `REDWOOD_ENV_*` |
-| Sanity | `SANITY_STUDIO_*` |
+| Framework        | `env` wildcards        |
+| ---------------- | ---------------------- |
+| Next.js          | `NEXT_PUBLIC_*`        |
+| Vite             | `VITE_*`               |
+| Create React App | `REACT_APP_*`          |
+| Gatsby           | `GATSBY_*`             |
+| Nuxt             | `NUXT_*`, `NUXT_ENV_*` |
+| Expo             | `EXPO_PUBLIC_*`        |
+| Astro            | `PUBLIC_*`             |
+| SvelteKit        | `PUBLIC_*`             |
+| Remix            | `REMIX_*`              |
+| SolidStart       | `VITE_*`               |
+| RedwoodJS        | `REDWOOD_ENV_*`        |
+| Sanity           | `SANITY_STUDIO_*`      |
+
+> Framework inference is per-package.
 
 If you'd like to opt out of Framework Inference, you can do so by:
 
@@ -71,11 +86,18 @@ Strict Mode filters the environment variables available to a task's runtime to *
 
 This means that tasks that do not account for all of the environment variables that they need are likely to fail. This is a good thing, since you don't want to cache a task that can potentially have different behavior in a different environment.
 
-Cache safety with Strict Mode
+> **Cache safety with Strict Mode:**
+>
+> While Strict Mode makes it much more likely for your task to fail when you
+> haven't accounted for all of your environment variables, it doesn't guarantee
+> task failure. If your application is able to gracefully handle a missing
+> environment variable, you could still successfully complete tasks and get
+> unintended cache hits.
 
 #### Passthrough variables
 
-In advanced use cases, you may want to make some environment variables available to a task without including them in the hash. Changes to these variables don't affect task outputs but still need to be available for the task to run successfully.
+In advanced use cases, you may want to make some environment variables
+available to a task without including them in the hash. Changes to these variables don't affect task outputs but still need to be available for the task to run successfully.
 
 For these cases, add those environment variables to [`globalPassThroughEnv`](../reference/configuration.md#globalpassthroughenv) and [`passThroughEnv`](../reference/configuration.md#passthroughenv).
 
@@ -91,7 +113,7 @@ Loose Mode does not filter your environment variables according to your `globalE
 
 Use [the `--env-mode` flag](../reference/run.md#--env-mode-option) to enable Loose Mode on any invocation where you're seeing environment variables cannot be found by your scripts:
 
-```
+```bash title="Terminal"
 turbo run build --env-mode=loose
 ```
 
@@ -99,8 +121,8 @@ As long as the environment variable is available when `turbo` is ran, your scrip
 
 For example, you may have some code in your application that fetches data from an API, using an environment variable for the base URL:
 
-```
-const data = fetch(\`${process.env.MY_API_URL}/resource/1\`);
+```ts title="./apps/web/data-fetcher.ts"
+const data = fetch(`${process.env.MY_API_URL}/resource/1`);
 ```
 
 You then build your application using a value for `MY_API_URL` that targets your preview environment. When you're ready to ship your application, you build for production and see a cache hit - even though the value of the `MY_API_URL` variable has changed! `MY_API_URL` changed - but Turborepo restored a version of your application from cache that uses the preview environment's `MY_API_URL` rather than production's.
@@ -109,43 +131,49 @@ When you're using Loose Mode, `MY_API_URL` is available in the task runtime **ev
 
 ### Platform Environment Variables
 
-When deploying your application to [Vercel](https://vercel.com/new?ref=turborepo), you likely already have [environment variables](https://vercel.com/docs/environment-variables) configured on your project. Turborepo will automatically check these variables against your `turbo.json` configuration to ensure that you've [accounted for them](#adding-environment-variables-to-task-hashes), and will warn you about any missing variables.
+When deploying your application to [Vercel](https://vercel.com/new?ref=turborepo), you likely already have [environment variables](https://vercel.com/docs/environment-variables) configured on your project. Turborepo will automatically check these variables against your `turbo.json` configuration to ensure that you've [accounted for them](#adding-environment-variables-to-task-hashes),
+and will warn you about any missing variables.
 
 This functionality can be disabled by setting `TURBO_PLATFORM_ENV_DISABLED=true`
 
-## Handling.env files
+## Handling `.env` files
 
-`.env` files are great for working on an application locally. **Turborepo does not load.env files into your task's runtime**, leaving them to be handled by your framework, or tools like [`dotenv`](https://www.npmjs.com/package/dotenv).
+`.env` files are great for working on an application locally. **Turborepo does not load .env files into your task's runtime**, leaving them to be handled by your framework, or tools like [`dotenv`](https://www.npmjs.com/package/dotenv).
 
 However, it's important that `turbo` knows about changes to values in your `.env` files so that it can use them for hashing. If you change a variable in your `.env` files between builds, the `build` task should miss cache.
 
 To do this, add the files to the [`inputs`](../reference/configuration.md#inputs) key:
 
-```
+```json title="./turbo.json"
 {
   "globalDependencies": [".env"], // All task hashes
   "tasks": {
     "build": {
-      "inputs": ["$TURBO_DEFAULT$", ".env"] // Only the \`build\` task hash
+      "inputs": ["$TURBO_DEFAULT$", ".env"] // Only the `build` task hash
     }
   }
 }
 ```
 
-### Multiple.env files
+### Multiple `.env` files
 
 You can capture multiple `.env` files at once using a `*`.
 
-```
+```json title="./turbo.json"
 {
   "globalDependencies": [".env"], // All task hashes
   "tasks": {
     "build": {
-      "inputs": ["$TURBO_DEFAULT$", ".env*"] // Only the \`build\` task hash
+      "inputs": ["$TURBO_DEFAULT$", ".env*"] // Only the `build` task hash
     }
   }
 }
 ```
+
+> `.env` files can load variables into the task runtime even when the
+> environment variables have not been added to [the `env`
+> key](../reference/configuration.md#env). Ensure that you add your environment
+> variables for your builds the `env` key for CI and production builds.
 
 ## Best practices
 
@@ -155,10 +183,13 @@ When an application consumes a package that relies on environment variables, tho
 
 For example, if an app called `docs` depends on a package `common`, there are two scenarios for handling environment variables:
 
-1. **The application depends on the package's task** If the `docs` app's `build` task depends on the `common` package's `build` task (e.g., `"dependsOn": ["^build"]`), and `common` declares an environment variable in its own `turbo.json`, Turborepo handles this automatically. Changing the environment variable will cause `common` to miss the cache and rebuild, which in turn causes `docs` to rebuild because of the dependency relationship.
-2. **The application imports the package directly without a build step** If the `common` package does not have a build step, but exposes variables that the `docs` app uses at build time (like `process.env.MY_VAR`), the `docs` application *must* declare the environment variable directly in its own `env` or `globalEnv` key in its `turbo.json`.
+1. **The application depends on the package's task**
+   If the `docs` app's `build` task depends on the `common` package's `build` task (e.g., `"dependsOn": ["^build"]`), and `common` declares an environment variable in its own `turbo.json`, Turborepo handles this automatically. Changing the environment variable will cause `common` to miss the cache and rebuild, which in turn causes `docs` to rebuild because of the dependency relationship.
 
-```
+2. **The application imports the package directly without a build step**
+   If the `common` package does not have a build step, but exposes variables that the `docs` app uses at build time (like `process.env.MY_VAR`), the `docs` application *must* declare the environment variable directly in its own `env` or `globalEnv` key in its `turbo.json`.
+
+```json title="./apps/docs/turbo.json"
 {
   "tasks": {
     "build": {
@@ -168,13 +199,18 @@ For example, if an app called `docs` depends on a package `common`, there are tw
 }
 ```
 
-### Use.env files in Application Packages
+### Use `.env` files in Application Packages
 
 Using a `.env` file at the root of the repository is not recommended. Instead, we recommend placing your `.env` files into the [Application Packages](../core-concepts/package-types.md#application-packages) where they're used.
 
 This practice more closely models the runtime behavior of your applications since environment variables exist in each application's runtime individually. Additionally, as your monorepo scales, this practice makes it easier to manage each application's environment, preventing environment variable leakage across applications.
 
-### Use eslint-config-turbo
+> You may find it easier to use a root `.env` file when incrementally migrating
+> to a monorepo. Tools like [dotenv](https://www.npmjs.com/package/dotenv) can
+> load `.env` files from different locations. We encourage making a goal of not
+> using a root `.env` file after completing your migration.
+
+### Use `eslint-config-turbo`
 
 [The `eslint-config-turbo` package](../reference/eslint-config-turbo.md) helps you find environment variables that are used in your code that aren't listed in your `turbo.json`. This helps ensure that all your environment variables are accounted for in your configuration.
 
@@ -184,7 +220,7 @@ Turborepo hashes the environment variables for your task at the beginning of the
 
 For instance, Turborepo will not be able to detect the inline variable in the example below:
 
-```
+```json title="./apps/web/package.json"
 {
   "scripts": {
     "dev": "export MY_VARIABLE=123 && next dev"
@@ -198,12 +234,90 @@ For instance, Turborepo will not be able to detect the inline variable in the ex
 
 Below are examples of proper environment variable configuration for a few popular frameworks:
 
+#### Next.js
+
+The `turbo.json` below expresses:
+
+- The `build` and `dev` tasks will have different hashes for changes to `MY_API_URL` and `MY_API_KEY`.
+- The `build` and `dev` tasks include the supported .env files for Next.js.
+- The `test` task does not use environment variables, so the `env` key is omitted. (Depending on your testing structure, your `test` task may need an `env` key.)
+
+```json title="./turbo.json"
+{
+  "tasks": {
+    "build": {
+      "env": ["MY_API_URL", "MY_API_KEY"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env.production.local",
+        ".env.local",
+        ".env.production",
+        ".env"
+      ]
+    },
+    "dev": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env.development.local",
+        ".env.local",
+        ".env.development",
+        ".env"
+      ]
+    },
+    "test": {}
+  }
+}
+```
+
+#### Vite
+
+The `turbo.json` below expresses:
+
+- The `build` and `dev` tasks will have different hashes for changes to `MY_API_URL` and `MY_API_KEY`.
+- The `build` and `dev` tasks include the supported .env files for Vite.
+- The `test` task does not use environment variables, so the `env` key is omitted. (Depending on your testing structure, your `test` task may need an `env` key.)
+
+```json title="./turbo.json"
+{
+  "tasks": {
+    "build": {
+      "env": ["MY_API_URL", "MY_API_KEY"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env.production.local",
+        ".env.local",
+        ".env.production",
+        ".env"
+      ]
+    },
+    "dev": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env.development.local",
+        ".env.local",
+        ".env.development",
+        ".env"
+      ]
+    },
+    "test": {}
+  }
+}
+```
+
 ## Troubleshooting
 
-### Use --summarize
+### Use `--summarize`
 
 [The `--summarize` flag](../reference/run.md#--summarize) can be added to your `turbo run` command to produce a JSON file summarizing data about your task. Checking the diff for the `globalEnv` and `env` key can help you identify any environment variables that may be missing from your configuration.
 
 ## Next steps
 
 Once you've accounted for your environment variables, you're ready to start building the CI pipelines that build, check, and deploy your applications, at the speed of `turbo`.
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

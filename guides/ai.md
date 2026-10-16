@@ -2,15 +2,11 @@
 url: https://turborepo.dev/docs/guides/ai
 title: "Using AI with Turborepo"
 description: "Get the most out of AI coding assistants in your Turborepo."
-access_date: 2026-10-13T18:20:57.380Z
-current_date: 2026-10-13T18:20:57.380Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# Using AI with Turborepo
-
-
-
-import { Callout } from "@/components/geistdocs/callout";
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Turborepo is designed to work seamlessly with AI coding assistants. Turborepo provides features that help AI understand your repository and work more efficiently.
 
@@ -34,10 +30,10 @@ npx skills add vercel/turborepo
 
 The Skill teaches agents:
 
-* Best practices for Turborepo configuration
-* Monorepo patterns and conventions
-* Anti-patterns to avoid
-* Performance optimization techniques
+- Best practices for Turborepo configuration
+- Monorepo patterns and conventions
+- Anti-patterns to avoid
+- Performance optimization techniques
 
 ## Git worktrees for parallel agents
 
@@ -83,9 +79,9 @@ Add a `description` field to your task definitions in `turbo.json` to help AI to
 
 Descriptions help AI assistants:
 
-* **Understand your repository**: AI can quickly grasp what each task does without reading implementation details
-* **Make better suggestions**: With context about task purposes, AI can provide more relevant recommendations
-* **Onboard faster**: New team members (human or AI) can understand your build system at a glance
+- **Understand your repository**: AI can quickly grasp what each task does without reading implementation details
+- **Make better suggestions**: With context about task purposes, AI can provide more relevant recommendations
+- **Onboard faster**: New team members (human or AI) can understand your build system at a glance
 
 ## Searching documentation
 
@@ -115,8 +111,8 @@ curl -sL -H "Accept: text/markdown" ../index.md
 
 Append `.md` to any documentation URL to get a Markdown version:
 
-* `https://turborepo.dev/docs.md`
-* `https://turborepo.dev/docs/crafting-your-repository/caching.md`
+- `https://turborepo.dev/docs.md`
+- `https://turborepo.dev/docs/crafting-your-repository/caching.md`
 
 ### Machine-readable sitemap
 
@@ -127,7 +123,6 @@ A sitemap is available at `https://turborepo.dev/sitemap.md`, allowing agents to
 Documentation for specific Turborepo versions is available on subdomains. For example, the 2.7.6 documentation is at `https://v2-7-6.turborepo.dev/docs`.
 
 This is useful when your AI needs to reference documentation matching your exact Turborepo version.
-
 
 ---
 

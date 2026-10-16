@@ -1,14 +1,16 @@
 ---
 url: https://turborepo.dev/docs/guides/coordinating-runtime-dependencies
 title: "Coordinating development runtime dependencies"
-description: "Combine a readiness probe with `with` and `dependsOn` to coordinate runtime dependencies between development services."
-access_date: 2026-08-03T21:45:14.046Z
-current_date: 2026-08-03T21:45:14.046Z
+description: "Learn how to coordinate development services that depend on each other at runtime."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Learn how to coordinate development services that depend on each other at runtime.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Some development tasks need another service to be available before they can start. For example, a frontend may need an API to be accepting requests before its development server starts.
+
+> This pattern is intended for coordinating services during local development. For CI and production, use the service orchestration and readiness capabilities provided by your CI provider or deployment platform.
 
 Turborepo can coordinate this workflow by combining:
 
@@ -22,7 +24,7 @@ This guide configures packages named `web` and `api`, where the API's developmen
 
 The readiness probe should retry until the service is available, exit successfully when it is ready, and fail after a timeout. Keep the readiness condition specific to your service so it can check everything the dependent task requires, such as a database connection or completed initialization.
 
-```
+```js title="./apps/api/scripts/wait-for-ready.mjs"
 const healthUrl = "http://localhost:3001/health";
 const deadline = Date.now() + 60_000;
 
@@ -33,7 +35,7 @@ while (Date.now() < deadline) {
     });
 
     if (response.ok) {
-      console.log(\`API is ready at ${healthUrl}\`);
+      console.log(`API is ready at ${healthUrl}`);
       process.exit(0);
     }
   } catch {
@@ -43,13 +45,13 @@ while (Date.now() < deadline) {
   await new Promise((resolve) => setTimeout(resolve, 500));
 }
 
-console.error(\`API did not become ready at ${healthUrl} within 60 seconds\`);
+console.error(`API did not become ready at ${healthUrl} within 60 seconds`);
 process.exit(1);
 ```
 
 Add scripts for the long-running service and its finite readiness probe:
 
-```
+```json title="./apps/api/package.json"
 {
   "name": "api",
   "scripts": {
@@ -63,7 +65,7 @@ The `api#dev:ready` script does not start the API. It only reports whether the A
 
 The `web` application also needs a `dev` script:
 
-```
+```json title="./apps/web/package.json"
 {
   "name": "web",
   "scripts": {
@@ -76,7 +78,7 @@ The `web` application also needs a `dev` script:
 
 Register both task names in the root `turbo.json`. The readiness probe must not be cached because its result depends on the state of a running service rather than files in the repository.
 
-```
+```json title="./turbo.json"
 {
   "$schema": "https://turborepo.dev/schema.json",
   "tasks": {
@@ -93,7 +95,7 @@ Register both task names in the root `turbo.json`. The readiness probe must not 
 
 Next, use a [Package Configuration](../reference/package-configurations.md) to describe the `web` application's runtime requirements:
 
-```
+```json title="./apps/web/turbo.json"
 {
   "extends": ["//"],
   "tasks": {
@@ -118,7 +120,7 @@ Do not add `api#dev` to `dependsOn`. A persistent task does not exit, so it cann
 
 Select the `web` application to start the complete workflow:
 
-```
+```bash title="Terminal"
 turbo run dev --filter=web
 ```
 
@@ -136,3 +138,11 @@ An HTTP endpoint is only one way to determine readiness. The probe script can wa
 - A specific initialization check succeeding
 
 You can implement the probe yourself, as shown above, or use a utility such as [`wait-on`](https://www.npmjs.com/package/wait-on). In either case, ensure the probe retries transient failures, has a timeout, and exits with a non-zero status when the service does not become ready.
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

@@ -1,47 +1,51 @@
 ---
 url: https://turborepo.dev/docs/reference/telemetry
 title: "telemetry"
-description: "Reference for the `turbo telemetry` command that manages anonymous usage data collection."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+description: "API reference for the `turbo telemetry` command"
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-[API reference](../reference.md)
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
-API reference for the \`turbo telemetry\` command
-
-```
+```bash title="Terminal"
 turbo telemetry [argument]
 ```
 
 Manage telemetry for this machine.
 
-[→](../telemetry.md)
+Learn more about Turborepo's telemetry.
 
 ## Arguments
 
-### status
+### `status`
 
 Retrieve the current state of telemetry for this machine.
 
-```
+```bash title="Terminal"
 turbo telemetry status
 ```
 
-### enable
+### `enable`
 
 Enable telemetry for this machine.
 
-```
+```bash title="Terminal"
 turbo telemetry enable
 ```
 
-### disable
+### `disable`
 
 Disable telemetry for this machine.
 
-```
+```bash title="Terminal"
 turbo telemetry disable
 ```
 
-[Previousinfo](info.md) [Nextcreate-turbo](create-turbo.md)
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

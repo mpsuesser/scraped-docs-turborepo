@@ -2,11 +2,9 @@
 url: https://turborepo.dev/docs/guides/microfrontends
 title: "Microfrontends"
 description: "Set up Turborepo's built-in proxy to route traffic between multiple frontend applications during local development."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
-
-Learn how to use Turborepo's built-in microfrontends proxy for local development.
 
 Microfrontends are an architectural pattern where a web application is decomposed into smaller, independently developed and deployed applications that work together.
 
@@ -29,6 +27,8 @@ In production, these applications might be deployed separately and composed toge
 ## Getting started
 
 Turborepo provides a built-in proxy server that automatically routes traffic between your microfrontend applications during development. The proxy reads a `microfrontends.json` configuration file and starts when you run `turbo dev`.
+
+You can try the following instructions with the monorepo created by `npx   create-turbo@latest -e with-microfrontends`.
 
 ### Create microfrontends.json
 
@@ -123,6 +123,8 @@ When you run `turbo dev`, Turborepo will:
 4. **Route incoming requests** based on path patterns to the appropriate application
 
 Now you can access all of your microfrontends applications at `http://localhost:3024`.
+
+Turborepo's microfrontends proxy and Module Federation solve different parts of local development. The proxy composes independently running applications by route. Module Federation composes JavaScript modules at runtime inside an application. For Module Federation examples, use [`with-vite-module-federation`](https://github.com/vercel/turborepo/tree/main/examples/with-vite-module-federation) or [`with-rsbuild-module-federation`](https://github.com/vercel/turborepo/tree/main/examples/with-rsbuild-module-federation).
 
 ## Configuration
 

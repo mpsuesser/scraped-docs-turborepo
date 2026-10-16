@@ -1,38 +1,40 @@
 ---
 url: https://turborepo.dev/docs/reference/query
 title: "query"
-description: "All flags and options for the `turbo query` command that runs GraphQL queries against your monorepo."
-access_date: 2026-09-30T21:34:58.695Z
-current_date: 2026-09-30T21:34:58.695Z
+description: "API reference for the `turbo query` command"
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
+
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Run GraphQL queries against your monorepo.
 
-```
+```bash title="Terminal"
 turbo query [query] [flags]
 ```
 
 To quickly get the GraphQL schema, use the `--schema` flag.
 
-```
+```bash title="Terminal"
 turbo query --schema
 ```
 
 When no arguments are passed, the command will open a GraphiQL playground to run queries.
 
-```
+```bash title="Terminal"
 turbo query
 ```
 
 When passed a query string, the command will run the query and output the results.
 
-```
+```bash title="Terminal"
 turbo query "query { packages { items { name } } }"
 ```
 
 When passed a file path, the command will read the file and run the query.
 
-```
+```bash title="Terminal"
 turbo query query.gql
 ```
 
@@ -48,7 +50,7 @@ This also applies to `turbo query affected --packages`. Use `affectedTasks` when
 
 Select task metadata without collecting a full `turbo run --dry=json` summary:
 
-```
+```bash title="Terminal"
 turbo query '
 query {
   globalEnvironment { env passThroughEnv }
@@ -72,27 +74,54 @@ query {
 
 You can also save the query as `ci-plan.gql` and run `turbo query ci-plan.gql`.
 
-### withDependencies
+### `withDependencies`
 
-`affectedTasks.withDependencies` returns the tasks in the collection and their transitive dependencies, deduplicated by task ID and sorted by package name, then task name. `length` counts the unique tasks. An empty selection returns an empty collection.
+`affectedTasks.withDependencies` returns the tasks in the collection and their
+transitive dependencies, deduplicated by task ID and sorted by package name, then
+task name. `length` counts the unique tasks. An empty selection returns an empty
+collection.
 
-Each task appears once, even when several tasks share the same dependency. Select only `fullName` beneath `directDependencies` to represent edges without repeating each task's dependency tree. Unlike nesting `allDependencies` beneath every task, this keeps the graph output proportional to its nodes and direct edges.
+Each task appears once, even when several tasks share the same dependency. Select
+only `fullName` beneath `directDependencies` to represent edges without repeating
+each task's dependency tree. Unlike nesting `allDependencies` beneath every task,
+this keeps the graph output proportional to its nodes and direct edges.
 
-The collection includes non-executable transit and leaf dependencies, as well as implicit native tasks and command overrides. `command` is `null` for tasks without a command. The internal graph root is excluded; configured root tasks such as `//#lint` are included when required.
+The collection includes non-executable transit and leaf dependencies, as well as
+implicit native tasks and command overrides. `command` is `null` for tasks without
+a command. The internal graph root is excluded; configured root tasks such as
+`//#lint` are included when required.
 
-This does not change `affectedTasks.items`: that collection retains its existing affected-task selection and runnable dependency behavior. `withDependencies` provides the complete dependency graph, including non-executable leaf nodes.
+This does not change `affectedTasks.items`: that collection retains its existing
+affected-task selection and runnable dependency behavior. `withDependencies`
+provides the complete dependency graph, including non-executable leaf nodes.
 
 ### Environment patterns
 
-`globalEnvironment` exposes `globalEnv` and `globalPassThroughEnv` as `env` and `passThroughEnv`. Each task's `environment` exposes its configured `env` and `passThroughEnv` after resolving Package Configurations, inheritance, and `$TURBO_EXTENDS$`. These fields are also available on tasks outside an affected query, such as `package(name: "web") { tasks { items { environment { env } } } }`.
+`globalEnvironment` exposes `globalEnv` and `globalPassThroughEnv` as `env` and
+`passThroughEnv`. Each task's `environment` exposes its configured `env` and
+`passThroughEnv` after resolving Package Configurations, inheritance, and
+`$TURBO_EXTENDS$`. These fields are also available on tasks outside an affected
+query, such as `package(name: "web") { tasks { items { environment { env } } } }`.
 
-Both fields return arrays, using `[]` when no patterns are configured. Global patterns remain separate from task patterns. Wildcards and exclusions are preserved: these are configuration patterns, not environment variable values, expanded names, framework-inferred variables, or a complete process environment.
+Both fields return arrays, using `[]` when no patterns are configured. Global
+patterns remain separate from task patterns. Wildcards and exclusions are
+preserved: these are configuration patterns, not environment variable values,
+expanded names, framework-inferred variables, or a complete process environment.
 
-The query does not execute tasks or report cache hits. Unlike dry-run summaries, this selection does not include file-hash inventories.
+The query does not execute tasks or report cache hits. Unlike dry-run summaries,
+this selection does not include file-hash inventories.
 
 ## Package task catalogue
 
-`package.tasks` lists the package's native scripts and resolved Task Graph entries, including configured tasks without a script and tasks with an explicit command. Scriptless tasks can be entrypoints that depend on runnable tasks. Their `script` is `null`, and their `command` is `null` unless a command is configured. Inherited and shared configurations are resolved before listing tasks; scriptless tasks excluded by `extends: false` are not included. Task names are deduplicated and sorted. Task filters apply to this full catalogue, not only tasks with native scripts.
+`package.tasks` lists the package's native scripts and resolved Task Graph entries,
+including configured tasks without a script and tasks with an explicit command.
+Scriptless tasks can be entrypoints that depend on runnable tasks. Their `script`
+is `null`, and their `command` is `null` unless a command is configured. Inherited
+and shared configurations are resolved before listing tasks; scriptless tasks
+excluded by `extends: false` are not included. Task names are deduplicated and sorted.
+Task filters apply to this full catalogue, not only tasks with native scripts.
+
+## Tags
 
 Packages and tasks expose a `tags` array, returning `[]` when no labels are configured. Package tags come from the package's loaded `turbo.json` and do not include task labels or inherit root package labels.
 
@@ -100,7 +129,7 @@ A task's `tags` contains its resolved task labels only, after configuration inhe
 
 Use `has: { field: TAG, value: "label" }` to filter by exact, case-sensitive membership. Package predicates match package labels only. Task predicates match either resolved task labels or package labels.
 
-```
+```bash title="Terminal"
 turbo query '
 query {
   packages(filter: {has: {field: TAG, value: "frontend"}}) {
@@ -119,7 +148,7 @@ Task predicates support `and`, `or`, and `not`, as well as `equal` and `notEqual
 
 For affected tasks, pass `taskFilter` alongside the existing package `filter` or task-name `tasks` arguments:
 
-```
+```graphql title="ci-plan.gql"
 query {
   affectedTasks(base: "origin/main", head: "HEAD", taskFilter: {has: {field: TAG, value: "ci"}}) {
     items { fullName tags package { tags } }
@@ -133,21 +162,21 @@ Affected-task filters intersect before required prerequisites are added, so prer
 
 Shorthands generate GraphQL queries for common operations so you don't need to write them by hand. The JSON output is identical to what you'd get from a raw query.
 
-### ls
+### `ls`
 
 List packages in your monorepo. This is a shorthand for a `packages` query, equivalent to `turbo ls`.
 
-```
+```bash title="Terminal"
 turbo query ls [packages] [flags]
 ```
 
 With no arguments, lists all packages:
 
-```
+```bash title="Terminal"
 turbo query ls
 ```
 
-```
+```json title="Output"
 {
   "packageManager": "npm",
   "packages": {
@@ -163,54 +192,60 @@ turbo query ls
 
 When passed package names, returns detailed information including tasks, dependencies, and dependents:
 
-```
+```bash title="Terminal"
 turbo query ls web
 ```
 
-#### \--filter (-F)
+#### `--filter` (`-F`)
 
 Use pnpm-style package selectors to narrow the package list. Same syntax as [`turbo run --filter`](run.md#--filter-string).
 
-```
+```bash title="Terminal"
 turbo query ls --filter=web...
 turbo query ls -F my-app...
 ```
 
-#### \--affected
+#### `--affected`
 
 Show only packages affected by changes between the current branch and `main`.
 
 When combined with `--filter`, returns the intersection: only packages that are both affected **and** match the filter.
 
-```
+```bash title="Terminal"
 turbo query ls --affected
 turbo query ls --affected --filter=web
 ```
 
-#### \--output Experimental
+#### `--output`&#x20;
 
 Control the output format. Defaults to `pretty` (human-readable).
 
-```
+```bash title="Terminal"
 turbo query ls --output json
 turbo query ls --output pretty
 ```
 
-### affected
+### `affected`
 
 Check which packages or tasks are affected by changes between two git refs.
 
-```
+```bash title="Terminal"
 turbo query affected [flags]
 ```
 
+> The comparison requires everything between base and head to exist in the
+> checkout. If the checkout is too shallow, then all packages will be considered
+> changed.
+>
+> For example, setting up Git to check out with `--filter=blob:none --depth=0` will ensure `turbo query affected` has the right history to work correctly.
+
 With no flags, returns all affected tasks:
 
-```
+```bash title="Terminal"
 turbo query affected
 ```
 
-```
+```json title="Output"
 {
   "data": {
     "affectedTasks": {
@@ -230,33 +265,33 @@ turbo query affected
 
 Task-level detection is more precise than package-level. A task is only reported as affected if its configured [`inputs`](configuration.md#inputs) match a changed file, or if an upstream task dependency is affected.
 
-#### \--tasks
+#### `--tasks`
 
 Filter to specific task names. With no values, returns all affected tasks (same as bare `turbo query affected`).
 
-```
+```bash title="Terminal"
 turbo query affected --tasks
 turbo query affected --tasks build
 turbo query affected --tasks build test
 ```
 
-#### \--packages
+#### `--packages`
 
 Without `--tasks`, returns affected packages instead of tasks. With no values, returns all affected packages. With values, filters to the named packages.
 
 When combined with `--tasks`, both filters apply (intersection) — only tasks matching the task name **and** belonging to the named packages are returned. This lets you check whether a specific task in a specific package changed:
 
-```
+```bash title="Terminal"
 turbo query affected --tasks build --packages web
 ```
 
-```
+```bash title="Terminal"
 turbo query affected --packages
 turbo query affected --packages web
 turbo query affected --packages web docs
 ```
 
-```
+```json title="Output"
 {
   "data": {
     "affectedPackages": {
@@ -275,82 +310,92 @@ turbo query affected --packages web docs
 
 #### Understanding affected-package reasons
 
-The `reason` object explains why a package is included. Its `__typename` is diagnostic output, not a `turbo.json` configuration value.
+The `reason` object explains why a package is included. Its `__typename` is
+diagnostic output, not a `turbo.json` configuration value.
 
-Most results are package-specific: a source file or a package's resolved dependencies changed. Some changes must be handled repository-wide because they change a shared input or Turborepo cannot safely determine a narrower scope. A repository-wide reason includes every package in the result.
+Most results are package-specific: a source file or a package's resolved
+dependencies changed. Some changes must be handled repository-wide because
+they change a shared input or Turborepo cannot safely determine a narrower
+scope. A repository-wide reason includes every package in the result.
 
-This is related to, but distinct from, cache behavior. For example, `RootInternalDepChanged` means that a workspace package used by the root package changed. It selects every package when comparing Git revisions and also changes the global hash, so every cacheable task misses cache. For the complete cache model, see [Caching](../crafting-your-repository/caching.md#root-workspace-dependencies).
+This is related to, but distinct from, cache behavior. For example,
+`RootInternalDepChanged` means that a workspace package used by the root
+package changed. It selects every package when comparing Git revisions and
+also changes the global hash, so every cacheable task misses cache. For the
+complete cache model, see [Caching](../crafting-your-repository/caching.md#root-workspace-dependencies).
 
 Use the reason to diagnose why a package was selected:
 
-```
+```bash title="Terminal"
 turbo query affected --packages --base main --head HEAD
 ```
 
 ##### Change-detection reason types
 
-| `reason.__typename` | Meaning |
-| --- | --- |
-| `FileChanged` | A file in this package changed. |
-| `LockfileChanged` | The lockfile comparison found added or removed external dependencies for this package. |
-| `ConservativeRootLockfileChanged` | The root package is included after a lockfile change because it may depend on a workspace package. |
-| `RootInternalDepChanged` | A direct or transitive internal workspace dependency of the root package changed. All packages are selected and the global hash changes. |
-| `GlobalDepsChanged` | A file configured in `globalDependencies` changed. All packages are selected. |
-| `DefaultGlobalFileChanged` | `turbo.json` or `turbo.jsonc` changed. All packages are selected. |
-| `LockfileChangeDetectionFailed` | Turborepo could not safely compare the lockfile versions, so all packages are selected. |
-| `LockfileChangedWithoutDetails` | The lockfile changed but its previous content was unavailable, so all packages are selected. |
-| `GitRefNotFound` | The requested Git range could not be resolved, so all packages are selected. |
-| `ScmError` | Source-control change detection failed, so all packages are selected. |
+| `reason.__typename`               | Meaning                                                                                                                                  |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `FileChanged`                     | A file in this package changed.                                                                                                          |
+| `LockfileChanged`                 | The lockfile comparison found added or removed external dependencies for this package.                                                   |
+| `ConservativeRootLockfileChanged` | The root package is included after a lockfile change because it may depend on a workspace package.                                       |
+| `RootInternalDepChanged`          | A direct or transitive internal workspace dependency of the root package changed. All packages are selected and the global hash changes. |
+| `GlobalDepsChanged`               | A file configured in `globalDependencies` changed. All packages are selected.                                                            |
+| `DefaultGlobalFileChanged`        | `turbo.json` or `turbo.jsonc` changed. All packages are selected.                                                                        |
+| `LockfileChangeDetectionFailed`   | Turborepo could not safely compare the lockfile versions, so all packages are selected.                                                  |
+| `LockfileChangedWithoutDetails`   | The lockfile changed but its previous content was unavailable, so all packages are selected.                                             |
+| `GitRefNotFound`                  | The requested Git range could not be resolved, so all packages are selected.                                                             |
+| `ScmError`                        | Source-control change detection failed, so all packages are selected.                                                                    |
 
 ##### Package-selection reason types
 
-These types describe graph or filter expansion rather than a direct cache invalidation:
+These types describe graph or filter expansion rather than a direct cache
+invalidation:
 
-| `reason.__typename` | Meaning |
-| --- | --- |
-| `DependencyChanged` | This package was included because one of its dependencies changed. |
-| `DependentChanged` | This package was included because an included package depends on it. |
-| `InFilteredDirectory` | The package was selected by a directory filter. |
-| `IncludedByFilter` | The package was selected explicitly by a filter or package-qualified task. |
-| `RootTask` | A root task was included in the run. |
+| `reason.__typename`   | Meaning                                                                    |
+| --------------------- | -------------------------------------------------------------------------- |
+| `DependencyChanged`   | This package was included because one of its dependencies changed.         |
+| `DependentChanged`    | This package was included because an included package depends on it.       |
+| `InFilteredDirectory` | The package was selected by a directory filter.                            |
+| `IncludedByFilter`    | The package was selected explicitly by a filter or package-qualified task. |
+| `RootTask`            | A root task was included in the run.                                       |
 
-Run `turbo query --schema` to inspect the exact GraphQL schema supported by your installed Turborepo version.
+Run `turbo query --schema` to inspect the exact GraphQL schema supported by
+your installed Turborepo version.
 
-#### \--base
+#### `--base`
 
 Base git ref for comparison. Defaults to the auto-detected base (e.g. `GITHUB_BASE_REF` on GitHub Actions, or the merge-base with `main`).
 
 Can also be set with the `TURBO_SCM_BASE` environment variable. When both are provided, `--base` takes precedence.
 
-```
+```bash title="Terminal"
 turbo query affected --base main
 ```
 
-#### \--head
+#### `--head`
 
 Head git ref for comparison. Defaults to `HEAD`.
 
 Can also be set with the `TURBO_SCM_HEAD` environment variable. When both are provided, `--head` takes precedence.
 
-```
+```bash title="Terminal"
 turbo query affected --head my-branch
 ```
 
-#### \--exit-code
+#### `--exit-code`
 
 Exit with code `1` when affected packages or tasks are found, `0` when none are found, or `2` on errors. JSON output is still printed to stdout.
 
 We recommend parsing the JSON output directly for most use cases since it gives you the reason for each change and lets you make more nuanced decisions. `--exit-code` is available as a shorthand for simple cases.
 
-```
+```bash title="Terminal"
 turbo query affected --packages my-app --exit-code
 ```
 
-| Condition | Exit code |
-| --- | --- |
-| Nothing affected | `0` |
-| Affected packages or tasks found | `1` |
-| Query error | `2` |
+| Condition                        | Exit code |
+| -------------------------------- | --------- |
+| Nothing affected                 | `0`       |
+| Affected packages or tasks found | `1`       |
+| Query error                      | `2`       |
 
 ### Migrating from turbo-ignore
 
@@ -358,11 +403,11 @@ turbo query affected --packages my-app --exit-code
 
 #### Flag mapping
 
-| `turbo-ignore` | `turbo query affected` |
-| --- | --- |
+| `turbo-ignore`            | `turbo query affected`                   |
+| ------------------------- | ---------------------------------------- |
 | `npx turbo-ignore my-app` | `turbo query affected --packages my-app` |
-| `--task build` | `--tasks build` |
-| `--fallback main` | `--base main` |
+| `--task build`            | `--tasks build`                          |
+| `--fallback main`         | `--base main`                            |
 
 #### Key differences
 
@@ -371,7 +416,7 @@ turbo query affected --packages my-app --exit-code
 
 #### CI example
 
-```
+```bash title="Terminal"
 affected=$(turbo query affected --packages my-app)
 count=$(echo "$affected" | jq '.data.affectedPackages.length')
 
@@ -385,18 +430,26 @@ fi
 
 ## Flags
 
-### \--schema
+### `--schema`
 
 Output the GraphQL introspection schema. Cannot be used with a query argument.
 
-```
+```bash title="Terminal"
 turbo query --schema
 ```
 
-### \--variables (-V)
+### `--variables` (`-V`)
 
 Path to a JSON file containing query variables. Requires a query argument.
 
-```
+```bash title="Terminal"
 turbo query query.gql --variables vars.json
 ```
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

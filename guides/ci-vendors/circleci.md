@@ -2,15 +2,15 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/circleci
 title: "CircleCI"
 description: "Configure CircleCI workflows to run Turborepo tasks with Remote Caching."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
-
-Learn how to use CircleCI with Turborepo.
 
 The following example shows how to use Turborepo with [CircleCI](https://circleci.com/).
 
 TTY on CircleCI
+
+CircleCI [uses interactive terminals (TTY)](https://discuss.circleci.com/t/reprise-allow-for-using-circle-ci-tooling-without-a-tty/23309) that crash Turborepo's terminal UI. To workaround this, set the `TURBO_UI=false` environment variable in your CircleCI configuration.
 
 For a given root `package.json`:
 

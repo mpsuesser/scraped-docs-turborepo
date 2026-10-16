@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/crafting-your-repository/understanding-your-repository
 title: "Understanding your repository"
 description: "Learn how to understand your repository structure using Turborepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# Understanding your repository
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Turborepo includes tools for understanding your repository structure, that can help you use and optimize your codebase.
 
@@ -156,7 +154,6 @@ With `turbo query`, you can find all the packages and the reason why they were i
   }
 }
 ```
-
 
 ---
 

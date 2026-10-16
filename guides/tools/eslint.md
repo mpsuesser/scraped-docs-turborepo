@@ -1,12 +1,12 @@
 ---
 url: https://turborepo.dev/docs/guides/tools/eslint
 title: "ESLint"
-description: "Configure ESLint for consistent linting across your monorepo packages with a shared config."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+description: "Learn how to use ESLint in a monorepo."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Learn how to use ESLint in a monorepo.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 ESLint is a static analysis tool for quickly finding and fixing problems in your JavaScript code.
 
@@ -22,25 +22,22 @@ We will share configurations across the monorepo's Workspace, ensuring configura
 
 Using ESLint v9's Flat Configs, we will end up with a file structure like this:
 
-package.json
-
-eslint.config.js
-
-package.json
-
-eslint.config.js
-
-base.js
-
-next.js
-
-react-internal.js
-
-package.json
-
-eslint.config.js
-
-package.json
+- `apps/`
+  - `docs/`
+    - `package.json`
+    - `eslint.config.js`
+  - `web/`
+    - `package.json`
+    - `eslint.config.js`
+- `packages/`
+  - `eslint-config/`
+    - `base.js`
+    - `next.js`
+    - `react-internal.js`
+    - `package.json`
+  - `ui/`
+    - `eslint.config.js`
+    - `package.json`
 
 This structure includes:
 
@@ -60,7 +57,7 @@ In our `web` app, we first need to add `@repo/eslint-config` as a dependency.
 
 #### pnpm
 
-```
+```jsonc title="./apps/web/package.json"
 {
   "devDependencies": {
     "@repo/eslint-config": "workspace:*"
@@ -70,7 +67,7 @@ In our `web` app, we first need to add `@repo/eslint-config` as a dependency.
 
 #### yarn
 
-```
+```jsonc title="./apps/web/package.json"
 {
   "devDependencies": {
     "@repo/eslint-config": "*"
@@ -80,7 +77,7 @@ In our `web` app, we first need to add `@repo/eslint-config` as a dependency.
 
 #### npm
 
-```
+```jsonc title="./apps/web/package.json"
 {
   "devDependencies": {
     "@repo/eslint-config": "*"
@@ -90,7 +87,7 @@ In our `web` app, we first need to add `@repo/eslint-config` as a dependency.
 
 #### bun
 
-```
+```jsonc title="./apps/web/package.json"
 {
   "devDependencies": {
     "@repo/eslint-config": "workspace:*"
@@ -100,7 +97,7 @@ In our `web` app, we first need to add `@repo/eslint-config` as a dependency.
 
 #### nub
 
-```
+```jsonc title="./apps/web/package.json"
 {
   "devDependencies": {
     "@repo/eslint-config": "workspace:*"
@@ -110,7 +107,7 @@ In our `web` app, we first need to add `@repo/eslint-config` as a dependency.
 
 #### aube
 
-```
+```jsonc title="./apps/web/package.json"
 {
   "devDependencies": {
     "@repo/eslint-config": "workspace:*"
@@ -120,7 +117,7 @@ In our `web` app, we first need to add `@repo/eslint-config` as a dependency.
 
 We can then import the configuration like this:
 
-```
+```js title="./apps/web/eslint.config.js"
 import { nextJsConfig } from "@repo/eslint-config/next-js";
 
 /** @type {import("eslint").Linter.Config} */
@@ -129,7 +126,7 @@ export default nextJsConfig;
 
 Additionally, you can add configuration specific to the package like this:
 
-```
+```js title="./apps/web/eslint.config.js"
 import { nextJsConfig } from "@repo/eslint-config/next-js";
 
 /** @type {import("eslint").Linter.Config} */
@@ -141,37 +138,38 @@ export default [
 
 ## ESLint v8 (Legacy)
 
+> ESLint v8 is end-of-life as of October 5, 2024. We encourage you to upgrade to
+> ESLint v9 or later. This documentation is here to help with existing projects
+> that have not yet upgraded.
+
 Using legacy configuration from ESLint v8 and lower, we will end up with a file structure like this:
 
-package.json
-
-.eslintrc.js
-
-package.json
-
-.eslintrc.js
-
-base.js
-
-next.js
-
-react-internal.js
-
-package.json
-
-.eslintrc.js
-
-package.json
+- `apps/`
+  - `docs/`
+    - `package.json`
+    - `.eslintrc.js`
+  - `web/`
+    - `package.json`
+    - `.eslintrc.js`
+- `packages/`
+  - `eslint-config/`
+    - `base.js`
+    - `next.js`
+    - `react-internal.js`
+    - `package.json`
+  - `ui/`
+    - `.eslintrc.js`
+    - `package.json`
 
 There's a package called `@repo/eslint-config`, and two applications, each with their own `.eslintrc.js`.
 
-### The @repo/eslint-config package
+### The `@repo/eslint-config` package
 
 The `@repo/eslint-config` file contains two files, `next.js`, and `library.js`. These are two different ESLint configurations, which we can use in different packages, depending on our needs.
 
 A configuration for Next.js may look like this:
 
-```
+```js title="./packages/eslint-config/next.js"
 /* Custom ESLint configuration for use with Next.js apps. */
 module.exports = {
   extends: [
@@ -185,7 +183,7 @@ module.exports = {
 
 The `package.json` looks like this:
 
-```
+```json title="./packages/eslint-config/package.json"
 {
   "name": "@repo/eslint-config",
   "version": "0.0.0",
@@ -200,13 +198,13 @@ The `package.json` looks like this:
 
 Note that the ESLint dependencies are all listed here. This is useful, since it means we don't need to re-specify the dependencies inside the apps which import `@repo/eslint-config`.
 
-### How to use the @repo/eslint-config package
+### How to use the `@repo/eslint-config` package
 
 In our `web` app, we first need to add `@repo/eslint-config` as a dependency.
 
 #### pnpm
 
-```
+```jsonc title="./apps/web/package.json"
 {
   "dependencies": {
     "@repo/eslint-config": "workspace:*"
@@ -216,7 +214,7 @@ In our `web` app, we first need to add `@repo/eslint-config` as a dependency.
 
 #### yarn
 
-```
+```jsonc title="./apps/web/package.json"
 {
   "dependencies": {
     "@repo/eslint-config": "*"
@@ -226,7 +224,7 @@ In our `web` app, we first need to add `@repo/eslint-config` as a dependency.
 
 #### npm
 
-```
+```jsonc title="./apps/web/package.json"
 {
   "dependencies": {
     "@repo/eslint-config": "*"
@@ -236,7 +234,7 @@ In our `web` app, we first need to add `@repo/eslint-config` as a dependency.
 
 #### bun
 
-```
+```jsonc title="./apps/web/package.json"
 {
   "dependencies": {
     "@repo/eslint-config": "workspace:*"
@@ -246,7 +244,7 @@ In our `web` app, we first need to add `@repo/eslint-config` as a dependency.
 
 #### nub
 
-```
+```jsonc title="./apps/web/package.json"
 {
   "dependencies": {
     "@repo/eslint-config": "workspace:*"
@@ -256,7 +254,7 @@ In our `web` app, we first need to add `@repo/eslint-config` as a dependency.
 
 #### aube
 
-```
+```jsonc title="./apps/web/package.json"
 {
   "dependencies": {
     "@repo/eslint-config": "workspace:*"
@@ -266,7 +264,7 @@ In our `web` app, we first need to add `@repo/eslint-config` as a dependency.
 
 We can then import the config like this:
 
-```
+```js title="./apps/web/.eslintrc.js"
 module.exports = {
   root: true,
   extends: ["@repo/eslint-config/next.js"],
@@ -275,11 +273,11 @@ module.exports = {
 
 By adding `@repo/eslint-config/next.js` to our `extends` array, we're telling ESLint to look for a package called `@repo/eslint-config`, and reference the file `next.js`.
 
-## Setting up a lint task
+## Setting up a `lint` task
 
 The `package.json` for each package where you'd like to run ESLint should look like this:
 
-```
+```json title="./packages/*/package.json"
 {
   "scripts": {
     "lint": "eslint ."
@@ -289,7 +287,7 @@ The `package.json` for each package where you'd like to run ESLint should look l
 
 With your scripts prepared, you can then create your Turborepo task:
 
-```
+```json title="./turbo.json"
 {
   "tasks": {
     "lint": {
@@ -303,10 +301,18 @@ Using `dependsOn` with `^lint` ensures that changes to dependencies like `@repo/
 
 You can now run `turbo lint` with [global `turbo`](../../getting-started/installation.md#global-installation) or create a script in your root `package.json`:
 
-```
+```json title="./package.json"
 {
   "scripts": {
     "lint": "turbo run lint"
   }
 }
 ```
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

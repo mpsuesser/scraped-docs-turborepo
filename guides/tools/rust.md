@@ -1,20 +1,25 @@
 ---
 url: https://turborepo.dev/docs/guides/tools/rust
 title: "Rust (Experimental)"
-description: "Discover Cargo workspace crates as Turborepo packages and run native Cargo tasks."
-access_date: 2026-10-13T18:20:57.380Z
-current_date: 2026-10-13T18:20:57.380Z
+description: "Use experimental native Cargo workspace support with Turborepo."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Use experimental native Cargo workspace support with Turborepo.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Turborepo can discover the crates in [a Cargo workspace](https://doc.rust-lang.org/book/ch14-03-cargo-workspaces.html) as packages, add their dependency relationships to the Package Graph, and map common Turborepo tasks to Cargo commands.
+
+> Rust support is experimental and can change at any time. We encourage you to
+> try it out in side projects, proof-of-concepts, and other environments where
+> stability is not essential. Please provide feedback on the [Rust
+> RFC](https://github.com/vercel/turborepo/discussions/13415).
 
 ## Enable Cargo workspaces
 
 Set the Future Flag in the root `turbo.json`:
 
-```
+```json title="./turbo.json"
 {
   "$schema": "https://turborepo.dev/schema.json",
   "futureFlags": {
@@ -37,7 +42,7 @@ To work with Rust, the repository root must contain:
 
 [Cargo workspaces](https://doc.rust-lang.org/book/ch14-03-cargo-workspaces.html) are natively understood by Turborepo.
 
-```
+```toml title="./Cargo.toml"
 [workspace]
 members = ["crates/*"]
 resolver = "2"
@@ -60,18 +65,18 @@ All three package types can be used as targets for [`--filter`](../../reference/
 
 Turborepo natively registers tasks that are common to all Cargo workspaces.
 
-| Package | Turbo task | Cargo command |
-| --- | --- | --- |
-| Any crate | `turbo build` | `cargo build --package=<crate> --locked` |
-| Entrypoint crate with exactly one binary | `turbo run`, `turbo dev` | `cargo run --package=<crate> --locked` |
-| Any crate | `turbo test` | `cargo test --package=<crate> --locked` |
-| Any crate | `turbo check` | `cargo check --package=<crate> --locked` |
-| Any crate | `turbo lint` | `cargo clippy --package=<crate> --locked` |
-| Any crate | `turbo format` | `cargo fmt --package=<crate>` |
-| Workspace package | `turbo test` | `cargo test --workspace --locked` |
-| Workspace package | `turbo check` | `cargo check --workspace --locked` |
-| Workspace package | `turbo lint` | `cargo clippy --workspace --locked` |
-| Workspace package | `turbo format` | `cargo fmt --all` |
+| Package                                  | Turbo task               | Cargo command                             |
+| ---------------------------------------- | ------------------------ | ----------------------------------------- |
+| Any crate                                | `turbo build`            | `cargo build --package=<crate> --locked`  |
+| Entrypoint crate with exactly one binary | `turbo run`, `turbo dev` | `cargo run --package=<crate> --locked`    |
+| Any crate                                | `turbo test`             | `cargo test --package=<crate> --locked`   |
+| Any crate                                | `turbo check`            | `cargo check --package=<crate> --locked`  |
+| Any crate                                | `turbo lint`             | `cargo clippy --package=<crate> --locked` |
+| Any crate                                | `turbo format`           | `cargo fmt --package=<crate>`             |
+| Workspace package                        | `turbo test`             | `cargo test --workspace --locked`         |
+| Workspace package                        | `turbo check`            | `cargo check --workspace --locked`        |
+| Workspace package                        | `turbo lint`             | `cargo clippy --workspace --locked`       |
+| Workspace package                        | `turbo format`           | `cargo fmt --all`                         |
 
 You can use [`--filter`](../../reference/run.md#--filter-string) to target a specific crate in the workspace.
 
@@ -79,7 +84,7 @@ You can use [`--filter`](../../reference/run.md#--filter-string) to target a spe
 
 Arguments after Turborepo's `--` are passed to the mapped command. Build flags that select a supported output layout participate in hashing and automatic output detection:
 
-```
+```bash title="Terminal"
 turbo run build -- --release
 turbo run build -- --profile=ci
 turbo run build -- --target=aarch64-unknown-linux-gnu
@@ -88,7 +93,7 @@ turbo run build -- --target-dir=target-ci
 
 `check` accepts Cargo flags directly after `--`. For `run`, `test`, `lint`, and `format`, Turborepo inserts Cargo's second `--`, so the arguments go to the binary, test harness, Clippy, or rustfmt rather than Cargo itself. For example:
 
-```
+```bash title="Terminal"
 turbo run run --filter=rust-api -- --port 8080
 turbo run test --filter=rust-library -- --nocapture
 turbo run test --filter=acme-rust -- --nocapture
@@ -99,7 +104,7 @@ turbo run format -- --check
 
 To define a Cargo-backed task that is not built in, or replace a built-in mapping, enable `experimentalTaskCommand` and set the task's `command`. The command is an argument array that runs directly without a shell. For example, the synthetic workspace package can add a `docs` task and make its workspace-wide `lint` task reject warnings:
 
-```
+```json title="./turbo.json"
 {
   "$schema": "https://turborepo.dev/schema.json",
   "futureFlags": {
@@ -151,7 +156,7 @@ Files that a crate reads from outside its own directory and outside its local de
 
 Without a declaration, editing such a file does not change the task hash, and Turborepo restores the previous result from cache. Declaring the files on one crate's task is not enough: every task that compiles the crate reads them too, including the tasks of crates that depend on it and workspace-wide `test`, `check`, and `lint`. Declare them on each of those tasks:
 
-```
+```json title="./turbo.json"
 {
   "tasks": {
     "build": {
@@ -189,3 +194,11 @@ Turborepo resolves exact outputs for these layouts:
 - The default `debug` profile, `--release`, built-in profile aliases, and ordinary custom `--profile=<name>` directories
 - The host target, a supported `--target=<triple>`, or a supported `CARGO_BUILD_TARGET`
 - An in-repository target directory selected, in order, by `--target-dir`, `CARGO_TARGET_DIR`, or Cargo metadata, including repository `.cargo/config` `target-dir`
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

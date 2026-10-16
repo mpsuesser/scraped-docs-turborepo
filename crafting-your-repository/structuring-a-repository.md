@@ -1,12 +1,12 @@
 ---
 url: https://turborepo.dev/docs/crafting-your-repository/structuring-a-repository
 title: "Structuring a repository"
-description: "Set up a multi-package workspace with the directory structure, package.json files, and lockfile that Turborepo expects."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+description: "Start by creating a repository using the conventions of the ecosystem."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Start by creating a repository using the conventions of the ecosystem.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 `turbo` is built on top of [Workspaces](https://vercel.com/docs/glossary#workspace), a feature of package managers in the JavaScript ecosystem that allows you to group multiple packages in one repository.
 
@@ -23,37 +23,37 @@ Setting up a workspace's structure can be tedious to do by hand. If you're new t
 
 #### pnpm
 
-```
+```bash title="Terminal"
 pnpm dlx create-turbo@latest
 ```
 
 #### yarn
 
-```
+```bash title="Terminal"
 yarn dlx create-turbo@latest
 ```
 
 #### npm
 
-```
+```bash title="Terminal"
 npx create-turbo@latest
 ```
 
 #### bun
 
-```
+```bash title="Terminal"
 bunx create-turbo@latest
 ```
 
 #### nub
 
-```
+```bash title="Terminal"
 nubx create-turbo@latest
 ```
 
 #### aube
 
-```
+```bash title="Terminal"
 aubx create-turbo@latest
 ```
 
@@ -67,65 +67,88 @@ Below, the structural elements of `create-turbo` that make it a valid workspace 
 
 #### pnpm
 
-package.json
-
-pnpm-lock.yaml
-
-pnpm-workspace.yaml
-
-turbo.json
-
-package.json
+- `package.json`
+- `pnpm-lock.yaml`
+- `pnpm-workspace.yaml`
+- `turbo.json`
+- `apps/`
+  - `docs/`
+    - `package.json`
+  - `web/`
+    - `package.json`
+- `packages/`
+  - `ui/`
+    - `package.json`
 
 #### yarn
 
-package.json
-
-yarn.lock
-
-turbo.json
-
-package.json
+- `package.json`
+- `yarn.lock`
+- `turbo.json`
+- `apps/`
+  - `docs/`
+    - `package.json`
+  - `web/`
+    - `package.json`
+- `packages/`
+  - `ui/`
+    - `package.json`
 
 #### npm
 
-package.json
-
-package-lock.json
-
-turbo.json
-
-package.json
+- `package.json`
+- `package-lock.json`
+- `turbo.json`
+- `apps/`
+  - `docs/`
+    - `package.json`
+  - `web/`
+    - `package.json`
+- `packages/`
+  - `ui/`
+    - `package.json`
 
 #### bun
 
-package.json
-
-bun.lock
-
-turbo.json
-
-package.json
+- `package.json`
+- `bun.lock`
+- `turbo.json`
+- `apps/`
+  - `docs/`
+    - `package.json`
+  - `web/`
+    - `package.json`
+- `packages/`
+  - `ui/`
+    - `package.json`
 
 #### nub
 
-package.json
-
-nub.lock
-
-turbo.json
-
-package.json
+- `package.json`
+- `nub.lock`
+- `turbo.json`
+- `apps/`
+  - `docs/`
+    - `package.json`
+  - `web/`
+    - `package.json`
+- `packages/`
+  - `ui/`
+    - `package.json`
 
 #### aube
 
-package.json
-
-aube-lock.yaml
-
-turbo.json
-
-package.json
+- `package.json`
+- `aube-lock.yaml`
+- `turbo.json`
+- `apps/`
+  - `docs/`
+    - `package.json`
+  - `web/`
+    - `package.json`
+- `packages/`
+  - `ui/`
+    - `package.json`
 
 ### Minimum requirements
 
@@ -137,23 +160,21 @@ package.json
 
 ### Specifying packages in a monorepo
 
-#### Declaring directories for packages
+#### 1. Declaring directories for packages
 
 First, your package manager needs to describe the locations of your packages. We recommend starting with splitting your packages into `apps/` for applications and services and `packages/` for everything else, like libraries and tooling.
 
 #### pnpm
 
-```
+```json title="pnpm-workspace.yaml"
 packages:
   - "apps/*"
   - "packages/*"
 ```
-
-[→ pnpm workspace documentation](https://pnpm.io/pnpm-workspace_yaml)
 
 #### yarn
 
-```
+```json title="./package.json"
 {
   "workspaces": [
     "apps/*",
@@ -161,12 +182,10 @@ packages:
   ]
 }
 ```
-
-[→ yarn workspace documentation](https://yarnpkg.com/features/workspaces#how-are-workspaces-declared)
 
 #### npm
 
-```
+```json title="./package.json"
 {
   "workspaces": [
     "apps/*",
@@ -174,12 +193,10 @@ packages:
   ]
 }
 ```
-
-[→ npm workspace documentation](https://docs.npmjs.com/cli/v7/using-npm/workspaces#defining-workspaces)
 
 #### bun
 
-```
+```json title="./package.json"
 {
   "workspaces": [
     "apps/*",
@@ -187,12 +204,10 @@ packages:
   ]
 }
 ```
-
-[→ bun workspace documentation](https://bun.sh/docs/install/workspaces)
 
 #### nub
 
-```
+```json title="./package.json"
 {
   "workspaces": [
     "apps/*",
@@ -201,31 +216,31 @@ packages:
 }
 ```
 
-[→ nub documentation](https://nub.dev/)
-
 #### aube
 
-```
+```yaml title="aube-workspace.yaml"
 packages:
   - "apps/*"
   - "packages/*"
 ```
 
-[→ aube workspace documentation](https://aube.jdx.dev/)
-
 Using this configuration, every directory **with a `package.json`** in the `apps` or `packages` directories will be considered a package.
 
-#### package.json in each package
+> Turborepo does not support nested packages like `apps/**` or `packages/**` due to ambiguous behavior among package managers in the JavaScript ecosystem. Using a structure that would put a package at `apps/a` and another at `apps/a/b` will result in an error.
+>
+> If you'd like to group packages by directory, you can do this using globs like `packages/*` and `packages/group/*` and **not** creating a `packages/group/package.json` file.
+
+#### 2. `package.json` in each package
 
 In the directory of the package, there must be a `package.json` to make the package discoverable to your package manager and `turbo`. The [requirements for the `package.json` of a package](#anatomy-of-a-package) are below.
 
-### Root package.json
+### Root `package.json`
 
 The root `package.json` is the base for your workspace. Below is a common example of what you would find in a root `package.json`:
 
 #### pnpm
 
-```
+```json title="./package.json"
 {
   "private": true,
   "scripts": {
@@ -247,7 +262,7 @@ The root `package.json` is the base for your workspace. Below is a common exampl
 
 #### yarn
 
-```
+```json title="./package.json"
 {
   "private": true,
   "scripts": {
@@ -270,7 +285,7 @@ The root `package.json` is the base for your workspace. Below is a common exampl
 
 #### npm
 
-```
+```json title="./package.json"
 {
   "private": true,
   "scripts": {
@@ -293,7 +308,7 @@ The root `package.json` is the base for your workspace. Below is a common exampl
 
 #### bun
 
-```
+```json title="./package.json"
 {
   "private": true,
   "scripts": {
@@ -316,7 +331,7 @@ The root `package.json` is the base for your workspace. Below is a common exampl
 
 #### nub
 
-```
+```json title="./package.json"
 {
   "private": true,
   "scripts": {
@@ -339,13 +354,13 @@ The root `package.json` is the base for your workspace. Below is a common exampl
 
 #### aube
 
-```
+```yaml title="aube-workspace.yaml"
 packages:
   - "apps/*"
   - "packages/*"
 ```
 
-### Root turbo.json
+### Root `turbo.json`
 
 `turbo.json` is used to configure the behavior of `turbo`. To learn more about how to configure your tasks, visit the [Configuring tasks](configuring-tasks.md) page.
 
@@ -353,29 +368,36 @@ packages:
 
 A lockfile is key to reproducible behavior for both your package manager and `turbo`. Additionally, Turborepo uses the lockfile to understand the dependencies between your [Internal Packages](../core-concepts/internal-packages.md) within your Workspace.
 
+> If you do not have a lockfile present when you run `turbo`, you may see
+> unpredictable behavior.
+
 ## Anatomy of a package
 
 It's often best to start thinking about designing a package as its own unit within the Workspace. At a high-level, each package is almost like its own small "project", with its own `package.json`, tooling configuration, and source code. There are limits to this idea—but its a good mental model to *start* from.
 
 Additionally, a package has specific entrypoints that other packages in your Workspace can use to access the package, specified by [`exports`](#exports).
 
-### package.json for a package
+### `package.json` for a package
 
-#### name
+#### `name`
 
 [The `name` field](https://nodejs.org/api/packages.html#name) is used to identify the package. It should be unique within your workspace.
 
-#### scripts
+> It's best practice to use a namespace prefix for your [Internal Packages](../core-concepts/internal-packages.md) to avoid conflicts with other packages on the npm registry. For example, if your organization is named `acme`, you might name your packages `@acme/package-name`.
+>
+> We use `@repo` in our docs and examples because it is an unused, unclaimable namespace on the npm registry. You can choose to keep it or use your own prefix.
+
+#### `scripts`
 
 The `scripts` field is used to define scripts that can be run in the package's context. Turborepo will use the name of these scripts to identify what scripts to run (if any) in a package. We talk more about these scripts on the [Running Tasks](running-tasks.md) page.
 
-#### exports
+#### `exports`
 
 [The `exports` field](https://nodejs.org/api/packages.html#exports) is used to specify the entrypoints for other packages that want to use the package. When you want to use code from one package in another package, you'll import from that entrypoint.
 
 For example, if you had a `@repo/math` package, you might have the following `exports` field:
 
-```
+```json title="./packages/math/package.json"
 {
   "exports": {
     ".": "./src/constants.ts",
@@ -387,9 +409,12 @@ For example, if you had a `@repo/math` package, you might have the following `ex
 
 Note that this example uses the [Just-in-Time Package](../core-concepts/internal-packages.md#just-in-time-packages) pattern for simplicity. It exports TypeScript directly, but you might choose to use the [Compiled Package](../core-concepts/internal-packages.md#compiled-packages) pattern instead.
 
+> The `exports` field in this example requires modern versions of Node.js and
+> TypeScript.
+
 This would allow you to import `add` and `subtract` functions from the `@repo/math` package like so:
 
-```
+```ts title="./apps/my-app/src/index.ts"
 import { GRAVITATIONAL_CONSTANT, SPEED_OF_LIGHT } from "@repo/math";
 import { add } from "@repo/math/add";
 import { subtract } from "@repo/math/subtract";
@@ -401,9 +426,11 @@ Using exports this way provides three major benefits:
 - **More powerful features**: `exports` also has other powerful features compared to [the `main` field](https://nodejs.org/api/packages.html#main) like [Conditional Exports](https://nodejs.org/api/packages.html#conditional-exports). In general, we recommend using `exports` over `main` whenever possible as it is the more modern option.
 - **IDE autocompletion**: By specifying the entrypoints for your package using `exports`, you can ensure that your code editor can provide auto-completion for the package's exports.
 
-#### imports (optional)
+#### `imports` (optional)
 
 [The `imports` field](https://nodejs.org/api/packages.html#imports) gives you a way to create subpaths to other modules within your package. You can think of these like "shortcuts" to write simpler import paths that are more resilient to refactors that move files. To learn how, visit [the TypeScript page](../guides/tools/typescript.md#use-nodejs-subpath-imports-instead-of-typescript-compiler-paths).
+
+> You may be more familiar with TypeScript's `compilerOptions#paths` option, which accomplishes a similar goal. As of TypeScript 5.4, TypeScript can infer subpaths from `imports`, making it a better option since you'll be working with Node.js conventions. For more information, visit [our TypeScript guide](../guides/tools/typescript.md#use-nodejs-subpath-imports-instead-of-typescript-compiler-paths).
 
 ### Source code
 
@@ -417,3 +444,11 @@ Of course, you'll want some source code in your package. Packages commonly use a
 ## Next steps
 
 With your Workspace configured, you can now use your package manager to [install dependencies into your packages](managing-dependencies.md).
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

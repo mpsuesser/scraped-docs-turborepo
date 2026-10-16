@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/messages/invalid-env-prefix
 title: "Invalid environment variable prefix"
 description: "Learn more about errors with invalid environment variable prefixes in Turborepo."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# Invalid environment variable prefix
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 ## Why this error occurred
 
@@ -35,7 +33,6 @@ Remove the `$` prefix from your environment variable declaration.
 
 You can migrate to the `env` and `globalEnv` keys using `npx @turbo/codemod migrate-env-var-dependencies`.
 Check out [the codemod's documentation for more details](../reference/turbo-codemod.md#turborepo-1x).
-
 
 ---
 

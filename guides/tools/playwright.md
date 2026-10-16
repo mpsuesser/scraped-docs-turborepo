@@ -1,12 +1,12 @@
 ---
 url: https://turborepo.dev/docs/guides/tools/playwright
 title: "Playwright"
-description: "Set up Playwright end-to-end test suites with proper caching and dependency graph configuration."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+description: "Learn how to use Playwright in a Turborepo."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Learn how to use Playwright in a Turborepo.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 [Playwright](https://playwright.dev/) enables reliable end-to-end testing for modern web apps.
 
@@ -20,7 +20,7 @@ Playwright requires several environment variables to run correctly. To ensure th
 
 The configuration below using `passThroughEnv` will allow environment variables that start with `PLAYWRIGHT_` into **the `e2e` task** and **will not affect hashing**.
 
-```
+```json title="./turbo.json"
 {
   "tasks": {
     "e2e": {
@@ -34,7 +34,7 @@ The configuration below using `passThroughEnv` will allow environment variables 
 
 The configuration below using `globalPassThroughEnv` will allow environment variables that start with `PLAYWRIGHT_` into **all tasks** and **will not affect hashing**.
 
-```
+```json title="./turbo.json"
 {
   "globalPassThroughEnv": ["PLAYWRIGHT_*"]
 }
@@ -55,14 +55,14 @@ This relationship can be expressed in `turbo.json` and the end-to-end suite's `p
 
 #### turbo.json
 
-```
+```json title="./turbo.json"
 {
   "tasks": {
     "build": {
       "dependsOn": ["^build"]
     },
     "e2e": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"] // [!code highlight]
     }
   }
 }
@@ -70,11 +70,11 @@ This relationship can be expressed in `turbo.json` and the end-to-end suite's `p
 
 #### package.json
 
-```
+```json title="./tooling/playwright-web/package.json"
 {
   "name": "@repo/playwright-web",
   "dependencies": {
-    "web": "workspace:*"
+    "web": "workspace:*" // [!code highlight]
   }
 }
 ```
@@ -87,7 +87,7 @@ You can also create a common package for shared utilities that you need in your 
 
 #### pnpm
 
-```
+```json title="./packages/playwright-utilities/package.json"
 {
   "name": "@repo/playwright-utilities",
   "peerDependencies": {
@@ -98,7 +98,7 @@ You can also create a common package for shared utilities that you need in your 
 
 #### yarn
 
-```
+```json title="./packages/playwright-utilities/package.json"
 {
   "name": "@repo/playwright-utilities",
   "peerDependencies": {
@@ -109,7 +109,7 @@ You can also create a common package for shared utilities that you need in your 
 
 #### npm
 
-```
+```json title="./packages/playwright-utilities/package.json"
 {
   "name": "@repo/playwright-utilities",
   "peerDependencies": {
@@ -120,7 +120,7 @@ You can also create a common package for shared utilities that you need in your 
 
 #### bun
 
-```
+```json title="./packages/playwright-utilities/package.json"
 {
   "name": "@repo/playwright-utilities",
   "peerDependencies": {
@@ -131,7 +131,7 @@ You can also create a common package for shared utilities that you need in your 
 
 #### nub
 
-```
+```json title="./packages/playwright-utilities/package.json"
 {
   "name": "@repo/playwright-utilities",
   "peerDependencies": {
@@ -142,7 +142,7 @@ You can also create a common package for shared utilities that you need in your 
 
 #### aube
 
-```
+```json title="./packages/playwright-utilities/package.json"
 {
   "name": "@repo/playwright-utilities",
   "peerDependencies": {
@@ -150,3 +150,11 @@ You can also create a common package for shared utilities that you need in your 
   }
 }
 ```
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

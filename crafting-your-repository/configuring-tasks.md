@@ -2,11 +2,9 @@
 url: https://turborepo.dev/docs/crafting-your-repository/configuring-tasks
 title: "Configuring tasks"
 description: "Define task dependencies, outputs, and inputs in turbo.json to orchestrate your repository's workflows."
-access_date: 2026-08-04T15:46:32.475Z
-current_date: 2026-08-04T15:46:32.475Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
-
-Learn how to describe the workflows in your repository to get them done as fast as possible.
 
 A task is a script that Turborepo runs. You can express relationships between tasks in your [`turbo.json` configuration](../reference/configuration.md) and [Package Graph](../core-concepts/package-and-task-graph.md#package-graph).
 
@@ -129,6 +127,8 @@ Some tasks may not have any dependencies. For example, a task for finding typos 
 
 ### Specifying outputs
 
+Turborepo caches the outputs of your tasks so that you never do the same work twice. We'll discuss this in depth in [the Caching guide](caching.md), but let's make sure your tasks are properly configured first.
+
 The `outputs` key tells Turborepo **files and directories** it should cache when the task has successfully completed. **Without this key defined, Turborepo will not cache any files. Hitting cache on subsequent runs will not restore any file outputs.**
 
 Below are a few examples of outputs for common tools:
@@ -188,6 +188,10 @@ As an example, a task for finding typos in Markdown files could be defined like 
 ```
 
 Now, **only** changes in Markdown files will cause the `spell-check` task to miss cache.
+
+This feature opts out of all of Turborepo's default `inputs` behavior, including following along with changes tracked by source control. This means that your `.gitignore` file will no longer be respected, and you will need to ensure that you do not capture those files with your globs.
+
+To restore the default behavior, use [the `$TURBO_DEFAULT$` microsyntax](#restoring-defaults-with-turbo_default).
 
 #### Restoring defaults with $TURBO\_DEFAULT$
 
@@ -349,6 +353,8 @@ To meet both requirements (correctness and parallelism), you can introduce [Tran
 ```
 
 These Transit Nodes create a relationship between your package dependencies using a task that doesn't do anything because it doesn't match a script in any `package.json` s. Because of this, your tasks can run in parallel **and** be aware of changes to their internal dependencies.
+
+In this example, we used the name `transit` - but you can name the task anything that isn't already a script in your Workspace.
 
 ## Next steps
 

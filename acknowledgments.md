@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/acknowledgments
 title: "Acknowledgements"
 description: "Thank you to all these developers, build systems, and monorepo tools for their support and assistance."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# Acknowledgements
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Turborepo was originally created by [Jared Palmer](https://x.com/jaredpalmer) as a closed-source enterprise software offering. In late 2021, [Vercel acquired Turborepo](https://vercel.com/blog/vercel-acquires-turborepo) and open sourced the codebase.
 
@@ -20,22 +18,22 @@ At [Vercel](https://vercel.com/), we believe deeply in the open source movement 
 
 We'd like to make a special shoutout to other build systems, monorepo tools, and prior art:
 
-* Bazel - [https://bazel.build](https://bazel.build)
-* Buck - [https://buck.build](https://buck.build)
-* Please - [https://please.build](https://please.build)
-* Pants - [https://www.pantsbuild.org](https://www.pantsbuild.org)
-* Scoot - [https://github.com/twitter/scoot](https://github.com/twitter/scoot)
-* TSDX - [https://tsdx.io](https://tsdx.io)
-* Lerna - [https://lerna.js.org](https://lerna.js.org)
-* Lage - [https://microsoft.github.io/lage](https://microsoft.github.io/lage)
-* Backfill - [https://github.com/microsoft/backfill](https://github.com/microsoft/backfill)
-* Bolt - [https://github.com/boltpkg/bolt](https://github.com/boltpkg/bolt)
-* Rush - [https://rushjs.io](https://rushjs.io)
-* Preconstruct - [https://preconstruct.tools](https://preconstruct.tools)
-* Nx - [https://nx.dev](https://nx.dev)
-* Yarn - [https://yarnpkg.com](https://yarnpkg.com)
-* npm - [https://www.npmjs.com](https://www.npmjs.com)
-* pnpm - [https://pnpm.js.org](https://pnpm.js.org)
+- Bazel - [https://bazel.build](https://bazel.build)
+- Buck - [https://buck.build](https://buck.build)
+- Please - [https://please.build](https://please.build)
+- Pants - [https://www.pantsbuild.org](https://www.pantsbuild.org)
+- Scoot - [https://github.com/twitter/scoot](https://github.com/twitter/scoot)
+- TSDX - [https://tsdx.io](https://tsdx.io)
+- Lerna - [https://lerna.js.org](https://lerna.js.org)
+- Lage - [https://microsoft.github.io/lage](https://microsoft.github.io/lage)
+- Backfill - [https://github.com/microsoft/backfill](https://github.com/microsoft/backfill)
+- Bolt - [https://github.com/boltpkg/bolt](https://github.com/boltpkg/bolt)
+- Rush - [https://rushjs.io](https://rushjs.io)
+- Preconstruct - [https://preconstruct.tools](https://preconstruct.tools)
+- Nx - [https://nx.dev](https://nx.dev)
+- Yarn - [https://yarnpkg.com](https://yarnpkg.com)
+- npm - [https://www.npmjs.com](https://www.npmjs.com)
+- pnpm - [https://pnpm.js.org](https://pnpm.js.org)
 
 Throughout the documentation, wherever applicable, we also provide inline callouts and links to the projects and people that have inspired us.
 
@@ -43,12 +41,11 @@ Throughout the documentation, wherever applicable, we also provide inline callou
 
 Additionally, we're grateful to:
 
-* [Rick Button](https://x.com/rickbutton) for donating the `turbo` package name on npm
-* [Iheanyi Ekechukwu](https://x.com/kwuchu) for helping Jared pick up Golang during the Pandemic!
-* [Kenneth Chau](https://x.com/kenneth_chau) for Lage's Scope and Pipeline API and docs
-* [Miguel Oller](https://x.com/ollermi) and [MakeSwift.com](https://www.makeswift.com/) for piloting Turborepo
-* [Eric Koslow](https://x.com/ekosz1), [Jack Hanford](https://x.com/jackhanford), and [Lattice.com](https://lattice.com/) for piloting Turborepo
-
+- [Rick Button](https://x.com/rickbutton) for donating the `turbo` package name on npm
+- [Iheanyi Ekechukwu](https://x.com/kwuchu) for helping Jared pick up Golang during the Pandemic!
+- [Kenneth Chau](https://x.com/kenneth_chau) for Lage's Scope and Pipeline API and docs
+- [Miguel Oller](https://x.com/ollermi) and [MakeSwift.com](https://www.makeswift.com/) for piloting Turborepo
+- [Eric Koslow](https://x.com/ekosz1), [Jack Hanford](https://x.com/jackhanford), and [Lattice.com](https://lattice.com/) for piloting Turborepo
 
 ---
 

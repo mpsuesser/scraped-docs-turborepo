@@ -2,20 +2,17 @@
 url: https://turborepo.dev/docs/reference/unlink
 title: "unlink"
 description: "API reference for the `turbo unlink` command"
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# unlink
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Disconnect the repository from Remote Cache.
 
 ```bash title="Terminal"
 turbo unlink
 ```
-
 
 ---
 

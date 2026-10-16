@@ -1,16 +1,19 @@
 ---
 url: https://turborepo.dev/docs/guides/single-package-workspaces
 title: "Single-package workspaces"
-description: "Use Turborepo's caching and task parallelization in a standalone application without a monorepo."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+description: "Learn how to use Turborepo in a single-package workspace."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Learn how to use Turborepo in a single-package workspace.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 While Turborepo is highly effective in [multi-package workspaces](https://vercel.com/docs/glossary#multi-package-workspace) (commonly referred to as monorepos), it can also be used to make [single-package workspaces](https://vercel.com/docs/glossary#single-package-workspace) faster.
 
 Turborepo's most important features work in single-package workspaces including local and [Remote Caching](../core-concepts/remote-caching.md) and task parallelization. Features that don't work are ones that don't make sense in the context of a single package, like package tasks (`app#build`).
+
+> Examples of single-package workspaces are the output of `npx create-next-app`
+> or `npm create vite`.
 
 ## Installation
 
@@ -18,41 +21,41 @@ Install `turbo` into your application:
 
 #### pnpm
 
-```
+```bash title="Terminal"
 pnpm add turbo --save-dev
 ```
 
 #### yarn
 
-```
+```bash title="Terminal"
 yarn add turbo --dev
 ```
 
 #### npm
 
-```
+```bash title="Terminal"
 npm install turbo --save-dev
 ```
 
 #### bun
 
-```
+```bash title="Terminal"
 bun install turbo --dev
 ```
 
 #### nub
 
-```
+```bash title="Terminal"
 nub add turbo --save-dev
 ```
 
 #### aube
 
-```
+```bash title="Terminal"
 aube add turbo --save-dev
 ```
 
-### Running a package.json script using global turbo (optional)
+### Running a `package.json` script using global `turbo` (optional)
 
 For even faster developer workflows, you can [install `turbo` globally](../getting-started/installation.md#global-installation), too, and run commands directly from the command line.
 
@@ -73,7 +76,7 @@ For example, let's say you have a project where we always have to set up a devel
 
 You can schedule these tasks into one command using Turborepo. First, create scripts in your `package.json`:
 
-```
+```json title="package.json"
 {
   "name": "@acme/my-app",
   "version": "0.0.0",
@@ -92,7 +95,7 @@ You can schedule these tasks into one command using Turborepo. First, create scr
 
 Then, create tasks in `turbo.json` to run these scripts in order:
 
-```
+```json title="./turbo.json"
 {
   "$schema": "https://turborepo.dev/schema.json",
   "tasks": {
@@ -122,7 +125,7 @@ The `dependsOn` arrays in the tasks above create a sequential order for the task
 
 Using `turbo` to parallelize tasks results in speeding up tasks by running all at once, when they can be. For instance, you can run your ESLint, TypeScript, and Prettier checks at the same time. Given scripts like:
 
-```
+```json title="./package.json"
 {
   "scripts": {
     "lint": "eslint .",
@@ -134,7 +137,7 @@ Using `turbo` to parallelize tasks results in speeding up tasks by running all a
 
 You can create a configuration like this one:
 
-```
+```json title="turbo.json"
 {
   "$schema": "https://turborepo.dev/schema.json",
   "tasks": {
@@ -147,7 +150,7 @@ You can create a configuration like this one:
 
 Then, to run all tasks at the same time:
 
-```
+```bash title="Terminal"
 turbo check-types lint format
 ```
 
@@ -157,7 +160,7 @@ Because Turborepo will treat a single-package workspace as one package, it can h
 
 For instance, a script for checking types using `tsc --noEmit` can be configured with inputs that only include TypeScript files:
 
-```
+```json title="./turbo.json"
 {
   "$schema": "https://turborepo.dev/schema.json",
   "tasks": {
@@ -167,3 +170,11 @@ For instance, a script for checking types using `tsc --noEmit` can be configured
   }
 }
 ```
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

@@ -1,19 +1,19 @@
 ---
 url: https://turborepo.dev/docs/crafting-your-repository/managing-dependencies
 title: "Managing dependencies"
-description: "Install, organize, and maintain external and internal dependencies across packages in your workspace."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+description: "Learn how to manage dependencies in your monorepo's workspace."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Learn how to manage dependencies in your monorepo's workspace.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 - **External dependencies** come from [the npm registry](https://www.npmjs.com/), allowing you to leverage valuable code from the ecosystem to build your applications and libraries faster.
 - **Internal dependencies** let you share functionality within your repository, dramatically improving discoverability and usability of shared code. We will discuss how to build an Internal Package in [the next guide](creating-an-internal-package.md).
 
 #### pnpm
 
-```
+```json title="./apps/web/package.json"
 {
   "dependencies": {
     "next": "latest", // External dependency
@@ -24,7 +24,7 @@ Learn how to manage dependencies in your monorepo's workspace.
 
 #### yarn
 
-```
+```json title="./apps/web/package.json"
 {
   "dependencies": {
     "next": "latest", // External dependency
@@ -35,7 +35,7 @@ Learn how to manage dependencies in your monorepo's workspace.
 
 #### npm
 
-```
+```json title="./apps/web/package.json"
 {
   "dependencies": {
     "next": "latest", // External dependency
@@ -46,7 +46,7 @@ Learn how to manage dependencies in your monorepo's workspace.
 
 #### bun
 
-```
+```json title="./apps/web/package.json"
 {
   "dependencies": {
     "next": "latest", // External dependency
@@ -57,7 +57,7 @@ Learn how to manage dependencies in your monorepo's workspace.
 
 #### nub
 
-```
+```json title="./apps/web/package.json"
 {
   "dependencies": {
     "next": "latest", // External dependency
@@ -68,7 +68,7 @@ Learn how to manage dependencies in your monorepo's workspace.
 
 #### aube
 
-```
+```json title="./apps/web/package.json"
 {
   "dependencies": {
     "next": "latest", // External dependency
@@ -83,69 +83,58 @@ Learn how to manage dependencies in your monorepo's workspace.
 
 When you install a dependency in your repository, you should install it directly in the package that uses it. The package's `package.json` will have every dependency that the package needs. This is true for both external and internal dependencies.
 
+> Note that your package manager may choose to [use a different node\_modules
+> location than the package](#node_modules-locations).
+
 To quickly install dependencies in multiple packages, you can use your package manager:
 
 #### pnpm
 
-```
+```bash title="Terminal"
 pnpm add jest --save-dev --recursive --filter=web --filter=@repo/ui --filter=docs
 ```
-
-[→ pnpm documentation](https://pnpm.io/cli/recursive)
 
 #### yarn
 
 Yarn 1:
 
-```
+```bash title="Terminal"
 yarn workspace web add jest --dev
 yarn workspace @repo/ui add jest --dev
 ```
 
-[→ Yarn 1 documentation](https://classic.yarnpkg.com/en/docs/cli/add)
-
 Yarn 2+:
 
-```
+```bash title="Terminal"
 yarn workspaces foreach -R --from '{web,@repo/ui}' add jest --dev
 ```
 
-[→ Yarn 2+ documentation](https://yarnpkg.com/cli/workspaces/foreach#usage)
-
 #### npm
 
-```
+```bash title="Terminal"
 npm install jest --workspace=web --workspace=@repo/ui --save-dev
 ```
 
-[→ npm documentation](https://docs.npmjs.com/cli/v7/using-npm/config#workspace)
-
 #### bun
 
-```
+```bash title="Terminal"
 cd apps/web && bun install jest --dev
 cd packages/ui && bun install jest --dev
 ```
 
-[→ bun documentation](https://bun.sh/docs/install/workspaces)
-
 #### nub
 
-```
+```bash title="Terminal"
 cd apps/web && nub add jest --save-dev
 cd packages/ui && nub add jest --save-dev
 ```
 
-[→ nub documentation](https://nub.dev/)
-
 #### aube
 
-```
+```bash title="Terminal"
 cd apps/web && aube add jest --save-dev
 cd packages/ui && aube add jest --save-dev
 ```
-
-[→ aube documentation](https://aube.jdx.dev/)
 
 This practice has several benefits:
 
@@ -182,7 +171,11 @@ Depending on your choice of package manager, version, settings, and where your d
 
 As long as your scripts and tasks are able to find the dependencies they need, your package manager is working correctly.
 
-Referencing \`node\_modules\` in your code
+> **Referencing \`node\_modules\` in your code:**
+>
+> The specific locations for `node_modules` within the Workspace are not a part of the public API of package managers. This means that referencing `node_modules` directly (like `node ./node_modules/a-package/dist/index.js`) can be brittle, since the location of the dependency on disk can change with other dependency changes around the Workspace.
+>
+> Instead, rely on conventions of the Node.js ecosystem for accessing dependency modules whenever possible.
 
 ### Keeping dependencies on the same version
 
@@ -198,61 +191,75 @@ You can use your package manager to update dependency versions in one command.
 
 #### pnpm
 
-```
+```bash title="Terminal"
 pnpm up --recursive typescript@latest
 ```
 
-[\-> pnpm documentation](https://pnpm.io/cli/update#--recursive--r)
+<small>
+  [-> pnpm documentation](https://pnpm.io/cli/update#--recursive--r)
+</small>
 
 #### yarn
 
 Yarn 1:
 
-```
+```bash title="Terminal"
 yarn upgrade-interactive --latest
 ```
 
-[\-> Yarn 1 documentation](https://classic.yarnpkg.com/en/docs/cli/upgrade-interactive)
+<small>
+  [-> Yarn 1 documentation](https://classic.yarnpkg.com/en/docs/cli/upgrade-interactive)
+</small>
 
 Yarn 2+:
 
-```
+```bash title="Terminal"
 yarn upgrade typescript@latest --upgrade
 ```
 
-[\-> Yarn 2+ documentation](https://yarnpkg.com/cli/up)
+<small>
+  [-> Yarn 2+ documentation](https://yarnpkg.com/cli/up)
+</small>
 
 #### npm
 
-```
+```bash title="Terminal"
 npm install typescript@latest --workspaces
 ```
 
-[\-> npm documentation](https://docs.npmjs.com/cli/v7/using-npm/config#workspaces)
+<small>
+  [-> npm documentation](https://docs.npmjs.com/cli/v7/using-npm/config#workspaces)
+</small>
 
 #### bun
 
-```
+```bash title="Terminal"
 bun update typescript --latest
 ```
 
-[\-> Bun documentation](https://bun.sh/docs/cli/update)
+<small>
+  [-> Bun documentation](https://bun.sh/docs/cli/update)
+</small>
 
 #### nub
 
-```
+```bash title="Terminal"
 nub update typescript --latest
 ```
 
-[\-> nub documentation](https://nub.dev/)
+<small>
+  [-> nub documentation](https://nub.dev)
+</small>
 
 #### aube
 
-```
+```bash title="Terminal"
 aube update typescript --latest
 ```
 
-[\-> aube documentation](https://aube.jdx.dev/)
+<small>
+  [-> aube documentation](https://aube.jdx.dev)
+</small>
 
 #### pnpm catalogs
 
@@ -267,3 +274,11 @@ Your IDE's refactoring tooling can find and replace the version of a dependency 
 ## Next steps
 
 Now that you know how to manage dependencies effectively in a workspace, let's [create an Internal Package](creating-an-internal-package.md) to be used as a dependency in your monorepo.
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

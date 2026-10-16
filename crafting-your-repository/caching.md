@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/caching
 title: "Caching"
 description: "Configure task caching to avoid repeating work, using fingerprinting for inputs and restoring outputs from cache."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
 Turborepo uses caching to speed up builds, ensuring you **never do the same work twice**. When your task is cacheable, Turborepo will restore the results of your task from cache using a fingerprint from the first time the task ran.
@@ -18,6 +18,8 @@ On this page, you'll learn:
 - [How to enable Remote Caching](../core-concepts/remote-caching.md)
 - [What Turborepo uses for the inputs and outputs to a hash](#task-inputs)
 - [How to troubleshoot caching issues](#troubleshooting)
+
+Turborepo assumes that your tasks are **deterministic**. If a task is able to produce different outputs given the set of inputs that Turborepo is aware of, caching may not work as expected.
 
 ## Hit your first Turborepo cache
 
@@ -107,6 +109,8 @@ Now, when you run a task, Turborepo will automatically send the outputs of the t
 
 For information on how to connect your CI machines to Remote Cache, visit [the Constructing CI guide](constructing-ci.md#enabling-remote-caching).
 
+By default, Turborepo uses [Vercel Remote Cache](https://vercel.com/docs/monorepos/remote-caching) with zero configuration. If you'd like to use a different Remote Cache, visit the [Remote Caching API documentation](../core-concepts/remote-caching.md#self-hosting)
+
 ## Git Worktree Cache Sharing
 
 When working with [Git worktrees](https://git-scm.com/docs/git-worktree), Turborepo automatically shares the local filesystem cache between the main worktree and any linked worktrees. This enables:
@@ -134,7 +138,11 @@ When worktree cache sharing is active, you'll see a message in the output:
 • Remote caching enabled, using shared worktree cache
 ```
 
+If you set an explicit [`cacheDir`](../reference/configuration.md#cachedir) in your `turbo.json`, worktree cache sharing is disabled and each worktree will use its own cache directory as specified.
+
 Outputs containing absolute paths
+
+Cache artifacts are restored without rewriting their contents. If a task output contains the absolute path to its worktree, sharing that artifact can restore an output that points to another checkout. Set an explicit [`cacheDir`](../reference/configuration.md#cachedir), such as `.turbo/cache`, to keep the local cache isolated to each worktree.
 
 ### With Remote Caching
 
@@ -156,6 +164,10 @@ Turborepo caches the file outputs of a task that are defined in [the `outputs` k
 The `outputs` key is optional, see [the API reference](../reference/configuration.md#outputs) for how Turborepo behaves in this case.
 
 Providing file outputs
+
+If you do not declare file outputs for a task, Turborepo will not cache them. This might be okay for some tasks (like linters) - but many tasks produce files that you will want to be cached.
+
+If you're running into errors with files not being available when you hit cache, make sure that you have defined the outputs for your task.
 
 ### Logs
 
@@ -214,6 +226,12 @@ Turborepo has a [`--summarize` flag](../reference/run.md#--summarize) that can b
 - Debugging outputs: If cache hits aren't restoring the files you're expecting, a Run Summary can help you understand what outputs are being restored from cache.
 
 Summaries viewer
+
+While there is not a Turborepo-native Run Summaries UI viewer, there are several community-built tools available:
+
+- [https://turbo.nullvoxpopuli.com](https://turbo.nullvoxpopuli.com/) - Web-based UI viewer for Run Summaries
+- [`turborepo-summary`](https://github.com/charpeni/turborepo-summary) - Generate human-readable reports from Turborepo run summary JSON output
+- [`turborepo-summary-action`](https://github.com/charpeni/turborepo-summary-action) - GitHub Action wrapping `turborepo-summary` to append them to GitHub Actions Job Summary
 
 ### Turning off caching
 

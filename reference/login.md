@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/reference/login
 title: "login"
 description: "API reference for the `turbo login` command"
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# login
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Log in to your Remote Cache provider.
 
@@ -47,7 +45,6 @@ turbo login --sso-team=slug-for-team
 ### --manual
 
 Manually enter token instead of requesting one from a login service.
-
 
 ---
 

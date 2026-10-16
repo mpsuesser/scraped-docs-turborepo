@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/reference/link
 title: "link"
 description: "API reference for the `turbo link` command"
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# link
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Link the repository to a Remote Cache provider.
 
@@ -43,7 +41,6 @@ The scope to which you are linking. For example, when using Vercel, this is your
 ```bash title="Terminal"
 turbo link --scope=your-team
 ```
-
 
 ---
 

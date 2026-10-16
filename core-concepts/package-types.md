@@ -2,18 +2,16 @@
 url: https://turborepo.dev/docs/core-concepts/package-types
 title: "Package types"
 description: "Learn about the different types of packages in a workspace."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# Package types
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 In Turborepo, we talk about two types of packages:
 
-* [Application Packages](#application-packages)
-* [Library Packages](#library-packages)
+- [Application Packages](#application-packages)
+- [Library Packages](#library-packages)
 
 ## Application Packages
 
@@ -30,7 +28,6 @@ An example of an exception for this rule is installing your Application Package 
 ## Library Packages
 
 Library Packages contain code that you intend to share around your workspace. They aren't independently deployable. Instead, they support the Application Packages to create the final deployables from your repository. You might also refer to these packages as [Internal Packages](internal-packages.md), which have their own sub-types.
-
 
 ---
 

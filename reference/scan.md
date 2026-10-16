@@ -1,16 +1,21 @@
 ---
 url: https://turborepo.dev/docs/reference/scan
 title: "scan (Deprecated)"
-description: "The `turbo scan` command has been deprecated and will be removed in a future major version."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+description: "API reference for the deprecated `turbo scan` command"
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Deprecated
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
+
+> **Deprecated:**
+>
+> `turbo scan` has been deprecated and will be removed in a future major version.
+> Running it will print a deprecation warning and exit.
 
 Enable faster tooling for your Turborepo locally with one, interactive command.
 
-```
+```bash title="Terminal"
 turbo scan
 ```
 
@@ -20,4 +25,13 @@ You'll be taken through a short series of steps to enable the fastest settings f
 - **Turborepo Daemon** (deprecated for `turbo run`): Turborepo's daemon is no longer used for `turbo run`. It is still used by `turbo watch` and the Turborepo LSP.
 - **Remote Caching**: While Turborepo can cache your work locally, it can also share a cache across all of your machines. Enabling [Remote Caching](../core-concepts/remote-caching.md) makes your caching **multiplayer**, ensuring that you, your teammates, and your CI machines, never do the same work twice.
 - **Check `turbo` version**: We're always working towards making `turbo` better. To ensure you are using the latest version of Turborepo, we'll check your version and remind you to install `latest` if you aren't using it yet.
-- **Check for Turborepo LSP**: Visit the [VSCode Extension Marketplace](https://marketplace.visualstudio.com/items?itemName=Vercel.turbo-vsc) and install the Turborepo LSP extension for your IDE.
+- **Check for Turborepo LSP**:
+  Visit the [VSCode Extension Marketplace](https://marketplace.visualstudio.com/items?itemName=Vercel.turbo-vsc) and install the Turborepo LSP extension for your IDE.
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

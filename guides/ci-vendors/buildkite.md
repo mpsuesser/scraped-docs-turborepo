@@ -2,11 +2,9 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/buildkite
 title: "Buildkite"
 description: "Configure Buildkite pipelines to run Turborepo tasks with Remote Caching."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
-
-Learn how to use Buildkite with Turborepo.
 
 The following example shows how to use Turborepo with [Buildkite](https://buildkite.com/).
 

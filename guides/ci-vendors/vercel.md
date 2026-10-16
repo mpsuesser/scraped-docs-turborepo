@@ -2,11 +2,9 @@
 url: https://turborepo.dev/docs/guides/ci-vendors/vercel
 title: "Vercel"
 description: "Deploy your Turborepo on Vercel with zero-config Remote Caching."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
-
-Learn how to use Turborepo on Vercel.
 
 ![](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fimmutable%2Fmedia%2Fturborepo-x-vercel.07keh8l4igee0.png&w=3840&q=75)
 
@@ -27,6 +25,8 @@ You can speed up installs by only installing the dependencies for the applicatio
   "installCommand": "pnpm install --filter web..."
 }
 ```
+
+Requires pnpm 9.5 or newer. On pnpm 8.x through 9.4, `--filter` installed dependencies for the entire workspace ([pnpm#6300](https://github.com/pnpm/pnpm/issues/6300)).
 
 #### yarn
 

@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/telemetry
 title: "Telemetry"
 description: "Learn more about Turborepo's anonymous telemetry."
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# Telemetry
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Vercel Inc. (Vercel) may collect telemetry data about your use of Turborepo as explained below.
 Telemetry data allows us to monitor and improve Turborepo and the Vercel platform by
@@ -27,11 +25,11 @@ Furthermore, this data allows us to verify if improvements are improving the bas
 
 We track general usage information, specifically, we track the following with anonymized telemetry data using random identifiers:
 
-* Command invoked ([turbo run](reference/run.md), [turbo prune](reference/prune.md), [turbo gen](reference/generate.md), etc.)
-* Version of `turbo`
-* General machine information (e.g. number of CPUs, macOS/Windows/Linux, whether or not the command was run within CI)
-* Size of application (total number of workspaces)
-* We **DO NOT** collect any metrics which may contain sensitive data. This includes, but is not limited to: task names, package names, sensitive argument or flag values, environment variables, file paths, or contents of files.
+- Command invoked ([turbo run](reference/run.md), [turbo prune](reference/prune.md), [turbo gen](reference/generate.md), etc.)
+- Version of `turbo`
+- General machine information (e.g. number of CPUs, macOS/Windows/Linux, whether or not the command was run within CI)
+- Size of application (total number of workspaces)
+- We **DO NOT** collect any metrics which may contain sensitive data. This includes, but is not limited to: task names, package names, sensitive argument or flag values, environment variables, file paths, or contents of files.
 
 **Note**: This list is regularly audited to ensure its accuracy.
 
@@ -51,8 +49,8 @@ turbo telemetry disable
 
 You can also opt out by setting any of the following environment variables:
 
-* `TURBO_TELEMETRY_DISABLED=1`
-* `DO_NOT_TRACK=1`
+- `TURBO_TELEMETRY_DISABLED=1`
+- `DO_NOT_TRACK=1`
 
 ### Status
 
@@ -69,7 +67,6 @@ You may re-enable telemetry if you'd like to re-join the program by running the 
 ```sh title="Terminal"
 turbo telemetry enable
 ```
-
 
 ---
 

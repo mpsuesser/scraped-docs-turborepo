@@ -1,20 +1,24 @@
 ---
 url: https://turborepo.dev/docs/guides/tools/go
 title: "Go (Experimental)"
-description: "Discover go.work modules as Turborepo packages and run native Go tasks."
-access_date: 2026-09-16T16:46:06.902Z
-current_date: 2026-09-16T16:46:06.902Z
+description: "Use experimental native Go workspace support with Turborepo."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Use experimental native Go workspace support with Turborepo.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Turborepo can discover modules in a repository-root [`go.work`](https://go.dev/ref/mod#workspaces) as packages, add their module dependencies to the Package Graph, and map common tasks to standard Go commands.
+
+> Native Go workspace support is experimental and can change at any time. The
+> initial supported range is Go 1.22 and newer. Please provide feedback on the [Go
+> RFC](https://github.com/vercel/turborepo/discussions/14033).
 
 ## Enable Go workspaces
 
 Set the Future Flag in the root `turbo.json`:
 
-```
+```json title="./turbo.json"
 {
   "$schema": "https://turborepo.dev/schema.json",
   "futureFlags": {
@@ -33,7 +37,7 @@ The repository root must contain:
 - A `go.mod` with a module path in every member
 - Current `go.sum` and `go.work.sum` files when the resolved graph requires them
 
-```
+```text title="./go.work"
 go 1.22
 
 use (
@@ -46,15 +50,15 @@ use (
 
 Turborepo derives each Go package name from the last component of its `go.mod` module path, preserving a trailing major-version suffix:
 
-| Go module path | Turborepo package name |
-| --- | --- |
-| `example.com/api` | `api` |
-| `example.com/acme/api` | `api` |
-| `example.com/api/v2` | `api/v2` |
+| Go module path         | Turborepo package name |
+| ---------------------- | ---------------------- |
+| `example.com/api`      | `api`                  |
+| `example.com/acme/api` | `api`                  |
+| `example.com/api/v2`   | `api/v2`               |
 
 Use the derived name in filters, task identifiers, and prune targets. For a module declared as `module example.com/api`:
 
-```
+```bash title="Terminal"
 turbo ls --filter=api
 turbo run test --filter=api
 turbo run api#test
@@ -72,14 +76,14 @@ The synthetic `go-workspace` scope depends on every member. That identity is res
 
 ## Built-in tasks
 
-| Scope | Turborepo task | Go command |
-| --- | --- | --- |
-| Module with zero or multiple `main` packages | `turbo run build` | `go build ./...` |
-| Module with exactly one `main` package | `turbo run build` | `go build <target>` |
-| Module with exactly one `main` package | `turbo run dev` | `go run <target>` |
-| Any module | `turbo run test` | `go test ./...` |
-| Any module | `turbo run lint` | `go vet ./...` |
-| Any module | `turbo run format` | `go fmt ./...` |
+| Scope                                        | Turborepo task     | Go command          |
+| -------------------------------------------- | ------------------ | ------------------- |
+| Module with zero or multiple `main` packages | `turbo run build`  | `go build ./...`    |
+| Module with exactly one `main` package       | `turbo run build`  | `go build <target>` |
+| Module with exactly one `main` package       | `turbo run dev`    | `go run <target>`   |
+| Any module                                   | `turbo run test`   | `go test ./...`     |
+| Any module                                   | `turbo run lint`   | `go vet ./...`      |
+| Any module                                   | `turbo run format` | `go fmt ./...`      |
 
 Running `turbo run test`, `turbo run lint`, or `turbo run format` from the repository root runs the corresponding command in each member module. Filtered runs select the same per-module tasks, so local filtered `test` and `lint` runs share cache entries with unfiltered CI runs. There are no built-in `go-workspace#test`, `go-workspace#lint`, or `go-workspace#format` tasks; omit `--filter=go-workspace` to run verification across all modules.
 
@@ -93,7 +97,7 @@ Turborepo does not guess when a module has zero or multiple runnable `main` pack
 
 Arguments after Turborepo's `--` are placed before package patterns for `build`, `test`, `lint`, and `format`. Arguments to `dev` follow the main import path and become program arguments.
 
-```
+```bash title="Terminal"
 turbo run test --filter=api -- -run TestHTTP
 turbo run dev --filter=api -- --port 8080
 ```
@@ -102,7 +106,7 @@ turbo run dev --filter=api -- --port 8080
 
 Normal task configuration applies to built-in tasks. Package Configuration can remove a default:
 
-```
+```json title="./apps/api/turbo.json"
 {
   "extends": ["//"],
   "tasks": {
@@ -115,7 +119,7 @@ Normal task configuration applies to built-in tasks. Package Configuration can r
 
 Enable `experimentalTaskCommand` to replace a command without a shell:
 
-```
+```json title="./turbo.json"
 {
   "futureFlags": {
     "experimentalGoWorkspaces": true,
@@ -133,7 +137,7 @@ Enable `experimentalTaskCommand` to replace a command without a shell:
 
 To preserve a custom binary path, enable `experimentalTaskCommand` in the root configuration as above, then replace the build command in the module's Package Configuration:
 
-```
+```json title="./apps/api/turbo.json"
 {
   "extends": ["//"],
   "tasks": {
@@ -170,7 +174,7 @@ Source changes affect their owning module and internal dependents. `go.mod` and 
 
 ## Prune
 
-```
+```bash title="Terminal"
 turbo prune api
 ```
 
@@ -178,7 +182,15 @@ The output keeps the selected module and required internal dependencies, rewrite
 
 Validate a pruned output with ordinary Go commands:
 
-```
+```bash title="Terminal"
 cd out/apps/api
 go test ./...
 ```
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/reference/system-environment-variables
 title: "System environment variables"
 description: "Learn about system variables used by Turborepo."
-access_date: 2026-09-29T13:35:58.474Z
-current_date: 2026-09-29T13:35:58.474Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# System environment variables
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 By setting certain environment variables, you can change Turborepo's behavior. This can be useful for creating specific configurations for different environments and machines.
 
@@ -31,7 +29,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="force_color">
       <td>
         <code>
-          FORCE_COLOR
+          FORCE\_COLOR
         </code>
       </td>
 
@@ -43,12 +41,12 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_api">
       <td>
         <code>
-          TURBO_API
+          TURBO\_API
         </code>
       </td>
 
       <td>
-        Set the base URL for{" "}
+        Set the base URL for
         <a href="/docs/core-concepts/remote-caching">Remote Cache</a>.
       </td>
     </tr>
@@ -56,12 +54,12 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_binary_path">
       <td>
         <code>
-          TURBO_BINARY_PATH
+          TURBO\_BINARY\_PATH
         </code>
       </td>
 
       <td>
-        Manually set the path to the <code>turbo</code> binary. By default,{" "}
+        Manually set the path to the <code>turbo</code> binary. By default,
         <code>turbo</code> will automatically discover the binary so you should
         only use this in rare circumstances.
       </td>
@@ -70,7 +68,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_cache">
       <td>
         <code>
-          TURBO_CACHE
+          TURBO\_CACHE
         </code>
       </td>
 
@@ -83,7 +81,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_cache_dir">
       <td>
         <code>
-          TURBO_CACHE_DIR
+          TURBO\_CACHE\_DIR
         </code>
       </td>
 
@@ -92,14 +90,12 @@ System environment variables are always overridden by flag values provided direc
           Sets the cache directory, similar to using
         </span>
 
-        {" "}
-
         <code>
           [--cache-dir](run.md#--cache-dir-path)
         </code>
 
         <span>
-           flag.
+          flag.
         </span>
       </td>
     </tr>
@@ -107,14 +103,14 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_cache_max_age">
       <td>
         <code>
-          TURBO_CACHE_MAX_AGE
+          TURBO\_CACHE\_MAX\_AGE
         </code>
       </td>
 
       <td>
         Maximum age of local cache entries before automatic eviction.
-        Accepts a human-readable duration string (e.g. <code>7d</code>,{" "}
-        <code>24h</code>, <code>2w</code>). See{" "}
+        Accepts a human-readable duration string (e.g. <code>7d</code>,
+        <code>24h</code>, <code>2w</code>). See
         <a href="/docs/reference/configuration#cachemaxage"><code>cacheMaxAge</code></a>.
       </td>
     </tr>
@@ -122,14 +118,14 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_cache_max_size">
       <td>
         <code>
-          TURBO_CACHE_MAX_SIZE
+          TURBO\_CACHE\_MAX\_SIZE
         </code>
       </td>
 
       <td>
         Maximum total size of the local filesystem cache. When exceeded, the
-        oldest entries are evicted. Accepts a human-readable size string (e.g.{" "}
-        <code>10GB</code>, <code>500MB</code>). See{" "}
+        oldest entries are evicted. Accepts a human-readable size string (e.g.
+        <code>10GB</code>, <code>500MB</code>). See
         <a href="/docs/reference/configuration#cachemaxsize"><code>cacheMaxSize</code></a>.
       </td>
     </tr>
@@ -137,14 +133,14 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_ci_vendor_env_key">
       <td>
         <code>
-          TURBO_CI_VENDOR_ENV_KEY
+          TURBO\_CI\_VENDOR\_ENV\_KEY
         </code>
       </td>
 
       <td>
         <span>Set a prefix for environment variables that you want</span>
         <strong> excluded</strong> <span>from</span> [Framework
-        Inference](../crafting-your-repository/using-environment-variables.md#framework-inference).{" "}
+        Inference](../crafting-your-repository/using-environment-variables.md#framework-inference).
 
         <div />
 
@@ -156,7 +152,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_dangerously_disable_package_manager_check">
       <td>
         <code>
-          TURBO_DANGEROUSLY_DISABLE_PACKAGE_MANAGER_CHECK
+          TURBO\_DANGEROUSLY\_DISABLE\_PACKAGE\_MANAGER\_CHECK
         </code>
       </td>
 
@@ -175,7 +171,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_download_local_enabled">
       <td>
         <code>
-          TURBO_DOWNLOAD_LOCAL_ENABLED
+          TURBO\_DOWNLOAD\_LOCAL\_ENABLED
         </code>
       </td>
 
@@ -188,7 +184,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_env_mode">
       <td>
         <code>
-          TURBO_ENV_MODE
+          TURBO\_ENV\_MODE
         </code>
       </td>
 
@@ -197,14 +193,12 @@ System environment variables are always overridden by flag values provided direc
           Sets the environment mode, similar to using the
         </span>
 
-        {" "}
-
         <code>
           [--env-mode](run.md#--env-mode-option)
         </code>
 
         <span>
-           flag.
+          flag.
         </span>
       </td>
     </tr>
@@ -212,7 +206,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_force">
       <td>
         <code>
-          TURBO_FORCE
+          TURBO\_FORCE
         </code>
       </td>
 
@@ -225,7 +219,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_global_warning_disabled">
       <td>
         <code>
-          TURBO_GLOBAL_WARNING_DISABLED
+          TURBO\_GLOBAL\_WARNING\_DISABLED
         </code>
       </td>
 
@@ -238,7 +232,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_print_version_disabled">
       <td>
         <code>
-          TURBO_PRINT_VERSION_DISABLED
+          TURBO\_PRINT\_VERSION\_DISABLED
         </code>
       </td>
 
@@ -251,15 +245,15 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_log_file">
       <td>
         <code>
-          TURBO_LOG_FILE
+          TURBO\_LOG\_FILE
         </code>
       </td>
 
       <td>
-        Write structured JSON logs to a file. Set to <code>1</code> or{" "}
+        Write structured JSON logs to a file. Set to <code>1</code> or
         <code>true</code> for the default location (
         <code>.turbo/logs/\<timestamp>.json</code>), or provide a custom
-        file path. Equivalent to the{" "}
+        file path. Equivalent to the
         <a href="/docs/reference/run#--log-file-path">--log-file</a> flag.
       </td>
     </tr>
@@ -267,7 +261,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_log_order">
       <td>
         <code>
-          TURBO_LOG_ORDER
+          TURBO\_LOG\_ORDER
         </code>
       </td>
 
@@ -275,8 +269,6 @@ System environment variables are always overridden by flag values provided direc
         <span>
           Set the
         </span>
-
-        {" "}
 
         <a href="/docs/reference/run#--log-order-option">
           log order
@@ -294,8 +286,6 @@ System environment variables are always overridden by flag values provided direc
           and
         </span>
 
-        {" "}
-
         <code>
           default
         </code>
@@ -309,7 +299,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_login">
       <td>
         <code>
-          TURBO_LOGIN
+          TURBO\_LOGIN
         </code>
       </td>
 
@@ -327,7 +317,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_no_update_notifier">
       <td>
         <code>
-          TURBO_NO_UPDATE_NOTIFIER
+          TURBO\_NO\_UPDATE\_NOTIFIER
         </code>
       </td>
 
@@ -345,7 +335,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_platform_env">
       <td>
         <code>
-          TURBO_PLATFORM_ENV
+          TURBO\_PLATFORM\_ENV
         </code>
       </td>
 
@@ -364,7 +354,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_platform_env_disabled">
       <td>
         <code>
-          TURBO_PLATFORM_ENV_DISABLED
+          TURBO\_PLATFORM\_ENV\_DISABLED
         </code>
       </td>
 
@@ -373,13 +363,9 @@ System environment variables are always overridden by flag values provided direc
           Disable checking environment variables configured in your
         </span>
 
-        {" "}
-
         <code>
           turbo.json
         </code>
-
-        {" "}
 
         <span>
           against those set on your supported platform
@@ -390,14 +376,14 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_preflight">
       <td>
         <code>
-          TURBO_PREFLIGHT
+          TURBO\_PREFLIGHT
         </code>
       </td>
 
       <td>
         Enables sending a preflight request before every cache artifact and
         analytics request. The follow-up upload and download will follow
-        redirects. Only applicable when{" "}
+        redirects. Only applicable when
         <a href="/docs/core-concepts/remote-caching">Remote Caching</a> is
         configured.
       </td>
@@ -406,12 +392,12 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_remote_cache_read_only">
       <td>
         <code>
-          TURBO_REMOTE_CACHE_READ_ONLY
+          TURBO\_REMOTE\_CACHE\_READ\_ONLY
         </code>
       </td>
 
       <td>
-        Prevent writing to the{" "}
+        Prevent writing to the
         <a href="/docs/core-concepts/remote-caching">Remote Cache</a> - but
         still allow reading.
       </td>
@@ -420,7 +406,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_remote_cache_signature_key">
       <td>
         <code>
-          TURBO_REMOTE_CACHE_SIGNATURE_KEY
+          TURBO\_REMOTE\_CACHE\_SIGNATURE\_KEY
         </code>
       </td>
 
@@ -432,12 +418,12 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_remote_cache_timeout">
       <td>
         <code>
-          TURBO_REMOTE_CACHE_TIMEOUT
+          TURBO\_REMOTE\_CACHE\_TIMEOUT
         </code>
       </td>
 
       <td>
-        Set a timeout in seconds for <code>turbo</code> to get artifacts from{" "}
+        Set a timeout in seconds for <code>turbo</code> to get artifacts from
         <a href="/docs/core-concepts/remote-caching">Remote Cache</a>.
       </td>
     </tr>
@@ -445,12 +431,12 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_remote_cache_upload_timeout">
       <td>
         <code>
-          TURBO_REMOTE_CACHE_UPLOAD_TIMEOUT
+          TURBO\_REMOTE\_CACHE\_UPLOAD\_TIMEOUT
         </code>
       </td>
 
       <td>
-        Set a timeout in seconds for <code>turbo</code> to upload artifacts to{" "}
+        Set a timeout in seconds for <code>turbo</code> to upload artifacts to
         <a href="/docs/core-concepts/remote-caching">Remote Cache</a>.
       </td>
     </tr>
@@ -458,7 +444,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_remote_only">
       <td>
         <code>
-          TURBO_REMOTE_ONLY
+          TURBO\_REMOTE\_ONLY
         </code>
       </td>
 
@@ -470,7 +456,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_root_turbo_json">
       <td>
         <code>
-          TURBO_ROOT_TURBO_JSON
+          TURBO\_ROOT\_TURBO\_JSON
         </code>
       </td>
 
@@ -483,12 +469,12 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_run_summary">
       <td>
         <code>
-          TURBO_RUN_SUMMARY
+          TURBO\_RUN\_SUMMARY
         </code>
       </td>
 
       <td>
-        Generate a <a href="/docs/reference/run#--summarize">Run Summary</a>{" "}
+        Generate a <a href="/docs/reference/run#--summarize">Run Summary</a>
         when you run tasks.
       </td>
     </tr>
@@ -496,13 +482,13 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_scm_base">
       <td>
         <code>
-          TURBO_SCM_BASE
+          TURBO\_SCM\_BASE
         </code>
       </td>
 
       <td>
-        Base used by <code>--affected</code> and{" "}
-        <code>turbo query affected</code> when calculating what has changed from{" "}
+        Base used by <code>--affected</code> and
+        <code>turbo query affected</code> when calculating what has changed from
         <code>base...head</code>
       </td>
     </tr>
@@ -510,13 +496,13 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_scm_head">
       <td>
         <code>
-          TURBO_SCM_HEAD
+          TURBO\_SCM\_HEAD
         </code>
       </td>
 
       <td>
-        Head used by <code>--affected</code> and{" "}
-        <code>turbo query affected</code> when calculating what has changed from{" "}
+        Head used by <code>--affected</code> and
+        <code>turbo query affected</code> when calculating what has changed from
         <code>base...head</code>
       </td>
     </tr>
@@ -524,12 +510,12 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_team">
       <td>
         <code>
-          TURBO_TEAM
+          TURBO\_TEAM
         </code>
       </td>
 
       <td>
-        The account name associated with your repository. When using{" "}
+        The account name associated with your repository. When using
         [Vercel Remote Cache](https://vercel.com/docs/monorepos/remote-caching#vercel-remote-cache), this is [your team's slug](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fsettings\&title=Get+team+slug).
       </td>
     </tr>
@@ -537,7 +523,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_teamid">
       <td>
         <code>
-          TURBO_TEAMID
+          TURBO\_TEAMID
         </code>
       </td>
 
@@ -549,12 +535,12 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_telemetry_message_disabled">
       <td>
         <code>
-          TURBO_TELEMETRY_MESSAGE_DISABLED
+          TURBO\_TELEMETRY\_MESSAGE\_DISABLED
         </code>
       </td>
 
       <td>
-        Disable the message notifying you that{" "}
+        Disable the message notifying you that
         <a href="/docs/telemetry">Telemetry</a> is enabled.
       </td>
     </tr>
@@ -562,12 +548,12 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_token">
       <td>
         <code>
-          TURBO_TOKEN
+          TURBO\_TOKEN
         </code>
       </td>
 
       <td>
-        The Bearer token for authentication to access{" "}
+        The Bearer token for authentication to access
         <a href="/docs/core-concepts/remote-caching">Remote Cache</a>.
       </td>
     </tr>
@@ -575,7 +561,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_tui_scrollback_length">
       <td>
         <code>
-          TURBO_TUI_SCROLLBACK_LENGTH
+          TURBO\_TUI\_SCROLLBACK\_LENGTH
         </code>
       </td>
 
@@ -588,7 +574,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_ui">
       <td>
         <code>
-          TURBO_UI
+          TURBO\_UI
         </code>
       </td>
 
@@ -600,7 +586,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_watch_startup_timeout">
       <td>
         <code>
-          TURBO_WATCH_STARTUP_TIMEOUT
+          TURBO\_WATCH\_STARTUP\_TIMEOUT
         </code>
       </td>
 
@@ -613,7 +599,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_concurrency">
       <td>
         <code>
-          TURBO_CONCURRENCY
+          TURBO\_CONCURRENCY
         </code>
       </td>
 
@@ -625,7 +611,7 @@ System environment variables are always overridden by flag values provided direc
     <tr id="turbo_sso_login_callback_port">
       <td>
         <code>
-          TURBO_SSO_LOGIN_CALLBACK_PORT
+          TURBO\_SSO\_LOGIN\_CALLBACK\_PORT
         </code>
       </td>
 
@@ -646,7 +632,6 @@ Turborepo will make the following environment variables available within your ta
 | `TURBO_HASH`   | The hash of the currently running task.                                                                                                              |
 | `TURBO_IS_TUI` | When using the [TUI](configuration.md#ui), this variable is set to `true`.                                                              |
 | `TURBO_IS_MFE` | When using the [microfrontends](../guides/microfrontends.md), this variable is set to the port defined in `microfrontends.json` for the application. |
-
 
 ---
 

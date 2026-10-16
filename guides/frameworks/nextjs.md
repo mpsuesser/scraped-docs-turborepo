@@ -1,14 +1,14 @@
 ---
 url: https://turborepo.dev/docs/guides/frameworks/nextjs
 title: "Next.js"
-description: "Add and configure Next.js applications in your Turborepo monorepo."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+description: "Learn how to use Next.js in a monorepo."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Learn how to use Next.js in a monorepo.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
-[Next.js](https://nextjs.org/) is the React framework for the web. Used by some of the world's largest companies, Next.js enables you to create high-quality web applications with the power of React components.
+[Next.js](https://nextjs.org) is the React framework for the web. Used by some of the world's largest companies, Next.js enables you to create high-quality web applications with the power of React components.
 
 ## Quickstart
 
@@ -16,37 +16,37 @@ To get started with Next.js in a Turborepo quickly, follow the [quickstart](../.
 
 #### pnpm
 
-```
+```bash title="Terminal"
 pnpm dlx create-turbo@latest
 ```
 
 #### yarn
 
-```
+```bash title="Terminal"
 yarn dlx create-turbo@latest
 ```
 
 #### npm
 
-```
+```bash title="Terminal"
 npx create-turbo@latest
 ```
 
 #### bun
 
-```
+```bash title="Terminal"
 bunx create-turbo@latest
 ```
 
 #### nub
 
-```
+```bash title="Terminal"
 nubx create-turbo@latest
 ```
 
 #### aube
 
-```
+```bash title="Terminal"
 aubx create-turbo@latest
 ```
 
@@ -56,37 +56,37 @@ Use [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-nex
 
 #### pnpm
 
-```
+```bash title="Terminal"
 pnpm dlx create-next-app@latest apps/my-app
 ```
 
 #### yarn
 
-```
+```bash title="Terminal"
 yarn dlx create-next-app@latest apps/my-app
 ```
 
 #### npm
 
-```
+```bash title="Terminal"
 npx create-next-app@latest apps/my-app
 ```
 
 #### bun
 
-```
+```bash title="Terminal"
 bunx create-next-app@latest apps/my-app
 ```
 
 #### nub
 
-```
+```bash title="Terminal"
 nubx create-next-app@latest apps/my-app
 ```
 
 #### aube
 
-```
+```bash title="Terminal"
 aubx create-next-app@latest apps/my-app
 ```
 
@@ -96,7 +96,7 @@ To add [Internal Packages](../../core-concepts/internal-packages.md) to your new
 
 #### pnpm
 
-```
+```diff title="./apps/my-app/package.json"
 {
   "name": "my-app",
   "dependencies": {
@@ -107,7 +107,7 @@ To add [Internal Packages](../../core-concepts/internal-packages.md) to your new
 
 #### yarn
 
-```
+```diff title="./apps/my-app/package.json"
 {
   "name": "my-app",
   "dependencies": {
@@ -118,7 +118,7 @@ To add [Internal Packages](../../core-concepts/internal-packages.md) to your new
 
 #### npm
 
-```
+```diff title="./apps/my-app/package.json"
 {
  "name": "my-app",
   "dependencies": {
@@ -129,7 +129,7 @@ To add [Internal Packages](../../core-concepts/internal-packages.md) to your new
 
 #### bun
 
-```
+```diff title="./apps/my-app/package.json"
 {
  "name": "my-app",
   "dependencies": {
@@ -140,7 +140,7 @@ To add [Internal Packages](../../core-concepts/internal-packages.md) to your new
 
 #### nub
 
-```
+```diff title="./apps/my-app/package.json"
 {
  "name": "my-app",
   "dependencies": {
@@ -151,7 +151,7 @@ To add [Internal Packages](../../core-concepts/internal-packages.md) to your new
 
 #### aube
 
-```
+```diff title="./apps/my-app/package.json"
 {
  "name": "my-app",
   "dependencies": {
@@ -170,7 +170,7 @@ By default, the new application will use the tasks defined in the root `turbo.js
 
 When using Next.js with [Turborepo's microfrontends](../microfrontends.md), make sure to set the `basePath` property for child applications. This ensures the assets like images and CSS will be routed to the correct application.
 
-```
+```ts title="./apps/my-app/next.config.ts"
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -179,3 +179,11 @@ const nextConfig: NextConfig = {
 
 export default nextConfig;
 ```
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

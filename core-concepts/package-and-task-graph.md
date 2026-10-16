@@ -2,11 +2,9 @@
 url: https://turborepo.dev/docs/core-concepts/package-and-task-graph
 title: "Package and Task Graphs"
 description: "Learn how Turborepo uses directed acyclic graphs to model package dependencies and task relationships."
-access_date: 2026-08-04T15:46:32.475Z
-current_date: 2026-08-04T15:46:32.475Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
-
-Turborepo builds a Task Graph based on your configuration and repository structure.
 
 ## Package Graph
 
@@ -17,6 +15,8 @@ For a deeper explanation of how to set up your Workspace, [visit our Structuring
 ## Task Graph
 
 In `turbo.json`, you express how tasks relate to each other. You can think of these relationships as dependencies between tasks, but we have a more formal name for them: the Task Graph.
+
+You can generate a visualization of the task graph for your tasks using [the `--graph` flag](../reference/run.md#--graph-file-type).
 
 Turborepo uses a data structure called a [directed acyclic graph (DAG)](https://en.wikipedia.org/wiki/Directed_acyclic_graph) to understand your repository and its tasks. A graph is made up of "nodes" and "edges". In the Task Graph, the nodes are tasks and the edges are the dependencies between tasks. A *directed* graph indicates that the edges connecting each node have a direction, so if Task A points to Task B, we can say that Task A depends on Task B. The direction of the edge depends on which task depends on which.
 

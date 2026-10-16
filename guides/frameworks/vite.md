@@ -1,12 +1,12 @@
 ---
 url: https://turborepo.dev/docs/guides/frameworks/vite
 title: "Vite"
-description: "Add and configure Vite applications in your Turborepo monorepo."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+description: "Learn more about using Vite in your monorepo."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Learn more about using Vite in your monorepo.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 [Vite](https://vitejs.dev/) is a build tool that aims to provide a faster and leaner development experience for modern web projects.
 
@@ -16,37 +16,37 @@ To get started with Vite in a Turborepo quickly, use [the `with-vite` example](h
 
 #### pnpm
 
-```
+```bash title="Terminal"
 pnpm dlx create-turbo@latest -e with-vite
 ```
 
 #### yarn
 
-```
+```bash title="Terminal"
 yarn dlx create-turbo@latest -e with-vite
 ```
 
 #### npm
 
-```
+```bash title="Terminal"
 npx create-turbo@latest -e with-vite
 ```
 
 #### bun
 
-```
+```bash title="Terminal"
 bunx create-turbo@latest -e with-vite
 ```
 
 #### nub
 
-```
+```bash title="Terminal"
 nubx create-turbo@latest -e with-vite
 ```
 
 #### aube
 
-```
+```bash title="Terminal"
 aubx create-turbo@latest -e with-vite
 ```
 
@@ -56,37 +56,37 @@ Use [`npm create vite`](https://vitejs.dev/guide/#scaffolding-your-first-vite-pr
 
 #### pnpm
 
-```
+```bash title="Terminal"
 pnpm create vite@latest apps/my-app
 ```
 
 #### yarn
 
-```
+```bash title="Terminal"
 yarn create vite@latest apps/my-app
 ```
 
 #### npm
 
-```
+```bash title="Terminal"
 npm create vite@latest apps/my-app
 ```
 
 #### bun
 
-```
+```bash title="Terminal"
 bun create vite@latest apps/my-app
 ```
 
 #### nub
 
-```
+```bash title="Terminal"
 nubx create-vite@latest apps/my-app
 ```
 
 #### aube
 
-```
+```bash title="Terminal"
 aubx create-vite@latest apps/my-app
 ```
 
@@ -96,7 +96,7 @@ To add [Internal Packages](../../core-concepts/internal-packages.md) to your new
 
 #### pnpm
 
-```
+```diff title="./apps/my-app/package.json"
 {
   "name": "my-app",
   "dependencies": {
@@ -107,7 +107,7 @@ To add [Internal Packages](../../core-concepts/internal-packages.md) to your new
 
 #### yarn
 
-```
+```diff title="./apps/my-app/package.json"
 {
   "name": "my-app",
   "dependencies": {
@@ -118,7 +118,7 @@ To add [Internal Packages](../../core-concepts/internal-packages.md) to your new
 
 #### npm
 
-```
+```diff title="./apps/my-app/package.json"
 {
  "name": "my-app",
   "dependencies": {
@@ -129,7 +129,7 @@ To add [Internal Packages](../../core-concepts/internal-packages.md) to your new
 
 #### bun
 
-```
+```diff title="./apps/my-app/package.json"
 {
  "name": "my-app",
   "dependencies": {
@@ -140,7 +140,7 @@ To add [Internal Packages](../../core-concepts/internal-packages.md) to your new
 
 #### nub
 
-```
+```diff title="./apps/my-app/package.json"
 {
  "name": "my-app",
   "dependencies": {
@@ -151,7 +151,7 @@ To add [Internal Packages](../../core-concepts/internal-packages.md) to your new
 
 #### aube
 
-```
+```diff title="./apps/my-app/package.json"
 {
  "name": "my-app",
   "dependencies": {
@@ -170,7 +170,7 @@ By default, the new application will use the tasks defined in the root `turbo.js
 
 When using Vite with [Turborepo's microfrontends](../microfrontends.md), make sure to set the `base` property for child applications. This ensures the assets like images and CSS will be routed to the correct application.
 
-```
+```ts title="./apps/my-app/vite.config.ts"
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -184,37 +184,37 @@ For runtime composition with Vite, use [the `with-vite-module-federation` exampl
 
 #### pnpm
 
-```
+```bash title="Terminal"
 pnpm dlx create-turbo@latest -e with-vite-module-federation
 ```
 
 #### yarn
 
-```
+```bash title="Terminal"
 yarn dlx create-turbo@latest -e with-vite-module-federation
 ```
 
 #### npm
 
-```
+```bash title="Terminal"
 npx create-turbo@latest -e with-vite-module-federation
 ```
 
 #### bun
 
-```
+```bash title="Terminal"
 bunx create-turbo@latest -e with-vite-module-federation
 ```
 
 #### nub
 
-```
+```bash title="Terminal"
 nubx create-turbo@latest -e with-vite-module-federation
 ```
 
 #### aube
 
-```
+```bash title="Terminal"
 aubx create-turbo@latest -e with-vite-module-federation
 ```
 
@@ -222,7 +222,7 @@ The example includes a `react-host` Vite app, a `react-remote` Vite app, and an 
 
 During development, run `turbo dev` from the example root. The host runs on `localhost:4173` and the remote runs on `localhost:4174`.
 
-```
+```json title="./turbo.json"
 {
   "tasks": {
     "dev": {
@@ -239,3 +239,11 @@ During development, run `turbo dev` from the example root. The host runs on `loc
 ```
 
 Keep `dev` uncached and persistent for Vite servers. Use `dependsOn: ["^build"]` so shared packages are built before the host and remote start.
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

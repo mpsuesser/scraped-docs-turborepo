@@ -1,12 +1,12 @@
 ---
 url: https://turborepo.dev/docs/core-concepts/internal-packages
 title: "Internal Packages"
-description: "Understand how internal packages work and their compilation strategies for sharing code across your monorepo."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+description: "Learn how to build Internal Packages in your monorepo."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Learn how to build Internal Packages in your monorepo.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Internal Packages are libraries whose source code is inside your Workspace. You can quickly make Internal Packages to share code within your monorepo and choose to [publish them to the npm registry](../guides/publishing-libraries.md) if you need to later.
 
@@ -14,60 +14,60 @@ Internal Packages are used in your repository by installing them in `package.jso
 
 #### pnpm
 
-```
+```json title="./apps/web/package.json"
 {
   "dependencies": {
-    "@repo/ui": "workspace:*"
+    "@repo/ui": "workspace:*" // [!code highlight]
   }
 }
 ```
 
 #### yarn
 
-```
+```json title="./apps/web/package.json"
 {
   "dependencies": {
-    "@repo/ui": "*"
+    "@repo/ui": "*" // [!code highlight]
   }
 }
 ```
 
 #### npm
 
-```
+```json title="./apps/web/package.json"
 {
   "dependencies": {
-    "@repo/ui": "*"
+    "@repo/ui": "*" // [!code highlight]
   }
 }
 ```
 
 #### bun
 
-```
+```json title="./apps/web/package.json"
 {
   "dependencies": {
-    "@repo/ui": "workspace:*"
+    "@repo/ui": "workspace:*" // [!code highlight]
   }
 }
 ```
 
 #### nub
 
-```
+```json title="./apps/web/package.json"
 {
   "dependencies": {
-    "@repo/ui": "workspace:*"
+    "@repo/ui": "workspace:*" // [!code highlight]
   }
 }
 ```
 
 #### aube
 
-```
+```json title="./apps/web/package.json"
 {
   "dependencies": {
-    "@repo/ui": "workspace:*"
+    "@repo/ui": "workspace:*" // [!code highlight]
   }
 }
 ```
@@ -76,8 +76,8 @@ In the [Creating an Internal Package guide](../crafting-your-repository/creating
 
 You can then import the package into your code like you're used to doing with an external package:
 
-```
-import { Button } from "@repo/ui";
+```tsx title="./apps/web/app/page.tsx"
+import { Button } from "@repo/ui"; // [!code highlight]
 
 export default function Page() {
   return <Button>Submit</Button>;
@@ -104,16 +104,16 @@ This strategy is most useful when:
 
 A `package.json` for a Just-in-Time package may look like this one:
 
-```
+```json title="./packages/ui/package.json"
 {
   "name": "@repo/ui",
   "exports": {
-    "./button": "./src/button.tsx",
-    "./card": "./src/card.tsx"
+    "./button": "./src/button.tsx", // [!code highlight]
+    "./card": "./src/card.tsx" // [!code highlight]
   },
   "scripts": {
-    "lint": "eslint . --max-warnings 0",
-    "check-types": "tsc --noEmit"
+    "lint": "eslint . --max-warnings 0", // [!code highlight]
+    "check-types": "tsc --noEmit" // [!code highlight]
   }
 }
 ```
@@ -134,21 +134,21 @@ There are a few important things to notice in this `package.json`:
 
 A Compiled Package is a package that handles its own compilation using a build tool, like [`tsc` (the TypeScript compiler)](https://www.typescriptlang.org/docs/handbook/compiler-options.html#handbook-content).
 
-```
+```json title="./packages/ui/package.json"
 {
   "name": "@repo/ui",
   "exports": {
     "./button": {
-      "types": "./src/button.tsx",
-      "default": "./dist/button.js"
+      "types": "./src/button.tsx", // [!code highlight]
+      "default": "./dist/button.js" // [!code highlight]
     },
     "./card": {
-      "types": "./src/card.tsx",
-      "default": "./dist/card.js"
+      "types": "./src/card.tsx", // [!code highlight]
+      "default": "./dist/card.js" // [!code highlight]
     }
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc" // [!code highlight]
   }
 }
 ```
@@ -167,3 +167,11 @@ Publishing a package to the npm registry comes with the most strict requirements
 Additionally, the process of publishing a package to the npm registry requires specialized knowledge and tooling. We recommend [`changesets`](https://github.com/changesets/changesets) for managing versioning, changelogs, and the publishing process.
 
 For a detailed guide, visit [our Publishing packages guide](../guides/publishing-libraries.md).
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

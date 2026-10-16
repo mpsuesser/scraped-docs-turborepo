@@ -2,25 +2,23 @@
 url: https://turborepo.dev/docs/reference/options-overview
 title: "Options overview"
 description: "Flags, configurations, and System Environment Variables for Turborepo"
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# Options overview
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 There are three ways to manage the behavior of a `turbo` invocation:
 
-* [Configuration in `turbo.json`](configuration.md)
-* [System Environment Variables](system-environment-variables.md)
-* [Flags passed to the CLI invocation](run.md)
+- [Configuration in `turbo.json`](configuration.md)
+- [System Environment Variables](system-environment-variables.md)
+- [Flags passed to the CLI invocation](run.md)
 
 The three strategies listed above are in order of precedence. Where a flag value is provided, for the same System Environment Variable or `turbo.json` configuration, the value for the flag will be used. Because of this, we recommend using:
 
-* `turbo.json` configuration for defaults
-* System Environment Variables for per-environment overrides
-* Flags for per-invocation overrides
+- `turbo.json` configuration for defaults
+- System Environment Variables for per-environment overrides
+- Flags for per-invocation overrides
 
 ## Options table
 
@@ -112,7 +110,6 @@ The three strategies listed above are in order of precedence. Where a flag value
   | Download local `turbo` | -                                                                          | [`TURBO_DOWNLOAD_LOCAL_ENABLED`](system-environment-variables.md#turbo_download_local_enabled) | -                                                |
   | Daemon (deprecated)    | [`--daemon` / `--no-daemon`](run.md#--daemon-and---no-daemon) | -                                                                                                           | [`daemon`](configuration.md#daemon) |
 </div>
-
 
 ---
 

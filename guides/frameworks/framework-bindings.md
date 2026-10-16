@@ -1,22 +1,25 @@
 ---
 url: https://turborepo.dev/docs/guides/frameworks/framework-bindings
 title: "Framework bindings in libraries"
-description: "Use peerDependencies and export paths to create framework-specific bindings in shared library packages."
-access_date: 2026-08-05T18:05:17.395Z
-current_date: 2026-08-05T18:05:17.395Z
+description: "Learn how to create framework bindings in packages."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Learn how to create framework bindings in packages.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Framework bindings in a [Library Package](../../core-concepts/package-types.md#library-packages) integrate your library's code more deeply with a framework by leveraging APIs from the framework directly in the library.
 
 To do this, use the `peerDependencies` field in `package.json` of the library, which makes the framework APIs available in your library without installing it directly in the package.
 
+> On this page, we'll be using Next.js for examples, but the concepts below
+> apply to any framework or other dependency.
+
 ## Example
 
 Add a `peerDependency` to your library for the dependency that you intend to create bindings for.
 
-```
+```json title="./packages/ui/package.json"
 {
   "name": "@repo/ui",
   "peerDependencies": {
@@ -25,9 +28,15 @@ Add a `peerDependency` to your library for the dependency that you intend to cre
 }
 ```
 
+> In the example above, the `peerDependency` for `next` accepts any version. You
+> may want to specify a range (for example, `">=15"`) according to your needs.
+> Additionally, for older package managers, you may need to instruct your
+> package manager to install peer dependencies with configuration, or add the
+> dependency to `devDependencies` as a workaround.
+
 This will make the dependency available in your library, allowing you to write code like below. Note the `className` prop, which sets a default styling for this component in the monorepo and can be overridden in the `props` object.
 
-```
+```tsx title="./packages/ui/src/link.tsx"
 import Link from "next/link";
 import type { ComponentProps } from "react";
 
@@ -54,7 +63,7 @@ The example below shows a library with two entrypoints, each for a different typ
 - `./next-js/link`: A customized version of [the Next.js `Link` component](https://nextjs.org/docs/app/getting-started/linking-and-navigating#link-component) with props that are preset to your organization's preferences
 - `./svelte/link`: A customized version of an [`a` tag for Svelte](https://svelte.dev/docs/kit/link-options) with presets.
 
-```
+```json title="./packages/ui/package.json"
 {
   "exports": {
     "./link": "./dist/link.js",
@@ -66,4 +75,15 @@ The example below shows a library with two entrypoints, each for a different typ
 }
 ```
 
+> In the example above, the `peerDependency` for `next` accepts any version. You
+> may want to specify a range (for example, `">=15"`) according to your needs.
+
 This concept can be applied to any number of frameworks or other dependencies that you'd like to provide bindings for.
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)

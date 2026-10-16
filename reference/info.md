@@ -2,13 +2,11 @@
 url: https://turborepo.dev/docs/reference/info
 title: "info"
 description: "API reference for the `turbo info` command"
-access_date: 2026-08-03T19:46:13.967Z
-current_date: 2026-08-03T19:46:13.967Z
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-# info
-
-
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 Print debugging information about your Turborepo.
 
@@ -39,7 +37,6 @@ Environment:
    Shell (SHELL): /bin/zsh
    stdin: false
 ```
-
 
 ---
 

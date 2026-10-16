@@ -1,16 +1,24 @@
 ---
 url: https://turborepo.dev/docs/guides/tools/typescript
 title: "TypeScript"
-description: "Share TypeScript configuration, set up compilation, and enable fast type checking across your monorepo."
-access_date: 2026-09-18T17:01:21.919Z
-current_date: 2026-09-18T17:01:21.919Z
+description: "Learn how to use TypeScript in a monorepo."
+access_date: 2026-10-16T19:42:51.265Z
+current_date: 2026-10-16T19:42:51.265Z
 ---
 
-Learn how to use TypeScript in a monorepo.
+> For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 TypeScript is an excellent tool in monorepos, allowing teams to safely add types to their JavaScript code. While there is some complexity to getting set up, this guide will walk you through the important parts of a TypeScript setup for most use cases.
 
-## Sharing tsconfig.json
+- [Sharing TypeScript configuration](#sharing-tsconfigjson)
+- [Building a TypeScript package](#building-a-typescript-package)
+- [Making type checking faster across your workspace](#linting-your-codebase)
+
+> This guide assumes you are using a recent version of TypeScript and uses some
+> features that are only available in those versions. You may need to adjust the
+> guidance on this page if you are unable to features from those versions.
+
+## Sharing `tsconfig.json`
 
 You want to build consistency into your TypeScript configurations so that your entire repo can use great defaults and your fellow developers can know what to expect when writing code in the Workspace.
 
@@ -20,45 +28,45 @@ This guide will use [`create-turbo`](../../reference/create-turbo.md) as an exam
 
 #### pnpm
 
-```
+```bash title="Terminal"
 pnpm dlx create-turbo@latest
 ```
 
 #### yarn
 
-```
+```bash title="Terminal"
 yarn dlx create-turbo@latest
 ```
 
 #### npm
 
-```
+```bash title="Terminal"
 npx create-turbo@latest
 ```
 
 #### bun
 
-```
+```bash title="Terminal"
 bunx create-turbo@latest
 ```
 
 #### nub
 
-```
+```bash title="Terminal"
 nubx create-turbo@latest
 ```
 
 #### aube
 
-```
+```bash title="Terminal"
 aubx create-turbo@latest
 ```
 
-### Use a base tsconfig file
+### Use a base `tsconfig` file
 
 Inside `packages/typescript-config`, you have a few `json` files which represent different ways you might want to configure TypeScript in various packages. The `base.json` file is extended by every other `tsconfig.json` in the workspace and looks like this:
 
-```
+```json title="./packages/typescript-config/base.json"
 {
   "compilerOptions": {
     "esModuleInterop": true,
@@ -75,15 +83,13 @@ Inside `packages/typescript-config`, you have a few `json` files which represent
 }
 ```
 
-[→ tsconfig options reference](https://www.typescriptlang.org/tsconfig)
-
 ### Creating the rest of the package
 
 The other `tsconfig` files in this package use the `extends` key to start with the base configuration and customize for specific types of projects, like for Next.js (`nextjs.json`) and a React library (`react-library.json`).
 
 Inside `package.json`, name the package so it can be referenced in the rest of the Workspace:
 
-```
+```json title="packages/typescript-config/package.json"
 {
   "name": "@repo/typescript-config"
 }
@@ -97,7 +103,7 @@ First, install the `@repo/typescript-config` package into your package:
 
 #### pnpm
 
-```
+```json title="./apps/web/package.json"
 {
   "devDependencies": {
      "@repo/typescript-config": "workspace:*",
@@ -108,7 +114,7 @@ First, install the `@repo/typescript-config` package into your package:
 
 #### yarn
 
-```
+```json title="./apps/web/package.json"
 {
   "devDependencies": {
      "@repo/typescript-config": "*",
@@ -119,7 +125,7 @@ First, install the `@repo/typescript-config` package into your package:
 
 #### npm
 
-```
+```json title="./apps/web/package.json"
 {
   "devDependencies": {
      "@repo/typescript-config": "*",
@@ -130,7 +136,7 @@ First, install the `@repo/typescript-config` package into your package:
 
 #### bun
 
-```
+```json title="./apps/web/package.json"
 {
   "devDependencies": {
      "@repo/typescript-config": "workspace:*",
@@ -141,7 +147,7 @@ First, install the `@repo/typescript-config` package into your package:
 
 #### nub
 
-```
+```json title="./apps/web/package.json"
 {
   "devDependencies": {
      "@repo/typescript-config": "workspace:*",
@@ -152,7 +158,7 @@ First, install the `@repo/typescript-config` package into your package:
 
 #### aube
 
-```
+```json title="./apps/web/package.json"
 {
   "devDependencies": {
      "@repo/typescript-config": "workspace:*",
@@ -163,7 +169,7 @@ First, install the `@repo/typescript-config` package into your package:
 
 Then, extend the `tsconfig.json` for the package from the `@repo/typescript-config` package. In this example, the `web` package is a Next.js application:
 
-```
+```json title="./apps/web/tsconfig.json"
 {
   "extends": "@repo/typescript-config/nextjs.json",
   "compilerOptions": {
@@ -178,7 +184,7 @@ Then, extend the `tsconfig.json` for the package from the `@repo/typescript-conf
 
 First, make sure your code gets compiled with `tsc` so there will be a `dist` directory. You'll need a `build` script as well as a `dev` script:
 
-```
+```json title="./packages/ui/package.json"
 {
   "scripts": {
     "dev": "tsc --watch",
@@ -189,7 +195,7 @@ First, make sure your code gets compiled with `tsc` so there will be a `dist` di
 
 Then, set up the entrypoints for your package in `package.json` so that other packages can use the compiled code:
 
-```
+```json title="./packages/ui/package.json"
 {
   "exports": {
     "./*": {
@@ -206,13 +212,17 @@ Setting up `exports` this way has several advantages:
 - You can quickly add new entrypoints to your package without creating [dangerous barrel files](https://vercel.com/blog/how-we-optimized-package-imports-in-next-js#what's-the-problem-with-barrel-files).
 - You'll receive auto-importing suggestions for your imports across package boundaries in your editor.
 
+> If you're publishing the package, you cannot use references to source code in
+> `types` since only the compiled code will be published to npm. You'll need to
+> generate and reference declaration files and source maps.
+
 ## Linting your codebase
 
 To use TypeScript as a linter, you can check the types across your workspace **fast** using Turborepo's caching and parallelization.
 
 First, add a `check-types` script to any package that you want to check the types for:
 
-```
+```json title="./apps/web/package.json"
 {
   "scripts": {
     "check-types": "tsc --noEmit"
@@ -222,7 +232,7 @@ First, add a `check-types` script to any package that you want to check the type
 
 Then, create a `check-types` task in `turbo.json`. From the [Configuring tasks guide](../../crafting-your-repository/configuring-tasks.md#dependent-tasks-that-can-be-run-in-parallel), we can make the task run in parallel while respecting source code changes from other packages using a [Transit Node](../../core-concepts/package-and-task-graph.md#transit-nodes):
 
-```
+```json title="./turbo.json"
 {
   "tasks": {
     "topo": {
@@ -239,7 +249,7 @@ Then, run your task using `turbo check-types`.
 
 ## Best practices
 
-### Use tsc to compile your packages
+### Use `tsc` to compile your packages
 
 For [Internal Packages](../../core-concepts/internal-packages.md), we recommend that you use `tsc` to compile your TypeScript libraries whenever possible. While you can use a bundler, it's not necessary and adds extra complexity to your build process. Additionally, bundling a library can mangle the code before it makes it to your applications' bundlers, causing hard to debug issues.
 
@@ -255,15 +265,16 @@ Exports from [Just-in-Time Packages](../../core-concepts/internal-packages.md#ju
 
 Exports from [Compiled Packages](../../core-concepts/internal-packages.md#compiled-packages) require the use of [`declaration`](https://www.typescriptlang.org/tsconfig/#declaration) and [`declarationMap`](https://www.typescriptlang.org/tsconfig/#declarationMap) configurations for go-to-definition to work. After you've enabled these two configurations for the package, compile the package with `tsc`, and open the output directory to find declaration files and source maps.
 
-button.js
-
-button.d.ts
-
-button.d.ts.map
+- `packages/`
+  - `ui/`
+    - `dist/`
+      - `button.js`
+      - `button.d.ts`
+      - `button.d.ts.map`
 
 With these two files in place, your editor will now navigate to the original source code.
 
-### Use Node.js subpath imports instead of TypeScript compiler paths
+### Use Node.js subpath imports instead of TypeScript compiler `paths`
 
 It's possible to create absolute imports in your packages using [the TypeScript compiler's `paths` option](https://www.typescriptlang.org/tsconfig#paths), but these paths can cause failed compilation when using [Just-in-Time Packages](../../core-concepts/internal-packages.md#just-in-time-packages). [As of TypeScript 5.4](https://devblogs.microsoft.com/typescript/announcing-typescript-5-4/#auto-import-support-for-subpath-imports), you can use [Node.js subpath imports](https://nodejs.org/api/packages.html#imports) instead for a more robust solution.
 
@@ -273,7 +284,7 @@ In [Just-in-Time packages](../../core-concepts/internal-packages.md#just-in-time
 
 #### package.json
 
-```
+```json title="./packages/ui/package.json"
 {
   "imports": {
     "#*": "./src/*"
@@ -283,8 +294,8 @@ In [Just-in-Time packages](../../core-concepts/internal-packages.md#just-in-time
 
 #### Source code
 
-```
-import { MY_STRING } from "#utils.ts" // Uses .ts extension
+```tsx title="./packages/ui/button.tsx"
+import { MY_STRING } from "#utils.ts" // Uses .ts extension // [!code highlight]
 
 export const Button = () => {
   return (
@@ -293,11 +304,12 @@ export const Button = () => {
 }
 ```
 
-If you prefer to import without file extensions, add explicit fallbacks for the source files you want to support:
+If you prefer to import without file extensions, add explicit fallbacks for the source files
+you want to support:
 
 #### package.json
 
-```
+```json title="./packages/ui/package.json"
 {
   "imports": {
     "#*": [
@@ -313,8 +325,8 @@ If you prefer to import without file extensions, add explicit fallbacks for the 
 
 #### Source code
 
-```
-import { Card } from "#card" // Uses fallback entries to resolve without an extension
+```tsx title="./packages/ui/button.tsx"
+import { Card } from "#card" // Uses fallback entries to resolve without an extension // [!code highlight]
 
 export const Button = () => {
   return (
@@ -331,7 +343,7 @@ In [Compiled packages](../../core-concepts/internal-packages.md#compiled-package
 
 #### package.json
 
-```
+```json title="./packages/ui/package.json"
 {
   "imports": {
     "#*": "./dist/*"
@@ -341,15 +353,15 @@ In [Compiled packages](../../core-concepts/internal-packages.md#compiled-package
 
 #### Source code
 
-```
-import { MY_STRING } from "#utils.js"; // Uses .js extension
+```tsx title="./packages/ui/button.tsx"
+import { MY_STRING } from "#utils.js"; // Uses .js extension // [!code highlight]
 
 export const Button = () => {
   return <button>{MY_STRING}</button>;
 };
 ```
 
-### You likely don't need a tsconfig.json file in the root of your project
+### You likely don't need a `tsconfig.json` file in the root of your project
 
 As mentioned in the [Structuring your repository guide](../../crafting-your-repository/structuring-a-repository.md#anatomy-of-a-package), you want to treat each package in your tooling as its own unit. This means each package should have its own `tsconfig.json` to use instead of referencing a `tsconfig.json` in the root of your project. Following this practice will make it easier for Turborepo to cache your type checking tasks, simplifying your configuration.
 
@@ -368,3 +380,11 @@ We don't recommend using TypeScript Project References as they introduce both an
 `tsserver` is not able to use different TypeScript versions for different packages in your code editor. Instead, it will discover a specific version and use that everywhere.
 
 This can result in differences between the linting errors that show in your editor and when you run `tsc` scripts to check types. If this is an issue for you, consider [keeping the TypeScript dependency on the same version](../../crafting-your-repository/managing-dependencies.md#keeping-dependencies-on-the-same-version).
+
+---
+
+For a semantic overview of all documentation, see [/sitemap.md](https://turborepo.dev/sitemap.md)
+
+For an index of all available documentation, see [/llms.txt](https://turborepo.dev/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/agents.md](https://turborepo.dev/agents.md)
