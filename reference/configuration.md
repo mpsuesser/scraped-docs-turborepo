@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/configuration
 title: "Configuring turbo.json"
 description: "Learn how to configure Turborepo through `turbo.json`."
-access_date: 2026-10-16T19:42:51.265Z
-current_date: 2026-10-16T19:42:51.265Z
+access_date: 2026-10-21T01:12:22.720Z
+current_date: 2026-10-21T01:12:22.720Z
 ---
 
 > For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
@@ -280,6 +280,24 @@ Enable experimental features that will become the default behavior in future ver
 
 > Future flags that change behavior can invalidate the [task
 > cache](../crafting-your-repository/caching.md).
+
+#### `hashFilePermissions`
+
+Default: `false`
+
+Include executable permissions in file hashes for task inputs and global dependencies. With this flag enabled, changing an input file from non-executable to executable, or back, changes the task hash even when its contents stay the same.
+
+On Unix, a regular file is executable if any owner, group, or other executable bit is set. On Windows, regular files are treated as non-executable. Symlink permissions and read or write permission bits do not affect hashes.
+
+Enabling this flag changes all task hashes. Existing cache entries are not reused. With the flag disabled, Turborepo preserves content-only file hashing.
+
+```jsonc title="./turbo.json"
+{
+  "futureFlags": {
+    "hashFilePermissions": true,
+  },
+}
+```
 
 #### `errorsOnlyShowHash`
 
