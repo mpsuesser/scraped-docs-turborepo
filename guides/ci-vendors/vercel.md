@@ -1,9 +1,9 @@
 ---
 url: https://turborepo.dev/docs/guides/ci-vendors/vercel
 title: "Vercel"
-description: "Deploy your Turborepo on Vercel with zero-config Remote Caching."
-access_date: 2026-10-16T19:42:51.265Z
-current_date: 2026-10-16T19:42:51.265Z
+description: "Deploy your Turborepo on Vercel and run tasks with Vercel CI using zero-config Remote Caching."
+access_date: 2026-11-02T14:23:35.971Z
+current_date: 2026-11-02T14:23:35.971Z
 ---
 
 ![](https://turborepo.dev/_next/image?url=%2F_next%2Fstatic%2Fimmutable%2Fmedia%2Fturborepo-x-vercel.07keh8l4igee0.png&w=3840&q=75)
@@ -13,6 +13,12 @@ Vercel's zero-config integration with Turborepo automatically understands your m
 To deploy your Turborepo on Vercel, [create a new project](https://vercel.com/new) and import your code. Your projects will be pre-configured with the correct settings to use the [Vercel Remote Cache](https://vercel.com/docs/monorepos/remote-caching).
 
 For more information about deploying your Turborepo to Vercel, [visit the Vercel documentation](https://vercel.com/docs/monorepos/turborepo).
+
+## Vercel CI
+
+[Vercel CI](https://vercel.com/docs/ci) runs your Turborepo tasks, such as tests, linting, and type checks, when you push code. It uses your Task Graph to run tasks in dependency order, skips unaffected tasks, and reuses cached results with zero-config Vercel Remote Cache. Each task runs in its own isolated compute instance.
+
+To get started, follow the [Vercel CI setup instructions](https://vercel.com/docs/ci) to enable CI for your repository and select which tasks to run. For more details, see the [configuration reference](https://vercel.com/docs/ci/configuration) for task dependencies and resource sizing, and the [environment variables guide](https://vercel.com/docs/ci/environment-variables) for secrets and other values your tasks need.
 
 ## Filtered installs
 
