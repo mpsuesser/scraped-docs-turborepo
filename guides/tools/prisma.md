@@ -2,15 +2,15 @@
 url: https://turborepo.dev/docs/guides/tools/prisma
 title: "Prisma"
 description: "Learn how to use Prisma in a Turborepo."
-access_date: 2026-10-16T19:42:51.265Z
-current_date: 2026-10-16T19:42:51.265Z
+access_date: 2026-11-04T19:58:58.901Z
+current_date: 2026-11-04T19:58:58.901Z
 ---
 
 > For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
 
 [Prisma](https://www.prisma.io/) unlocks a new level of developer experience when working with databases thanks to its intuitive data model, automated migrations, type-safety & auto-completion.
 
-[Their official guide](https://www.prisma.io/docs/guides/turborepo) describes how to integrate Prisma into a Turborepo, including:
+[Their official guide](https://www.prisma.io/docs/guides/deployment/turborepo) describes how to integrate Prisma into a Turborepo, including:
 
 - Prisma client initialization
 - Packaging the client as an [Internal Package](../../core-concepts/internal-packages.md)
