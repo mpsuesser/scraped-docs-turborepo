@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/guides/tools/shadcn-ui
 title: "shadcn/ui"
 description: "Learn how to use shadcn/ui in a Turborepo."
-access_date: 2026-10-16T19:42:51.265Z
-current_date: 2026-10-16T19:42:51.265Z
+access_date: 2026-11-04T19:46:16.932Z
+current_date: 2026-11-04T19:46:16.932Z
 ---
 
 > For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
@@ -15,37 +15,37 @@ To get started with shadcn/ui in a new monorepo, run:
 #### pnpm
 
 ```bash title="Terminal"
-pnpm dlx shadcn@canary init
+pnpm dlx shadcn@latest init
 ```
 
 #### yarn
 
 ```bash title="Terminal"
-npx shadcn@canary init
+npx shadcn@latest init
 ```
 
 #### npm
 
 ```bash title="Terminal"
-npx shadcn@canary init
+npx shadcn@latest init
 ```
 
 #### bun
 
 ```bash title="Terminal"
-bunx shadcn@canary init
+bunx shadcn@latest init
 ```
 
 #### nub
 
 ```bash title="Terminal"
-nubx shadcn@canary init
+nubx shadcn@latest init
 ```
 
 #### aube
 
 ```bash title="Terminal"
-aubx shadcn@canary init
+aubx shadcn@latest init
 ```
 
 When prompted, select the option for monorepos.
@@ -55,37 +55,37 @@ To add a component, run:
 #### pnpm
 
 ```bash title="Terminal"
-pnpm dlx shadcn@canary add [COMPONENT]
+pnpm dlx shadcn@latest add [COMPONENT]
 ```
 
 #### yarn
 
 ```bash title="Terminal"
-npx shadcn@canary add [COMPONENT]
+npx shadcn@latest add [COMPONENT]
 ```
 
 #### npm
 
 ```bash title="Terminal"
-npx shadcn@canary add [COMPONENT]
+npx shadcn@latest add [COMPONENT]
 ```
 
 #### bun
 
 ```bash title="Terminal"
-bunx shadcn@canary add [COMPONENT]
+bunx shadcn@latest add [COMPONENT]
 ```
 
 #### nub
 
 ```bash title="Terminal"
-nubx shadcn@canary add [COMPONENT]
+nubx shadcn@latest add [COMPONENT]
 ```
 
 #### aube
 
 ```bash title="Terminal"
-aubx shadcn@canary add [COMPONENT]
+aubx shadcn@latest add [COMPONENT]
 ```
 
 ## More information
