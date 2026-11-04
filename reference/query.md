@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/query
 title: "query"
 description: "API reference for the `turbo query` command"
-access_date: 2026-10-16T19:42:51.265Z
-current_date: 2026-10-16T19:42:51.265Z
+access_date: 2026-11-04T20:32:23.930Z
+current_date: 2026-11-04T20:32:23.930Z
 ---
 
 > For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
@@ -237,7 +237,7 @@ turbo query affected [flags]
 > checkout. If the checkout is too shallow, then all packages will be considered
 > changed.
 >
-> For example, setting up Git to check out with `--filter=blob:none --depth=0` will ensure `turbo query affected` has the right history to work correctly.
+> For example, a blobless clone with full history (`git clone --filter=blob:none`, without `--depth`) gives `turbo query affected` the history it needs. With `actions/checkout`, set `filter: blob:none` and `fetch-depth: 0`.
 
 With no flags, returns all affected tasks:
 

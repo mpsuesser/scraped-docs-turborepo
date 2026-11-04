@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/run
 title: "run"
 description: "API reference for the `turbo run` command"
-access_date: 2026-10-16T19:42:51.265Z
-current_date: 2026-10-16T19:42:51.265Z
+access_date: 2026-11-04T20:32:23.930Z
+current_date: 2026-11-04T20:32:23.930Z
 ---
 
 > For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
@@ -59,7 +59,7 @@ By default, the flag is equivalent to `--filter=...[main...HEAD]`. This consider
 > checkout. If the checkout is too shallow, then all packages will be considered
 > changed.
 >
-> For example, setting up Git to check out with `--filter=blob:none --depth=0` will ensure `--affected` has the right history to work correctly.
+> For example, a blobless clone with full history (`git clone --filter=blob:none`, without `--depth`) gives `--affected` the history it needs. With `actions/checkout`, set `filter: blob:none` and `fetch-depth: 0`.
 
 You can override the default base and head with their respective [System Environment Variables](system-environment-variables.md).
 
