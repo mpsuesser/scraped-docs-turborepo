@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/query
 title: "query"
 description: "API reference for the `turbo query` command"
-access_date: 2026-11-11T16:24:16.575Z
-current_date: 2026-11-11T16:24:16.575Z
+access_date: 2026-11-11T18:12:48.035Z
+current_date: 2026-11-11T18:12:48.035Z
 ---
 
 > For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
@@ -117,6 +117,18 @@ Each task's `logFile` is the path to the log the task writes, relative to the
 repository root, and matches the `logFile` that `turbo run --dry=json` reports
 for that task. It is `null` when the task sets `cache: false`, because a task
 that does not cache writes no log file.
+
+### Task hashes
+
+Each task's `hash` is the hash the task contributes to cache lookups, and it
+matches the `hash` that `turbo run --dry=json` reports for that task. Both read
+the same inputs Turbo hashes before a run, so they agree for the same repository
+state, environment, and configuration.
+
+The hash is `null` when it cannot be known before the task runs, such as when a
+task's inputs include files that its dependencies produce. `hashReason` then
+explains why, matching the dry run's `hashReason`; it is `null` when the hash is
+known up front.
 
 ## Package task catalogue
 
