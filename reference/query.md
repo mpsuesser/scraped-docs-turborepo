@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/query
 title: "query"
 description: "API reference for the `turbo query` command"
-access_date: 2026-11-04T20:32:23.930Z
-current_date: 2026-11-04T20:32:23.930Z
+access_date: 2026-11-11T16:24:16.575Z
+current_date: 2026-11-11T16:24:16.575Z
 ---
 
 > For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
@@ -110,6 +110,13 @@ expanded names, framework-inferred variables, or a complete process environment.
 
 The query does not execute tasks or report cache hits. Unlike dry-run summaries,
 this selection does not include file-hash inventories.
+
+### Log files
+
+Each task's `logFile` is the path to the log the task writes, relative to the
+repository root, and matches the `logFile` that `turbo run --dry=json` reports
+for that task. It is `null` when the task sets `cache: false`, because a task
+that does not cache writes no log file.
 
 ## Package task catalogue
 
