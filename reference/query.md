@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/query
 title: "query"
 description: "API reference for the `turbo query` command"
-access_date: 2026-11-11T18:12:48.035Z
-current_date: 2026-11-11T18:12:48.035Z
+access_date: 2026-11-12T15:38:40.788Z
+current_date: 2026-11-12T15:38:40.788Z
 ---
 
 > For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
@@ -358,7 +358,7 @@ turbo query affected --packages --base main --head HEAD
 | `ConservativeRootLockfileChanged` | The root package is included after a lockfile change because it may depend on a workspace package.                                       |
 | `RootInternalDepChanged`          | A direct or transitive internal workspace dependency of the root package changed. All packages are selected and the global hash changes. |
 | `GlobalDepsChanged`               | A file configured in `globalDependencies` changed. All packages are selected.                                                            |
-| `DefaultGlobalFileChanged`        | `turbo.json` or `turbo.jsonc` changed. All packages are selected.                                                                        |
+| `DefaultGlobalFileChanged`        | `turbo.json`, `turbo.jsonc`, or the root `.gitattributes` changed. All packages are selected.                                            |
 | `LockfileChangeDetectionFailed`   | Turborepo could not safely compare the lockfile versions, so all packages are selected.                                                  |
 | `LockfileChangedWithoutDetails`   | The lockfile changed but its previous content was unavailable, so all packages are selected.                                             |
 | `GitRefNotFound`                  | The requested Git range could not be resolved, so all packages are selected.                                                             |
