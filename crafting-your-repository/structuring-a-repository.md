@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/structuring-a-repository
 title: "Structuring a repository"
 description: "Start by creating a repository using the conventions of the ecosystem."
-access_date: 2026-10-16T19:42:51.265Z
-current_date: 2026-10-16T19:42:51.265Z
+access_date: 2026-11-16T18:00:15.148Z
+current_date: 2026-11-16T18:00:15.148Z
 ---
 
 > For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
@@ -226,7 +226,7 @@ packages:
 
 Using this configuration, every directory **with a `package.json`** in the `apps` or `packages` directories will be considered a package.
 
-> Turborepo does not support nested packages like `apps/**` or `packages/**` due to ambiguous behavior among package managers in the JavaScript ecosystem. Using a structure that would put a package at `apps/a` and another at `apps/a/b` will result in an error.
+> Turborepo does not support nested packages like `apps/**` or `packages/**` due to ambiguous behavior among package managers in the JavaScript ecosystem. Using a structure that would put a package at `apps/a` and another at `apps/a/b` will result in the package at `apps/a` using all child directories, including `apps/a/b/**`.
 >
 > If you'd like to group packages by directory, you can do this using globs like `packages/*` and `packages/group/*` and **not** creating a `packages/group/package.json` file.
 
