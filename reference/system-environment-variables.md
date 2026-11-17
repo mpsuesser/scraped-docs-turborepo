@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/system-environment-variables
 title: "System environment variables"
 description: "Learn about system variables used by Turborepo."
-access_date: 2026-10-16T19:42:51.265Z
-current_date: 2026-10-16T19:42:51.265Z
+access_date: 2026-11-17T15:23:29.572Z
+current_date: 2026-11-17T15:23:29.572Z
 ---
 
 > For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
@@ -35,6 +35,27 @@ System environment variables are always overridden by flag values provided direc
 
       <td>
         Forces color to be shown in terminal logs
+      </td>
+    </tr>
+
+    <tr id="no_color">
+      <td>
+        <code>
+          NO\_COLOR
+        </code>
+      </td>
+
+      <td>
+        When set to any non-empty value, suppresses color in terminal logs,
+        including task output, like
+
+        <a href="/docs/reference#--no-color">
+          <code>
+            \--no-color
+          </code>
+        </a>
+
+        . <code>FORCE\_COLOR</code> takes precedence.
       </td>
     </tr>
 

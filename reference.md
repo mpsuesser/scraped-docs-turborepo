@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference
 title: "Turborepo API reference"
 description: "Learn about Turborepo's APIs using the reference."
-access_date: 2026-10-16T19:42:51.265Z
-current_date: 2026-10-16T19:42:51.265Z
+access_date: 2026-11-17T15:23:29.572Z
+current_date: 2026-11-17T15:23:29.572Z
 ---
 
 > For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
@@ -127,7 +127,9 @@ Forces the use of color, even in non-interactive terminals. This is useful for e
 
 ### `--no-color`
 
-Suppresses color in terminal output, even in interactive terminals.
+Suppresses color in terminal output, even in interactive terminals. Color codes are also removed from task output, both live and replayed from the cache. Log files keep the output as the task wrote it.
+
+Alternatively, you can suppress color using [the `NO_COLOR` environment variable](reference/system-environment-variables.md#no_color).
 
 ### `--no-update-notifier`
 
