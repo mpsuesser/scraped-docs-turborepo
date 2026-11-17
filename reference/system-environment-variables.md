@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/system-environment-variables
 title: "System environment variables"
 description: "Learn about system variables used by Turborepo."
-access_date: 2026-11-17T15:23:29.572Z
-current_date: 2026-11-17T15:23:29.572Z
+access_date: 2026-11-17T18:00:00.473Z
+current_date: 2026-11-17T18:00:00.473Z
 ---
 
 > For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
@@ -221,6 +221,27 @@ System environment variables are always overridden by flag values provided direc
         <span>
           flag.
         </span>
+      </td>
+    </tr>
+
+    <tr id="turbo_experimental_trace">
+      <td>
+        <code>
+          TURBO\_EXPERIMENTAL\_TRACE
+        </code>
+      </td>
+
+      <td>
+        Set to <code>1</code> or <code>true</code> to enable the experimental
+
+        <a href="/docs/reference/trace">
+          <code>
+            turbo trace
+          </code>
+        </a>
+
+        command. Only read from the environment: it is not a
+        <code>turbo.json</code> key and not an input to task hashes.
       </td>
     </tr>
 
