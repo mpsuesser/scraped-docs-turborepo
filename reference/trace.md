@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/trace
 title: "trace"
 description: "Reference for the experimental `turbo trace` command that selects the tests a change can affect."
-access_date: 2026-11-17T18:00:00.473Z
-current_date: 2026-11-17T18:00:00.473Z
+access_date: 2026-11-18T14:46:33.305Z
+current_date: 2026-11-18T14:46:33.305Z
 ---
 
 Experimental
@@ -40,6 +40,8 @@ The variable is read only from the environment. It is not a `turbo.json` key, an
 The command stores the graph it builds in `.turbo/trace` at the root of the repository and refreshes it against the tree on each run. Like the rest of `.turbo`, it belongs in your `.gitignore`.
 
 The graph's caches, some of which are keyed by this machine's file timestamps, are kept in your user cache directory (`~/.cache/turbo/trace` on Linux, `~/Library/Caches/turbo/trace` on macOS), never in `.turbo`. Restoring `.turbo` into another checkout, as `actions/cache` does, is safe: the graph is refreshed against that checkout's tree before it answers.
+
+With [`cacheMaxAge`](configuration.md#cachemaxage) or [`cacheMaxSize`](configuration.md#cachemaxsize) set in `turbo.json`, the graph directory is cleaned up at the end of each command the way `.turbo/cache` is cleaned up for task outputs: the shards the current graph does not use are reclaimed first, then the age and size limits are applied to the graph's caches. The shards the graph needs are never evicted.
 
 **Through Turborepo's cache.** In CI, `turbo trace affected` puts the graph it built into Turborepo's cache, under a key made of the commit SHA, the `turbo` version, the operating system and the architecture. A checkout without a graph fetches one before its first build: the graph of `HEAD`, else of the merge base with the base ref, else of one of the merge base's 20 nearest first-parent ancestors. The fetched graph is refreshed against the working tree, so it only saves time: the selection is the same as with a graph built from scratch. The graph goes wherever task outputs go: the local cache, [Remote Caching](../core-concepts/remote-caching.md) (with signatures when enabled), `--cache-dir` and `--cache`. A machine outside CI fetches graphs and never puts one.
 
