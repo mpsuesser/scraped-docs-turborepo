@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/reference/configuration
 title: "Configuring turbo.json"
 description: "Learn how to configure Turborepo through `turbo.json`."
-access_date: 2026-10-21T01:12:22.720Z
-current_date: 2026-10-21T01:12:22.720Z
+access_date: 2026-11-18T14:53:52.882Z
+current_date: 2026-11-18T14:53:52.882Z
 ---
 
 > For an index of all documentation, see [/llms.txt](https://turborepo.dev/llms.txt).
@@ -39,7 +39,7 @@ Extend from the root `turbo.json` to create specific configuration for a package
 
 A list of globs that you want to include in all task hashes. **If any file matching these globs changes, all tasks will miss cache.** Globs are relative to the location of `turbo.json`.
 
-By default, the root `package.json`, lockfile, and source files in internal packages that the root package depends on are included in [the global hash](../crafting-your-repository/caching.md#root-workspace-dependencies) and can't be ignored. Any added `globalDependencies` will also be included in the global hash.
+By default, the root `package.json`, lockfile, and source files in internal packages that the root package depends on are included in [the global hash](../crafting-your-repository/caching.md#root-workspace-dependencies) and can't be ignored. Tasks in Rust, Python, and Go packages don't include the root package's internal or external dependencies. Any added `globalDependencies` will also be included in the global hash.
 
 > Globs must be in the repository's source control root. Globs outside of the
 > repository aren't supported.

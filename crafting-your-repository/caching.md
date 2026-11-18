@@ -2,8 +2,8 @@
 url: https://turborepo.dev/docs/crafting-your-repository/caching
 title: "Caching"
 description: "Configure task caching to avoid repeating work, using fingerprinting for inputs and restoring outputs from cache."
-access_date: 2026-10-16T19:42:51.265Z
-current_date: 2026-10-16T19:42:51.265Z
+access_date: 2026-11-18T14:53:52.882Z
+current_date: 2026-11-18T14:53:52.882Z
 ---
 
 Turborepo uses caching to speed up builds, ensuring you **never do the same work twice**. When your task is cacheable, Turborepo will restore the results of your task from cache using a fingerprint from the first time the task ran.
@@ -186,8 +186,8 @@ Under the hood, Turborepo creates two hashes: a global hash and a task hash. If 
 | Input | Example |
 | --- | --- |
 | Resolved task definition from root `turbo.json` and package `turbo.json` | Changing [`outputs`](../reference/configuration.md#outputs) in either root `turbo.json` or [Package Configuration](../reference/package-configurations.md) |
-| Lockfile changes that affect the Workspace root | Updating dependencies in root `package.json` will cause **all** tasks to miss cache |
-| Source files in internal packages used by the Workspace root | If the root `package.json` depends on `@repo/tooling`, changing `packages/tooling/src/index.ts` will cause **all** tasks to miss cache |
+| Lockfile changes that affect the Workspace root | Updating dependencies in root `package.json` will cause **all** JavaScript and root tasks to miss cache |
+| Source files in internal packages used by the Workspace root | If the root `package.json` depends on `@repo/tooling`, changing `packages/tooling/src/index.ts` will cause **all** JavaScript and root tasks to miss cache |
 | [`globalDependencies`](../reference/configuration.md#globaldependencies) file contents | Changing `./.env` when it is listed in `globalDependencies` will cause **all** tasks to miss cache |
 | Values of variables listed in [`globalEnv`](../reference/configuration.md#globalenv) | Changing the value of `GITHUB_TOKEN` when it is listed in `globalEnv` |
 | Flag values that affect task runtime | Using behavior-changing flags like `--cache-dir`, `--framework-inference`, or `--env-mode` |
@@ -195,11 +195,13 @@ Under the hood, Turborepo creates two hashes: a global hash and a task hash. If 
 
 #### Root workspace dependencies
 
-Turborepo includes the source files of every internal workspace package that the root `package.json` depends on, directly or transitively, in the global hash. This keeps cache entries correct when root-level scripts or tooling use those packages.
+Turborepo includes the source files of every internal workspace package that the root `package.json` depends on, directly or transitively, in the global hash of JavaScript tasks and root (`//#`) tasks. The root package's external dependencies from the lockfile are part of the same global hash. This keeps cache entries correct when root-level scripts or tooling use those packages.
 
-For example, if the root package depends on `@repo/tooling`, changing a source file in `@repo/tooling` causes every cacheable task to miss cache. A change to an internal package outside this root dependency closure only changes the relevant package and task hashes.
+For example, if the root package depends on `@repo/tooling`, changing a source file in `@repo/tooling` causes every cacheable JavaScript task and root task to miss cache. A change to an internal package outside this root dependency closure only changes the relevant package and task hashes.
 
-When comparing Git revisions, `turbo query affected --packages` reports this repository-wide result with the `RootInternalDepChanged` reason. See [Understanding affected-package reasons](../reference/query.md#understanding-affected-package-reasons) for the diagnostic reason types.
+Tasks in Rust, Python, and Go packages don't include the root package's internal or external dependencies, because those tasks don't run root `package.json` tooling. Changing `@repo/tooling` or bumping a root `devDependency` keeps their cache. A task in one of those packages still misses cache when it depends on a changed JavaScript task, for example through `^build`. The `globalCacheInputs` section of `--dry=json` describes the global hash of JavaScript tasks and root tasks.
+
+`--affected` and `turbo query affected` select the same tasks that hashing invalidates. When comparing Git revisions, `turbo query affected --packages` reports the JavaScript packages and the root with the `RootInternalDepChanged` reason. See [Understanding affected-package reasons](../reference/query.md#understanding-affected-package-reasons) for the diagnostic reason types.
 
 ### Package hash inputs
 
